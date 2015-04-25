@@ -808,20 +808,24 @@
          * 异步加载js函数
          * @param opts 配置项{url:url,fn:fn}
          */
-        $.loadJs = function (opts) {
-            var url = opts.url,
-                fn = opts.fn,
-                isJs = /(\.js)$/.test(url),//是否js文件
-                script = document.createElement('script');
+        $.loadJs = (function () {
+            var headEl = document.getElementsByTagName('head')[0];
 
-            script.type = 'text/javascript';
-            script.onload = function () {
-                typeof fn === 'function' && fn();
-                !isJs && script.parentNode.removeChild(script);
+            return function (opts) {
+                var url = opts.url,
+                    fn = opts.fn,
+                    isJs = /(\.js)$/.test(url),//是否js文件
+                    script = document.createElement('script');
+
+                script.type = 'text/javascript';
+                script.onload = function () {
+                    typeof fn === 'function' && fn();
+                    !isJs && headEl.removeChild(script);
+                };
+                script.src = url;
+                headEl.appendChild(script);
             };
-            script.src = url;
-            document.getElementsByTagName('head')[0].appendChild(script);
-        };
+        })();
 
         /**
          * 跨域请求函数
