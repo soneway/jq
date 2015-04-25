@@ -798,23 +798,22 @@
 
         //支持$().click等写法
         forEach(['click', 'touchstart', 'touchmove', 'touchend', 'submit', 'load', 'resize', 'change', 'select'], function (item) {
-            $.fn[item] = function (cb) {
-                return cb ? this.bind(item, cb) : this.trigger(item);
+            $.fn[item] = function (fn) {
+                return fn ? this.bind(item, fn) : this.trigger(item);
             };
         });
 
 
         /**
-         * 异步加载js函数
-         * @param opts 配置项{url:url,fn:fn}
+         * 跨域请求函数(异步加载js函数)
+         * @param url 请求地址
+         * @param fn 回调函数
          */
-        $.loadJs = (function () {
+        $.jsonp = (function () {
             var headEl = document.getElementsByTagName('head')[0];
 
-            return function (opts) {
-                var url = opts.url,
-                    fn = opts.fn,
-                    isJs = /(\.js)$/.test(url),//是否js文件
+            return function (url, fn) {
+                var isJs = /(\.js)$/.test(url),//是否js文件
                     script = document.createElement('script');
 
                 script.type = 'text/javascript';
@@ -826,18 +825,6 @@
                 headEl.appendChild(script);
             };
         })();
-
-        /**
-         * 跨域请求函数
-         * @param url 请求地址
-         * @param fn 回调函数
-         */
-        $.jsonp = function (url, fn) {
-            $.loadJs({
-                url: url,
-                fn: fn
-            });
-        };
 
         /**
          * ajax请求函数
