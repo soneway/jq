@@ -1,0 +1,382 @@
+﻿/*外部引入*/
+@import '../scss/var', '../scss/common', '../scss/spinner';
+
+
+/*head导航条背景*/
+.head, #navbar
+{
+    @if $bg_type == 1
+    {
+        background-color: $head_bgcolor;
+    } @else
+    {
+        @include mx_gradient(top, $head_bg);
+    }
+}
+
+
+/*head类*/
+.head
+{
+    @extend %ph_palt;
+    width: 100%;
+    z-index: 1;
+
+    /*模拟1px边框*/
+    &:after
+    {
+        content: '';
+        @include mx_plb;
+        width: 100%;
+        height: 1px;
+        background-color: $head_border-color;
+        @include mx_transform(scale3d(1, 0.5, 1));
+        @include mx_transform-origin(50% 100%);
+    }
+
+    .btnleft, .btnright
+    {
+        z-index: 2;
+        padding: 0 8px;
+        height: 100%;
+    }
+
+    .btnleft
+    {
+        @extend %ph_palt;
+    }
+
+    .btnright
+    {
+        @extend %ph_part;
+
+        &:before
+        {
+            font-size: 24px;
+            vertical-align: sub;
+        }
+    }
+
+    /*返回按钮类*/
+    .btnback
+    {
+        font-size: 16px;
+        padding-left: 4px;
+
+        &:before
+        {
+            font-size: 20px;
+            vertical-align: sub;
+        }
+    }
+
+    .title
+    {
+        text-align: center;
+    }
+}
+
+
+/*mainbox*/
+#mainbox
+{
+    @extend %ph_full;
+    overflow: hidden;
+
+    @at-root
+    {
+        .onsidebox &
+        {
+            @include mx_transform(translate3d(-50%, 0, 0));
+        }
+    }
+}
+
+
+/*边栏*/
+#sidebox
+{
+    @extend %ph_pfrt;
+    height: 100%;
+    width: 80%;
+    background-color: $panel_bgcolor;
+    z-index: 9;
+    @include mx_transform(translate3d(100%, 0, 0));
+
+    .head
+    {
+        line-height: $head_height;
+    }
+
+    .content
+    {
+        height: 100%;
+        padding-top: $head_height;
+    }
+
+    @at-root
+    {
+        .onsidebox &
+        {
+            @include mx_transform(translate3d(0, 0, 0));
+        }
+    }
+}
+
+
+/*loading*/
+#loading
+{
+    display: table;
+    @extend %ph_full;
+    background-color: $panel_bgcolor;
+    z-index: 5;
+    cursor: pointer; /*防止点击事件绑定不到(ios8)*/
+    @include mx_transition(background-color 0.3s ease);
+
+    & > div
+    {
+        @extend %ph_td;
+        text-align: center;
+    }
+
+    @at-root
+    {
+        .loaded &
+        {
+            visibility: hidden;
+            background-color: transparent;
+
+            & > div
+            {
+                visibility: hidden;
+            }
+        }
+
+
+        .onsidebox &
+        {
+            visibility: visible;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    }
+}
+
+
+/*头部*/
+#header
+{
+    height: $head_height;
+    line-height: $head_height;
+
+    & > div
+    {
+        @extend %ph_palt;
+        @extend %ph_full;
+        @extend %ph_transall;
+    }
+
+    @at-root
+    {
+        .offheader &
+        {
+            @include mx_transform(translate3d(0, -100%, 0));
+        }
+
+
+        /*一级页面标题*/
+        .roottitle
+        {
+            @at-root
+            {
+                .onsubtitle &
+                {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+        }
+
+
+        /*二级页面标题*/
+        .subtitle
+        {
+            opacity: 0;
+            visibility: hidden;
+
+            .btnleft
+            {
+                @include mx_transform(translate3d(100px, 0, 0));
+            }
+
+            @at-root
+            {
+                .onsubtitle &
+                {
+                    opacity: 1;
+                    visibility: visible;
+
+                    .btnleft
+                    {
+                        @include mx_transform(translate3d(0, 0, 0));
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*面板*/
+.panel
+{
+    @extend %ph_palt;
+    @extend %ph_full;
+    @extend %ph_ofauto;
+    padding-top: $head_height;
+    /*二级面板会出现横向滚动条的bug,可以通过对二级面板的重排来解决,比如显示面板时,padding-bottom的值的改变*/
+    display: none;
+    background-color: $panel_bgcolor;
+    z-index: 0;
+    @extend %ph_transall;
+    @include mx_transform(translate3d(100%, 0, 0));
+    @include mx_box-shadow(-2px 0 0 rgba(0, 0, 0, 0.2));
+
+    &[data-role=root]
+    {
+        padding-bottom: $navbar_height;
+    }
+
+    &.subopened
+    {
+        @include mx_transform(translate3d(-40%, 0, 0));
+    }
+
+    &.opened
+    {
+        @include mx_transform(translate3d(0%, 0, 0));
+    }
+
+    @at-root
+    {
+        .offheader &
+        {
+            padding-top: 0;
+        }
+
+
+        /*打开iframe页面的面板*/
+        #paneliframe
+        {
+            height: 100%;
+
+            iframe
+            {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        }
+    }
+}
+
+
+/*导航*/
+#navbar
+{
+    @include mx_plb;
+    width: 100%;
+    height: $navbar_height;
+    z-index: 1;
+    text-align: center;
+
+    /*模拟1px边框*/
+    &:after
+    {
+        content: '';
+        @extend %ph_palt;
+        width: 100%;
+        height: 1px;
+        background-color: $head_border-color;
+        @include mx_transform(scale3d(1, 0.5, 1));
+        @include mx_transform-origin(50% 0);
+    }
+
+    @at-root
+    {
+        .offnavbar > &
+        {
+            @include mx_transform(translate3d(0, 100%, 0));
+        }
+
+
+        .navbox
+        {
+            overflow: hidden;
+            height: 100%;
+            max-width: 100%;
+            display: inline-block;
+        }
+
+
+        .navlist
+        {
+            display: table;
+            height: 100%;
+            white-space: nowrap;
+            line-height: 1.1em;
+
+            a
+            {
+                @extend %ph_td;
+                padding: 0 5px;
+            }
+        }
+    }
+}
+
+
+/*mask*/
+#mask
+{
+    @extend %ph_full;
+    display: table;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    opacity: 0;
+
+    &.visible
+    {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    & > div
+    {
+        @extend %ph_td;
+        text-align: center;
+    }
+
+    .spinner
+    {
+        @include mx_animation(spinner_rotate 1s linear infinite);
+
+        p
+        {
+            top: 18px;
+            left: 23px;
+            width: 3px;
+            height: 14px;
+        }
+    }
+}
+
+
+/*二维码*/
+#qrcode
+{
+    @include mx_prt(fixed, 10px, $head_height + 10px);
+    width: 200px;
+    height: 200px;
+}

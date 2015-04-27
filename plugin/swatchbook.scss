@@ -1,0 +1,19 @@
+﻿/*扇形特效*/
+.sb-container
+{
+    position: relative;
+    width: 65px;
+    height: 200px;
+    /*防止动画过程闪烁*/
+    @include mx_backface-visibility(hidden);
+    @include mx_perspective(1000);
+
+    & > div
+    {
+        @extend %ph_palt;
+        @extend %ph_full;
+        border-radius: 5px;
+        @include mx_transform-origin(25% 90%);
+        @include mx_transition-transform(0.7s ease);
+    }
+}

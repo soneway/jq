@@ -1,0 +1,235 @@
+﻿/*变量*/
+//$bg_type: 2;
+/*外部引入*/
+@import '../ui/ui', '../scss/iconmoon', '../plugin/scroll', '../plugin/customalert', '../plugin/carousel', '../plugin/flip', '../plugin/picpager', '../plugin/swatchbook';
+
+
+/*扇形特效 end*/
+
+/*框架*/
+
+/*其他*/
+.navlist a
+{
+    padding: 0 10px;
+
+    &.selected
+    {
+        border-bottom: 2px solid #DF2221;
+        color: #DF2221;
+    }
+}
+
+
+.contentpanel
+{
+    line-height: 40px;
+    padding: 10px;
+
+    p
+    {
+        height: 999px;
+    }
+}
+
+
+/*soneway.js*/
+#panel1
+{
+    a
+    {
+        display: block;
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+
+/*焦点图*/
+.carousel
+{
+    width: 90%;
+    min-width: 300px;
+    height: 100%;
+    margin: 10px auto;
+    @include mx_box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+
+/*相册*/
+#picpager
+{
+    height: 100%;
+}
+
+
+.picpager
+{
+    @extend %ph_full;
+}
+
+
+/*3d旋转切换*/
+.flip
+{
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    margin: 10px auto;
+    @include mx_box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+
+    img
+    {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+
+/*自定义滚动*/
+.scroll
+{
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    margin: 10px auto;
+    @include mx_box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+    overflow: hidden;
+
+    div
+    {
+        background: url(../images/1.jpg);
+        @include mx_transition-duration(0.4s);
+    }
+
+    &:nth-of-type(1) > div
+    {
+        width: 100%;
+        height: 9000%;
+    }
+
+    &:nth-of-type(2) > div
+    {
+        width: 9000%;
+        height: 100%;
+    }
+}
+
+
+/*扇形特效*/
+.swatchbook
+{
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    text-align: center;
+    margin: 10px auto;
+}
+
+
+/*每张扇页*/
+.sb-item
+{
+    @include mx_box-shadow(-1px -1px 3px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.2));
+
+    & h3
+    {
+        border-top: 1px dashed rgba(0, 0, 0, 0.2);
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+        padding: 5px;
+        margin: 5px;
+        font-size: 12px;
+    }
+
+    //循环赋值颜色
+    $colors: #ea2a29, #f16729, #f89322, #ffcf14, #ffea0d, #87b11d, #008253, #3277b5, #4c549f, #764394, #ca0d86, #ef0fa6, #000;
+    @each $c in $colors
+    {
+        &:nth-of-type(#{index($colors, $c)})
+        {
+            background-color: $c;
+        }
+    }
+
+    &:last-of-type
+    {
+        h3
+        {
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        &:after
+        {
+            @include mx_plb(absolute, 10px, 10px);
+            content: '';
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            @include mx_gradient(-45deg, #dddddd 0%, #58535e 48%, #889396 100%);
+            @include mx_box-shadow(-1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.1));
+        }
+    }
+}
+
+
+/*打关样式*/
+.sb-toggle
+{
+    display: block;
+    padding: 5px;
+}
+
+
+/*图标*/
+.sb-icon
+{
+    display: inline-block;
+    font-size: 45px;
+    line-height: 45px;
+    width: 45px;
+    margin: 10px auto;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+
+/*刮刮卡*/
+.scratchcard
+{
+    width: 100%;
+    max-width: 500px;
+    height: 250px;
+    margin: 10px auto;
+    @include mx_box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+
+/*转盘抽奖*/
+#turntable
+{
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+    margin: 5px auto;
+    background: url(../images/turntable_bg.png) center center no-repeat;
+    background-size: 100% auto;
+    position: relative;
+}
+
+
+#turntable_pointer
+{
+    @extend %ph_palt;
+    @extend %ph_full;
+    background: url(../images/turntable_pointer.png) 144px 51px no-repeat;
+    background-size: 37px auto;
+}
+
+
+#turntable_start
+{
+    @include mx_plt(absolute, 125px, 136px);
+    width: 78px;
+    height: 48px;
+    background: url(../images/turntable_start.png) center center no-repeat;
+    background-size: 100% auto;
+}
