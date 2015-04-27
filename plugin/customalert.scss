@@ -11,47 +11,51 @@
     opacity: 0;
     z-index: -1;
 
-    &.visible
-    {
-        opacity: 1;
-        z-index: 9999;
-    }
-
     & > div
     {
         @extend %ph_td;
         text-align: center;
     }
+
+    .box
+    {
+        display: inline-block;
+        width: 280px;
+        @extend %ph_hauto;
+        padding: 0 0 15px 0;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+        /*动画*/
+        @extend %ph_transtransf;
+        @include mx_transform(scale3d(0, 0, 1));
+    }
+
+    /*显示时*/
+    &.visible
+    {
+        opacity: 1;
+        z-index: 9999;
+
+        .box
+        {
+            @include mx_transform(scale3d(1, 1, 1));
+        }
+    }
 }
 
-#customalert-box
+
+#customalert-title
 {
-    display: inline-block;
-    width: 280px;
-    @extend %ph_hauto;
-    padding: 0 0 15px 0;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.95);
-    /*动画*/
-    @extend %ph_transtransf;
-    @include mx_transform(scale3d(0, 0, 1));
-
-    @at-root .visible &
-    {
-        @include mx_transform(scale3d(1, 1, 1));
-    }
-
-    h1
-    {
-        line-height: 40px;
-        @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.5));
-    }
+    line-height: 40px;
+    @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.5));
 }
+
 
 #customalert-content
 {
     padding: 15px 20px;
 }
+
 
 #customalert-btnok, #customalert-btncancel
 {
@@ -61,12 +65,22 @@
     color: #333;
 }
 
+
 #customalert-btnok
 {
     margin-right: 10px;
 }
 
-#customalert-btncancel.only
+
+.alert
 {
-    width: 230px;
+    #customalert-btncancel
+    {
+        display: none;
+    }
+
+    #customalert-btnok
+    {
+        width: 230px;
+    }
 }

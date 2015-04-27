@@ -357,19 +357,6 @@
         @extend %ph_td;
         text-align: center;
     }
-
-    .spinner
-    {
-        @include mx_animation(spinner_rotate 1s linear infinite);
-
-        p
-        {
-            top: 18px;
-            left: 23px;
-            width: 3px;
-            height: 14px;
-        }
-    }
 }
 
 

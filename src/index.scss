@@ -4,11 +4,13 @@
 @import '../ui/ui', '../scss/iconmoon', '../plugin/scroll', '../plugin/customalert', '../plugin/carousel', '../plugin/flip', '../plugin/picpager', '../plugin/swatchbook';
 
 
-/*扇形特效 end*/
-
-/*框架*/
-
 /*其他*/
+body
+{
+    line-height: 40px;
+}
+
+
 .navlist a
 {
     padding: 0 10px;
@@ -21,14 +23,44 @@
 }
 
 
-.contentpanel
+.panel
 {
-    line-height: 40px;
-    padding: 10px;
-
-    p
+    & > div
     {
-        height: 999px;
+        padding: 10px;
+    }
+}
+
+
+.list
+{
+    a
+    {
+        display: block;
+        padding: 0 5px;
+        position: relative;
+
+        &.title
+        {
+            background: #eee;
+            font-weight: bold;
+        }
+
+        &:after, &:first-of-type:before
+        {
+            content: '';
+            @extend %ph_palb;
+            height: 1px;
+            width: 100%;
+            @include mx_transform(scale3d(1, 0.5, 1));
+            background: #ddd;
+        }
+
+        &:first-of-type:before
+        {
+            bottom: auto;
+            top: 0;
+        }
     }
 }
 
@@ -36,11 +68,7 @@
 /*soneway.js*/
 #panel1
 {
-    a
-    {
-        display: block;
-        border-bottom: 1px solid #ccc;
-    }
+
 }
 
 

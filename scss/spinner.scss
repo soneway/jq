@@ -12,18 +12,20 @@
 
     b
     {
-        @include mx_plt(absolute, 20px, 20px);
+        $w: 10px;
+
+        @include mx_plt($left: 20px, $top: 20px);
         background-color: $color;
-        width: 10px;
-        height: 10px;
-        border-radius: 10px;
+        width: $w;
+        height: $w;
+        border-radius: $w;
 
         @for $i from 1 through 8
         {
             &:nth-of-type(#{$i})
             {
                 @include mx_transform(rotate(45deg * $i) translate(0, -20px));
-                opacity: 0.125 * ($i + 1);
+                opacity: 0.125 * $i;
             }
         }
     }

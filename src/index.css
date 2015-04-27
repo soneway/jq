@@ -55,6 +55,12 @@
   top: 0;
 }
 
+.list a:after, .list a:first-of-type:before {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
 /*宽度高度100%*/
 #mainbox, #loading, #header > div, .panel, #mask, #customalert, .jq-picpager-wrap, .jq-picpager-pic, .sb-container > div, .picpager, #turntable_pointer {
   width: 100%;
@@ -69,7 +75,7 @@
 }
 
 /*高度自动撑高*/
-#customalert-box {
+#customalert .box {
   height: auto;
   overflow: hidden;
 }
@@ -81,7 +87,7 @@
 }
 
 /*transform动画*/
-.transform, #customalert-box, .jq-carousel-wrap.transform {
+.transform, #customalert .box, .jq-carousel-wrap.transform {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
 }
@@ -276,42 +282,42 @@ h4 {
 .spinner b:nth-of-type(1) {
   -webkit-transform: rotate(45deg) translate(0, -20px);
   transform: rotate(45deg) translate(0, -20px);
-  opacity: 0.25;
+  opacity: 0.125;
 }
 .spinner b:nth-of-type(2) {
   -webkit-transform: rotate(90deg) translate(0, -20px);
   transform: rotate(90deg) translate(0, -20px);
-  opacity: 0.375;
+  opacity: 0.25;
 }
 .spinner b:nth-of-type(3) {
   -webkit-transform: rotate(135deg) translate(0, -20px);
   transform: rotate(135deg) translate(0, -20px);
-  opacity: 0.5;
+  opacity: 0.375;
 }
 .spinner b:nth-of-type(4) {
   -webkit-transform: rotate(180deg) translate(0, -20px);
   transform: rotate(180deg) translate(0, -20px);
-  opacity: 0.625;
+  opacity: 0.5;
 }
 .spinner b:nth-of-type(5) {
   -webkit-transform: rotate(225deg) translate(0, -20px);
   transform: rotate(225deg) translate(0, -20px);
-  opacity: 0.75;
+  opacity: 0.625;
 }
 .spinner b:nth-of-type(6) {
   -webkit-transform: rotate(270deg) translate(0, -20px);
   transform: rotate(270deg) translate(0, -20px);
-  opacity: 0.875;
+  opacity: 0.75;
 }
 .spinner b:nth-of-type(7) {
   -webkit-transform: rotate(315deg) translate(0, -20px);
   transform: rotate(315deg) translate(0, -20px);
-  opacity: 1;
+  opacity: 0.875;
 }
 .spinner b:nth-of-type(8) {
   -webkit-transform: rotate(360deg) translate(0, -20px);
   transform: rotate(360deg) translate(0, -20px);
-  opacity: 1.125;
+  opacity: 1;
 }
 
 /*head导航条背景*/
@@ -545,16 +551,6 @@ h4 {
 #mask > div {
   text-align: center;
 }
-#mask .spinner {
-  -webkit-animation: spinner_rotate 1s linear infinite;
-  animation: spinner_rotate 1s linear infinite;
-}
-#mask .spinner p {
-  top: 18px;
-  left: 23px;
-  width: 3px;
-  height: 14px;
-}
 
 /*二维码*/
 #qrcode {
@@ -600,30 +596,31 @@ h4 {
   /*动画*/
   opacity: 0;
   z-index: -1;
+  /*显示时*/
+}
+#customalert > div {
+  text-align: center;
+}
+#customalert .box {
+  display: inline-block;
+  width: 280px;
+  padding: 0 0 15px 0;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  /*动画*/
+  -webkit-transform: scale3d(0, 0, 1);
+  transform: scale3d(0, 0, 1);
 }
 #customalert.visible {
   opacity: 1;
   z-index: 9999;
 }
-#customalert > div {
-  text-align: center;
-}
-
-#customalert-box {
-  display: inline-block;
-  width: 280px;
-  padding: 0 0 15px 0;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.95);
-  /*动画*/
-  -webkit-transform: scale3d(0, 0, 1);
-  transform: scale3d(0, 0, 1);
-}
-.visible #customalert-box {
+#customalert.visible .box {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
 }
-#customalert-box h1 {
+
+#customalert-title {
   line-height: 40px;
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
@@ -645,8 +642,11 @@ h4 {
   margin-right: 10px;
 }
 
-#customalert-btncancel.only {
+.alert #customalert-btncancel {
   width: 230px;
+}
+.alert #customalert-btnok {
+  display: none;
 }
 
 /*焦点图*/
@@ -814,9 +814,11 @@ h4 {
   transition: transform 0.7s ease;
 }
 
-/*扇形特效 end*/
-/*框架*/
 /*其他*/
+body {
+  line-height: 40px;
+}
+
 .navlist a {
   padding: 0 10px;
 }
@@ -825,20 +827,33 @@ h4 {
   color: #DF2221;
 }
 
-.contentpanel {
-  line-height: 40px;
+.panel > div {
   padding: 10px;
 }
-.contentpanel p {
-  height: 999px;
+
+.list a {
+  display: block;
+  padding: 0 5px;
+  position: relative;
+}
+.list a.title {
+  background: #eee;
+  font-weight: bold;
+}
+.list a:after, .list a:first-of-type:before {
+  content: '';
+  height: 1px;
+  width: 100%;
+  -webkit-transform: scale3d(1, 0.5, 1);
+  transform: scale3d(1, 0.5, 1);
+  background: #ddd;
+}
+.list a:first-of-type:before {
+  bottom: auto;
+  top: 0;
 }
 
 /*soneway.js*/
-#panel1 a {
-  display: block;
-  border-bottom: 1px solid #ccc;
-}
-
 /*焦点图*/
 .carousel {
   width: 90%;

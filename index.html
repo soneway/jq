@@ -53,105 +53,122 @@
 
         <!--一级面板-->
 
-        <!--panel1-->
-        <div id="panel1" data-role="root" class="panel" title="soneway.js">
-            <div class="contentpanel">
+        <!--核心库soneway.js-->
+        <div id="panel1" data-role="root" class="panel" title="核心库soneway.js">
+            <div class="list">
                 <a href="https://github.com/soneway/soneway/blob/master/soneway.js" target="_blank">查看源代码</a>
+                <a href="perf.html" target="_blank">查看与zepto性能对比(请打开console)</a>
+                <a class="title">实现以下API</a>
+                <a>$.ajax</a>
+                <a>$.extend</a>
+                <a>$.fn</a>
+                <a>$.isArray</a>
+                <a>$.isFunction</a>
+                <a>$.isObject</a>
+                <a>$.jsonp</a>
+                <a>addClass</a>
+                <a>append</a>
+                <a>attr</a>
+                <a>bind</a>
+                <a>change</a>
+                <a>children</a>
+                <a>click</a>
+                <a>closest</a>
+                <a>css</a>
+                <a>delegate</a>
+                <a>each</a>
+                <a>eq</a>
+                <a>extend</a>
+                <a>fadeIn</a>
+                <a>fadeOut</a>
+                <a>filter</a>
+                <a>find</a>
+                <a>forEach</a>
+                <a>hasClass</a>
+                <a>height</a>
+                <a>hide</a>
+                <a>html</a>
+                <a>index</a>
+                <a>is</a>
+                <a>load</a>
+                <a>not</a>
+                <a>off</a>
+                <a>offset</a>
+                <a>on</a>
+                <a>parent</a>
+                <a>prepend</a>
+                <a>prependTo</a>
+                <a>ready</a>
+                <a>removeAttr</a>
+                <a>removeClass</a>
+                <a>resize</a>
+                <a>select</a>
+                <a>show</a>
+                <a>siblings</a>
+                <a>submit</a>
+                <a>text</a>
+                <a>touchend</a>
+                <a>touchmove</a>
+                <a>touchstart</a>
+                <a>trigger</a>
+                <a>unbind</a>
+                <a>val</a>
+                <a>width</a>
             </div>
         </div>
-        <!--panel1 end-->
+        <!--核心库soneway.js end-->
 
-        <!--panelui-->
-        <div id="panelui" data-role="root" class="panel" title="ui.js">
-            <div class="contentpanel">
+        <!--UI库ui.js-->
+        <div id="panelui" data-role="root" class="panel" title="UI库ui.js">
+            <div class="list">
                 <a href="https://github.com/soneway/soneway/blob/master/ui/ui.js" target="_blank">查看源代码</a>
-                <a href="#subpanel">跳转到二级页面</a>
-                <a data-href="http://sohu.com">跳转到sohu</a><br />
-                <a onclick="$.toggleHeader(0)">关闭header</a>
-                <a onclick="$.toggleHeader(1)">打开header</a><br />
-                <a onclick="$.toggleNavbar(0)">关闭navbar</a>
-                <a onclick="$.toggleNavbar(1)">打开navbar</a><br />
-                <a onclick="$.toggleMask(1)">打开mask</a>
+                <a href="#panelsub">跳转到二级页面</a>
+                <a data-href="http://sohu.com">跳转到sohu</a>
+                <a onclick="$.loadPanel('#panelsub2')">$.loadPanel('#panelsub2')</a>
+                <a onclick="$.toggleHeader(0)">$.toggleHeader(0)</a>
+                <a onclick="$.toggleHeader(1)">$.toggleHeader(1)</a>
+                <a onclick="$.toggleNavbar(0)">$.toggleNavbar(0)</a>
+                <a onclick="$.toggleNavbar(1)">$.toggleNavbar(1)</a>
+                <a onclick="$.toggleMask(1)">$.toggleMask(1)</a>
+                <a onclick="$.toggleSidebox(1)">$.toggleSidebox(1)</a>
+                <a onclick="$.customalert({ content: '全球领先的信息与通信解决方案供应商华为，近日亮相日本最大的ICT展会',isAlert:false, btnOkClick: function(){ alert('点击了确定');}, btnCancelClick: function(){ alert('点击了取消');} });">confirm弹框</a>
+                <a onclick="$.customalert({ content: '全球领先的信息与通信解决方案供应商华为，近日亮相日本最大的ICT展会'});">alert弹框</a>
             </div>
         </div>
-        <!--panelui end-->
+        <!--UI库ui.js end-->
 
-        <!--panelalert-->
-        <div id="panelalert" data-role="root" class="panel" title="弹框元素">
-            <div class="contentpanel">
-                <a class="btn"
-                   onclick="$.customalert({ content: '全球领先的信息与通信解决方案供应商华为，近日亮相日本最大的ICT展会',btnCancelOnly:false, btnOkClick: function(){ alert('点击了确定');}, btnCancelClick: function(){ alert('点击了取消');} });">打开confirm</a>
-                <a class="btn"
-                   onclick="$.customalert({ content: '全球领先的信息与通信解决方案供应商华为，近日亮相日本最大的ICT展会', btnCancelClick: function(){ alert('点击了确定');}});">打开alert</a>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
-            </div>
-        </div>
-        <!--panelalert end-->
-
-        <!--panelcarousel-->
+        <!--焦点图-->
         <div id="panelcarousel" data-role="root" class="panel" title="焦点图">
-            <div class="contentpanel">
+            <div>
                 <div class="carousel" data-len="5">
                 </div>
                 <div class="carousel" data-len="5" data-isvertical="1">
                 </div>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
             </div>
         </div>
-        <!--panelcarousel end-->
+        <!--焦点图 end-->
 
-        <!--panelflip-->
+        <!--3d旋转切换-->
         <div id="panelflip" data-role="root" class="panel" title="3d旋转切换">
-            <div class="contentpanel">
+            <div>
                 <div class="flip" data-len="5">
                 </div>
                 <div class="flip" data-len="5" data-isvertical="1">
                 </div>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
             </div>
         </div>
-        <!--panelflip end-->
+        <!--3d旋转切换 end-->
 
-        <!--panelpicpager-->
+        <!--相册功能-->
         <div id="panelpicpager" data-role="root" class="panel" title="相册功能">
             <div class="picpager">
             </div>
         </div>
-        <!--panelpicpager end-->
+        <!--相册功能 end-->
 
-        <!--panelscroll-->
+        <!--自定义滚动-->
         <div id="panelscroll" data-role="root" class="panel" title="自定义滚动">
-            <div class="contentpanel">
+            <div>
                 <div class="scroll" data-isvertical="1">
                     <div></div>
                 </div>
@@ -160,11 +177,11 @@
                 </div>
             </div>
         </div>
-        <!--panelscroll end-->
+        <!--自定义滚动 end-->
 
-        <!--panelswatchbook-->
+        <!--扇形特效-->
         <div id="panelswatchbook" data-role="root" class="panel" title="扇形特效">
-            <div class="contentpanel">
+            <div>
                 <div class="swatchbook">
                     <div class="sb-item">
                         <span class="sb-icon">♈</span>
@@ -219,48 +236,26 @@
                         <span class="sb-toggle">请点击</span>
                     </div>
                 </div>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
             </div>
         </div>
-        <!--panelswatchbook end-->
+        <!--扇形特效 end-->
 
-        <!--panelscratchcard-->
+        <!--刮刮卡-->
         <div id="panelscratchcard" data-role="root" class="panel" title="刮刮卡">
-            <div class="contentpanel">
+            <div>
                 <div class="scratchcard"></div>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
             </div>
         </div>
-        <!--panelscratchcard end-->
+        <!--刮刮卡 end-->
 
-        <!--panelturntable-->
+        <!--转盘抽奖-->
         <div id="panelturntable" data-role="root" class="panel" title="转盘抽奖">
             <div id="turntable">
                 <div id="turntable_pointer"></div>
                 <a id="turntable_start"></a>
             </div>
         </div>
-        <!--panelturntable end-->
+        <!--转盘抽奖 end-->
 
         <!--一级面板 end-->
 
@@ -272,42 +267,21 @@
         </div>
         <!--嵌入的iframe页面 end-->
 
-        <!--subpanel-->
-        <div id="subpanel" class="panel" title="二级页面详情">
-            <div class="contentpanel">
-                <a class="btn" href="#subpanel2">跳转到三级页面</a>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
+        <!--panelsub-->
+        <div id="panelsub" class="panel" title="二级页面">
+            <div class="list">
+                <a href="#panelsub2">跳转到三级页面</a>
             </div>
         </div>
-        <!--subpanel end-->
+        <!--panelsub end-->
 
-        <!--subpanel2-->
-        <div id="subpanel2" class="panel" title="三级页面详情">
-            <div class="contentpanel">
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                </p>
+        <!--panelsub2-->
+        <div id="panelsub2" class="panel" title="三级页面">
+            <div>
+                三级页面内容
             </div>
         </div>
-        <!--subpanel2 end-->
+        <!--panelsub2 end-->
 
         <!--二级面板 end-->
 
@@ -316,13 +290,12 @@
         <div id="navbar" class="transform">
             <div class="navbox">
                 <div class="navlist">
-                    <a href="#panel1">soneway.js</a>
-                    <a href="#panelui">ui.js</a>
+                    <a href="#panel1">核心库soneway.js</a>
+                    <a href="#panelui">UI库ui.js</a>
                     <a href="#panelcarousel">焦点图</a>
                     <a href="#panelflip">3d旋转切换</a>
                     <a href="#panelpicpager">相册功能</a>
                     <a href="#panelscroll">自定义滚动</a>
-                    <a href="#panelalert">弹框元素</a>
                     <a href="#panelswatchbook">扇形特效</a>
                     <a href="#panelscratchcard">刮刮卡</a>
                     <a href="#panelturntable">转盘抽奖</a>
@@ -342,7 +315,7 @@
         </div>
 
         <div class="content ofauto">
-            <div class="contentpanel">
+            <div>
                 <h2>菜单</h2>
                 <p>
                     内容<br />
@@ -364,6 +337,7 @@
     <script type="text/javascript" src="soneway.js"></script>
     <script type="text/javascript" src="ui/ui.js"></script>
     <script type="text/javascript" src="plugin/carousel.js"></script>
+    <script type="text/javascript" src="plugin/customalert.js"></script>
     <script type="text/javascript" src="plugin/flip.js"></script>
     <script type="text/javascript" src="plugin/picpager.js"></script>
     <script type="text/javascript" src="plugin/scratchcard.js"></script>
