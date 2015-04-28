@@ -16,7 +16,6 @@
             tmpArray = [],
             slice = tmpArray.slice,
             indexOf = tmpArray.indexOf,
-            filter = tmpArray.filter,
             oneSelReg = /^[\w-]*$/,
             spaceReg = /\s+/g;
 
@@ -118,28 +117,6 @@
         })();
 
         /**
-         * 数组去重函数
-         * @param {Array} array 待去重的数组
-         * @returns {Array} 去重后的数组
-         * @ignore
-         */
-        function distinct(array) {
-            for (var i = 0, len = array.length; i < len; i++) {
-                //取出当前项
-                var cur = array[i];
-                for (var j = i + 1; j < len; j++) {
-                    //删除其他和当前项相同的项
-                    if (array[j] === cur) {
-                        array.splice(j--, 1);
-                        //数组长度和索引-1
-                        len--;
-                    }
-                }
-            }
-            return array;
-        }
-
-        /**
          * 数组遍历函数
          * @param {Array} array 待遍历的数组
          * @param {Function} fn 回调函数
@@ -180,6 +157,24 @@
                 };
             }
         })();
+
+        /**
+         * 按sel过滤并返回$对象函数
+         * @param {$init|NodeList} nodes
+         * @param {string} sel 选择器
+         * @returns {$init} 过滤后的$对象
+         * @ignore
+         */
+        function filterNodes(nodes, sel) {
+            if (sel === undefined) {
+                return $(nodes);
+            }
+            var els = [];
+            forEach(nodes, function (el) {
+                getMatSel(el).call(el, sel) && els.push(el);
+            });
+            return $(els);
+        }
 
 
         //判断是否为某种类型函数
@@ -263,12 +258,7 @@
              * @returns {$init} 选择后的$对象
              */
             filter: function (sel) {
-                if (sel === undefined) {
-                    return this;
-                }
-                return $(filter.call(this, function (el) {
-                    return getMatSel(el).call(el, sel) && sel;
-                }));
+                return filterNodes(this, sel);
             },
 
             /**
@@ -282,10 +272,10 @@
                     var parentNode = el.parentNode;
                     //父元素的子元素,排除当前元素
                     parentNode && forEach(parentNode.children, function (item) {
-                        item !== el && els.push(item);
+                        item !== el && els.indexOf(item) === -1 && els.push(item);
                     });
                 });
-                return $(distinct(els)).filter(sel);
+                return filterNodes(els, sel);
             },
 
             /**
@@ -294,13 +284,15 @@
              * @returns {$init} 选择后的$对象
              */
             not: function (sel) {
-                return $(filter.call(this, function (el) {
-                    return !getMatSel(el).call(el, sel) && sel;
-                }));
+                var els = [];
+                this.forEach(function (el) {
+                    !getMatSel(el).call(el, sel) && els.push(el);
+                });
+                return $(els);
             },
 
             /**
-             * 查找元素
+             * 取子孙元素
              * @param {string} sel 选择器
              * @returns {$init} 选择后的$对象
              */
@@ -308,9 +300,11 @@
                 var els = [];
                 this.forEach(function (el) {
                     //根据当前元素查找符合sel的元素
-                    els = els.concat(slice.call(el.querySelectorAll(sel), 0));
+                    forEach(el.querySelectorAll(sel), function (item) {
+                        els.indexOf(item) === -1 && els.push(item);
+                    });
                 });
-                return $(distinct(els));
+                return $(els);
             },
 
             /**
@@ -331,9 +325,11 @@
                 var els = [];
                 this.forEach(function (el) {
                     //所有子元素
-                    els = els.concat(slice.call(el.children, 0));
+                    forEach(el.children, function (item) {
+                        els.push(item);
+                    });
                 });
-                return $(els).filter(sel);
+                return filterNodes(els, sel);
             },
 
             /**
@@ -345,9 +341,26 @@
                 var els = [];
                 this.forEach(function (el) {
                     var parentNode = el.parentNode;
-                    parentNode && els.push(parentNode);
+                    parentNode && parentNode !== document && els.indexOf(parentNode) === -1 && els.push(parentNode);
                 });
-                return $(distinct(els)).filter(sel);
+                return filterNodes(els, sel);
+            },
+
+            /**
+             * 取祖先元素
+             * @param {string} sel 选择器
+             * @returns {$init} 选择后的$对象
+             */
+            parents: function (sel) {
+                var els = [];
+                this.forEach(function (el) {
+                    var parentNode = el.parentNode;
+                    while (parentNode) {
+                        parentNode !== document && els.indexOf(parentNode) === -1 && els.push(parentNode);
+                        parentNode = parentNode.parentNode;
+                    }
+                });
+                return filterNodes(els, sel);
             },
 
             /**

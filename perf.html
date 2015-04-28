@@ -512,9 +512,9 @@
 
     <!--pi-->
     <script type="text/javascript" src="soneway.js"></script>
-    <script type="text/javascript" src="http://img.gd.sohu.com/js/zepto.js"></script>
+    <script type="text/javascript" src="lib/zepto.js"></script>
     <!--perftest-->
-    <script type="text/javascript" src="http://img.gd.sohu.com/js/perftest.js"></script>
+    <script type="text/javascript" src="lib/perftest.js"></script>
     <script type="text/javascript">
 
         window.onerror = function (r) {
@@ -574,8 +574,8 @@
         }, 99999);
 
         perfTest(function () {
-            s = sdiv.each(function () {
-                var xxxxx = this;
+            s = sdiv.forEach(function (el) {
+                var xxxxx = el;
             });
         }, 99999);
 
@@ -602,11 +602,11 @@
         }, 999);
 
         perfTest(function () {
-            s = sdiv.not('.i');
+            s = sdiv.not('.panel');
         }, 9999);
 
         perfTest(function () {
-            z = zdiv.not('.i');
+            z = zdiv.not('.panel');
         }, 9999);
 
         perfTest(function () {
@@ -634,11 +634,19 @@
         }, 999);
 
         perfTest(function () {
-            s = sdiv.parent('div');
+            s = sdiv.parent('.panel');
         }, 9999);
 
         perfTest(function () {
-            z = zdiv.parent('div');
+            z = zdiv.parent('.panel');
+        }, 9999);
+
+        perfTest(function () {
+            s = sdiv.parents('.panel');
+        }, 9999);
+
+        perfTest(function () {
+            z = zdiv.parents('.panel');
         }, 9999);
 
         perfTest(function () {
