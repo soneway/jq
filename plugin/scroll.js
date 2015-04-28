@@ -1,4 +1,4 @@
-﻿//jq.scroll.js
+﻿//scroll.js
 (function (window, $) {
 
     $.fn.scroll = function (options) {
@@ -37,7 +37,7 @@
 
             //初始化函数
             function init() {
-                $items.addClass('jq-scroll-item');
+                $items.addClass('pi-scroll-item');
 
                 //初始化事件
                 initEvent();

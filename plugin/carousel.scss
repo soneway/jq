@@ -1,5 +1,5 @@
 ﻿/*焦点图*/
-.jq-carousel
+.pi-carousel
 {
     overflow: hidden;
     position: relative;
@@ -25,7 +25,7 @@
 }
 
 /*滚动容器*/
-.jq-carousel-wrap
+.pi-carousel-wrap
 {
     @extend %ph_palt;
     overflow: hidden;
@@ -50,7 +50,7 @@
 }
 
 /*title*/
-.jq-carousel-title
+.pi-carousel-title
 {
     @include mx_plb;
     width: 100%;
@@ -70,7 +70,7 @@
 }
 
 /*pager*/
-.jq-carousel-pager
+.pi-carousel-pager
 {
     @include mx_prb(absolute, 4px, 4px);
 

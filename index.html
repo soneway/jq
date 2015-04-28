@@ -33,7 +33,7 @@
 
             <!--一级面板标题-->
             <div class="roottitle">
-                <a class="btnleft">按钮</a>
+                <a class="btnleft" href="#panelshare">分享</a>
                 <h1 class="title"></h1>
             </div>
             <!--一级面板标题 end-->
@@ -53,8 +53,9 @@
 
         <!--一级面板-->
 
-        <!--核心库soneway.js-->
-        <div id="panel1" data-role="root" class="panel" title="核心库soneway.js">
+        <!--核心库-->
+        <div id="panel1" data-role="root" class="panel" title="soneway.js">
+            <p class="info">soneway.js是简化版zepto,体积比zepto小(1/4),效率比zepto高(50%左右),兼容jquery语法</p>
             <div class="list">
                 <a href="https://github.com/soneway/soneway/blob/master/soneway.js" target="_blank">查看源代码</a>
                 <a href="perf.html" target="_blank">查看与zepto性能对比(请打开console)</a>
@@ -116,15 +117,20 @@
                 <a>width</a>
             </div>
         </div>
-        <!--核心库soneway.js end-->
+        <!--核心库 end-->
 
-        <!--UI库ui.js-->
-        <div id="panelui" data-role="root" class="panel" title="UI库ui.js">
+        <!--UI库-->
+        <div id="panelui" data-role="root" class="panel" title="ui.js">
+            <p class="info">ui.js是一个ui框架,包含页面切换,边栏,弹出框,导航栏等功能</p>
             <div class="list">
                 <a href="https://github.com/soneway/soneway/blob/master/ui/ui.js" target="_blank">查看源代码</a>
                 <a href="#panelsub">跳转到二级页面</a>
-                <a data-href="http://sohu.com">跳转到sohu</a>
-                <a onclick="$.loadPanel('#panelsub2')">$.loadPanel('#panelsub2')</a>
+                <a data-href="http://sohu.com">跳转到sohu
+                    <p>有data-href属性的链接将不会跳出页面,以iframe显示</p>
+                </a>
+                <a onclick="$.loadPanel('#panelsub2')">$.loadPanel('#panelsub2')
+                    <p>data-role="root"的panel为一级页面,除此之外为二级页面</p>
+                </a>
                 <a onclick="$.toggleHeader(0)">$.toggleHeader(0)</a>
                 <a onclick="$.toggleHeader(1)">$.toggleHeader(1)</a>
                 <a onclick="$.toggleNavbar(0)">$.toggleNavbar(0)</a>
@@ -135,123 +141,123 @@
                 <a onclick="$.customalert({ content: '全球领先的信息与通信解决方案供应商华为，近日亮相日本最大的ICT展会'});">alert弹框</a>
             </div>
         </div>
-        <!--UI库ui.js end-->
+        <!--UI库 end-->
 
         <!--焦点图-->
-        <div id="panelcarousel" data-role="root" class="panel" title="焦点图">
-            <div>
-                <div class="carousel" data-len="5">
-                </div>
-                <div class="carousel" data-len="5" data-isvertical="1">
-                </div>
+        <div id="panelcarousel" data-role="root" class="panel" title="$.fn.carousel">
+            <p class="info">carousel.js插件适合有限张图片切换展示,除了图片,还适用于普通html容器</p>
+            <h3 class="center">横向滚动</h3>
+            <div class="carousel" data-len="5">
+            </div>
+            <h3 class="center">竖向滚动</h3>
+            <div class="carousel" data-len="5" data-isvertical="1">
             </div>
         </div>
         <!--焦点图 end-->
 
         <!--3d旋转切换-->
-        <div id="panelflip" data-role="root" class="panel" title="3d旋转切换">
-            <div>
-                <div class="flip" data-len="5">
-                </div>
-                <div class="flip" data-len="5" data-isvertical="1">
-                </div>
+        <div id="panelflip" data-role="root" class="panel" title="$.fn.flip">
+            <p class="info">flip.js插件适合有限张图片3d切换展示,除了图片,还适用于普通html容器</p>
+            <h3 class="center">横向切换</h3>
+            <div class="flip" data-len="5">
+            </div>
+            <h3 class="center">竖向切换</h3>
+            <div class="flip" data-len="5" data-isvertical="1">
             </div>
         </div>
         <!--3d旋转切换 end-->
 
         <!--相册功能-->
-        <div id="panelpicpager" data-role="root" class="panel" title="相册功能">
+        <div id="panelpicpager" data-role="root" class="panel" title="$.fn.picpager">
+            <p class="info">picpager.js插件适合无限张图片切换展示,可动态添加图片数据</p>
             <div class="picpager">
             </div>
         </div>
         <!--相册功能 end-->
 
         <!--自定义滚动-->
-        <div id="panelscroll" data-role="root" class="panel" title="自定义滚动">
-            <div>
-                <div class="scroll" data-isvertical="1">
-                    <div></div>
-                </div>
-                <div class="scroll">
-                    <div></div>
-                </div>
+        <div id="panelscroll" data-role="root" class="panel" title="$.fn.scroll">
+            <p class="info">scroll.js用于模拟页面滚动效果,本DEMO中的可滚动的导航栏就是用该插件实现</p>
+            <h3 class="center">横向滚动</h3>
+            <div class="scroll" data-isvertical="1">
+                <div></div>
+            </div>
+            <h3 class="center">竖向滚动</h3>
+            <div class="scroll">
+                <div></div>
             </div>
         </div>
         <!--自定义滚动 end-->
 
         <!--扇形特效-->
-        <div id="panelswatchbook" data-role="root" class="panel" title="扇形特效">
-            <div>
-                <div class="swatchbook">
-                    <div class="sb-item">
-                        <span class="sb-icon">♈</span>
-                        <h3><span>白羊座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♉</span>
-                        <h3><span>金牛座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♊</span>
-                        <h3><span>双子座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♋</span>
-                        <h3><span>巨蟹座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♌</span>
-                        <h3><span>狮子座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♍</span>
-                        <h3><span>处女座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♎</span>
-                        <h3><span>天秤座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♏</span>
-                        <h3><span>天蝎座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♐</span>
-                        <h3><span>射手座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♑</span>
-                        <h3><span>摩羯座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♒</span>
-                        <h3><span>水瓶座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <span class="sb-icon">♓</span>
-                        <h3><span>双鱼座</span></h3>
-                    </div>
-                    <div class="sb-item">
-                        <h3><span>星座牌</span></h3>
-                        <span class="sb-toggle">请点击</span>
-                    </div>
+        <div id="panelswatchbook" data-role="root" class="panel" title="$.fn.swatchbook">
+            <div class="swatchbook">
+                <div class="sb-item">
+                    <span class="sb-icon">♈</span>
+                    <h3><span>白羊座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♉</span>
+                    <h3><span>金牛座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♊</span>
+                    <h3><span>双子座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♋</span>
+                    <h3><span>巨蟹座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♌</span>
+                    <h3><span>狮子座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♍</span>
+                    <h3><span>处女座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♎</span>
+                    <h3><span>天秤座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♏</span>
+                    <h3><span>天蝎座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♐</span>
+                    <h3><span>射手座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♑</span>
+                    <h3><span>摩羯座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♒</span>
+                    <h3><span>水瓶座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <span class="sb-icon">♓</span>
+                    <h3><span>双鱼座</span></h3>
+                </div>
+                <div class="sb-item">
+                    <h3><span>星座牌</span></h3>
+                    <span class="sb-toggle">请点击</span>
                 </div>
             </div>
         </div>
         <!--扇形特效 end-->
 
         <!--刮刮卡-->
-        <div id="panelscratchcard" data-role="root" class="panel" title="刮刮卡">
-            <div>
-                <div class="scratchcard"></div>
-            </div>
+        <div id="panelscratchcard" data-role="root" class="panel" title="$.scratchcard">
+            <div class="scratchcard"></div>
         </div>
         <!--刮刮卡 end-->
 
         <!--转盘抽奖-->
         <div id="panelturntable" data-role="root" class="panel" title="转盘抽奖">
+            <p class="info">turntable.js是一个简单的转盘抽奖特效</p>
             <div id="turntable">
-                <div id="turntable_pointer"></div>
                 <a id="turntable_start"></a>
             </div>
         </div>
@@ -267,21 +273,42 @@
         </div>
         <!--嵌入的iframe页面 end-->
 
-        <!--panelsub-->
+        <!--二级页面-->
         <div id="panelsub" class="panel" title="二级页面">
             <div class="list">
                 <a href="#panelsub2">跳转到三级页面</a>
             </div>
         </div>
-        <!--panelsub end-->
+        <!--二级页面 end-->
 
-        <!--panelsub2-->
+        <!--三级页面-->
         <div id="panelsub2" class="panel" title="三级页面">
-            <div>
+            <div class="list">
                 三级页面内容
             </div>
         </div>
-        <!--panelsub2 end-->
+        <!--三级页面 end-->
+
+        <!--分享-->
+        <div id="panelshare" class="panel" title="分享">
+            <div class="sharebox center bgborder maxwidth">
+                <h3 id="share_alert"></h3>
+                <input type="hidden" id="url_share"/>
+                <input type="hidden" id="pic_share"/>
+                <textarea id="txt_share"></textarea>
+                <p id="share_list">
+                    <a data-provider="weibosina" class="weibosina"></a>
+                    <a data-provider="qq" class="qq"></a>
+                    <a data-provider="renren" class="renren"></a>
+                    <a data-provider="tieba" class="tieba"></a>
+                    <a data-provider="tqq" class="tqq"></a>
+                    <a data-provider="douban" class="douban"></a>
+                    <a data-provider="kaixin001" class="kaixin001"></a>
+                    <a data-provider="163" class="netease"></a>
+                </p>
+            </div>
+        </div>
+        <!--分享 end-->
 
         <!--二级面板 end-->
 
@@ -290,8 +317,8 @@
         <div id="navbar" class="transform">
             <div class="navbox">
                 <div class="navlist">
-                    <a href="#panel1">核心库soneway.js</a>
-                    <a href="#panelui">UI库ui.js</a>
+                    <a href="#panel1">核心库</a>
+                    <a href="#panelui">UI库</a>
                     <a href="#panelcarousel">焦点图</a>
                     <a href="#panelflip">3d旋转切换</a>
                     <a href="#panelpicpager">相册功能</a>
@@ -315,20 +342,30 @@
         </div>
 
         <div class="content ofauto">
-            <div>
-                <h2>菜单</h2>
-                <p>
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
-                    内容<br />
+
+            <!--未登陆-->
+            <div class="tologin center">
+                <a class="sohulogo"></a>
+                <p class="icon_userid">
+                    <input type="text" id="userid" data-msg="用户名" class="notnull" placeholder="请输入用户名"/>
                 </p>
+                <p class="icon_password">
+                    <input type="password" id="password" data-msg="密码" class="notnull" placeholder="请输入密码"/>
+                </p>
+                <a id="btn_login" class="btn">登录</a>
+                <div class="other_login">
+                    <p>其他登录方式：</p>
+                    <div>
+                        <a onclick="jtool.otherLogin('qq')" class="qq"></a>
+                        <a onclick="jtool.otherLogin('sina')" class="sina"></a>
+                        <a onclick="jtool.otherLogin('renren')" class="renren"></a>
+                        <a onclick="jtool.otherLogin('baidu')" class="baidu"></a>
+                        <a onclick="jtool.otherLogin('taobao')" class="taobao"></a>
+                    </div>
+                </div>
             </div>
+            <!--未登陆 end-->
+
         </div>
     </div>
     <!--sidebox end-->
@@ -343,6 +380,7 @@
     <script type="text/javascript" src="plugin/scratchcard.js"></script>
     <script type="text/javascript" src="plugin/scroll.js"></script>
     <script type="text/javascript" src="plugin/swatchbook.js"></script>
+    <script type="text/javascript" src="plugin/turntable.js"></script>
     <!--主代码-->
     <script type="text/javascript" src="src/index.js"></script>
 </body>

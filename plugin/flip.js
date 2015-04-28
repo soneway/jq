@@ -1,4 +1,4 @@
-﻿//jq.flip.js
+﻿//flip.js
 (function (window, $) {
 
     $.fn.flip = function (options) {
@@ -29,7 +29,7 @@
 
             //初始化函数
             function init() {
-                $this.addClass('jq-flip');
+                $this.addClass('pi-flip');
 
                 //初始化第一个item显示
                 $items.eq(0).addClass('visible');
@@ -82,9 +82,7 @@
                         $.isFunction(slideCallback) && slideCallback(index);
 
                         $items.each(function (i) {
-                            var me = this,
-                                $this = $(this);
-
+                            var $this = $(this);
                             if (i === index) {
                                 transform = isVertical ? 'rotate3d(1,0,0,' + -(swipSpan ? 0 : -360) + 'deg)' : 'rotate3d(0,1,0,' + (swipSpan ? 0 : -360) + 'deg)';
                                 $this.addClass('visible').css({

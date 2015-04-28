@@ -1,5 +1,5 @@
 ﻿/*3d翻转效果*/
-.jq-flip
+.pi-flip
 {
     position: relative;
     @include mx_perspective(1000);
@@ -7,7 +7,7 @@
     & > *
     {
         @extend %ph_palt;
-        width: 100%;
+        @extend %ph_full;
         @extend %ph_transall;
         opacity: 0;
 

@@ -1,4 +1,4 @@
-﻿//jq.picpager.js
+﻿//picpager.js
 (function (window, $) {
 
     $.fn.picpager = function (options) {
@@ -30,8 +30,8 @@
 
             //初始化函数
             function init() {
-                $this.addClass('jq-picpager').html('<div class="jq-picpager-wrap"><div class="jq-picpager-pic"></div><div class="jq-picpager-pic"></div><div class="jq-picpager-pic"></div></div>');
-                $pics = $this.find('.jq-picpager-pic');
+                $this.addClass('pi-picpager').html('<div class="pi-picpager-wrap"><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div></div>');
+                $pics = $this.find('.pi-picpager-pic');
 
                 //初始化事件
                 initEvent();

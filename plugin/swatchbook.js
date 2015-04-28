@@ -1,8 +1,8 @@
-﻿//jq.swatchbook.js
+﻿//swatchbook.js
 (function (window, $) {
 
     $.fn.swatchbook = function (options) {
-        $.fn.swatchbook.deflunt = {
+        $.fn.swatchbook.defaults = {
             //打开的index
             centerIdx: 6,
             //item之间的角度(center右边的item)
@@ -25,7 +25,7 @@
 
         //每个元素执行
         return this.each(function () {
-            var opts = $.extend({}, $.fn.swatchbook.deflunt, options);
+            var opts = $.extend({}, $.fn.swatchbook.defaults, options);
 
             //配置项
             var centerIdx = opts.centerIdx,

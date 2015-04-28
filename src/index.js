@@ -38,7 +38,7 @@
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a data-title="焦点图示例 ' + (i + 1) + '"><img src="src/images/' + (part ? part + '/' : '') + '' + i + '.jpg"/></a>';
+                        html += '<a style="background: url(src/images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
                     }
 
                     $(this).html(html).carousel({
@@ -63,7 +63,7 @@
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a><img src="src/images/' + (part ? part + '/' : '') + '' + i + '.jpg"/></a>';
+                        html += '<a><p style="background: url(src/images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></p></a>';
                     }
 
                     $(this).html(html).flip({
@@ -181,14 +181,13 @@
 
         return function ($this, isInit) {
             if (isInit) {
-                var turntable = new Turntable({
-                    count: 16,
-                    pointerEl: document.getElementById('turntable_pointer')
-                });
+                var turntableEl = $('#turntable').turntable({
+                    count: 10
+                })[0];
 
                 $doc.on('click', '#turntable_start', function () {
-                    var index = parseInt(Math.random() * 16);
-                    turntable.doTurn(index, function () {
+                    var index = parseInt(Math.random() * 10);
+                    turntableEl.turnToIndex(index, function () {
                         alert(index + 1);
                     });
                 });

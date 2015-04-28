@@ -1,5 +1,5 @@
 ﻿/*相册*/
-.jq-picpager
+.pi-picpager
 {
     overflow: hidden;
     position: relative;
@@ -23,13 +23,13 @@
     }
 }
 
-.jq-picpager-wrap
+.pi-picpager-wrap
 {    
     @extend %ph_palt;
     @extend %ph_full;
 }
 
-.jq-picpager-pic
+.pi-picpager-pic
 {
     @extend %ph_palt;
     @extend %ph_full;

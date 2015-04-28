@@ -1,4 +1,4 @@
-﻿//jq.scratchcard.js
+﻿//scratchcard.js
 (function (window, $) {
 
     $.fn.scratchcard = function (options) {

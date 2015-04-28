@@ -1,4 +1,4 @@
-﻿//jq.carousel.js
+﻿//carousel.js
 (function (window, $) {
 
     $.fn.carousel = function (options) {
@@ -40,26 +40,26 @@
 
             //初始化函数
             function init() {
-                $this.addClass('jq-carousel').html('<div class="jq-carousel-wrap">' + $this.html() + '</div>' + (isShowTitle ? '<div class="jq-carousel-title"></div>' : ''));
+                $this.addClass('pi-carousel').html('<div class="pi-carousel-wrap">' + $this.html() + '</div>' + (isShowTitle ? '<div class="pi-carousel-title"></div>' : ''));
 
-                $wrap = $this.find('.jq-carousel-wrap');
+                $wrap = $this.find('.pi-carousel-wrap');
                 wrapElStyle = $wrap[0].style;
                 $items = $wrap.children('*');
                 itemCount = $items.length;
 
                 isVertical && $this.addClass('vertical');
-                $title = $this.find('.jq-carousel-title');
+                $title = $this.find('.pi-carousel-title');
 
                 //pager
                 var html = '';
                 if (isShowPager) {
-                    html += '<div class="jq-carousel-pager">';
+                    html += '<div class="pi-carousel-pager">';
                     for (var i = 0, len = itemCount; i < len; i++) {
                         html += '<span></span>';
                     }
                     html += '</div>';
                 }
-                $pagers = $this.append(html).find('.jq-carousel-pager span');
+                $pagers = $this.append(html).find('.pi-carousel-pager span');
 
                 //初始化事件
                 initEvent();
