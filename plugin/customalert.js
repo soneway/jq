@@ -40,15 +40,15 @@
     $doc.on('click', '#customalert-btnok', function () {
         //隐藏
         $customalert.removeClass('visible');
-        $.isFunction(onHide) && onHide();
-        $.isFunction(btnOkClick) && btnOkClick();
+        typeof onHide === 'function' && onHide();
+        typeof btnOkClick == 'function' && btnOkClick();
     });
     //关闭按钮
     $doc.on('click', '#customalert-btncancel', function () {
         //隐藏
         $customalert.removeClass('visible');
-        $.isFunction(onHide) && onHide();
-        $.isFunction(btnCancelClick) && btnCancelClick();
+        typeof onHide === 'function' && onHide();
+        typeof btnCancelClick === 'function' && btnCancelClick();
     });
 
 
@@ -86,7 +86,7 @@
 
         //显示
         $customalert.addClass('visible');
-        $.isFunction(onShow) && onShow();
+        typeof onShow === 'function' && onShow();
     };
 
     //默认配置

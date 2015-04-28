@@ -34,7 +34,7 @@
                 //初始化第一个item显示
                 $items.eq(0).addClass('visible');
                 //滚动回调函数
-                $.isFunction(slideCallback) && slideCallback(0);
+                typeof slideCallback === 'function' && slideCallback(0);
 
                 //初始化事件
                 initEvent();

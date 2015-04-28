@@ -119,7 +119,7 @@
                     }
                     else {
                         //滚动回调函数
-                        $.isFunction(slideCallback) && slideCallback(index);
+                        typeof slideCallback === 'function' && slideCallback(index);
                         //title
                         var title = $items.eq(index).attr('data-title');
                         $title.removeClass('visible');

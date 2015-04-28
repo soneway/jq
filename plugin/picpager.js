@@ -88,7 +88,7 @@
                     }
 
                     //滚动回调函数
-                    $.isFunction(slideCallback) && slideCallback(index, direction);
+                    typeof slideCallback === 'function' && slideCallback(index, direction);
 
                 }
 

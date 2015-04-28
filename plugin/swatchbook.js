@@ -100,7 +100,7 @@
                         rotateSiblings($item, itemIdx);
                     }
                 }
-                else if (itemIdx === currentIdx && $.isFunction(selectCallback)) {
+                else if (itemIdx === currentIdx && typeof selectCallback === 'function') {
                     selectCallback(itemIdx);
                 }
             }
@@ -132,7 +132,7 @@
 
                 $siblings.each(function (i) {
                     var rotateVal = i < itemIdx ?
-                        angleInc * (i - itemIdx) : i - itemIdx === 1 ?
+                    angleInc * (i - itemIdx) : i - itemIdx === 1 ?
                         proximity : proximity + (i - itemIdx - 1) * neighbor;
                     var transformStr = 'rotate(' + rotateVal + 'deg)';
 
