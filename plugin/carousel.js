@@ -35,7 +35,7 @@
             //变量
             var $this = $(this),
                 me = this,
-                $wrap, wrapElStyle, $items, itemCount, $spinner,
+                $wrap, wrapElStyle, $items, itemCount,
                 $title, $pagers;
 
             //初始化函数
