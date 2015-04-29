@@ -121,7 +121,7 @@
                         //滚动回调函数
                         typeof slideCallback === 'function' && slideCallback(index);
                         //title
-                        var title = $items.eq(index).attr('data-title');
+                        var title = $items.removeClass('current').eq(index).addClass('current').attr('data-title');
                         $title.removeClass('visible');
                         title && setTimeout(function () {
                             $title.addClass('visible').html(title);
