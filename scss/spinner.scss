@@ -1,0 +1,32 @@
+﻿@import 'ani_circle';
+
+
+/*spinner动画*/
+.spinner
+{
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    @include mx_animation(ani_circle 1s ease infinite);
+
+    b
+    {
+        $w: 10px;
+
+        @include mx_plt($left: 20px, $top: 20px);
+        background-color: $color;
+        width: $w;
+        height: $w;
+        border-radius: $w;
+
+        @for $i from 1 through 8
+        {
+            &:nth-of-type(#{$i})
+            {
+                @include mx_transform(rotate(45deg * $i) translate(0, -20px));
+                opacity: 0.125 * $i;
+            }
+        }
+    }
+}

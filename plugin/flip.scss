@@ -1,0 +1,25 @@
+﻿/*3d翻转效果*/
+.pi-flip
+{
+    position: relative;
+    @include mx_perspective(1000);
+
+    & > *
+    {
+        @extend %ph_palt;
+        @extend %ph_full;
+        @extend %ph_transall;
+        opacity: 0;
+
+        &.notrans
+        {
+            @include mx_transition(none);
+        }
+
+        &.visible
+        {
+            opacity: 1;
+            z-index: 1;
+        }
+    }
+}

@@ -1,0 +1,462 @@
+﻿/*变量*/
+//$bg_type: 2;
+/*外部引入*/
+@import '../ui/ui', '../scss/iconmoon', '../plugin/scroll', '../plugin/customalert', '../plugin/carousel', '../plugin/flip', '../plugin/picpager', '../plugin/swatchbook', '../plugin/turntable', '../scss/share', '../scss/login';
+
+
+/*其他*/
+$border-color: rgba(0, 0, 0, 0.1);
+input, select, textarea
+{
+    height: 32px;
+    border-radius: 0;
+    border: 1px solid $border-color;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-indent: 0.5em;
+    color: $color;
+    font-size: 12px;
+
+    &[disabled]
+    {
+        opacity: 0.5;
+    }
+}
+
+
+/*placeholder的颜色*/
+::-webkit-input-placeholder
+{
+    color: #888;
+}
+
+
+textarea
+{
+    height: 100px;
+    text-indent: 0;
+    padding: 3px;
+}
+
+
+/*导航*/
+.navlist
+{
+    a
+    {
+        padding: 0 10px;
+
+        &.selected
+        {
+            border-bottom: 2px solid #DF2221;
+            color: #DF2221;
+        }
+    }
+}
+
+
+/*说明*/
+.info
+{
+    padding: 10px 10px 0 4em;
+    position: relative;
+
+    &:before
+    {
+        content: '说明：';
+        @include mx_plt($left: 10px, $top: 10px);
+        font-weight: bold;
+    }
+}
+
+
+/*列表*/
+.list
+{
+    padding: 10px;
+
+    a
+    {
+        display: block;
+        padding: 10px 5px;
+        position: relative;
+
+        p
+        {
+            color: #888;
+            padding-left: 2em;
+        }
+
+        &.title
+        {
+            background: #eee;
+            font-weight: bold;
+        }
+
+        &:after, &:first-of-type:before
+        {
+            content: '';
+            @extend %ph_palb;
+            height: 1px;
+            width: 100%;
+            @include mx_transform(scale3d(1, 0.5, 1));
+            background: #ddd;
+        }
+
+        &:first-of-type:before
+        {
+            bottom: auto;
+            top: 0;
+        }
+    }
+}
+
+
+h3.center
+{
+    line-height: 30px;
+    position: relative;
+    margin-top: 10px;
+
+    &:before
+    {
+        content: '';
+        @extend %ph_palt;
+        height: 1px;
+        width: 100%;
+        @include mx_transform(scale3d(1, 0.5, 1));
+        background: #ddd;
+    }
+}
+
+
+/*焦点图*/
+#panelcarousel
+{
+    .carousel
+    {
+        width: 90%;
+        min-width: 300px;
+        height: 90%;
+        margin: 0 auto;
+    }
+}
+
+
+/*相册*/
+#panelpicpager
+{
+    .info
+    {
+        @extend %ph_palt;
+        top: $head_height;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        color: #fff;
+        padding-bottom: 10px;
+    }
+
+    .picpager
+    {
+        @extend %ph_full;
+    }
+}
+
+
+/*3d旋转切换*/
+#panelflip
+{
+    .flip
+    {
+        width: 90%;
+        min-width: 300px;
+        height: 90%;
+        margin: 0 auto;
+
+        p
+        {
+            @extend %ph_full;
+        }
+    }
+}
+
+
+/*自定义滚动*/
+#panelscroll
+{
+    .scroll
+    {
+
+        width: 90%;
+        min-width: 300px;
+        height: 90%;
+        margin: 0 auto;
+        overflow: hidden;
+
+        div
+        {
+            background: url(images/1.jpg);
+            @include mx_transition-duration(0.4s);
+        }
+
+        &:nth-of-type(1) > div
+        {
+            width: 100%;
+            height: 900%;
+        }
+
+        &:nth-of-type(2) > div
+        {
+            width: 900%;
+            height: 100%;
+        }
+    }
+}
+
+
+/*扇形特效*/
+#panelswatchbook
+{
+    .swatchbook
+    {
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+        text-align: center;
+        margin: 10px auto;
+    }
+
+    /*每张扇页*/
+    .sb-item
+    {
+        @include mx_box-shadow(-1px -1px 3px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.2));
+
+        & h3
+        {
+            border-top: 1px dashed rgba(0, 0, 0, 0.2);
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+            padding: 5px;
+            margin: 5px;
+            font-size: 12px;
+        }
+
+        //循环赋值颜色
+        $colors: #ea2a29, #f16729, #f89322, #ffcf14, #ffea0d, #87b11d, #008253, #3277b5, #4c549f, #764394, #ca0d86, #ef0fa6, #000;
+        @each $c in $colors
+        {
+            &:nth-of-type(#{index($colors, $c)})
+            {
+                background-color: $c;
+            }
+        }
+
+        &:last-of-type
+        {
+            h3
+            {
+                background: rgba(0, 0, 0, 0.2);
+                box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
+            }
+
+            &:after
+            {
+                @include mx_plb(absolute, 10px, 10px);
+                content: '';
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                @include mx_gradient(-45deg, #dddddd 0%, #58535e 48%, #889396 100%);
+                @include mx_box-shadow(-1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.1));
+            }
+        }
+    }
+
+    /*开关样式*/
+    .sb-toggle
+    {
+        display: block;
+        padding: 5px;
+    }
+
+    /*图标*/
+    .sb-icon
+    {
+        display: inline-block;
+        font-size: 45px;
+        line-height: 45px;
+        width: 45px;
+        margin: 10px auto;
+        background: rgba(0, 0, 0, 0.1);
+    }
+}
+
+
+/*刮刮卡*/
+#panelscratchcard
+{
+    .scratchcard
+    {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+/*转盘抽奖*/
+#panelturntable
+{
+    @at-root
+    {
+        #turntable
+        {
+            width: 320px;
+            height: 320px;
+            margin: 5px auto;
+            background-image: url(images/bg.png);
+
+            .pi-turntable-pointer
+            {
+                background-image: url(images/pointer.png);
+            }
+        }
+
+
+        #turntable_start
+        {
+            $w: 68px;
+            $h: 66px;
+
+            @include mx_plt($left: 50%, $top: 50%);
+            width: $w;
+            height: $h;
+            margin-left: -$w / 2;
+            margin-top: -$h / 2;
+            background: url(images/start.png) center center;
+            background-size: cover;
+            z-index: 1;
+
+            &.focus
+            {
+                opacity: 0.85;
+            }
+        }
+    }
+}
+
+
+/*分享*/
+#panelshare
+{
+    $w: 85%;
+    textarea
+    {
+        width: $w;
+    }
+
+    @at-root
+    {
+        .sharebox
+        {
+            //margin-top: 200px;
+            padding: 15px 0;
+        }
+
+
+        #share_alert
+        {
+            @include mx_plt($left: 50%, $top: 130px);
+            width: 300px;
+            margin-left: -150px;
+            background: rgba(0, 0, 0, 0.5);
+            line-height: 36px;
+            text-align: center;
+        }
+
+
+        #share_list
+        {
+            width: $w + 5%;
+            margin: 0 auto;
+            img
+            {
+                width: 55px;
+                margin: 5px;
+            }
+
+            a.focus img
+            {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
+
+/*未登陆*/
+.tologin
+{
+    width: 80%;
+    min-width: 210px;
+    max-width: 510px;
+    margin: 0 auto;
+
+    & > *
+    {
+        margin-top: 15px;
+    }
+
+    .sohulogo
+    {
+        $h: 110px;
+        display: inline-block;
+        width: $h;
+        height: $h;
+        border-radius: $h;
+        background: #000;
+        @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+        position: relative;
+
+        &:after
+        {
+            content: '';
+            @extend %ph_palt;
+            @extend %ph_full;
+            background: url(images/sohulogo.jpg);
+            background-size: cover;
+            border-radius: $h;
+        }
+
+        &.focus:after
+        {
+            opacity: 0.5;
+        }
+    }
+
+    .icon_userid:before, .icon_password:before
+    {
+        font-size: 20px;
+        vertical-align: middle;
+        line-height: 32px;
+    }
+
+    .other_login
+    {
+        margin-bottom: 15px;
+    }
+
+    input
+    {
+        width: 85%;
+        background-color: transparent;
+        border-style: none;
+        border-bottom-style: solid;
+    }
+
+    @at-root
+    {
+        #btn_login
+        {
+            width: 100%;
+        }
+    }
+}
