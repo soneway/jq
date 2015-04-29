@@ -129,37 +129,38 @@
         }
 
         /**
-         * 获取matchesSelector函数
+         * matchesSelector函数
          * @param {Node} el 元素
-         * @returns {Function} matchesSelector
+         * @param {string} sel 选择器
+         * @returns {boolean} 元素是否符合sel
          * @ignore
          */
-        var getMatSel = (function () {
+        var matchesSelector = (function () {
             var bodyEl = document.body;
             if (bodyEl.matchesSelector) {
-                return function (el) {
-                    return el.matchesSelector;
+                return function (el, sel) {
+                    return el.matchesSelector(sel);
                 };
             }
             if (bodyEl.webkitMatchesSelector) {
-                return function (el) {
-                    return el.webkitMatchesSelector;
+                return function (el, sel) {
+                    return el.webkitMatchesSelector(sel);
                 };
             }
             if (bodyEl.msMatchesSelector) {
-                return function (el) {
-                    return el.msMatchesSelector;
+                return function (el, sel) {
+                    return el.msMatchesSelector(sel);
                 };
             }
             if (bodyEl.mozMatchesSelector) {
-                return function (el) {
-                    return el.mozMatchesSelector;
+                return function (el, sel) {
+                    return el.mozMatchesSelector(sel);
                 };
             }
         })();
 
         /**
-         * 按sel过滤并返回$对象函数
+         * 按sel过滤nodes并返回$对象函数
          * @param {$init|NodeList} nodes
          * @param {string} sel 选择器
          * @returns {$init} 过滤后的$对象
@@ -171,7 +172,7 @@
             }
             var els = [];
             forEach(nodes, function (el) {
-                getMatSel(el).call(el, sel) && els.push(el);
+                matchesSelector(el, sel) && els.push(el);
             });
             return $(els);
         }
@@ -286,7 +287,7 @@
             not: function (sel) {
                 var els = [];
                 this.forEach(function (el) {
-                    !getMatSel(el).call(el, sel) && els.push(el);
+                    !matchesSelector(el, sel) && els.push(el);
                 });
                 return $(els);
             },
@@ -329,6 +330,7 @@
                         els.push(item);
                     });
                 });
+                //过滤
                 return filterNodes(els, sel);
             },
 
@@ -341,8 +343,10 @@
                 var els = [];
                 this.forEach(function (el) {
                     var parentNode = el.parentNode;
+                    //添加parentNode
                     parentNode && parentNode !== document && els.indexOf(parentNode) === -1 && els.push(parentNode);
                 });
+                //过滤
                 return filterNodes(els, sel);
             },
 
@@ -355,11 +359,13 @@
                 var els = [];
                 this.forEach(function (el) {
                     var parentNode = el.parentNode;
+                    //遍历parentNode直到根元素
                     while (parentNode) {
                         parentNode !== document && els.indexOf(parentNode) === -1 && els.push(parentNode);
                         parentNode = parentNode.parentNode;
                     }
                 });
+                //过滤
                 return filterNodes(els, sel);
             },
 
@@ -371,7 +377,7 @@
              */
             closest: function (sel, context) {
                 var curEl = this[0];
-                while (curEl && !getMatSel(curEl).call(curEl, sel)) {
+                while (curEl && !matchesSelector(curEl, sel)) {
                     //document没有matchesSelector
                     var parentNode = curEl.parentNode;
                     curEl = parentNode === document ? null : (curEl !== context && parentNode);
@@ -617,7 +623,7 @@
              */
             is: function (sel) {
                 var el = this[0];
-                return sel && getMatSel(el).call(el, sel);
+                return sel && matchesSelector(el, sel);
             },
 
             /**
