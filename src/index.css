@@ -483,10 +483,6 @@ h4 {
   padding-top: 0;
 }
 
-.offheader .panel {
-  padding-bottom: 0;
-}
-
 /*打开iframe页面的面板*/
 #paneliframe {
   height: 100%;
