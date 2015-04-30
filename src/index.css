@@ -81,7 +81,7 @@
 }
 
 /*all动画*/
-.fade-out, .fade-in, .transition, #header > div, .panel, #customalert, .pi-carousel-title, .pi-flip > *, .pi-picpager .spinnerbox, .pi-picpager-pic {
+.fade-out, .fade-in, .transition, #loading, #header > div, .panel, #customalert, .pi-carousel-title, .pi-flip > *, .pi-picpager .spinnerbox, .pi-picpager-pic {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
@@ -403,8 +403,6 @@ h4 {
   z-index: 5;
   cursor: pointer;
   /*防止点击事件绑定不到(ios8)*/
-  -webkit-transition: background-color 0.3s ease;
-  transition: background-color 0.3s ease;
 }
 #loading > div {
   text-align: center;

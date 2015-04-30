@@ -132,7 +132,8 @@
     background-color: $panel_bgcolor;
     z-index: 5;
     cursor: pointer; /*防止点击事件绑定不到(ios8)*/
-    @include mx_transition(background-color 0.3s ease);
+    @extend %ph_transall;
+    //@include mx_transition(background-color 0.3s ease);
 
     & > div
     {
