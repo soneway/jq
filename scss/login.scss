@@ -24,7 +24,6 @@
         border-radius: $height * 0.2;
         margin-left: 14px;
         position: relative;
-        background: #000;
 
         &:first-of-type
         {
@@ -41,9 +40,14 @@
             border-radius: $height * 0.2;
         }
 
-        &.focus:after
+        &.focus
         {
-            opacity: 0.5;
+            background: #000;
+
+            &:after
+            {
+                opacity: 0.5;
+            }
         }
     }
 
@@ -56,6 +60,7 @@
         }
     }
 }
+
 
 /*用户名密码图标*/
 @font-face
@@ -95,6 +100,7 @@ IABJAGMAbwBNAG8AbwBuAC4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==') forma
     font-style: normal;
 }
 
+
 .icon_userid:before, .icon_password:before
 {
     font-family: iconlogin;
@@ -102,10 +108,12 @@ IABJAGMAbwBNAG8AbwBuAC4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==') forma
     -webkit-font-smoothing: antialiased;
 }
 
+
 .icon_userid:before
 {
     content: '\e600';
 }
+
 
 .icon_password:before
 {

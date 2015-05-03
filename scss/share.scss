@@ -14,7 +14,6 @@
         border-radius: $height * 0.2;
         margin: 8px;
         position: relative;
-        background: #000;
 
         &:after
         {
@@ -26,9 +25,14 @@
             border-radius: $height * 0.2;
         }
 
-        &.focus:after
+        &.focus
         {
-            opacity: 0.5;
+            background: #000;
+
+            &:after
+            {
+                opacity: 0.5;
+            }
         }
     }
 

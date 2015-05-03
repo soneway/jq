@@ -835,13 +835,15 @@ h4 {
   border-radius: 10px;
   margin: 8px;
   position: relative;
-  background: #000;
 }
 #share_list a:after {
   content: '';
   background: url(../src/images/icon_share.png);
   background-size: auto 50px;
   border-radius: 10px;
+}
+#share_list a.focus {
+  background: #000;
 }
 #share_list a.focus:after {
   opacity: 0.5;
@@ -890,7 +892,6 @@ h4 {
   border-radius: 6px;
   margin-left: 14px;
   position: relative;
-  background: #000;
 }
 .other_login a:first-of-type {
   margin-left: 0;
@@ -900,6 +901,9 @@ h4 {
   background: url(../src/images/icon_login.png);
   background-size: auto 30px;
   border-radius: 6px;
+}
+.other_login a.focus {
+  background: #000;
 }
 .other_login a.focus:after {
   opacity: 0.5;
