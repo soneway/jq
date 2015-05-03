@@ -41,7 +41,7 @@
     {
         .#{$provider}:after
         {
-            background-position: #{ -$height * (index($providers, $provider) - 1)} 0;
+            background-position: #{ -$height * (index($providers, $provider) - 1)} top;
         }
     }
 }
