@@ -28,11 +28,13 @@ $panel_bgcolor: #fff !default;
     top: $top;
 }
 
+
 @mixin mx_plb($position: absolute, $left: 0, $bottom: 0) {
     position: $position;
     left: $left;
     bottom: $bottom;
 }
+
 
 @mixin mx_prt($position: absolute, $right: 0, $top: 0) {
     position: $position;
@@ -40,11 +42,13 @@ $panel_bgcolor: #fff !default;
     top: $top;
 }
 
+
 @mixin mx_prb($position: absolute, $right: 0, $bottom: 0) {
     position: $position;
     right: $right;
     bottom: $bottom;
 }
+
 
 /*transition*/
 @mixin mx_transition($value) {
@@ -52,20 +56,24 @@ $panel_bgcolor: #fff !default;
     transition: $value;
 }
 
+
 @mixin mx_transition-duration($value) {
     -webkit-transition-duration: $value;
     transition-duration: $value;
 }
+
 
 @mixin mx_transition-delay($value) {
     -webkit-transition-delay: $value;
     transition-delay: $value;
 }
 
+
 @mixin mx_transition-transform($value) {
     -webkit-transition: -webkit-transform $value;
     transition: transform $value;
 }
+
 
 /*transform*/
 @mixin mx_transform($value) {
@@ -73,11 +81,13 @@ $panel_bgcolor: #fff !default;
     transform: $value;
 }
 
+
 /*transform-origin*/
 @mixin mx_transform-origin($value) {
     -webkit-transform-origin: $value;
     transform-origin: $value;
 }
+
 
 /*animation*/
 @mixin mx_animation($value) {
@@ -85,16 +95,19 @@ $panel_bgcolor: #fff !default;
     animation: $value;
 }
 
+
 /*渐变背景*/
 @mixin mx_gradient($value...) {
     background-image: -webkit-linear-gradient($value); /*安卓4.0-4.4*/
     background-image: linear-gradient($value); /*css3标准*/
 }
 
+
 @mixin mx_radial-gradient($value...) {
     background-image: -webkit-radial-gradient($value); /*安卓4.0-4.4*/
     background-image: radial-gradient($value); /*css3标准*/
 }
+
 
 /*backface-visibility*/
 @mixin mx_backface-visibility($value) {
@@ -103,11 +116,13 @@ $panel_bgcolor: #fff !default;
     backface-visibility: $value;
 }
 
+
 /*perspective*/
 @mixin mx_perspective($value) {
     -webkit-perspective: $value;
     perspective: $value;
 }
+
 
 /*盒子阴影*/
 @mixin mx_box-shadow($value...) {
@@ -115,11 +130,13 @@ $panel_bgcolor: #fff !default;
     box-shadow: $value;
 }
 
+
 /*user-select*/
 @mixin mx_user-select($value) {
     -webkit-user-select: $value;
     user-select: $value;
 }
+
 
 /*box-sizing*/
 @mixin mx_box-sizing($value) {
@@ -127,11 +144,13 @@ $panel_bgcolor: #fff !default;
     box-sizing: $value;
 }
 
+
 /*行高与高度相同*/
 @mixin mx_line-height($value) {
     height: $value;
     line-height: $value;
 }
+
 
 /*1px边框*/
 @mixin mx_ptborder($style: solid, $color: #ccc, $trbl: none) {
@@ -162,6 +181,7 @@ $panel_bgcolor: #fff !default;
     }
 }
 
+
 /*占位符*/
 /*滚动*/
 %ph_ofauto
@@ -170,46 +190,55 @@ $panel_bgcolor: #fff !default;
     -webkit-overflow-scrolling: touch;
 }
 
+
 /*定位*/
 %ph_palt
 {
     @include mx_plt;
 }
 
+
 %ph_pflt
 {
     @include mx_plt(fixed);
 }
+
 
 %ph_part
 {
     @include mx_prt;
 }
 
+
 %ph_pfrt
 {
     @include mx_prt(fixed);
 }
+
 
 %ph_palb
 {
     @include mx_plb;
 }
 
+
 %ph_pflb
 {
     @include mx_plb(fixed);
 }
+
 
 %ph_parb
 {
     @include mx_prb;
 }
 
+
 %ph_pfrb
 {
     @include mx_prb(fixed);
 }
+
 
 /*宽度高度100%*/
 %ph_full
@@ -217,6 +246,7 @@ $panel_bgcolor: #fff !default;
     width: 100%;
     height: 100%;
 }
+
 
 /*表格单元格*/
 %ph_td
@@ -226,6 +256,7 @@ $panel_bgcolor: #fff !default;
     line-height: initial;
 }
 
+
 /*高度自动撑高*/
 %ph_hauto
 {
@@ -233,17 +264,20 @@ $panel_bgcolor: #fff !default;
     overflow: hidden;
 }
 
+
 /*all动画*/
 %ph_transall
 {
     @include mx_transition(all 0.3s ease);
 }
 
+
 /*transform动画*/
 %ph_transtransf
 {
     @include mx_transition-transform(0.3s ease);
 }
+
 
 /*visible*/
 %ph_visible
@@ -252,6 +286,7 @@ $panel_bgcolor: #fff !default;
     opacity: 1;
 }
 
+
 /*hidden*/
 %ph_hidden
 {
@@ -259,11 +294,13 @@ $panel_bgcolor: #fff !default;
     opacity: 0;
 }
 
+
 /*border-box*/
 %ph_border-box
 {
     @include mx_box-sizing(border-box);
 }
+
 
 /*content-box*/
 %ph_content-box
@@ -271,11 +308,13 @@ $panel_bgcolor: #fff !default;
     @include mx_box-sizing(content-box);
 }
 
+
 /*1px边框*/
 %ph_ptborder
 {
     @include mx_ptborder;
 }
+
 
 /*垂直居中*/
 %ph_vcenter

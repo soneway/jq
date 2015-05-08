@@ -4,12 +4,14 @@
     outline: none;
 }
 
+
 *, *:before, *:after
 {
     margin: 0;
     padding: 0;
     @extend %ph_border-box; /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/
 }
+
 
 body
 {
@@ -24,21 +26,25 @@ body
     -webkit-touch-callout: none; /*禁止保存图片*/
 }
 
+
 input, textarea
 {
     @include mx_user-select(text);
     color: $color;
 }
 
+
 img, input
 {
     vertical-align: middle;
 }
 
+
 img
 {
     border: none;
 }
+
 
 a
 {
@@ -48,15 +54,18 @@ a
     cursor: pointer;
 }
 
+
 a.focus
 {
     color: $color_focus;
 }
 
+
 li
 {
     list-style: none;
 }
+
 
 /*h类标签*/
 $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
@@ -67,6 +76,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
         font-size: $size;
     }
 }
+
 
 /*类*/
 /*btn*/
@@ -88,11 +98,13 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     }
 }
 
+
 /*隐藏*/
 .hidden
 {
     display: none !important;
 }
+
 
 /*显示*/
 .show
@@ -100,24 +112,28 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     display: block !important;
 }
 
+
 .fade-out, .fade-in
 {
     @extend %ph_transall;
 }
 
+
 /*渐隐*/
 .fade-out
 {
-    visibility: hidden;
-    opacity: 0;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
+
 
 /*渐显*/
 .fade-in
 {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
+
 
 /*float*/
 .fl
@@ -125,10 +141,12 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     float: left;
 }
 
+
 .fr
 {
     float: right;
 }
+
 
 /*居中*/
 .center
@@ -136,16 +154,19 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     text-align: center;
 }
 
+
 /*定位*/
 .absolute
 {
     @extend %ph_palt;
 }
 
+
 .fixed
 {
     @extend %ph_pflt;
 }
+
 
 /*动画*/
 .transition
@@ -153,21 +174,25 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     @extend %ph_transall;
 }
 
+
 .transform
 {
     @extend %ph_transtransf;
 }
+
 
 .notrans
 {
     @include mx_transition(none !important);
 }
 
+
 /*滚动*/
 .ofauto
 {
     @extend %ph_ofauto;
 }
+
 
 /*重排类*/
 .reflow

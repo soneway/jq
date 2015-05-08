@@ -29,6 +29,7 @@ AAAA') format('truetype');
     font-style: normal;
 }
 
+
 [class^='icon-']:before, [class*=' icon-']:before, [class^='icon-']:after, [class*=' icon-']:after
 {
     font-family: iconmoon;
@@ -36,10 +37,12 @@ AAAA') format('truetype');
     -webkit-font-smoothing: antialiased;
 }
 
+
 .icon-left:before
 {
     content: '\e600';
 }
+
 
 .icon-menu:before
 {
