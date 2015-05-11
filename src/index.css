@@ -207,14 +207,14 @@ h4 {
 
 /*渐隐*/
 .fade-out {
-  visibility: hidden;
-  opacity: 0;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 /*渐显*/
 .fade-in {
-  visibility: visible;
-  opacity: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /*float*/
