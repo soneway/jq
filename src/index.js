@@ -42,8 +42,7 @@
                     }
 
                     $(this).html(html).carousel({
-                        isVertical: this.getAttribute('data-isvertical') === '1',
-                        isShowSpinner: false
+                        isVertical: this.getAttribute('data-isvertical') === '1'
                     });
                 });
             }
@@ -95,7 +94,6 @@
                             var $picpager = $('.picpager').picpager({
                                 imgData: rs.data.detail,
                                 imgAttrName: 'image',
-                                isShowSpinner: false,
                                 slideCallback: function (index) {
                                     if (index + 1 === page * 10) {
                                         page++;
