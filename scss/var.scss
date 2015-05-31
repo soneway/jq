@@ -69,7 +69,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-@mixin mx_transition-transform($value) {
+@mixin mx_transition-transform($value...) {
     -webkit-transition: -webkit-transform $value;
     transition: transform $value;
 }
