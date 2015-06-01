@@ -418,6 +418,15 @@
             },
 
             /**
+             * 元素内容置为空
+             */
+            empty: function () {
+                return this.forEach(function (el) {
+                    el.innerHTML = ''
+                })
+            },
+
+            /**
              * 元素取值/赋值
              * @param {string} val 待赋的值
              * @returns {$init|string} $对象本身|获取的值
