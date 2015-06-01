@@ -421,9 +421,7 @@
              * 元素内容置为空
              */
             empty: function () {
-                return this.forEach(function (el) {
-                    el.innerHTML = ''
-                })
+                return this.html('');
             },
 
             /**
