@@ -56,7 +56,7 @@
   top: 0;
 }
 
-.list a:after, .list a:first-of-type:before {
+.head:after, #navbar, .list a:after, .list a:first-of-type:before {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -335,9 +335,6 @@ h4 {
 }
 .head:after {
   content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
   width: 100%;
   height: 1px;
   background-color: rgba(128, 128, 128, 0.5);
@@ -492,9 +489,6 @@ h4 {
 
 /*导航*/
 #navbar {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   width: 100%;
   height: 50px;
   z-index: 1;
