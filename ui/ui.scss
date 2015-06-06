@@ -262,7 +262,7 @@
 /*导航*/
 #navbar
 {
-    @include mx_plb;
+    @extend %ph_palb;
     width: 100%;
     height: $navbar_height;
     z-index: 1;
