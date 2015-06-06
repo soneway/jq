@@ -69,7 +69,7 @@
 }
 
 /*表格单元格*/
-#loading > div, .navlist a, #mask > div, #customalert > div, .pi-carousel .spinnerbox, .pi-picpager .spinnerbox {
+#loading > div, #navbar .navlist a, #mask > div, #customalert > div, .pi-carousel .spinnerbox, .pi-picpager .spinnerbox {
   display: table-cell;
   vertical-align: middle;
   line-height: initial;
@@ -415,7 +415,6 @@ h4 {
 .loaded #loading > div {
   visibility: hidden;
 }
-
 .onsidebox #loading {
   visibility: visible;
   background-color: rgba(0, 0, 0, 0.7);
@@ -516,21 +515,19 @@ h4 {
   -webkit-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
 }
-
-.navbox {
+#navbar .navbox {
   overflow: hidden;
   height: 100%;
   max-width: 100%;
   display: inline-block;
 }
-
-.navlist {
+#navbar .navlist {
   display: table;
   height: 100%;
   white-space: nowrap;
   line-height: 1.1em;
 }
-.navlist a {
+#navbar .navlist a {
   padding: 0 5px;
 }
 
