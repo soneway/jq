@@ -219,7 +219,7 @@
     /*二级面板会出现横向滚动条的bug,可以通过对二级面板的重排来解决,比如显示面板时,padding-bottom的值的改变*/
     display: none;
     background-color: $panel_bgcolor;
-    @extend %ph_transall;
+    @extend %ph_transtransf;
     @include mx_transform(translate3d(100%, 0, 0));
     @include mx_box-shadow(-2px 0 0 rgba(0, 0, 0, 0.2));
 

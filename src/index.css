@@ -82,13 +82,13 @@
 }
 
 /*all动画*/
-.fade-out, .fade-in, .transition, #loading, #header > div, .panel, #customalert, .pi-carousel-title, .pi-flip > *, .pi-picpager .spinnerbox, .pi-picpager-pic {
+.fade-out, .fade-in, .transition, #loading, #header > div, #customalert, .pi-carousel-title, .pi-flip > *, .pi-picpager .spinnerbox, .pi-picpager-pic {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 /*transform动画*/
-.transform, #customalert .box, .pi-carousel-wrap.transform {
+.transform, .panel, #customalert .box, .pi-carousel-wrap.transform {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
 }
