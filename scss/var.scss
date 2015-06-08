@@ -324,10 +324,13 @@ $panel_bgcolor: #fff !default;
 
 
 /*垂直居中*/
-%ph_vcenter
+%ph_center
 {
     display: -webkit-box;
     -webkit-box-align: center;
-    display: box;
+    -webkit-box-pack: center;
+
+    /*display: box;
     box-align: center;
+    box-pack: center;*/
 }
