@@ -1,4 +1,8 @@
-﻿/*元素*/
+﻿/*外部引入*/
+@import '../scss/var', '../scss/spinner';
+
+
+/*元素*/
 *:focus
 {
     outline: none;
@@ -198,4 +202,40 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .reflow
 {
     padding-bottom: 1px;
+}
+
+
+/*loading*/
+#loading
+{
+    display: table;
+    @extend %ph_full;
+    background-color: $panel_bgcolor;
+    z-index: 5;
+    cursor: pointer; /*防止点击事件绑定不到(ios8)*/
+    @extend %ph_transall;
+    //@include mx_transition(background-color 0.3s ease);
+
+    & > div
+    {
+        @extend %ph_td;
+        text-align: center;
+    }
+
+    .loaded &
+    {
+        visibility: hidden;
+        background-color: transparent;
+
+        & > div
+        {
+            visibility: hidden;
+        }
+    }
+
+    .onsidebox &
+    {
+        visibility: visible;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
 }

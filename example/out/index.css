@@ -65,7 +65,7 @@ a:first-of-type:before {
   bottom: 0; }
 
 /*宽度高度100%*/
-#mainbox, #loading, #header > div, .panel, #mask, #customalert, .pi-flip > *, .pi-picpager-wrap, .pi-picpager-pic, .sb-container > div, .pi-turntable-pointer, #share_list
+#loading, #mainbox, #header > div, .panel, #mask, #customalert, .pi-flip > *, .pi-picpager-wrap, .pi-picpager-pic, .sb-container > div, .pi-turntable-pointer, #share_list
 a:after, .other_login
 a:after, #panelpicpager
 .picpager, #panelflip
@@ -230,6 +230,43 @@ h4 {
 .reflow {
   padding-bottom: 1px; }
 
+/*loading*/
+#loading {
+  display: table;
+  background-color: #fff;
+  z-index: 5;
+  cursor: pointer;
+  /*防止点击事件绑定不到(ios8)*/ }
+  #loading > div {
+    text-align: center; }
+  .loaded #loading {
+    visibility: hidden;
+    background-color: transparent; }
+    .loaded #loading > div {
+      visibility: hidden; }
+  .onsidebox #loading {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.7); }
+
+/*外部引入*/
+/*iconmoon*/
+@font-face {
+  font-family: iconmoon;
+  src: url("data:application/x-font-woff;charset=utf-8;base64,\a     AAEAAAALAIAAAwAwT1MvMg8SAysAAAC8AAAAYGNtYXAaVcxYAAABHAAAAExnYXNwAAAAEAAAAWgA\a AAAIZ2x5ZvwFkJgAAAFwAAABNGhlYWQFBe7SAAACpAAAADZoaGVhB20DxwAAAtwAAAAkaG10eAoA\a AVoAAAMAAAAAGGxvY2EAwgBaAAADGAAAAA5tYXhwAAoAOwAAAygAAAAgbmFtZVcZpu4AAANIAAAB\a RXBvc3QAAwAAAAAEkAAAACAAAwQAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAA\a AAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADmAQPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAA\a AAACAAAAAwAAABQAAwABAAAAFAAEADgAAAAKAAgAAgACAAEAIOYB//3//wAAAAAAIOYA//3//wAB\a /+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAA\a AgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQEFAB8CxwN7ABMAACUWFAcOAScBJjQ3ATYy\a FxYUBwkBAscLCwodCv5vCwsBkQodCgsL/pMBbVEKHgoKAQsBlQodCwGVCgoLHQr+hP6EAAADAFUA\a gAOrAtUAEgAlADgAABMhMhcWFRQHBiMhIicmNTQ3NjMRITIXFhUUBwYjISInJjU0NzYzESEyFxYV\a FAcGIyEiJyY1NDc2M4ADABIMDQ0MEv0AEgwNDQwSAwASDA0NDBL9ABIMDQ0MEgMAEgwNDQwS/QAS\a DA0NDBIC1QwNERINDAwNEhENDP4ADA0REg0MDA0SEQ0MAQAMDRESDQwMDRIRDQwAAAABAAAAAAAA\a FqQjNF8PPPUACwQAAAAAANEe1S0AAAAA0R7VLQAAAAADqwN7AAAACAACAAAAAAAAAAEAAAPA/8AA\a AAQAAAAAAAOrAAEAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAgAAAAQAAQUEAABVAAAAAAAK\a ABQAHgBGAJoAAAABAAAABgA5AAMAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEA\a DgAAAAEAAAAAAAIADgBHAAEAAAAAAAMADgAkAAEAAAAAAAQADgBVAAEAAAAAAAUAFgAOAAEAAAAA\a AAYABwAyAAEAAAAAAAoANABjAAMAAQQJAAEADgAAAAMAAQQJAAIADgBHAAMAAQQJAAMADgAkAAMA\a AQQJAAQADgBVAAMAAQQJAAUAFgAOAAMAAQQJAAYADgA5AAMAAQQJAAoANABjAGkAYwBvAG0AbwBv\a AG4AVgBlAHIAcwBpAG8AbgAgADEALgAwAGkAYwBvAG0AbwBvAG5pY29tb29uAGkAYwBvAG0AbwBv\a AG4AUgBlAGcAdQBsAGEAcgBpAGMAbwBtAG8AbwBuAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUA\a ZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\a AAAA") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^='icon-']:before, [class*=' icon-']:before, [class^='icon-']:after, [class*=' icon-']:after {
+  font-family: iconmoon;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased; }
+
+.icon-left:before {
+  content: '\e600'; }
+
+.icon-menu:before {
+  content: '\e601'; }
+
 /*外部引入*/
 @-webkit-keyframes ani_circle
 {
@@ -373,24 +410,6 @@ b:nth-of-type(8) {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
 
-/*loading*/
-#loading {
-  display: table;
-  background-color: #fff;
-  z-index: 5;
-  cursor: pointer;
-  /*防止点击事件绑定不到(ios8)*/ }
-  #loading > div {
-    text-align: center; }
-  .loaded #loading {
-    visibility: hidden;
-    background-color: transparent; }
-    .loaded #loading > div {
-      visibility: hidden; }
-  .onsidebox #loading {
-    visibility: visible;
-    background-color: rgba(0, 0, 0, 0.7); }
-
 /*头部*/
 #header {
   height: 40px;
@@ -506,24 +525,6 @@ a {
   top: 50px;
   width: 200px;
   height: 200px; }
-
-/*iconmoon*/
-@font-face {
-  font-family: iconmoon;
-  src: url("data:application/x-font-woff;charset=utf-8;base64,\a     AAEAAAALAIAAAwAwT1MvMg8SAysAAAC8AAAAYGNtYXAaVcxYAAABHAAAAExnYXNwAAAAEAAAAWgA\a AAAIZ2x5ZvwFkJgAAAFwAAABNGhlYWQFBe7SAAACpAAAADZoaGVhB20DxwAAAtwAAAAkaG10eAoA\a AVoAAAMAAAAAGGxvY2EAwgBaAAADGAAAAA5tYXhwAAoAOwAAAygAAAAgbmFtZVcZpu4AAANIAAAB\a RXBvc3QAAwAAAAAEkAAAACAAAwQAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAA\a AAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADmAQPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAA\a AAACAAAAAwAAABQAAwABAAAAFAAEADgAAAAKAAgAAgACAAEAIOYB//3//wAAAAAAIOYA//3//wAB\a /+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAA\a AgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQEFAB8CxwN7ABMAACUWFAcOAScBJjQ3ATYy\a FxYUBwkBAscLCwodCv5vCwsBkQodCgsL/pMBbVEKHgoKAQsBlQodCwGVCgoLHQr+hP6EAAADAFUA\a gAOrAtUAEgAlADgAABMhMhcWFRQHBiMhIicmNTQ3NjMRITIXFhUUBwYjISInJjU0NzYzESEyFxYV\a FAcGIyEiJyY1NDc2M4ADABIMDQ0MEv0AEgwNDQwSAwASDA0NDBL9ABIMDQ0MEgMAEgwNDQwS/QAS\a DA0NDBIC1QwNERINDAwNEhENDP4ADA0REg0MDA0SEQ0MAQAMDRESDQwMDRIRDQwAAAABAAAAAAAA\a FqQjNF8PPPUACwQAAAAAANEe1S0AAAAA0R7VLQAAAAADqwN7AAAACAACAAAAAAAAAAEAAAPA/8AA\a AAQAAAAAAAOrAAEAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAgAAAAQAAQUEAABVAAAAAAAK\a ABQAHgBGAJoAAAABAAAABgA5AAMAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEA\a DgAAAAEAAAAAAAIADgBHAAEAAAAAAAMADgAkAAEAAAAAAAQADgBVAAEAAAAAAAUAFgAOAAEAAAAA\a AAYABwAyAAEAAAAAAAoANABjAAMAAQQJAAEADgAAAAMAAQQJAAIADgBHAAMAAQQJAAMADgAkAAMA\a AQQJAAQADgBVAAMAAQQJAAUAFgAOAAMAAQQJAAYADgA5AAMAAQQJAAoANABjAGkAYwBvAG0AbwBv\a AG4AVgBlAHIAcwBpAG8AbgAgADEALgAwAGkAYwBvAG0AbwBvAG5pY29tb29uAGkAYwBvAG0AbwBv\a AG4AUgBlAGcAdQBsAGEAcgBpAGMAbwBtAG8AbwBuAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUA\a ZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\a AAAA") format("truetype");
-  font-weight: normal;
-  font-style: normal; }
-
-[class^='icon-']:before, [class*=' icon-']:before, [class^='icon-']:after, [class*=' icon-']:after {
-  font-family: iconmoon;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased; }
-
-.icon-left:before {
-  content: '\e600'; }
-
-.icon-menu:before {
-  content: '\e601'; }
 
 /*自定义滚动*/
 .pi-scroll-item {
