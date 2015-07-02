@@ -38,15 +38,6 @@ var dest = 'out';
 var gulp = require('gulp');
 
 
-////检查脚本
-//var jshint = require('gulp-jshint');
-//gulp.task('lint', function () {
-//    gulp.src('./js/!*.js')
-//        .pipe(jshint())
-//        .pipe(jshint.reporter('default'));
-//});
-
-
 //编译sass,压缩css
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
