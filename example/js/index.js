@@ -38,7 +38,7 @@
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a style="background: url(src/images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
+                        html += '<a style="background: url(example/images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
                     }
 
                     $(this).html(html).carousel({
@@ -62,7 +62,7 @@
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a><p style="background: url(src/images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></p></a>';
+                        html += '<a><p style="background: url(example/images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></p></a>';
                     }
 
                     $(this).html(html).flip({
@@ -165,7 +165,7 @@
                 $('.scratchcard').each(function () {
                     $(this).scratchcard({
                         text: '刮开有奖',
-                        imgSrc: 'src/images/1.jpg'
+                        imgSrc: 'example/images/1.jpg'
                     });
                 });
             }

@@ -1,7 +1,7 @@
 ﻿/*变量*/
 //$bg_type: 2;
 /*外部引入*/
-@import '../ui/ui', '../scss/iconmoon', '../plugin/scroll', '../plugin/customalert', '../plugin/carousel', '../plugin/flip', '../plugin/picpager', '../plugin/swatchbook', '../plugin/turntable', '../scss/share', '../scss/login';
+@import '../../ui/ui', '../../scss/iconmoon', '../../plugin/scroll', '../../plugin/customalert', '../../plugin/carousel', '../../plugin/flip', '../../plugin/picpager', '../../plugin/swatchbook', '../../plugin/turntable', '../../scss/share', '../../scss/login';
 
 
 /*其他*/
@@ -195,7 +195,7 @@ h3.center
 
         div
         {
-            background: url(images/1.jpg);
+            background: url(../images/1.jpg);
             @include mx_transition-duration(0.4s);
         }
 
@@ -312,11 +312,11 @@ h3.center
             width: 320px;
             height: 320px;
             margin: 5px auto;
-            background-image: url(images/bg.png);
+            background-image: url(../images/bg.png);
 
             .pi-turntable-pointer
             {
-                background-image: url(images/pointer.png);
+                background-image: url(../images/pointer.png);
             }
         }
 
@@ -331,7 +331,7 @@ h3.center
             height: $h;
             margin-left: -$w / 2;
             margin-top: -$h / 2;
-            background: url(images/start.png) center center;
+            background: url(../images/start.png) center center;
             background-size: cover;
             z-index: 1;
 
@@ -421,7 +421,7 @@ h3.center
             content: '';
             @extend %ph_palt;
             @extend %ph_full;
-            background: url(images/sohulogo.jpg);
+            background: url(http://img.gd.sohu.com/images/sohulogo.jpg);
             background-size: cover;
             border-radius: $h;
         }
