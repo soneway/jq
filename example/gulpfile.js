@@ -4,7 +4,7 @@
 //是否调试
 var debug = 1;
 //根目录
-var root = '../';//'Y:/static/v1/jq/'
+var root = '../../';//'Y:/static/v1/'
 //任务对象
 var tasks = {
     css: {
@@ -14,16 +14,16 @@ var tasks = {
     js: {
         src: {
             index: [
-                root + 'jq.js',
-                root + 'ui/ui.js',
-                root + 'plugin/carousel.js',
-                root + 'plugin/customalert.js',
-                root + 'plugin/flip.js',
-                root + 'plugin/picpager.js',
-                root + 'plugin/scratchcard.js',
-                root + 'plugin/scroll.js',
-                root + 'plugin/swatchbook.js',
-                root + 'plugin/turntable.js',
+                root + 'jq/jq.js',
+                root + 'jq/ui/ui.js',
+                root + 'jq/plugin/carousel.js',
+                root + 'jq/plugin/customalert.js',
+                root + 'jq/plugin/flip.js',
+                root + 'jq/plugin/picpager.js',
+                root + 'jq/plugin/scratchcard.js',
+                root + 'jq/plugin/scroll.js',
+                root + 'jq/plugin/swatchbook.js',
+                root + 'jq/plugin/turntable.js',
                 'js/index.js'
             ]
         },

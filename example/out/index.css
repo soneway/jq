@@ -113,6 +113,83 @@ a, #mask > div, #customalert > div, .pi-carousel
 /*content-box*/
 /*1px边框*/
 /*垂直居中*/
+/*外部引入*/
+@-webkit-keyframes ani_circle
+{
+  0%
+{
+    -webkit-transform: rotate(0deg); }
+  100%
+{
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes ani_circle
+{
+  0%
+{
+    transform: rotate(0deg); }
+  100%
+{
+    transform: rotate(360deg); } }
+
+/*spinner动画*/
+.spinner {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: ani_circle 1s ease infinite;
+  animation: ani_circle 1s ease infinite; }
+  .spinner
+b {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background-color: #333;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px; }
+    .spinner
+b:nth-of-type(1) {
+      -webkit-transform: rotate(45deg) translate(0, -20px);
+      transform: rotate(45deg) translate(0, -20px);
+      opacity: 0.125; }
+    .spinner
+b:nth-of-type(2) {
+      -webkit-transform: rotate(90deg) translate(0, -20px);
+      transform: rotate(90deg) translate(0, -20px);
+      opacity: 0.25; }
+    .spinner
+b:nth-of-type(3) {
+      -webkit-transform: rotate(135deg) translate(0, -20px);
+      transform: rotate(135deg) translate(0, -20px);
+      opacity: 0.375; }
+    .spinner
+b:nth-of-type(4) {
+      -webkit-transform: rotate(180deg) translate(0, -20px);
+      transform: rotate(180deg) translate(0, -20px);
+      opacity: 0.5; }
+    .spinner
+b:nth-of-type(5) {
+      -webkit-transform: rotate(225deg) translate(0, -20px);
+      transform: rotate(225deg) translate(0, -20px);
+      opacity: 0.625; }
+    .spinner
+b:nth-of-type(6) {
+      -webkit-transform: rotate(270deg) translate(0, -20px);
+      transform: rotate(270deg) translate(0, -20px);
+      opacity: 0.75; }
+    .spinner
+b:nth-of-type(7) {
+      -webkit-transform: rotate(315deg) translate(0, -20px);
+      transform: rotate(315deg) translate(0, -20px);
+      opacity: 0.875; }
+    .spinner
+b:nth-of-type(8) {
+      -webkit-transform: rotate(360deg) translate(0, -20px);
+      transform: rotate(360deg) translate(0, -20px);
+      opacity: 1; }
+
 /*元素*/
 *:focus {
   outline: none; }
@@ -266,83 +343,6 @@ h4 {
 
 .icon-menu:before {
   content: '\e601'; }
-
-/*外部引入*/
-@-webkit-keyframes ani_circle
-{
-  0%
-{
-    -webkit-transform: rotate(0deg); }
-  100%
-{
-    -webkit-transform: rotate(360deg); } }
-
-@keyframes ani_circle
-{
-  0%
-{
-    transform: rotate(0deg); }
-  100%
-{
-    transform: rotate(360deg); } }
-
-/*spinner动画*/
-.spinner {
-  display: inline-block;
-  position: relative;
-  width: 50px;
-  height: 50px;
-  -webkit-animation: ani_circle 1s ease infinite;
-  animation: ani_circle 1s ease infinite; }
-  .spinner
-b {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    background-color: #333;
-    width: 10px;
-    height: 10px;
-    border-radius: 10px; }
-    .spinner
-b:nth-of-type(1) {
-      -webkit-transform: rotate(45deg) translate(0, -20px);
-      transform: rotate(45deg) translate(0, -20px);
-      opacity: 0.125; }
-    .spinner
-b:nth-of-type(2) {
-      -webkit-transform: rotate(90deg) translate(0, -20px);
-      transform: rotate(90deg) translate(0, -20px);
-      opacity: 0.25; }
-    .spinner
-b:nth-of-type(3) {
-      -webkit-transform: rotate(135deg) translate(0, -20px);
-      transform: rotate(135deg) translate(0, -20px);
-      opacity: 0.375; }
-    .spinner
-b:nth-of-type(4) {
-      -webkit-transform: rotate(180deg) translate(0, -20px);
-      transform: rotate(180deg) translate(0, -20px);
-      opacity: 0.5; }
-    .spinner
-b:nth-of-type(5) {
-      -webkit-transform: rotate(225deg) translate(0, -20px);
-      transform: rotate(225deg) translate(0, -20px);
-      opacity: 0.625; }
-    .spinner
-b:nth-of-type(6) {
-      -webkit-transform: rotate(270deg) translate(0, -20px);
-      transform: rotate(270deg) translate(0, -20px);
-      opacity: 0.75; }
-    .spinner
-b:nth-of-type(7) {
-      -webkit-transform: rotate(315deg) translate(0, -20px);
-      transform: rotate(315deg) translate(0, -20px);
-      opacity: 0.875; }
-    .spinner
-b:nth-of-type(8) {
-      -webkit-transform: rotate(360deg) translate(0, -20px);
-      transform: rotate(360deg) translate(0, -20px);
-      opacity: 1; }
 
 /*head导航条背景*/
 .head, #navbar {
@@ -843,6 +843,17 @@ a.focus:after {
 .icon_password:before {
   content: '\e601'; }
 
+/*@import 'Y:/static/v1/jq/scss/common',
+'Y:/static/v1/jq/ui/ui',
+'Y:/static/v1/jq/plugin/scroll',
+'Y:/static/v1/jq/plugin/customalert',
+'Y:/static/v1/jq/plugin/carousel',
+'Y:/static/v1/jq/plugin/flip',
+'Y:/static/v1/jq/plugin/picpager',
+'Y:/static/v1/jq/plugin/swatchbook',
+'Y:/static/v1/jq/plugin/turntable',
+'Y:/static/v1/jq/scss/share',
+'Y:/static/v1/jq/scss/login';*/
 /*其他*/
 input, select, textarea {
   height: 32px;

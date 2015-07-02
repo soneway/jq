@@ -1,8 +1,30 @@
 ﻿/*变量*/
 //$bg_type: 2;
 /*外部引入*/
-@import '../../scss/common', '../../ui/ui', '../../plugin/scroll', '../../plugin/customalert', '../../plugin/carousel', '../../plugin/flip', '../../plugin/picpager', '../../plugin/swatchbook', '../../plugin/turntable', '../../scss/share', '../../scss/login';
+@import '../../scss/common',
+'../../ui/ui',
+'../../plugin/scroll',
+'../../plugin/customalert',
+'../../plugin/carousel',
+'../../plugin/flip',
+'../../plugin/picpager',
+'../../plugin/swatchbook',
+'../../plugin/turntable',
+'../../scss/share',
+'../../scss/login';
 
+
+/*@import 'Y:/static/v1/jq/scss/common',
+'Y:/static/v1/jq/ui/ui',
+'Y:/static/v1/jq/plugin/scroll',
+'Y:/static/v1/jq/plugin/customalert',
+'Y:/static/v1/jq/plugin/carousel',
+'Y:/static/v1/jq/plugin/flip',
+'Y:/static/v1/jq/plugin/picpager',
+'Y:/static/v1/jq/plugin/swatchbook',
+'Y:/static/v1/jq/plugin/turntable',
+'Y:/static/v1/jq/scss/share',
+'Y:/static/v1/jq/scss/login';*/
 
 /*其他*/
 $border-color: rgba(0, 0, 0, 0.1);
