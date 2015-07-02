@@ -1,3 +1,4 @@
+//jq.js
 (function (window) {
 
     var $ = (function () {
@@ -914,6 +915,6 @@
     }
 
     //添加到全局变量
-    window.soneway = window.$ = $;
+    window.jq = window.$ = $;
 
 })(this);

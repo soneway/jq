@@ -514,7 +514,7 @@
     <script type="text/javascript" src="../jq.js"></script>
     <script type="text/javascript" src="http://zeptojs.com/zepto.min.js"></script>
     <!--perftest-->
-    <script type="text/javascript" src="http://soneway.github.io/lib/perftest.js"></script>
+    <script type="text/javascript" src="http://jq.github.io/lib/perftest.js"></script>
     <script type="text/javascript">
 
         window.onerror = function (r) {
@@ -524,17 +524,17 @@
 
         var perfTest = window.perfTest;
 
-        var sdiv = soneway('div'),
+        var sdiv = jq('div'),
                 zdiv = Zepto('div'),
-                sbtn = soneway('#btn_register'),
+                sbtn = jq('#btn_register'),
                 zbtn = Zepto('#btn_register'),
-                snavbar = soneway('#navbar'),
+                snavbar = jq('#navbar'),
                 znavbar = Zepto('#navbar');
 
         var s, z;
 
         perfTest(function () {
-            s = soneway('#navbar');
+            s = jq('#navbar');
         }, 99999);
 
         perfTest(function () {
@@ -542,7 +542,7 @@
         }, 99999);
 
         perfTest(function () {
-            s = soneway('<div id="xxx"><p></p><h1></h1>ssss</div>');
+            s = jq('<div id="xxx"><p></p><h1></h1>ssss</div>');
         }, 9999);
 
         perfTest(function () {
@@ -550,7 +550,7 @@
         }, 9999);
 
         perfTest(function () {
-            s = soneway('.panel');
+            s = jq('.panel');
         }, 9999);
 
         perfTest(function () {
@@ -558,7 +558,7 @@
         }, 9999);
 
         perfTest(function () {
-            s = soneway(document);
+            s = jq(document);
         }, 99999);
 
         perfTest(function () {
@@ -566,7 +566,7 @@
         }, 99999);
 
         perfTest(function () {
-            s = soneway(window);
+            s = jq(window);
         }, 99999);
 
         perfTest(function () {

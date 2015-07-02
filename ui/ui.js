@@ -1,4 +1,5 @@
-﻿(function (window, $) {
+﻿//ui.js
+(function (window, $) {
 
     //文档元素
     var document = window.document,
