@@ -29,7 +29,6 @@ var tasks = {
         },
         watch: ['js/**']
     }
-
 };
 //输出文件夹
 var dest = 'out';
