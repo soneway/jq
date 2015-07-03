@@ -44,7 +44,7 @@
             function initEvent() {
 
                 var timeout,
-                    isSiding;
+                    isAnimating;
 
                 //转动函数
                 me.turnToIndex = function (index, fn) {
@@ -54,7 +54,7 @@
                     }
 
                     //正在转动
-                    if (isSiding) {
+                    if (isAnimating) {
                         return;
                     }
 
@@ -65,7 +65,7 @@
 
                     //重置
                     $pointer[0].style.cssText = '';
-                    isSiding = true;
+                    isAnimating = true;
 
                     //设定延迟才会有动画效果
                     setTimeout(function () {
@@ -81,10 +81,10 @@
                         clearTimeout(timeout);//清理上一个timeout
                         timeout = setTimeout(function () {
                             typeof fn === 'function' && fn();
-                            isSiding = false;
+                            isAnimating = false;
                         }, duration);
 
-                    }, 10);
+                    }, 40);
                 };
             }
 
