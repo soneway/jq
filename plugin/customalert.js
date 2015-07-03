@@ -15,13 +15,11 @@
     (function () {
         if ($customalert.length === 0) {
             $customalert = $('<div id="customalert">' +
-            '<div>' +
             '<div class="box">' +
             '<h1 id="customalert-title">提示</h1>' +
             '<p id="customalert-content">是否转到登陆</p>' +
             '<a id="customalert-btnok" class="btn">确定</a>' +
             '<a id="customalert-btncancel" class="btn">关闭</a>' +
-            '</div>' +
             '</div>' +
             '</div>');
             //添加html元素

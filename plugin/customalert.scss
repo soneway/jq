@@ -3,19 +3,13 @@
 {
     @extend %ph_pflt;
     @extend %ph_full;
-    display: table;
     color: #333;
     background-color: rgba(0, 0, 0, 0.7);
     /*动画*/
     @extend %ph_transall;
     opacity: 0;
     z-index: -1;
-
-    & > div
-    {
-        @extend %ph_td;
-        text-align: center;
-    }
+    @extend %ph_center;
 
     .box
     {
