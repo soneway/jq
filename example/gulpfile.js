@@ -19,6 +19,7 @@ var config = {
         src: {
             index: [
                 root + 'jq/jq.js',
+                root + 'jq/ui/common.js',
                 root + 'jq/ui/ui.js',
                 root + 'jq/plugin/carousel.js',
                 root + 'jq/plugin/customalert.js',
