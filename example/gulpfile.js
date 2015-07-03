@@ -6,8 +6,8 @@ var debug = 0;
 //输出文件夹
 var dest = 'out';
 //根目录
-//var root = '../../';
-var root = 'Y:/static/v1/';
+var root = '../../';
+//var root = 'Y:/static/v1/';
 //任务对象
 var config = {
     css: {
