@@ -1,30 +1,29 @@
 ﻿/*变量*/
 //$bg_type: 2;
 /*外部引入*/
-@import '../../scss/common',
-'../../ui/ui',
-'../../plugin/scroll',
-'../../plugin/customalert',
-'../../plugin/carousel',
-'../../plugin/flip',
-'../../plugin/picpager',
-'../../plugin/swatchbook',
-'../../plugin/turntable',
-'../../scss/share',
-'../../scss/login';
+//@import '../../scss/common';
+//@import '../../ui/ui';
+//@import '../../plugin/scroll';
+//@import '../../plugin/customalert';
+//@import '../../plugin/carousel';
+//@import '../../plugin/flip';
+//@import '../../plugin/picpager';
+//@import '../../plugin/swatchbook';
+//@import '../../plugin/turntable';
+//@import '../../scss/share';
+//@import '../../scss/login';
+@import 'Y:/static/v1/jq/scss/common';
+@import 'Y:/static/v1/jq/ui/ui';
+@import 'Y:/static/v1/jq/plugin/scroll';
+@import 'Y:/static/v1/jq/plugin/customalert';
+@import 'Y:/static/v1/jq/plugin/carousel';
+@import 'Y:/static/v1/jq/plugin/flip';
+@import 'Y:/static/v1/jq/plugin/picpager';
+@import 'Y:/static/v1/jq/plugin/swatchbook';
+@import 'Y:/static/v1/jq/plugin/turntable';
+@import 'Y:/static/v1/jq/scss/share';
+@import 'Y:/static/v1/jq/scss/login';
 
-
-/*@import 'Y:/static/v1/jq/scss/common',
-'Y:/static/v1/jq/ui/ui',
-'Y:/static/v1/jq/plugin/scroll',
-'Y:/static/v1/jq/plugin/customalert',
-'Y:/static/v1/jq/plugin/carousel',
-'Y:/static/v1/jq/plugin/flip',
-'Y:/static/v1/jq/plugin/picpager',
-'Y:/static/v1/jq/plugin/swatchbook',
-'Y:/static/v1/jq/plugin/turntable',
-'Y:/static/v1/jq/scss/share',
-'Y:/static/v1/jq/scss/login';*/
 
 /*其他*/
 $border-color: rgba(0, 0, 0, 0.1);
