@@ -275,27 +275,3 @@
         }
     }
 }
-
-
-/*mask*/
-#mask
-{
-    @extend %ph_full;
-    display: table;
-    z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.3);
-    visibility: hidden;
-    opacity: 0;
-
-    &.visible
-    {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    & > div
-    {
-        @extend %ph_td;
-        text-align: center;
-    }
-}

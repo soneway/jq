@@ -1,4 +1,4 @@
-﻿//ui.js
+﻿//common.js
 (function (window, $) {
 
     //文档元素
@@ -22,6 +22,22 @@
      * @type {boolean}
      */
     $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(window.navigator.userAgent);
+
+
+    /**
+     * 显示/隐藏mask函数
+     * @param isShow 是否显示
+     */
+    $.toggleMask = (function () {
+        var $mask = $('#mask');
+        if ($mask.length === 0) {
+            $mask = $('<div id="mask"><i class="spinner"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>');
+            $body.append($mask);
+        }
+        return function (isShow) {
+            isShow ? $mask.addClass('visible') : $mask.removeClass('visible');
+        };
+    })();
 
 
     //文档加载完成

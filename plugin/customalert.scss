@@ -19,6 +19,7 @@
         padding: 0 0 15px 0;
         border-radius: 8px;
         background-color: rgba(255, 255, 255, 0.95);
+        text-align: center;
         /*动画*/
         @extend %ph_transtransf;
         @include mx_transform(scale3d(0, 0, 1));

@@ -47,22 +47,6 @@
         typeof panelUnloaded === 'function' && panelUnloaded($toHide);
     }
 
-
-    /**
-     * 显示/隐藏mask函数
-     * @param isShow 是否显示
-     */
-    $.toggleMask = (function () {
-        var $mask = $('#mask');
-        if ($mask.length === 0) {
-            $mask = $('<div id="mask" class="fixed"><div><div class="spinner"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div></div>');
-            $body.append($mask);
-        }
-        return function (isShow) {
-            isShow ? $mask.addClass('visible') : $mask.removeClass('visible');
-        };
-    })();
-
     /**
      * 显示/隐藏边栏函数
      * @param isShow 是否显示
