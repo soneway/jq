@@ -71,6 +71,12 @@ li
 }
 
 
+i
+{
+    font-style: normal;
+}
+
+
 /*h类标签*/
 $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 @each $h, $size in $hx
@@ -211,7 +217,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
         visibility: hidden;
         background-color: transparent;
 
-        & > div
+        & > i, &:after
         {
             visibility: hidden;
         }
@@ -221,6 +227,11 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     {
         visibility: visible;
         background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    &:after
+    {
+        content: '加载中...';
     }
 }
 
