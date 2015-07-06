@@ -2,12 +2,12 @@
 'use strict';
 
 //是否调试
-var debug = 0;
+var debug = 1;
 //输出文件夹
 var dest = 'out';
 //根目录
-var root = '../../';
-//var root = 'Y:/static/v1/';
+var root = '../';
+//var root = 'Y:/static/v1/jq';
 //任务对象
 var config = {
     css: {
@@ -18,17 +18,17 @@ var config = {
     js: {
         src: {
             index: [
-                root + 'jq/jq.js',
-                root + 'jq/ui/common.js',
-                root + 'jq/ui/ui.js',
-                root + 'jq/plugin/carousel.js',
-                root + 'jq/plugin/customalert.js',
-                root + 'jq/plugin/flip.js',
-                root + 'jq/plugin/picpager.js',
-                root + 'jq/plugin/scratchcard.js',
-                root + 'jq/plugin/scroll.js',
-                root + 'jq/plugin/swatchbook.js',
-                root + 'jq/plugin/turntable.js',
+                root + 'jq.js',
+                root + 'ui/common.js',
+                root + 'ui/ui.js',
+                root + 'plugin/carousel.js',
+                root + 'plugin/customalert.js',
+                root + 'plugin/flip.js',
+                root + 'plugin/picpager.js',
+                root + 'plugin/scratchcard.js',
+                root + 'plugin/scroll.js',
+                root + 'plugin/swatchbook.js',
+                root + 'plugin/turntable.js',
                 'js/index.js'
             ]
         },
