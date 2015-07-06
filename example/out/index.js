@@ -1134,6 +1134,7 @@
                 bodyEl = document.body;
 
             return function (id, isCache) {
+                //是否是存储scrollTop
                 isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
             };
         })();
@@ -1196,7 +1197,7 @@
                     isBodyScroll && scrollTop($toHide.attr('id'), true);
 
                     //1.立即操作
-                    $toShow.addClass('show');
+                    $toShow.addClass('show reflow');//显示面板强制重排一次,以免出现横向滚动条
 
                     //2.延迟保证显示动画
                     setTimeout(function () {
@@ -1237,7 +1238,7 @@
                             //header内容切换
                             $header.addClass('onsubtitle');
 
-                            $toShow.removeClass('notrans').addClass('reflow');//显示二级面板时强制重排一次,以免出现横向滚动条
+                            $toShow.removeClass('notrans');
                             $toHide.removeClass('notrans');
 
                             if ($toShow.hasClass('subopened')) {
@@ -1250,9 +1251,6 @@
                             }
                         }
 
-                        //b.设置scrollTop(必须放在显示之后)
-                        isBodyScroll && scrollTop($toShow.attr('id'), false);
-
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
                     }, 10);
@@ -1260,14 +1258,17 @@
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
                         $toHide.removeClass('show');
-                        $toShow.removeClass('reflow');//显示二级面板时强制重排一次
+                        $toShow.removeClass('reflow');//显示面板强制重排一次
+
+                        //b.设置scrollTop(必须放在显示之后)
+                        isBodyScroll && scrollTop($toShow.attr('id'), false);
 
                         //如果是打开iframe页面的面板
                         $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration + 100);
+                    }, duration + 10);
                 }
             }
             //没有显示面板

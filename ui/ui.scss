@@ -25,7 +25,7 @@
 /*head类*/
 .head
 {
-    @extend %ph_palt;
+    @extend %ph_pflt;
     width: 100%;
     z-index: 1;
 
@@ -230,7 +230,7 @@
 /*导航*/
 #navbar
 {
-    @extend %ph_palb;
+    @extend %ph_pflb;
     width: 100%;
     height: $navbar_height;
     z-index: 1;

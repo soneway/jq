@@ -31,7 +31,7 @@
   -webkit-overflow-scrolling: touch; }
 
 /*定位*/
-.absolute, #mainbox, #loading, #mask, .head, .head
+.absolute, #mainbox, #loading, #mask, .head
 .btnleft, #header > div, .panel, #navbar:after, .pi-carousel-wrap, .pi-flip > *, .pi-picpager-wrap, .pi-picpager-pic, .sb-container > div, .pi-turntable-pointer, #share_list
 a:after, .other_login
 a:after, h3.center:before, #panelpicpager
@@ -41,7 +41,7 @@ a:after, h3.center:before, #panelpicpager
   left: 0;
   top: 0; }
 
-.fixed, #customalert {
+.fixed, .head, #customalert {
   position: fixed;
   left: 0;
   top: 0; }
@@ -57,10 +57,15 @@ a:after, h3.center:before, #panelpicpager
   right: 0;
   top: 0; }
 
-.head:after, #navbar, .list
+.head:after, .list
 a:after, .list
 a:first-of-type:before {
   position: absolute;
+  left: 0;
+  bottom: 0; }
+
+#navbar {
+  position: fixed;
   left: 0;
   bottom: 0; }
 
@@ -1145,9 +1150,6 @@ input {
 body可滚动的页面
 样式复写
 */
-#header, #navbar {
-  position: fixed; }
-
 #mainbox {
   overflow: visible; }
   .onsidebox #mainbox {
@@ -1155,4 +1157,7 @@ body可滚动的页面
 
 .panel {
   height: auto;
+  min-height: 100%;
   overflow: visible; }
+  .panel.reflow {
+    height: 99999px; }

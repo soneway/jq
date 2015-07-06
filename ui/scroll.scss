@@ -3,12 +3,6 @@ body可滚动的页面
 样式复写
 */
 
-#header, #navbar
-{
-    position: fixed;
-}
-
-
 #mainbox
 {
     overflow: visible;
@@ -23,5 +17,11 @@ body可滚动的页面
 .panel
 {
     height: auto;
+    min-height: 100%;
     overflow: visible;
+
+    &.reflow
+    {
+        height: 99999px;
+    }
 }
