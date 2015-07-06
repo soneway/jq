@@ -165,7 +165,7 @@
                 $('.scratchcard').each(function () {
                     $(this).scratchcard({
                         text: '刮开有奖',
-                        imgSrc: 'example/images/1.jpg'
+                        imgSrc: 'images/3.jpg'
                     });
                 });
             }
