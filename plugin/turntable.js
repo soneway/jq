@@ -10,7 +10,7 @@
             //旋转时长
             duration: 7000,
             //动画fx
-            timeFx: 'ease-in-out',
+            timeFx: 'cubic-bezier(0.42,0,0.25,1)',
             //校正值
             offset: 0
         };
@@ -61,7 +61,7 @@
                     //动画属性
                     var transition = duration / 1000 + 's ' + timeFx,
                         endDeg = rotateDeg + (index / count) * 360 + offset + 'deg',
-                        transform = 'rotate(' + endDeg + ')';//如用'rotate3d(0, 0, 1, ' + endDeg + ')',ios上动画有bug
+                        transform = 'rotateZ(' + endDeg + ')';//如用'rotate3d(0, 0, 1, ' + endDeg + ')',ios上动画有bug
 
                     //重置
                     $pointer[0].style.cssText = '';
