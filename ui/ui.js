@@ -3,12 +3,8 @@
 
     //文档元素
     var document = window.document,
-    //loc对象
-        location = window.location,
     //文档$对象
-        $doc = $(document),
-    //body$对象
-        $body = $(document.body);
+        $doc = $(document);
 
     /**
      * 首页hash(默认为#panel1)
@@ -52,7 +48,9 @@
      * @param isShow 是否显示
      */
     $.toggleSidebox = (function () {
-        var $sidebox = $('#sidebox');
+        var $sidebox = $('#sidebox'),
+            $body = $(document.body);
+        
         return function (isShow) {
             //相关panel
             var $panel = $.history[$.history.length - 1];

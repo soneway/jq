@@ -3,11 +3,9 @@
 
     //文档元素
     var document = window.document,
-    //loc对象
-        location = window.location,
     //文档$对象
         $doc = $(document),
-    //body$对象
+    //body $对象
         $body = $(document.body);
 
 
@@ -44,7 +42,7 @@
     $(function () {
 
         //添加class
-        $body.addClass('loaded');
+        //$body.addClass('loaded');
 
         //a标签touch
         $doc.on('touchstart', 'a', function () {

@@ -1,32 +1,28 @@
-﻿@import 'ani_circle';
-
-
-/*spinner动画*/
+﻿/*spinner loading*/
 .spinner
 {
+    /*容器宽度*/
+    $cw: 50px;
+
     display: inline-block;
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: $cw;
+    height: $cw;
     @include mx_animation(ani_circle 1s ease infinite);
 
-    b
+    &:before
     {
-        $w: 10px;
+        /*点宽度*/
+        $dw: 10px;
+        $neg: ($cw - $dw) / 2;
 
-        @include mx_plt($left: 20px, $top: 20px);
-        background-color: $color;
-        width: $w;
-        height: $w;
-        border-radius: $w;
-
-        @for $i from 1 through 8
-        {
-            &:nth-of-type(#{$i})
-            {
-                @include mx_transform(rotate(45deg * $i) translate(0, -20px));
-                opacity: 0.125 * $i;
-            }
-        }
+        content: '';
+        @include mx_plt($left: 50%, $top: 50%);
+        width: $dw;
+        height: $dw;
+        margin-left: -$dw / 2;
+        margin-top: -$dw / 2;
+        border-radius: $dw;
+        box-shadow: 0 -$neg 0 0 rgba($color, 1);
     }
 }
