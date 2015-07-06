@@ -42,7 +42,7 @@
     $(function () {
 
         //添加class
-        //$body.addClass('loaded');
+        $body.addClass('loaded');
 
         //a标签touch
         $doc.on('touchstart', 'a', function () {

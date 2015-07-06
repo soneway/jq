@@ -29,14 +29,15 @@ $spinner_color: $color !default;
         margin-left: -$dw / 2;
         margin-top: -$dw / 2;
         border-radius: $dw;
-        box-shadow: 0 (-$neg) 0 rgba($spinner_color, 1),
-                (-$neg1) (-$neg1) 0 rgba($spinner_color, 0.875),
-                (-$neg) 0 0 rgba($spinner_color, 0.75),
-                (-$neg1) $neg1 0 rgba($spinner_color, 0.625),
-        0 $neg 0 rgba($spinner_color, 0.5),
-        $neg1 $neg1 0 rgba($spinner_color, 0.375),
-        $neg 0 0 rgba($spinner_color, 0.25),
-        $neg1 (-$neg1) 0 rgba($spinner_color, 0.125);
+        /*8个圆点用阴影生成*/
+        @include mx_box-shadow(0 (-$neg) 0 rgba($spinner_color, 1),
+                        (-$neg1) (-$neg1) 0 rgba($spinner_color, 0.875),
+                        (-$neg) 0 0 rgba($spinner_color, 0.75),
+                        (-$neg1) $neg1 0 rgba($spinner_color, 0.625),
+                0 $neg 0 rgba($spinner_color, 0.5),
+                $neg1 $neg1 0 rgba($spinner_color, 0.375),
+                $neg 0 0 rgba($spinner_color, 0.25),
+                $neg1 (-$neg1) 0 rgba($spinner_color, 0.125));
     }
 }
 
