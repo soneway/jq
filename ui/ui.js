@@ -4,7 +4,9 @@
     //文档元素
     var document = window.document,
     //文档$对象
-        $doc = $(document);
+        $doc = $(document),
+    //body $对象
+        $body = $(document.body);
 
     /**
      * 首页hash(默认为#panel1)
@@ -48,9 +50,8 @@
      * @param isShow 是否显示
      */
     $.toggleSidebox = (function () {
-        var $sidebox = $('#sidebox'),
-            $body = $(document.body);
-        
+        var $sidebox = $('#sidebox');
+
         return function (isShow) {
             //相关panel
             var $panel = $.history[$.history.length - 1];
@@ -253,6 +254,12 @@
                                 $toHide.addClass('subopened').removeClass('opened');
                             }
                         }
+
+                        //b.设置scrollTop(必须放在显示之后)
+                        isBodyScroll && scrollTop($toShow.attr('id'), false);
+
+                        //显示时调用函数(放在靠后)
+                        toShowPanel($toShow);
                     }, 10);
 
                     //3.延迟保证隐藏动画
@@ -260,18 +267,12 @@
                         $toHide.removeClass('show');
                         $toShow.removeClass('reflow');//显示二级面板时强制重排一次
 
-                        //b.设置scrollTop(必须放在显示之后)
-                        isBodyScroll && scrollTop($toShow.attr('id'), false);
+                        //如果是打开iframe页面的面板
+                        $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-
-                        //如果是打开iframe页面的面板
-                        $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
                     }, duration + 100);
-
-                    //显示时调用函数(放在靠后)
-                    toShowPanel($toShow);
                 }
             }
             //没有显示面板

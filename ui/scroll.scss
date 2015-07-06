@@ -1,0 +1,27 @@
+﻿/*
+body可滚动的页面
+样式复写
+*/
+
+#header, #navbar
+{
+    position: fixed;
+}
+
+
+#mainbox
+{
+    overflow: visible;
+
+    .onsidebox &
+    {
+        overflow: hidden;
+    }
+}
+
+
+.panel
+{
+    height: auto;
+    overflow: visible;
+}

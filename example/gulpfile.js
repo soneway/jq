@@ -11,7 +11,7 @@ var root = '../../';
 //任务对象
 var config = {
     css: {
-        src: ['css/index.scss'],
+        src: ['css/index.scss','css/index1.scss'],
         watch: ['css/**'],
         dest: dest
     },

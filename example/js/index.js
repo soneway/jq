@@ -74,7 +74,6 @@
 
     })();
 
-
     //相册功能
     load.panelpicpager = (function () {
 
