@@ -264,7 +264,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     @extend %ph_palt;
     @extend %ph_full;
     z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     visibility: hidden;
     opacity: 0;
     @extend %ph_center;
@@ -273,13 +273,5 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     {
         visibility: visible;
         opacity: 1;
-    }
-
-    .spinner
-    {
-        b
-        {
-            background-color: #fff;
-        }
     }
 }

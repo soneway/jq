@@ -120,6 +120,7 @@ a, .pi-picpager
     box-align: center;
     box-pack: center;*/ }
 
+/*变量*/
 /*spinner loading*/
 .spinner {
   /*容器宽度*/
@@ -128,9 +129,11 @@ a, .pi-picpager
   width: 50px;
   height: 50px;
   -webkit-animation: ani_circle 1s ease infinite;
-  animation: ani_circle 1s ease infinite; }
+  animation: ani_circle 1s ease infinite;
+  /*点宽度*/
+  /*负数*/
+  /*负数1*/ }
   .spinner:before {
-    /*点宽度*/
     content: '';
     position: absolute;
     left: 50%;
@@ -140,7 +143,28 @@ a, .pi-picpager
     margin-left: -5px;
     margin-top: -5px;
     border-radius: 10px;
-    box-shadow: -20px 0 0 #333333; }
+    box-shadow: 0 -20px 0 #333333, -14px -14px 0 rgba(51, 51, 51, 0.875), -20px 0 0 rgba(51, 51, 51, 0.75), -14px 14px 0 rgba(51, 51, 51, 0.625), 0 20px 0 rgba(51, 51, 51, 0.5), 14px 14px 0 rgba(51, 51, 51, 0.375), 20px 0 0 rgba(51, 51, 51, 0.25), 14px -14px 0 rgba(51, 51, 51, 0.125); }
+  .spinner.invert:before {
+    box-shadow: 0 -20px 0 #cccccc, -14px -14px 0 rgba(204, 204, 204, 0.875), -20px 0 0 rgba(204, 204, 204, 0.75), -14px 14px 0 rgba(204, 204, 204, 0.625), 0 20px 0 rgba(204, 204, 204, 0.5), 14px 14px 0 rgba(204, 204, 204, 0.375), 20px 0 0 rgba(204, 204, 204, 0.25), 14px -14px 0 rgba(204, 204, 204, 0.125); }
+
+/*旋转动画*/
+@-webkit-keyframes ani_circle
+{
+  0%
+{
+    -webkit-transform: rotateZ(0deg); }
+  100%
+{
+    -webkit-transform: rotateZ(360deg); } }
+
+@keyframes ani_circle
+{
+  0%
+{
+    transform: rotateZ(0deg); }
+  100%
+{
+    transform: rotateZ(360deg); } }
 
 /*元素*/
 *:focus {
@@ -290,16 +314,12 @@ h4 {
 /*mask*/
 #mask {
   z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   visibility: hidden;
   opacity: 0; }
   #mask.visible {
     visibility: visible;
     opacity: 1; }
-  #mask
-.spinner
-b {
-    background-color: #fff; }
 
 /*外部引入*/
 /*iconmoon*/

@@ -29,7 +29,7 @@
     $.toggleMask = (function () {
         var $mask = $('#mask');
         if ($mask.length === 0) {
-            $mask = $('<div id="mask"><i class="spinner"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>');
+            $mask = $('<div id="mask"><i class="spinner"></i></div>');
             $body.append($mask);
         }
         return function (isShow) {
