@@ -71,7 +71,7 @@
             function center(idx) {
                 $items.each(function (i) {
                     var $this = $(this),
-                        transformStr = 'rotate(' + (angleInc * (i - idx)) + 'deg)';
+                        transformStr = 'rotateZ(' + (angleInc * (i - idx)) + 'deg)';
 
                     //设定一定延时,防止计算能力差的浏览器(ucweb)打不开swatchbook
                     setTimeout(function () {
@@ -94,8 +94,8 @@
                     else {
                         currentIdx = itemIdx;
                         $item.css({
-                            '-webkit-transform': 'rotate(0deg)',
-                            'transform': 'rotate(0deg)'
+                            '-webkit-transform': 'rotateZ(0deg)',
+                            'transform': 'rotateZ(0deg)'
                         }).addClass('selected');
                         rotateSiblings($item, itemIdx);
                     }
@@ -111,8 +111,8 @@
                 }
                 else {
                     $items.css({
-                        '-webkit-transform': 'rotate(0deg)',
-                        'transform': 'rotate(0deg)'
+                        '-webkit-transform': 'rotateZ(0deg)',
+                        'transform': 'rotateZ(0deg)'
                     });
                 }
                 isClosed = !isClosed;
@@ -134,7 +134,7 @@
                     var rotateVal = i < itemIdx ?
                     angleInc * (i - itemIdx) : i - itemIdx === 1 ?
                         proximity : proximity + (i - itemIdx - 1) * neighbor;
-                    var transformStr = 'rotate(' + rotateVal + 'deg)';
+                    var transformStr = 'rotateZ(' + rotateVal + 'deg)';
 
                     $(this).css({
                         '-webkit-transform': transformStr,
