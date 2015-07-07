@@ -351,7 +351,7 @@
 
             if (href) {
                 evt.preventDefault();
-                $iframe.html('<iframe example="' + href + '"></iframe>');
+                $iframe.html('<iframe src="' + href + '"></iframe>');
                 $.setSubtitle(title || '详情');
                 $.loadPanel('#paneliframe');
             }
