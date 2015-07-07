@@ -12,6 +12,7 @@ body可滚动的页面
         overflow: hidden;
     }
 
+    /*避免页面不够高,挡不住tohide页面*/
     .reflow
     {
         height: 99999px;

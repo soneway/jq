@@ -159,6 +159,7 @@ h3.center
         width: 90%;
         min-width: 300px;
         height: 90%;
+        min-height: 300px;
         margin: 0 auto;
     }
 }
@@ -167,6 +168,8 @@ h3.center
 /*相册*/
 #panelpicpager
 {
+    height: 100%;
+
     .info
     {
         @extend %ph_palt;
@@ -193,6 +196,7 @@ h3.center
         width: 90%;
         min-width: 300px;
         height: 90%;
+        min-height: 300px;
         margin: 0 auto;
 
         p
@@ -211,13 +215,14 @@ h3.center
 
         width: 90%;
         min-width: 300px;
-        height: 90%;
+        height: 300px;
         margin: 0 auto;
         overflow: hidden;
 
         div
         {
             background: url(../images/1.jpg);
+            background-size: auto 455px;
             @include mx_transition-duration(0.4s);
         }
 
@@ -316,6 +321,8 @@ h3.center
 /*刮刮卡*/
 #panelscratchcard
 {
+    height: 100%;
+
     .scratchcard
     {
         width: 100%;
