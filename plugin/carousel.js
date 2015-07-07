@@ -76,20 +76,15 @@
                     width = $this.width();
                     height = $this.height();
 
-                    $items.css({
-                        width: width + 'px',
-                        height: height + 'px'
-                    });
-
                     //水平方向滚动
                     if (!isVertical) {
                         wrapElStyle.width = width * itemCount + 'px';
-                        wrapElStyle.height = height + 'px';
+                        $items.css('width', width + 'px');
                     }
                     //竖直方向滚动
                     else {
-                        wrapElStyle.width = width + 'px';
                         wrapElStyle.height = height * itemCount + 'px';
+                        $items.css('height', height + 'px');
                     }
                 }
 

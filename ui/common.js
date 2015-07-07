@@ -15,11 +15,23 @@
      */
     $.isShowQrcode = true;
 
+
+    var ua = navigator.userAgent;
     /**
      * 是否为移动端
      * @type {boolean}
      */
-    $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(window.navigator.userAgent);
+    $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(navigator.userAgent);
+    /**
+     * 是否为安卓
+     * @type {string}
+     */
+    $.isAndroid = /(android)/i.test(ua);
+    /**
+     * 是否为ios
+     * @type {string}
+     */
+    $.isIos = /(iPhone|iPod|iPad)/i.test(ua);
 
 
     /**

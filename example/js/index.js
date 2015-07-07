@@ -26,7 +26,6 @@
         $.isFunction(unloadfn) && unloadfn($this);
     };
 
-
     //焦点图
     load.panelcarousel = (function () {
 
@@ -73,6 +72,7 @@
         };
 
     })();
+
 
     //相册功能
     load.panelpicpager = (function () {

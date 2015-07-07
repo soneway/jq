@@ -158,9 +158,22 @@ h3.center
     {
         width: 90%;
         min-width: 300px;
-        height: 90%;
-        min-height: 300px;
         margin: 0 auto;
+
+        a
+        {
+            height: 300px;
+        }
+
+        &.vertical
+        {
+            height: 300px;
+
+            a
+            {
+                width: 100%;
+            }
+        }
     }
 }
 
@@ -195,8 +208,7 @@ h3.center
     {
         width: 90%;
         min-width: 300px;
-        height: 90%;
-        min-height: 300px;
+        height: 300px;
         margin: 0 auto;
 
         p

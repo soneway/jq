@@ -2,8 +2,6 @@
 .pi-carousel
 {
     overflow: hidden;
-    position: relative;
-    display: table;
     /*防止动画过程闪烁*/
     @include mx_backface-visibility(hidden);
     @include mx_perspective(1000);
@@ -12,9 +10,6 @@
 /*滚动容器*/
 .pi-carousel-wrap
 {
-    @extend %ph_palt;
-    overflow: hidden;
-
     &.transform
     {
         @extend %ph_transtransf;
@@ -25,12 +20,6 @@
         display: block;
         float: left;
         overflow: hidden;
-        @include mx_transition(opacity 0.3s ease);
-
-        .loading &
-        {
-            opacity: 0;
-        }
     }
 }
 

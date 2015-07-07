@@ -5,8 +5,10 @@
     var document = window.document,
     //文档$对象
         $doc = $(document),
+    //body对象
+        bodyEl = document.body,
     //body $对象
-        $body = $(document.body),
+        $body = $(bodyEl),
     //mainbox $对象
         $mainbox = $('#mainbox');
 
@@ -20,7 +22,6 @@
     //scrollTop处理相关
     var scrollTop = (function () {
         var cache = {},
-            bodyEl = document.body,
         //是否body滚动
             isBodyScroll = $mainbox.css('overflow') !== 'hidden';
 
@@ -198,6 +199,10 @@
                 }
 
 
+                //a.记录scrollTop(必须放在隐藏之前)
+                scrollTop($toHide.attr('id'), true);
+
+
                 //面板切换
                 if ('#' + $toHide.attr('id') !== hash) {
 
@@ -206,7 +211,12 @@
 
                     //1.立即操作
                     $toShow.addClass('show');
-                    $mainbox.addClass('reflow');//切换面板时强制重排一次,以免出现横向滚动条
+
+                    //b.设置scrollTop(必须放在显示之后)
+                    scrollTop($toShow.attr('id'), false);
+
+                    //切换面板时强制重排一次,以免出现横向滚动条
+                    $mainbox.addClass('reflow');
 
                     //2.延迟保证显示动画
                     setTimeout(function () {
@@ -260,21 +270,26 @@
                             }
                         }
 
-                        //a.记录scrollTop(必须放在隐藏之前)
-                        scrollTop($toHide.attr('id'), true);
-
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
-                    }, 0);
+                    }, 10);
 
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
                         $toHide.removeClass('show');
 
-                        //b.设置scrollTop(必须放在显示之后)
-                        scrollTop($toShow.attr('id'), false);
+                        //ios8 bug
+                        if ($.isIos) {
+                            bodyEl.scrollTop += 1;
+                            //(延迟100ms在ios8上才有效果)
+                            setTimeout(function () {
+                                bodyEl.scrollTop -= 1;
+                            }, 100);
+                        }
+
+                        //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
-                            $mainbox.removeClass('reflow');//切换面板时强制重排一次(延迟100ms在ios8上才有效果)
+                            $mainbox.removeClass('reflow');//切换面板时强制重排一次
                         }, 100);
 
                         //如果是打开iframe页面的面板
@@ -282,7 +297,7 @@
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration);
+                    }, duration + 20);
                 }
             }
             //没有显示面板
