@@ -11,6 +11,11 @@ body可滚动的页面
     {
         overflow: hidden;
     }
+
+    .reflow
+    {
+        height: 99999px;
+    }
 }
 
 
@@ -19,9 +24,4 @@ body可滚动的页面
     height: auto;
     min-height: 100%;
     overflow: visible;
-
-    &.reflow
-    {
-        height: 99999px;
-    }
 }

@@ -6,7 +6,9 @@
     //文档$对象
         $doc = $(document),
     //body $对象
-        $body = $(document.body);
+        $body = $(document.body),
+    //mainbox $对象
+        $mainbox = $('#mainbox');
 
     /**
      * 首页hash(默认为#panel1)
@@ -15,9 +17,26 @@
     $.indexSelector = '#panel1';
 
 
+    //scrollTop处理相关
+    var scrollTop = (function () {
+        var cache = {},
+            bodyEl = document.body,
+        //是否body滚动
+            isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+
+        return function (id, isCache) {
+            if (isBodyScroll) {
+                //是否是存储scrollTop
+                isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
+            }
+        };
+    })();
+
+
     /**
      * 显示panel时函数
      * @param $toShow 显示的$对象
+     * @param $toHide 隐藏的$对象
      * @ignore
      */
     var toShowPanel = (function () {
@@ -37,6 +56,7 @@
     /**
      * 隐藏panel时函数
      * @param $toHide 隐藏的$对象
+     * @param $toShow 显示的$对象
      * @ignore
      */
     function toHidePanel($toHide) {
@@ -72,7 +92,6 @@
         };
     })();
 
-    var $mainbox = $('#mainbox');
     /**
      * 显示/隐藏头部函数
      * @param isShow 是否显示
@@ -129,20 +148,7 @@
         //历史记录对象
             history = $.history = [],
         //header元素
-            $header = $('#header'),
-        //是否body滚动
-            isBodyScroll = $mainbox.css('overflow') !== 'hidden';
-
-        //scrollTop处理相关
-        var scrollTop = (function () {
-            var cache = {},
-                bodyEl = document.body;
-
-            return function (id, isCache) {
-                //是否是存储scrollTop
-                isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
-            };
-        })();
+            $header = $('#header');
 
         return function (hash) {
             var $toShow, $toHide;
@@ -198,11 +204,9 @@
                     var showRole = $toShow.attr('data-role'),
                         hideRole = $toHide.attr('data-role');
 
-                    //a.记录scrollTop(必须放在隐藏之前)
-                    isBodyScroll && scrollTop($toHide.attr('id'), true);
-
                     //1.立即操作
-                    $toShow.addClass('show reflow');//显示面板强制重排一次,以免出现横向滚动条
+                    $toShow.addClass('show');
+                    $mainbox.addClass('reflow');//切换面板时强制重排一次,以免出现横向滚动条
 
                     //2.延迟保证显示动画
                     setTimeout(function () {
@@ -256,6 +260,9 @@
                             }
                         }
 
+                        //a.记录scrollTop(必须放在隐藏之前)
+                        scrollTop($toHide.attr('id'), true);
+
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
                     }, 0);
@@ -263,10 +270,12 @@
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
                         $toHide.removeClass('show');
-                        $toShow.removeClass('reflow');//显示面板强制重排一次
 
                         //b.设置scrollTop(必须放在显示之后)
-                        isBodyScroll && scrollTop($toShow.attr('id'), false);
+                        scrollTop($toShow.attr('id'), false);
+                        setTimeout(function () {
+                            $mainbox.removeClass('reflow');//切换面板时强制重排一次(延迟100ms在ios8上才有效果)
+                        }, 100);
 
                         //如果是打开iframe页面的面板
                         $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));

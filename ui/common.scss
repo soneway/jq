@@ -261,7 +261,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*mask*/
 #mask
 {
-    @extend %ph_palt;
+    @extend %ph_pflt;
     @extend %ph_full;
     z-index: 9999;
     background-color: rgba(0, 0, 0, 0.3);
