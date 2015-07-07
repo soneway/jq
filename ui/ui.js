@@ -35,9 +35,32 @@
 
 
     /**
+     * 页面滚动到函数
+     * @param toScrollTop 滚动到的scrollTop
+     * @param rate 比率
+     * @param el 滚动元素
+     */
+    $.scrollTo = function (toScrollTop, rate, el) {
+        rate || (rate = 20);
+        el || (el = bodyEl);
+
+        var scrollTop = el.scrollTop,
+            scrollSpan = (toScrollTop - scrollTop) / rate;
+
+        function scroll() {
+            scrollTop += scrollSpan;
+            el.scrollTop = scrollTop;
+            scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
+        }
+
+        //定位滚动
+        scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
+    };
+
+
+    /**
      * 显示panel时函数
      * @param $toShow 显示的$对象
-     * @param $toHide 隐藏的$对象
      * @ignore
      */
     var toShowPanel = (function () {
@@ -57,7 +80,6 @@
     /**
      * 隐藏panel时函数
      * @param $toHide 隐藏的$对象
-     * @param $toShow 显示的$对象
      * @ignore
      */
     function toHidePanel($toHide) {
@@ -212,9 +234,6 @@
                     //1.立即操作
                     $toShow.addClass('show');
 
-                    //b.设置scrollTop(必须放在显示之后)
-                    scrollTop($toShow.attr('id'), false);
-
                     //切换面板时强制重排一次,以免出现横向滚动条
                     $mainbox.addClass('reflow');
 
@@ -278,14 +297,8 @@
                     setTimeout(function () {
                         $toHide.removeClass('show');
 
-                        //ios8 bug
-                        if ($.isIos) {
-                            bodyEl.scrollTop += 1;
-                            //(延迟100ms在ios8上才有效果)
-                            setTimeout(function () {
-                                bodyEl.scrollTop -= 1;
-                            }, 100);
-                        }
+                        //b.设置scrollTop(必须放在显示之后)
+                        scrollTop($toShow.attr('id'), false);
 
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
