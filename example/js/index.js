@@ -44,6 +44,8 @@
                         isVertical: this.getAttribute('data-isvertical') === '1'
                     });
                 });
+
+                $('#img_car').carousel();
             }
         };
 
