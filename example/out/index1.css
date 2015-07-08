@@ -92,8 +92,7 @@ p, .tologin
 /*表格单元格*/
 #navbar
 .navlist
-a, .pi-picpager
-.spinnerbox {
+a {
   display: table-cell;
   vertical-align: middle;
   line-height: normal; }
@@ -105,8 +104,7 @@ a, .pi-picpager
   overflow: hidden; }
 
 /*all动画*/
-.fade-out, .fade-in, .transition, #loading, #header > div, #customalert, .pi-carousel-title, .pi-flip > *, .pi-picpager
-.spinnerbox, .pi-picpager-pic {
+.fade-out, .fade-in, .transition, #loading, #header > div, #customalert, .pi-carousel-title, .pi-flip > *, .pi-picpager-pic {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
@@ -679,22 +677,15 @@ picpager
 相册样式
 */
 .pi-picpager {
-  overflow: hidden;
   position: relative;
-  display: table;
   /*防止动画过程闪烁*/
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000;
   perspective: 1000; }
-  .pi-picpager
-.spinnerbox {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    opacity: 0; }
-  .pi-picpager.loading .spinnerbox {
-    opacity: 1; }
+
+.pi-picpager-wrap {
+  overflow: hidden; }
 
 .pi-picpager-pic {
   background-position: center center;

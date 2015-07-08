@@ -4,33 +4,19 @@ picpager
 */
 .pi-picpager
 {
-    overflow: hidden;
     position: relative;
-    display: table;
     @include mx_backface-visibility(hidden);
     @include mx_perspective(1000);
-
-    .spinnerbox
-    {
-        width: 100%;
-        height: 100%;
-        @extend %ph_td;
-        text-align: center;
-        @extend %ph_transall;
-        opacity: 0;
-    }
-    
-    &.loading .spinnerbox
-    {
-        opacity: 1;
-    }
 }
+
 
 .pi-picpager-wrap
-{    
+{
     @extend %ph_palt;
     @extend %ph_full;
+    overflow: hidden;
 }
+
 
 .pi-picpager-pic
 {
@@ -60,5 +46,5 @@ picpager
     &:nth-of-type(3)
     {
         left: 100%;
-    }  
+    }
 }
