@@ -40,7 +40,7 @@ var
   -webkit-overflow-scrolling: touch; }
 
 /*定位*/
-.absolute, #mainbox, #loading, .head
+.absolute, #mainbox, #loading, .head, .head
 .btnleft, #header > div, .panel, #navbar:after, .pi-flip > *, .pi-picpager-wrap, .pi-picpager-pic, .sb-container > div, .pi-turntable-pointer, #share_list
 a:after, .other_login
 a:after, h3.center:before, #panelpicpager
@@ -50,7 +50,7 @@ a:after, h3.center:before, #panelpicpager
   left: 0;
   top: 0; }
 
-.fixed, #mask, .head, #customalert {
+.fixed, #mask, #header, #customalert {
   position: fixed;
   left: 0;
   top: 0; }
