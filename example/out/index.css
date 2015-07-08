@@ -128,7 +128,9 @@ a {
   display: -webkit-box;
   -webkit-box-align: center;
   -webkit-box-pack: center;
-  -ms-text-algin: center; }
+  /*display: box;
+    box-align: center;
+    box-pack: center;*/ }
 
 /*
 spinner
