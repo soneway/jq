@@ -1005,6 +1005,9 @@
             }
         );
 
+        //pc端mouse转touch事件
+        !$.isMobi && $.jsonp('../plugin/desktouch.js');
+
     });
 
 })(this, $);

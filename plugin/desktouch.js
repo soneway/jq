@@ -1,108 +1,100 @@
-/*
+ï»¿/*
  * desktouch.js
- * ×ÀÃæä¯ÀÀÆ÷Ä£ÄâtouchÊÂ¼ş
+ * æ¡Œé¢æµè§ˆå™¨æ¨¡æ‹Ÿtouchäº‹ä»¶
  * */
-(function (window, $) {
+(function (window) {
 
-    var document = window.document,
-        $doc = $(document);
+    var document = window.document;
 
-    var cancelClickMove = false;
-
+    //é˜»æ­¢å‡½æ•°
     function preventAll(evt) {
         evt.preventDefault();
         evt.stopPropagation();
     }
 
-    function redirectMouseToTouch(type, originalEvent, newTarget) {
+    //mouseäº‹ä»¶è½¬touch
+    function mouseToTouch(type, evt, target) {
+        target || (target = evt.target);
 
-        var theTarget = newTarget ? newTarget : originalEvent.target,
-            tagName = theTarget.tagName.toLowerCase();
-
-        //³ıÎÄ±¾ÓòÒÔÍâpreventAll
+        var tagName = target.tagName.toLowerCase();
+        //é™¤æ–‡æœ¬åŸŸä»¥å¤–preventAll
         if (tagName.indexOf('select') === -1 && tagName.indexOf('textarea') === -1 && tagName.indexOf('input') === -1) {
-            preventAll(originalEvent);
+            preventAll(evt);
         }
 
-        var touchevt = document.createEvent('Event');
-        touchevt.initEvent(type, true, true);
-        if (type != 'touchend') {
-            touchevt.touches = [];
-            touchevt.touches[0] = {};
-            touchevt.touches[0].pageX = originalEvent.pageX;
-            touchevt.touches[0].pageY = originalEvent.pageY;
-            //target
-            touchevt.touches[0].target = theTarget;
-            touchevt.changedTouches = touchevt.touches;
-            touchevt.targetTouches = touchevt.touches;
-        }
-        //target
-        touchevt.target = theTarget;
+        var event = document.createEvent('Event');
+        event.initEvent(type, true, true);
 
-        touchevt.mouseToTouch = true;
-        if ($.os.ie) {
-            //handle inline event handlers for target and parents (for bubbling)
-            var elem = originalEvent.target;
-            while (elem != null) {
-                if (elem.hasAttribute('on' + type)) {
-                    eval(elem.getAttribute('on' + type));
-                }
-                elem = elem.parentElement;
-            }
+        //étouchendæ·»åŠ touches
+        if (type !== 'touchend') {
+            var touch = {
+                pageX: evt.pageX,
+                pageY: evt.pageY,
+                target: target
+            };
+            event.touches = event.changedTouches = event.targetTouches = [touch];
         }
-        theTarget.dispatchEvent(touchevt);
+
+        //æ·»åŠ äº‹ä»¶çš„å…¶ä»–å±æ€§
+        for (var p in evt) {
+            event[p] === undefined && (event[p] = evt[p]);
+        }
+
+        event.isFromMouse = true;
+        target.dispatchEvent(event);
     }
 
-    var mouseDown = false,
-        lastTarget = null,
-        firstMove = false;
-
-
-    document.addEventListener('mousedown', function (e) {
-        mouseDown = true;
-        lastTarget = e.target;
-        if (e.target.nodeName.toLowerCase() == 'a' && e.target.href.toLowerCase() == 'javascript:;')
-            e.target.href = '#';
-        redirectMouseToTouch('touchstart', e);
-        firstMove = true;
-        cancelClickMove = false;
-    }, true);
-
-    document.addEventListener('mouseup', function (e) {
-        if (!mouseDown) return;
-        redirectMouseToTouch('touchend', e, lastTarget);	//bind it to initial mousedown target
+    var isDowned = false,
+        isFirstMove = false,
+        isMoved = false,
         lastTarget = null;
-        mouseDown = false;
+
+    document.addEventListener('mousedown', function (evt) {
+        isDowned = true;
+        lastTarget = evt.target;
+
+        mouseToTouch('touchstart', evt);
+        isFirstMove = true;
+        isMoved = false;
     }, true);
 
-    document.addEventListener('mousemove', function (e) {
-        if (!mouseDown) return;
-        if (firstMove) return;
-        firstMove = false;
-        redirectMouseToTouch('touchmove', e);
-        e.preventDefault();
-
-        cancelClickMove = true;
-    }, true);
-
-
-    //½ûÓÃËùÓĞÒÆ¶¯¶Ë²»´æÔÚµÄÊÂ¼ş
-    document.addEventListener('drag', preventAll, true);
-    document.addEventListener('dragstart', preventAll, true);
-    document.addEventListener('dragenter', preventAll, true);
-    document.addEventListener('dragover', preventAll, true);
-    document.addEventListener('dragleave', preventAll, true);
-    document.addEventListener('dragend', preventAll, true);
-    document.addEventListener('drop', preventAll, true);
-    document.addEventListener('selectstart', preventAll, true);
-    document.addEventListener('click', function (e) {
-        if (!e.mouseToTouch && e.target == lastTarget) {
-            preventAll(e);
+    document.addEventListener('mousemove', function (evt) {
+        if (!isDowned) {
+            return;
         }
-        if (cancelClickMove) {
-            preventAll(e);
-            cancelClickMove = false;
+        if (isFirstMove) {
+            isFirstMove = false;
+            return;
+        }
+
+        mouseToTouch('touchmove', evt);
+        isMoved = true;
+    }, true);
+
+    document.addEventListener('mouseup', function (evt) {
+        if (!isDowned) {
+            return;
+        }
+
+        mouseToTouch('touchend', evt, lastTarget);
+        lastTarget = null;
+        isDowned = false;
+    }, true);
+
+    document.addEventListener('click', function (evt) {
+        if (!evt.isFromMouse && evt.target === lastTarget) {
+            preventAll(evt);
+        }
+        if (isMoved) {
+            preventAll(evt);
+            isMoved = false;
         }
     }, true);
 
-})(this, $);
+
+    //ç¦ç”¨æ‰€æœ‰ç§»åŠ¨ç«¯ä¸å­˜åœ¨çš„äº‹ä»¶
+    ['drag', 'dragstart', 'dragenter', 'dragover', 'dragleave', 'dragend', 'drop', 'selectstart'].forEach(function (type) {
+        document.addEventListener(type, preventAll, true);
+    });
+
+})(this);
