@@ -194,6 +194,7 @@ logding样式
 body {
   background-color: #fff;
   /*加背景色可减缓页面闪烁*/
+  overflow-x: hidden;
   /*可继承*/
   color: #333;
   line-height: 1.5em;

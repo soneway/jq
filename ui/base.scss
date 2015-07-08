@@ -24,6 +24,7 @@
 body
 {
     background-color: $panel_bgcolor; /*加背景色可减缓页面闪烁*/
+    overflow-x: hidden;
     /*可继承*/
     color: $color;
     line-height: 1.5em;
