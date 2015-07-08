@@ -2,7 +2,7 @@
 'use strict';
 
 //是否调试
-var debug = 0;
+var debug = 1;
 //输出文件夹
 var dest = 'out';
 //根目录
