@@ -603,7 +603,8 @@ carousel
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000;
-  perspective: 1000; }
+  perspective: 1000;
+  position: relative; }
 
 /*滚动容器*/
 .pi-carousel-wrap > * {
