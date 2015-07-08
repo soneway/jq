@@ -1,4 +1,6 @@
-﻿/*自定义滚动*/
+﻿/*
+自定义滚动样式
+*/
 .pi-scroll-item
 {
     @include mx_transition-transform(0.3s ease-out);

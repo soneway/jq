@@ -1,4 +1,7 @@
-﻿//$.customalert
+﻿/*
+ * customalert.js
+ * 自定义提示框js
+ */
 (function (window, $) {
 
     //1.变量

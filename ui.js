@@ -1,19 +1,21 @@
-﻿/*
- * ui.js
- * 移动端界面js,包括面板切换,导航,边栏等功能
- */
+﻿//ui.js
 (function (window, $) {
 
     //文档元素
     var document = window.document,
+    //loc对象
+        location = window.location,
     //文档$对象
         $doc = $(document),
-    //body对象
-        bodyEl = document.body,
-    //body $对象
-        $body = $(bodyEl),
-    //mainbox $对象
-        $mainbox = $('#mainbox');
+    //body$对象
+        $body = $(document.body);
+
+
+    /**
+     * 是否显示二维码(默认为true)
+     * @type {boolean}
+     */
+    $.isShowQrcode = true;
 
     /**
      * 首页hash(默认为#panel1)
@@ -21,44 +23,11 @@
      */
     $.indexSelector = '#panel1';
 
-
-    //scrollTop处理相关
-    var scrollTop = (function () {
-        var cache = {},
-        //是否body滚动
-            isBodyScroll = $mainbox.css('overflow') !== 'hidden';
-
-        return function (id, isCache) {
-            if (isBodyScroll) {
-                //是否是存储scrollTop
-                isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
-            }
-        };
-    })();
-
-
     /**
-     * 页面滚动到函数
-     * @param toScrollTop 滚动到的scrollTop
-     * @param rate 比率
-     * @param el 滚动元素
+     * 是否为移动端
+     * @type {boolean}
      */
-    $.scrollTo = function (toScrollTop, rate, el) {
-        rate || (rate = 20);
-        el || (el = bodyEl);
-
-        var scrollTop = el.scrollTop,
-            scrollSpan = (toScrollTop - scrollTop) / rate;
-
-        function scroll() {
-            scrollTop += scrollSpan;
-            el.scrollTop = scrollTop;
-            scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
-        }
-
-        //定位滚动
-        scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
-    };
+    $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(window.navigator.userAgent);
 
 
     /**
@@ -91,13 +60,28 @@
         typeof panelUnloaded === 'function' && panelUnloaded($toHide);
     }
 
+
+    /**
+     * 显示/隐藏mask函数
+     * @param isShow 是否显示
+     */
+    $.toggleMask = (function () {
+        var $mask = $('#mask');
+        if ($mask.length === 0) {
+            $mask = $('<div id="mask" class="fixed"><div><div class="spinner"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div></div>');
+            $body.append($mask);
+        }
+        return function (isShow) {
+            isShow ? $mask.addClass('visible') : $mask.removeClass('visible');
+        };
+    })();
+
     /**
      * 显示/隐藏边栏函数
      * @param isShow 是否显示
      */
     $.toggleSidebox = (function () {
         var $sidebox = $('#sidebox');
-
         return function (isShow) {
             //相关panel
             var $panel = $.history[$.history.length - 1];
@@ -118,6 +102,7 @@
         };
     })();
 
+    var $mainbox = $('#mainbox');
     /**
      * 显示/隐藏头部函数
      * @param isShow 是否显示
@@ -174,7 +159,19 @@
         //历史记录对象
             history = $.history = [],
         //header元素
-            $header = $('#header');
+            $header = $('#header'),
+        //是否body滚动
+            isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+
+        //scrollTop处理相关
+        var scrollTop = (function () {
+            var cache = {},
+                bodyEl = document.body;
+
+            return function (id, isCache) {
+                isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
+            };
+        })();
 
         return function (hash) {
             var $toShow, $toHide;
@@ -224,21 +221,17 @@
                 }
 
 
-                //a.记录scrollTop(必须放在隐藏之前)
-                scrollTop($toHide.attr('id'), true);
-
-
                 //面板切换
                 if ('#' + $toHide.attr('id') !== hash) {
 
                     var showRole = $toShow.attr('data-role'),
                         hideRole = $toHide.attr('data-role');
 
+                    //a.记录scrollTop(必须放在隐藏之前)
+                    isBodyScroll && scrollTop($toHide.attr('id'), true);
+
                     //1.立即操作
                     $toShow.addClass('show');
-
-                    //切换面板时强制重排一次,以免出现横向滚动条
-                    $mainbox.addClass('reflow');
 
                     //2.延迟保证显示动画
                     setTimeout(function () {
@@ -279,7 +272,7 @@
                             //header内容切换
                             $header.addClass('onsubtitle');
 
-                            $toShow.removeClass('notrans');
+                            $toShow.removeClass('notrans').addClass('reflow');//显示二级面板时强制重排一次,以免出现横向滚动条
                             $toHide.removeClass('notrans');
 
                             if ($toShow.hasClass('subopened')) {
@@ -291,29 +284,25 @@
                                 $toHide.addClass('subopened').removeClass('opened');
                             }
                         }
-
-                        //显示时调用函数(放在靠后)
-                        toShowPanel($toShow);
                     }, 10);
 
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
                         $toHide.removeClass('show');
+                        $toShow.removeClass('reflow');//显示二级面板时强制重排一次
 
                         //b.设置scrollTop(必须放在显示之后)
-                        scrollTop($toShow.attr('id'), false);
-
-                        //延迟重排(延迟100ms在ios8上才有效果)
-                        setTimeout(function () {
-                            $mainbox.removeClass('reflow');//切换面板时强制重排一次
-                        }, 100);
-
-                        //如果是打开iframe页面的面板
-                        $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
+                        isBodyScroll && scrollTop($toShow.attr('id'), false);
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration + 20);
+
+                        //如果是打开iframe页面的面板
+                        $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
+                    }, duration + 100);
+
+                    //显示时调用函数(放在靠后)
+                    toShowPanel($toShow);
                 }
             }
             //没有显示面板
@@ -326,8 +315,16 @@
     })();
 
 
-    //文档加载完成
-    $(function () {
+    //初始化
+    (function () {
+
+        //a标签touch
+        $doc.on('touchstart', 'a', function () {
+            $(this).addClass('focus');
+        });
+        $doc.on('touchend', 'a', function () {
+            $(this).removeClass('focus');
+        });
 
         //btn-onsidebox点击
         $doc.on('click', '.btn-onsidebox', function () {
@@ -354,7 +351,7 @@
 
             if (href) {
                 evt.preventDefault();
-                $iframe.html('<iframe src="' + href + '"></iframe>');
+                $iframe.html('<iframe example="' + href + '"></iframe>');
                 $.setSubtitle(title || '详情');
                 $.loadPanel('#paneliframe');
             }
@@ -364,6 +361,33 @@
         $doc.on('click', '#btn-goback', function () {
             $.loadPanel();
         });
+
+    })();
+
+
+    //文档加载完成
+    $(function () {
+
+        //pc端二维码
+        $.isShowQrcode && !$.isMobi && $.jsonp('http://img.gd.sohu.com/js/qrcode.js', function () {
+                var $qrcode = $('#qrcode');
+                if ($qrcode.length === 0) {
+                    $qrcode = $('<div id="qrcode"></div>');
+                    $body.append($qrcode);
+                    new QRCode($qrcode[0], {
+                        width: $qrcode.width(),
+                        height: $qrcode.height(),
+                        text: location.href
+                    });
+                }
+                $doc.on('click', '#qrcode', function () {
+                    $qrcode.fadeOut();
+                });
+            }
+        );
+
+        //添加class
+        $body.addClass('loaded');
 
 
         //导航条

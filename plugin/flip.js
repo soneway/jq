@@ -1,4 +1,7 @@
-﻿//flip.js
+﻿/*
+ * flip.js
+ * 3d翻转效果js
+ * */
 (function (window, $) {
 
     $.fn.flip = function (options) {

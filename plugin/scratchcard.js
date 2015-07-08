@@ -1,4 +1,7 @@
-﻿//scratchcard.js
+﻿/*
+ * scratchcard.js
+ * 刮刮卡js
+ * */
 (function (window, $) {
 
     $.fn.scratchcard = function (options) {
@@ -36,13 +39,13 @@
             var $this = $(this),
                 width = $this.width() * scale,
                 height = $this.height() * scale,
-                //绘画元素
+            //绘画元素
                 $canvas,
-                //容器offsetLeft
+            //容器offsetLeft
                 offsetLeft,
-                //容器offsetTop
+            //容器offsetTop
                 offsetTop,
-                //上下文
+            //上下文
                 context;
 
             //初始化函数

@@ -1,4 +1,7 @@
-﻿//swatchbook.js
+﻿/*
+ * swatchbook.js
+ * 扇形特效js
+ * */
 (function (window, $) {
 
     $.fn.swatchbook = function (options) {

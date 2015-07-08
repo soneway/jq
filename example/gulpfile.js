@@ -2,7 +2,7 @@
 'use strict';
 
 //是否调试
-var debug = 1;
+var debug = 0;
 //输出文件夹
 var dest = 'out';
 //根目录
@@ -19,7 +19,7 @@ var config = {
         src: {
             index: [
                 root + 'jq.js',
-                root + 'ui/common.js',
+                root + 'ui/base.js',
                 root + 'ui/ui.js',
                 root + 'plugin/carousel.js',
                 root + 'plugin/customalert.js',

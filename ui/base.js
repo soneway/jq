@@ -1,4 +1,7 @@
-﻿//common.js
+﻿/*
+ * base.js
+ * 移动端基础js,包含pc端二维码,mask,a标签触摸等基础功能
+ */
 (function (window, $) {
 
     //文档元素

@@ -1,4 +1,7 @@
-﻿//carousel.js
+﻿/*
+ * carousel.js
+ * 焦点图js
+ */
 (function (window, $) {
 
     $.fn.carousel = function (options) {
