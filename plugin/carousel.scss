@@ -24,6 +24,11 @@ carousel
         display: block;
         float: left;
         overflow: hidden;
+
+        .vertical > &
+        {
+            float: none;
+        }
     }
 }
 

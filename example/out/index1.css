@@ -605,10 +605,14 @@ carousel
   perspective: 1000; }
 
 /*滚动容器*/
-.pi-carousel-wrap > * {
-  display: block;
-  float: left;
+.pi-carousel-wrap {
   overflow: hidden; }
+  .pi-carousel-wrap > * {
+    display: block;
+    float: left;
+    overflow: hidden; }
+    .vertical > .pi-carousel-wrap > * {
+      float: none; }
 
 /*title*/
 .pi-carousel-title {
@@ -953,10 +957,6 @@ a {
   #panelcarousel
 .carousel.vertical {
     height: 300px; }
-    #panelcarousel
-.carousel.vertical
-a {
-      width: 100%; }
 
 #img_car {
   width: 90%;
@@ -1226,6 +1226,3 @@ body可滚动页面样式
   /*避免页面不够高,挡不住隐藏页面*/ }
   .reflow .panel {
     height: 99999px; }
-
-.panel:not([data-role]) {
-  height: 999px; }
