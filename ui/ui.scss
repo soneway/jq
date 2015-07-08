@@ -29,7 +29,7 @@
 /*head类*/
 .head
 {
-    @extend %ph_pflt;
+    @extend %ph_palt;
     width: 100%;
     z-index: 1;
 
@@ -129,6 +129,7 @@
 /*头部*/
 #header
 {
+    @extend %ph_pflt;
     height: $head_height;
     line-height: $head_height;
 
