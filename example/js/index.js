@@ -83,7 +83,7 @@
         return function ($this, isInit) {
             if (isInit) {
 
-                $.jsonp('http://img.gd.sohu.com/js/jtool.js', function () {
+                $.jsonp('http://img.gd.sohu.com/static/v1/jtool.js', function () {
                     var page = 1,
                         perpage = 10;
 

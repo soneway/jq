@@ -68,7 +68,7 @@
         });
 
         //pc端二维码
-        $.isShowQrcode && !$.isMobi && $.jsonp('http://img.gd.sohu.com/js/qrcode.js', function () {
+        $.isShowQrcode && !$.isMobi && $.jsonp('http://img.gd.sohu.com/static/v1/qrcode.js', function () {
                 var $qrcode = $('#qrcode');
                 if ($qrcode.length === 0) {
                     $qrcode = $('<div id="qrcode"></div>');

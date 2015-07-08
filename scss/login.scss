@@ -39,7 +39,7 @@ login
             content: '';
             @extend %ph_palt;
             @extend %ph_full;
-            background: url(http://img.gd.sohu.com/images/mobi/icon_login.png);
+            background: url(http://img.gd.sohu.com/static/v1/images/icon_login.png);
             background-size: auto $height;
             border-radius: $height * 0.2;
         }

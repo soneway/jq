@@ -461,7 +461,6 @@ h3.center
         width: $h;
         height: $h;
         border-radius: $h;
-        background: #000;
         @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.3));
         position: relative;
 
@@ -470,14 +469,19 @@ h3.center
             content: '';
             @extend %ph_palt;
             @extend %ph_full;
-            background: url(http://img.gd.sohu.com/images/mobi/sohulogo.jpg);
+            background: url(http://img.gd.sohu.com/static/v1/images/sohulogo.jpg);
             background-size: cover;
             border-radius: $h;
         }
 
-        &.focus:after
+        &.focus
         {
-            opacity: 0.5;
+            background: #000;
+
+            &:after
+            {
+                opacity: 0.5;
+            }
         }
     }
 
