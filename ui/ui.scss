@@ -234,7 +234,7 @@
 /*导航*/
 #navbar
 {
-    @extend %ph_pflb;
+    @extend %ph_pflb; /*safari中,在滚动页面隐藏工具栏的情况下,点击屏幕下方bottom:约50px以内的范围内,都会触发显示工具栏操作,而导致点击失效,必须点第二次*/
     width: 100%;
     height: $navbar_height;
     z-index: 1;
