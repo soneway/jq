@@ -86,7 +86,7 @@
         );
 
         //pc端mouse转touch事件
-        !$.isMobi && $.jsonp('../plugin/desktouch.js');
+        !$.isMobi && $.jsonp('http://img.gd.sohu.com/static/v1/desktouch.js');
 
     });
 
