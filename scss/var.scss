@@ -1,32 +1,33 @@
-﻿/*
-var
-变量scss
-包含默认变量,常用函数,常用点位符(全是sass运算相关的东西)
-*/
+﻿//var
+//变量scss
+//包含默认变量,常用函数,常用点位符(全是sass运算相关的东西)
+//本文件中用//注释,可使生成文件中不包含注释信息
 
-/*默认变量*/
-/*字体*/
+//默认变量
+//字体
 $font-size: 14px !default;
 $color: #333 !default;
 $color_focus: #df2221 !default;
 
-/*布局*/
+//布局
 $head_height: 40px !default;
 $navbar_height: 50px !default;
 
-/*默认为1:纯色背景,2:渐变背景*/
+//默认为1:纯色背景,2:渐变背景
 $bg_type: 1 !default;
-/*导航条背景*/
+
+//导航条背景
 $head_bgcolor: rgba(255, 255, 255, 0.9) !default;
 $head_bg: #006c1a 0%, #04990e 100% !default;
-/*边框颜色*/
+
+//边框颜色
 $head_border-color: rgba(128, 128, 128, 0.5) !default;
 
 /*页面背景*/
 $panel_bgcolor: #fff !default;
 
-/*混入*/
-/*定位*/
+//混入
+//定位
 @mixin mx_plt($position: absolute, $left: 0, $top: 0) {
     position: $position;
     left: $left;
@@ -55,7 +56,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*transition*/
+//transition
 @mixin mx_transition($value) {
     -webkit-transition: $value;
     transition: $value;
@@ -74,34 +75,39 @@ $panel_bgcolor: #fff !default;
 }
 
 
+@mixin mx_transition-property($value) {
+    -webkit-transition-property: $value;
+    transition-property: $value;
+}
+
+
 @mixin mx_transition-transform($value...) {
     -webkit-transition: -webkit-transform $value;
     transition: transform $value;
 }
 
 
-/*transform*/
+//transform
 @mixin mx_transform($value) {
     -webkit-transform: $value;
     transform: $value;
 }
 
 
-/*transform-origin*/
 @mixin mx_transform-origin($value) {
     -webkit-transform-origin: $value;
     transform-origin: $value;
 }
 
 
-/*animation*/
+//animation
 @mixin mx_animation($value) {
     -webkit-animation: $value;
     animation: $value;
 }
 
 
-/*渐变背景*/
+//渐变背景
 @mixin mx_gradient($value...) {
     background-image: -webkit-linear-gradient($value); /*安卓4.0-4.4*/
     background-image: linear-gradient($value); /*css3标准*/
@@ -114,7 +120,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*backface-visibility*/
+//backface-visibility
 @mixin mx_backface-visibility($value) {
     /*防止动画过程闪烁*/
     -webkit-backface-visibility: $value;
@@ -122,42 +128,42 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*perspective*/
+//perspective
 @mixin mx_perspective($value) {
     -webkit-perspective: $value;
     perspective: $value;
 }
 
 
-/*盒子阴影*/
+//盒子阴影
 @mixin mx_box-shadow($value...) {
     -webkit-box-shadow: $value;
     box-shadow: $value;
 }
 
 
-/*user-select*/
+//user-select
 @mixin mx_user-select($value) {
     -webkit-user-select: $value;
     user-select: $value;
 }
 
 
-/*box-sizing*/
+//box-sizing
 @mixin mx_box-sizing($value) {
     -webkit-box-sizing: $value;
     box-sizing: $value;
 }
 
 
-/*行高与高度相同*/
+//行高与高度相同
 @mixin mx_line-height($value) {
     height: $value;
     line-height: $value;
 }
 
 
-/*1px边框*/
+//1px边框
 @mixin mx_ptborder($style: solid, $color: #ccc, $trbl: none) {
     position: relative;
 
@@ -187,15 +193,15 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*滤镜*/
+//滤镜
 @mixin mx_filter($value) {
     -webkit-filter: $value;
     filter: $value;
 }
 
 
-/*占位符*/
-/*滚动*/
+//占位符
+//滚动
 %ph_ofauto
 {
     overflow: auto;
@@ -203,7 +209,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*定位*/
+//定位
 %ph_palt
 {
     @include mx_plt;
@@ -252,7 +258,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*宽度高度100%*/
+//宽度高度100
 %ph_full
 {
     width: 100%;
@@ -260,7 +266,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*表格单元格*/
+//表格单元格
 %ph_td
 {
     display: table-cell;
@@ -269,7 +275,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*高度自动撑高*/
+//高度自动撑高
 %ph_hauto
 {
     height: auto;
@@ -277,21 +283,21 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*all动画*/
+//all动画
 %ph_transall
 {
     @include mx_transition(all 0.3s ease);
 }
 
 
-/*transform动画*/
+//transform动画
 %ph_transtransf
 {
     @include mx_transition-transform(0.3s ease);
 }
 
 
-/*visible*/
+//visible
 %ph_visible
 {
     visibility: visible;
@@ -299,7 +305,7 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*hidden*/
+//hidden
 %ph_hidden
 {
     visibility: hidden;
@@ -307,28 +313,28 @@ $panel_bgcolor: #fff !default;
 }
 
 
-/*border-box*/
+//border-box(IE5盒子模型)
 %ph_border-box
 {
     @include mx_box-sizing(border-box);
 }
 
 
-/*content-box*/
+//content-box
 %ph_content-box
 {
     @include mx_box-sizing(content-box);
 }
 
 
-/*1px边框*/
+//1px边框(全边框)
 %ph_ptborder
 {
     @include mx_ptborder;
 }
 
 
-/*垂直居中*/
+//垂直居中
 %ph_center
 {
     display: -webkit-box;
