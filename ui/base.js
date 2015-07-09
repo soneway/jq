@@ -12,14 +12,10 @@
         $body = $(document.body);
 
 
-    //去掉部分浏览器地址栏
+    //去掉部分浏览器地址栏(ucweb,qq有效)
     $body.addClass('very-high');
-    setTimeout(function () {
-        window.scrollTo(0, 1);
-        setTimeout(function () {
-            $body.removeClass('very-high');
-        }, 0);
-    }, 0);
+    window.scrollTo(0, 1);
+    $body.removeClass('very-high');
 
 
     /**
