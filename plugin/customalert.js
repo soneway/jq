@@ -103,4 +103,4 @@
         onHide: null
     };
 
-})(this, $);
+})(window, $);

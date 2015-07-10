@@ -9,7 +9,7 @@ swatchbook
     height: 200px;
     /*防止动画过程闪烁*/
     @include mx_backface-visibility(hidden);
-    @include mx_perspective(1000);
+    //@include mx_perspective(1000);
 
     & > div
     {

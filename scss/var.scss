@@ -100,6 +100,12 @@ $panel_bgcolor: #fff !default;
 }
 
 
+@mixin mx_transform-style($value) {
+    -webkit-transform-style: $value;
+    transform-style: $value;
+}
+
+
 //animation
 @mixin mx_animation($value) {
     -webkit-animation: $value;
@@ -344,4 +350,10 @@ $panel_bgcolor: #fff !default;
     /*display: box;
     box-align: center;
     box-pack: center;*/
+}
+
+
+%ph_preserve-3d
+{
+    @include mx_transform-style(preserve-3d);
 }

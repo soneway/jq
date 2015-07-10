@@ -917,4 +917,4 @@
     //添加到全局变量
     window.jq = window.$ = $;
 
-})(this);
+})(window);
