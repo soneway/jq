@@ -11,7 +11,7 @@ var root = '../';
 //任务对象
 var config = {
     css: {
-        src: ['css/index.scss','css/index1.scss'],
+        src: ['css/index.scss', 'css/index1.scss'],
         watch: ['css/**'],
         dest: dest
     },
@@ -60,27 +60,40 @@ gulp.task('css', function () {
 });
 
 
-//合并,压缩文件js
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-//var rename = require('gulp-rename');
+var browserify = require('gulp-browserify');
 gulp.task('js', function () {
     var js = config.js,
         src = js.src;
 
-    for (var p in src) {
-        //合并
-        var task = gulp.src(src[p])
-            .pipe(concat(p + '.js'))
-            .pipe(gulp.dest(js.dest));
-
-        //压缩
-        if (!debug) {
-            task.pipe(uglify())
-                .pipe(gulp.dest(js.dest));
-        }
-    }
+    gulp.src('js/index.js')
+        .pipe(browserify({
+            debug: true
+        }))
+        .pipe(gulp.dest(js.dest));
 });
+
+
+////合并,压缩文件js
+//var concat = require('gulp-concat');
+//var uglify = require('gulp-uglify');
+////var rename = require('gulp-rename');
+//gulp.task('js', function () {
+//    var js = config.js,
+//        src = js.src;
+//
+//    for (var p in src) {
+//        //合并
+//        var task = gulp.src(src[p])
+//            .pipe(concat(p + '.js'))
+//            .pipe(gulp.dest(js.dest));
+//
+//        //压缩
+//        if (!debug) {
+//            task.pipe(uglify())
+//                .pipe(gulp.dest(js.dest));
+//        }
+//    }
+//});
 
 
 //监听任务
