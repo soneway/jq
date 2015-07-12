@@ -3,19 +3,26 @@
         "transform": ["browserify-shim"]
     },
     "browser": {
-        "jq": "/static/v1/jq/jq.js",
-        "base": "/static/v1/jq/ui/base.js",
-        "ui": "/static/v1/jq/ui/ui.js",
-        "carousel": "/static/v1/jq/plugin/carousel.js",
-        "customalert": "/static/v1/jq/plugin/customalert.js",
-        "flip": "/static/v1/jq/plugin/flip.js",
-        "picpager": "/static/v1/jq/plugin/picpager.js",
-        "scratchcard": "/static/v1/jq/plugin/scratchcard.js",
-        "scroll": "/static/v1/jq/plugin/scroll.js",
-        "swatchbook": "/static/v1/jq/plugin/swatchbook.js",
-        "turntable": "/static/v1/jq/plugin/turntable.js"
+        "jq": "../../jq.js",
+        "base": "../../ui/base.js",
+        "ui": "../../ui/ui.js",
+        "carousel": "../../plugin/carousel.js",
+        "customalert": "../../plugin/customalert.js",
+        "flip": "../../plugin/flip.js",
+        "picpager": "../../plugin/picpager.js",
+        "scratchcard": "../../plugin/scratchcard.js",
+        "scroll": "../../plugin/scroll.js",
+        "swatchbook": "../../plugin/swatchbook.js",
+        "turntable": "../../plugin/turntable.js"
     },
     "browserify-shim": {
-        "base": {"depends": ["jq:$"]}
+        "jq": "$"
+    },
+    "dependencies": {
+        "request": "~2.12.0"
+    },
+    "devDependencies": {
+        "browserify": "~2.36.1",
+        "browserify-shim": "~3.0.0"
     }
 }

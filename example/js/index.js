@@ -1,17 +1,4 @@
 ﻿(function (window) {
-    var root = '';
-
-    var $ = require('/static/v1/jq/jq.js');
-    require([$], '../../ui/base.js');
-    require(root + 'ui/ui.js')($);
-    require(root + 'plugin/carousel.js')($);
-    require(root + 'plugin/customalert.js')($);
-    require(root + 'plugin/flip.js')($);
-    require(root + 'plugin/picpager.js')($);
-    require(root + 'plugin/scratchcard.js')($);
-    require(root + 'plugin/scroll.js')($);
-    require(root + 'plugin/swatchbook.js')($);
-    require(root + 'plugin/turntable.js')($);
 
     //文档jq对象
     var $doc = $(window.document),
