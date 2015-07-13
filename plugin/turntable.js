@@ -1,7 +1,7 @@
 ﻿/*
  * turntable.js
  * 转盘抽奖js
- * */
+ */
 (function (window, $) {
 
     $.fn.turntable = function (options) {

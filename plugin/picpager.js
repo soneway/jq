@@ -1,7 +1,7 @@
 ﻿/*
  * picpager.js
  * 相册js
- * */
+ */
 (function (window, $) {
 
     $.fn.picpager = function (options) {

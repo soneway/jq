@@ -1,7 +1,7 @@
 ﻿/*
  * scroll.js
  * 自定义滚动js
- * */
+ */
 (function (window, $) {
 
     $.fn.scroll = function (options) {

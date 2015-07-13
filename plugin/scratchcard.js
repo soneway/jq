@@ -1,7 +1,7 @@
 ﻿/*
  * scratchcard.js
  * 刮刮卡js
- * */
+ */
 (function (window, $) {
 
     $.fn.scratchcard = function (options) {
