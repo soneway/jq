@@ -901,16 +901,16 @@
 
     })();
 
+    //CommonJS
+    if (typeof exports === 'object') {
+        module.exports = $;
+        return;
+    }
     //AMD
     if (typeof define === 'function') {
         define(function () {
             return $;
         });
-        return;
-    }
-    //CommonJS
-    if (typeof exports === 'object') {
-        module.exports = $;
         return;
     }
 
