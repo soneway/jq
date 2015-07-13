@@ -23,37 +23,9 @@ var config = {
         //模块化js文件shim
         shim: {
             jq: {
-                path: '../jq.js', exports: '$'
-            },
-            base: {
-                path: '../ui/base.js', exports: null
-            },
-            ui: {
-                path: '../ui/ui.js', exports: null
-            },
-            carousel: {
-                path: '../plugin/carousel.js', exports: null
-            },
-            customalert: {
-                path: '../plugin/customalert.js', exports: null
-            },
-            flip: {
-                path: '../plugin/flip.js', exports: null
-            },
-            picpager: {
-                path: '../plugin/picpager.js', exports: null
-            },
-            scratchcard: {
-                path: '../plugin/scratchcard.js', exports: null
-            },
-            scroll: {
-                path: '../plugin/scroll.js', exports: null
-            },
-            swatchbook: {
-                path: '../plugin/swatchbook.js', exports: null
-            },
-            turntable: {
-                path: '../plugin/turntable.js', exports: null
+                path: '../jq.js',
+                //将$暴露到全局变量
+                exports: '$'
             }
         }
     }
