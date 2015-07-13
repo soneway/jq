@@ -1,5 +1,17 @@
 ﻿(function (window) {
 
+    var $ = require('jq');
+    require('base');
+    require('ui');
+    require('carousel');
+    require('customalert');
+    require('flip');
+    require('picpager');
+    require('scratchcard');
+    require('scroll');
+    require('swatchbook');
+    require('turntable');
+
     //文档jq对象
     var $doc = $(window.document),
     //全局变量

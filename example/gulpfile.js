@@ -1,39 +1,61 @@
-//npm install gulp gulp-jshint gulp-sass gulp-concat gulp-uglify gulp-rename gulp-minify-css --save-dev
+//npm install gulp gulp-sass gulp-minify-css gulp-browserify gulp-uglify --save-dev
 'use strict';
 
-//是否调试
-var debug = 1;
 //输出文件夹
-var dest = 'out';
-//根目录
-var root = '../';
-//var root = 'Y:/static/v1/jq';
-//任务对象
+var dest = './out';
+//配置对象
 var config = {
     css: {
-        src: ['css/index.scss', 'css/index1.scss'],
-        watch: ['css/**'],
-        dest: dest
+        //源文件
+        src: ['./css/*.scss'],
+        //监听文件
+        watch: ['./css/**'],
+        //输出文件夹
+        dest: dest,
+        //是否压缩
+        isPack: 1
     },
     js: {
-        src: {
-            index: [
-                root + 'jq.js',
-                root + 'ui/base.js',
-                root + 'ui/ui.js',
-                root + 'plugin/carousel.js',
-                root + 'plugin/customalert.js',
-                root + 'plugin/flip.js',
-                root + 'plugin/picpager.js',
-                root + 'plugin/scratchcard.js',
-                root + 'plugin/scroll.js',
-                root + 'plugin/swatchbook.js',
-                root + 'plugin/turntable.js',
-                'js/index.js'
-            ]
-        },
-        watch: ['js/**'],
-        dest: dest
+        src: ['./js/*.js'],
+        watch: ['./js/**'],
+        dest: dest,
+        isPack: 1,
+        //模块化js文件shim
+        shim: {
+            jq: {
+                path: '../jq.js', exports: '$'
+            },
+            base: {
+                path: '../ui/base.js', exports: null
+            },
+            ui: {
+                path: '../ui/ui.js', exports: null
+            },
+            carousel: {
+                path: '../plugin/carousel.js', exports: null
+            },
+            customalert: {
+                path: '../plugin/customalert.js', exports: null
+            },
+            flip: {
+                path: '../plugin/flip.js', exports: null
+            },
+            picpager: {
+                path: '../plugin/picpager.js', exports: null
+            },
+            scratchcard: {
+                path: '../plugin/scratchcard.js', exports: null
+            },
+            scroll: {
+                path: '../plugin/scroll.js', exports: null
+            },
+            swatchbook: {
+                path: '../plugin/swatchbook.js', exports: null
+            },
+            turntable: {
+                path: '../plugin/turntable.js', exports: null
+            }
+        }
     }
 };
 
@@ -47,51 +69,37 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 gulp.task('css', function () {
     var css = config.css;
+
     var task = gulp.src(css.src)
         //编译
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest(css.dest));
 
     //压缩
-    if (!debug) {
+    if (css.isPack) {
         task.pipe(minifyCss())
             .pipe(gulp.dest(css.dest));
     }
 });
 
 
-//var browserify = require('gulp-browserify');
-//gulp.task('js', function () {
-//    var js = config.js,
-//        src = js.src;
-//
-//    gulp.src('js/index.js')
-//        .pipe(browserify({
-//            debug: true
-//        }))
-//        .pipe(gulp.dest(js.dest));
-//});
-
-
-//合并,压缩文件js
-var concat = require('gulp-concat');
+//browserify编译合并,压缩文件js
+var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
-//var rename = require('gulp-rename');
 gulp.task('js', function () {
-    var js = config.js,
-        src = js.src;
+    var js = config.js;
 
-    for (var p in src) {
-        //合并
-        var task = gulp.src(src[p])
-            .pipe(concat(p + '.js'))
+    var task = gulp.src(js.src)
+        //编译合并
+        .pipe(browserify({
+            shim: js.shim
+        }))
+        .pipe(gulp.dest(js.dest));
+
+    //压缩
+    if (js.isPack) {
+        task.pipe(uglify())
             .pipe(gulp.dest(js.dest));
-
-        //压缩
-        if (!debug) {
-            task.pipe(uglify())
-                .pipe(gulp.dest(js.dest));
-        }
     }
 });
 
