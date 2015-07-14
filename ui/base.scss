@@ -2,9 +2,16 @@
 移动端基础样式
 包括样式重置,常用类等
 */
+
+//默认变量
+$font-size: 14px !default;
+$color: #333 !default;
+$color-focus: #df2221 !default;
+//面板背景
+$panel-bgcolor: #fff !default;
+
 //引入
 @import '../scss/var', '../scss/spinner';
-
 
 /*元素*/
 *:focus
@@ -23,7 +30,7 @@
 
 body
 {
-    background-color: $panel_bgcolor; /*加背景色可减缓页面闪烁*/
+    background-color: $panel-bgcolor; /*加背景色可减缓页面闪烁*/
     overflow-x: hidden;
     /*可继承*/
     color: $color;
@@ -66,7 +73,7 @@ a
 
 a.focus
 {
-    color: $color_focus;
+    color: $color-focus;
 }
 
 
@@ -230,7 +237,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 {
     @extend %ph_palt;
     @extend %ph_full;
-    background-color: $panel_bgcolor;
+    background-color: $panel-bgcolor;
     z-index: 5;
     cursor: pointer; /*防止点击事件绑定不到(ios8)*/
     @extend %ph_transall;
@@ -264,7 +271,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*二维码*/
 #qrcode
 {
-    @include mx_prt(fixed, 10px, $head_height + 10px);
+    @include mx_prt(fixed, 10px, 60px);
     width: 200px;
     height: 200px;
 }

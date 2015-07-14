@@ -1,30 +1,7 @@
 ﻿//var
-//变量scss
+//移动端变量scss
 //包含默认变量,常用函数,常用点位符(全是sass运算相关的东西)
 //本文件中用//注释,可使生成文件中不包含注释信息
-
-//默认变量
-//字体
-$font-size: 14px !default;
-$color: #333 !default;
-$color_focus: #df2221 !default;
-
-//布局
-$head_height: 40px !default;
-$navbar_height: 50px !default;
-
-//默认为1:纯色背景,2:渐变背景
-$bg_type: 1 !default;
-
-//导航条背景
-$head_bgcolor: rgba(255, 255, 255, 0.9) !default;
-$head_bg: #006c1a 0%, #04990e 100% !default;
-
-//边框颜色
-$head_border-color: rgba(128, 128, 128, 0.5) !default;
-
-/*页面背景*/
-$panel_bgcolor: #fff !default;
 
 //混入
 //定位

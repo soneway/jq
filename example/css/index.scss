@@ -1,5 +1,5 @@
 ﻿//变量
-//$bg_type: 2;
+//$bg-type: 2;
 //引入
 @import '../../ui/base';
 @import '../../ui/ui';
@@ -181,7 +181,7 @@ h3.center
     .info
     {
         @extend %ph_palt;
-        top: $head_height;
+        top: $head-height;
         width: 100%;
         background: rgba(0, 0, 0, 0.5);
         z-index: 1;
