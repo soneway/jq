@@ -1,0 +1,15 @@
+{
+    "browser": {
+        "jq"         : "../jq.js",
+        "base"       : "../ui/base.js",
+        "ui"         : "../ui/ui.js",
+        "carousel"   : "../plugin/carousel.js",
+        "customalert": "../plugin/customalert.js",
+        "flip"       : "../plugin/flip.js",
+        "picpager"   : "../plugin/picpager.js",
+        "scratchcard": "../plugin/scratchcard.js",
+        "scroll"     : "../plugin/scroll.js",
+        "swatchbook" : "../plugin/swatchbook.js",
+        "turntable"  : "../plugin/turntable.js"
+    }
+}

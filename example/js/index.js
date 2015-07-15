@@ -1,16 +1,16 @@
 ﻿(function (window) {
 
     var $ = require('jq');
-    require('../../ui/base.js');
-    require('../../ui/ui.js');
-    require('../../plugin/carousel.js');
-    require('../../plugin/customalert.js');
-    require('../../plugin/flip.js');
-    require('../../plugin/picpager.js');
-    require('../../plugin/scratchcard.js');
-    require('../../plugin/scroll.js');
-    require('../../plugin/swatchbook.js');
-    require('../../plugin/turntable.js');
+    require('base');
+    require('ui');
+    require('carousel');
+    require('customalert');
+    require('flip');
+    require('picpager');
+    require('scratchcard');
+    require('scroll');
+    require('swatchbook');
+    require('turntable');
 
     //文档jq对象
     var $doc = $(window.document),
