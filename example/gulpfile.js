@@ -24,7 +24,7 @@ var config = {
         shim: {
             jq: {
                 path: '../jq.js',
-                //将$暴露到全局变量
+                //闭包中module是undefined,js代码中将按照没有模块化的方式运行,从而使得成员变量正常添加到全局变量(var a = require('jq')时,a的值将是window.$)
                 exports: '$'
             }
         }
