@@ -30,7 +30,7 @@
      * 是否为移动端
      * @type {boolean}
      */
-    $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(navigator.userAgent);
+    $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(ua);
     /**
      * 是否为安卓
      * @type {string}
