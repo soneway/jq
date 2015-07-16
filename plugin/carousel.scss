@@ -37,9 +37,9 @@ carousel
 /*title*/
 .pi-carousel-title
 {
-    @include mx_plb;
+    @extend %ph_palb;
     width: 100%;
-    line-height: 1.1em;
+    line-height: 1.1;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     padding: 10px;
@@ -58,7 +58,7 @@ carousel
 /*pager*/
 .pi-carousel-pager
 {
-    @include mx_prb(absolute, 4px, 4px);
+    @include mx_prb($right: 4px, $bottom: 4px);
 
     span
     {

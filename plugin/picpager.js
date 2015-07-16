@@ -29,11 +29,13 @@
             //变量
             var $this = $(this),
                 me = this,
-                $pics, itemCount = imgData.length;
+                $pics, $wrap,
+                itemCount = imgData.length;
 
             //初始化函数
             function init() {
                 $this.addClass('pi-picpager').html('<div class="pi-picpager-wrap"><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div></div>');
+                $wrap = $this.find('.pi-picpager-wrap');
                 $pics = $this.find('.pi-picpager-pic');
 
                 //初始化事件
@@ -46,13 +48,12 @@
                     index = 0,
                     startX, startY,
                     swipSpan, isAnimating,
-                    duration = parseFloat($pics.css('transition-duration') || $pics.css('-webkit-transition-duration')) * 1000;
-
+                    duration = parseFloat($wrap.css('transition-duration') || $wrap.css('-webkit-transition-duration')) * 1000;
 
                 //移动到函数
                 function slide(direction) {
                     //加上动画
-                    $pics.removeClass('notrans');
+                    $wrap.removeClass('notrans');
 
                     //判断滚动
                     switch (direction) {
@@ -64,18 +65,13 @@
                             //动画
                             isAnimating = true;
                             var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
-                            $pics.css({
-                                '-webkit-transform': transform,
-                                'transform': transform
-                            });
+                            translate($wrap, transform);
 
                             //复位操作,更新图片
                             setTimeout(function () {
+                                translate($wrap.addClass('notrans'), 'translate3d(0,0,0)');
                                 $pics.each(function (i) {
-                                    loadImg($(this).addClass('notrans').css({
-                                        '-webkit-transform': 'translate3d(0,0,0)',
-                                        'transform': 'translate3d(0,0,0)'
-                                    }), index + i - 1);
+                                    loadImg($(this), index + i - 1);
                                 });
                                 isAnimating = false;
                             }, duration + 100);//加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
@@ -83,18 +79,21 @@
                         }
                         default:
                         {
-                            $pics.css({
-                                '-webkit-transform': 'translate3d(0,0,0)',
-                                'transform': 'translate3d(0,0,0)'
-                            });
+                            translate($wrap, 'translate3d(0,0,0)');
                         }
                     }
 
                     //滚动回调函数
                     typeof slideCallback === 'function' && slideCallback(index, direction);
-
                 }
 
+                //移动函数
+                function translate($this, val) {
+                    $this.css({
+                        '-webkit-transform': val,
+                        'transform': val
+                    });
+                }
 
                 //加载图片函数
                 function loadImg($this, i) {
@@ -157,7 +156,7 @@
                         //重置swipSpan
                         swipSpan = 0;
                         //取消动画
-                        $pics.addClass('notrans');
+                        $wrap.addClass('notrans');
                     }
                 });
 
@@ -184,10 +183,7 @@
                             }
 
                             var transform = 'translate3d(' + (swipSpan = swipSpanX) + 'px,0,0)';
-                            $pics.css({
-                                '-webkit-transform': transform,
-                                'transform': transform
-                            });
+                            translate($wrap, transform);
                         }
                     }
                     else {
@@ -197,7 +193,7 @@
                 });
 
                 //触摸结束事件
-                $this.on('touchend', function (evt) {
+                $this.on('touchend', function () {
                     if (!isAnimating) {
                         var direction;
                         //向右

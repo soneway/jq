@@ -13,6 +13,7 @@
 @import '../../scss/share';
 @import '../../scss/login';
 
+
 /*其他*/
 $border-color: rgba(0, 0, 0, 0.1);
 input, select, textarea
@@ -122,7 +123,6 @@ textarea
 
 h3.center
 {
-    line-height: 30px;
     position: relative;
     margin-top: 10px;
 
@@ -150,6 +150,12 @@ h3.center
         a
         {
             height: 300px;
+            position: relative;
+
+            p
+            {
+                @extend %ph_full;
+            }
         }
 
         &.vertical
@@ -317,7 +323,7 @@ h3.center
     {
         display: inline-block;
         font-size: 45px;
-        line-height: 45px;
+        line-height: 1;
         width: 45px;
         margin: 10px auto;
         background: rgba(0, 0, 0, 0.1);
@@ -398,17 +404,6 @@ h3.center
         }
 
 
-        #share_alert
-        {
-            @include mx_plt($left: 50%, $top: 130px);
-            width: 300px;
-            margin-left: -150px;
-            background: rgba(0, 0, 0, 0.5);
-            line-height: 36px;
-            text-align: center;
-        }
-
-
         #share_list
         {
             width: $w + 5%;
@@ -476,7 +471,7 @@ h3.center
     {
         font-size: 20px;
         vertical-align: middle;
-        line-height: 32px;
+        //line-height: 32px;
     }
 
     .other_login

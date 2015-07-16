@@ -5,6 +5,7 @@ picpager
 .pi-picpager
 {
     position: relative;
+    overflow: hidden;
     @include mx_backface-visibility(hidden);
     //@include mx_perspective(1000);
 }
@@ -14,7 +15,7 @@ picpager
 {
     @extend %ph_palt;
     @extend %ph_full;
-    overflow: hidden;
+    @extend %ph_transtransf;
 }
 
 
@@ -22,21 +23,10 @@ picpager
 {
     @extend %ph_palt;
     @extend %ph_full;
+    @extend .spinner;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
-    @extend %ph_transall;
-    opacity: 1;
-
-    &.notrans
-    {
-        @include mx_transition(none !important);
-    }
-
-    &.unvisible
-    {
-        opacity: 0;
-    }
 
     &:nth-of-type(1)
     {

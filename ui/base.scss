@@ -6,6 +6,7 @@
 //默认变量
 $font-size: 14px !default;
 $color: #333 !default;
+$line-height: 1.5 !default;
 $color-focus: #df2221 !default;
 //面板背景
 $panel-bgcolor: #fff !default;
@@ -34,7 +35,7 @@ body
     overflow-x: hidden;
     /*可继承*/
     color: $color;
-    line-height: 1.5em;
+    line-height: $line-height;
     font-size: $font-size;
     -webkit-text-size-adjust: none;
     @include mx_user-select(none); /*禁止选中文本*/
@@ -249,7 +250,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
         visibility: hidden;
         background-color: transparent;
 
-        & > i, &:after
+        &:before, &:after
         {
             visibility: hidden;
         }
@@ -263,7 +264,9 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 
     &:after
     {
-        content: '加载中...';
+        display: block;
+        padding-top: 80px;
+        content: '拼命加载...';
     }
 }
 
@@ -283,10 +286,11 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     @extend %ph_pflt;
     @extend %ph_full;
     z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     visibility: hidden;
     opacity: 0;
     @extend %ph_center;
+    @include mx_spinner($dc: #fff);
 
     &.visible
     {
