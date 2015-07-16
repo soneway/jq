@@ -212,7 +212,9 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
     })();
 
 })(window);
-},{"base":12,"carousel":4,"customalert":5,"flip":6,"jq":"hOadq2","picpager":7,"scratchcard":8,"scroll":9,"swatchbook":10,"turntable":11,"ui":13}],"hOadq2":[function(require,module,exports){
+},{"base":12,"carousel":4,"customalert":5,"flip":6,"jq":"NPuu+f","picpager":7,"scratchcard":8,"scroll":9,"swatchbook":10,"turntable":11,"ui":13}],"jq":[function(require,module,exports){
+module.exports=require('NPuu+f');
+},{}],"NPuu+f":[function(require,module,exports){
 (function (global){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 //jq.js
@@ -1140,8 +1142,6 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"jq":[function(require,module,exports){
-module.exports=require('hOadq2');
 },{}],4:[function(require,module,exports){
 /*
  * carousel.js
@@ -1814,6 +1814,8 @@ module.exports=require('hOadq2');
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
+                    //取消动画
+                    $wrap.addClass('notrans');
                     if (!isAnimating) {
                         var touch = evt.targetTouches[0];
                         //记录触摸开始位置
@@ -1821,14 +1823,11 @@ module.exports=require('hOadq2');
                         startY = touch.pageY;
                         //重置swipSpan
                         swipSpan = 0;
-                        //取消动画
-                        $wrap.addClass('notrans');
                     }
                 });
 
                 //触摸移动事件
                 $this.on('touchmove', function (evt) {
-
                     if (!isAnimating) {
                         var touch = evt.targetTouches[0],
                             swipSpanX = touch.pageX - startX,
