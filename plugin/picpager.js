@@ -148,16 +148,14 @@
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
+                    var touch = evt.targetTouches[0];
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                    //重置swipSpan
+                    swipSpan = 0;
                     //取消动画
                     $wrap.addClass('notrans');
-                    if (!isAnimating) {
-                        var touch = evt.targetTouches[0];
-                        //记录触摸开始位置
-                        startX = touch.pageX;
-                        startY = touch.pageY;
-                        //重置swipSpan
-                        swipSpan = 0;
-                    }
                 });
 
                 //触摸移动事件
