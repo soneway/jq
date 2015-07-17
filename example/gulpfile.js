@@ -119,7 +119,9 @@ gulp.task('html', function () {
         if (conf.isPack) {
             task.pipe(htmlmin({
                 collapseWhitespace: true,
-                removeComments: true
+                removeComments: true,
+                minifyJS: true,
+                minifyCSS: true
             }))
                 .pipe(gulp.dest(conf.dest));
         }
