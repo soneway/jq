@@ -19,7 +19,7 @@ var config = {
         src: ['./js/*.js'],
         watch: ['./js/**'],
         dest: dest,
-        isPack: 0,
+        isPack: 1,
         //模块化js文件shim
         shim: {
             jq: {
