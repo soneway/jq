@@ -138,6 +138,33 @@ h3.center
 }
 
 
+/*panelui*/
+#panelui
+{
+    h3
+    {
+        text-indent: 10px;
+    }
+
+    .list > div
+    {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        border: 1px solid #eee;
+        margin: 5px;
+
+        &:after
+        {
+            content: attr(class);
+            display: block;
+            @extend .center;
+        }
+    }
+}
+
+
 /*焦点图*/
 #panelcarousel
 {
@@ -306,28 +333,6 @@ h3.center
             {
                 opacity: 0.85;
             }
-        }
-    }
-}
-
-
-/*loading样式*/
-#panelloading
-{
-    & > div
-    {
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        position: relative;
-        border: 1px solid #eee;
-        margin: 5px;
-
-        &:after
-        {
-            content: attr(class);
-            display: block;
-            @extend .center;
         }
     }
 }
