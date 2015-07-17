@@ -3,6 +3,8 @@
 
 //输出文件夹
 var out = './out/';
+//是否压缩
+var isPack = 1;
 //配置对象
 var config = {
     css: {
@@ -13,13 +15,13 @@ var config = {
         //输出文件夹
         dest: out + 'css',
         //是否压缩
-        isPack: 1
+        isPack: 0 || isPack
     },
     js: {
         src: ['./js/*.js'],
         watch: ['./js/**'],
         dest: out + 'js',
-        isPack: 1,
+        isPack: 0 || isPack,
         //模块化js文件shim
         shim: {
             jq: {
@@ -35,10 +37,10 @@ var config = {
         dest: out + 'images'
     },
     html: {
-        src: ['*.html'],
-        watch: ['*.html'],
+        src: ['./*.html'],
+        watch: ['./*.html'],
         dest: out,
-        isPack: 0
+        isPack: 0 || isPack
     }
 };
 
@@ -110,12 +112,17 @@ var htmlmin = require('gulp-htmlmin');
 gulp.task('html', function () {
     var conf = config.html;
 
-    if (conf && conf.isPack) {
-        gulp.src(conf.src)
-            .pipe(htmlmin({
-                collapseWhitespace: true
-            }))
+    if (conf) {
+        var task = gulp.src(conf.src)
             .pipe(gulp.dest(conf.dest));
+
+        if (conf.isPack) {
+            task.pipe(htmlmin({
+                collapseWhitespace: true,
+                removeComments: true
+            }))
+                .pipe(gulp.dest(conf.dest));
+        }
     }
 });
 
