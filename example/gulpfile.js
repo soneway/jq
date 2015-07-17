@@ -13,7 +13,7 @@ var config = {
         //输出文件夹
         dest: dest,
         //是否压缩
-        isPack: 1
+        isPack: 0
     },
     js: {
         src: ['./js/*.js'],
