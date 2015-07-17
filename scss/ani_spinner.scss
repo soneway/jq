@@ -25,7 +25,7 @@ spinner动画类
         margin-left: -$dw / 2;
         margin-top: -$dw / 2;
         border-radius: $dw;
-        /*如.spinner元素中还有transform,:before内容将挡不住*/
+        /*如.ani_spinner元素中有transform,:before内容将不能被挡住*/
         z-index: -1;
         /*8个圆点用阴影生成*/
         @include mx_box-shadow(0 (-$neg) 0 rgba($dc, 1),
