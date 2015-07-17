@@ -163,18 +163,20 @@ h3.center
             height: 300px;
         }
     }
-}
 
-
-#img_car
-{
-    width: 90%;
-    min-width: 300px;
-    margin: 0 auto;
-
-    img
+    @at-root
     {
-        width: 100%;
+        #img_car
+        {
+            width: 90%;
+            min-width: 300px;
+            margin: 0 auto;
+
+            img
+            {
+                width: 100%;
+            }
+        }
     }
 }
 
@@ -254,6 +256,83 @@ h3.center
 }
 
 
+/*刮刮卡*/
+#panelscratchcard
+{
+    height: 100%;
+
+    .scratchcard
+    {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+/*转盘抽奖*/
+#panelturntable
+{
+    @at-root
+    {
+        #turntable
+        {
+            width: 320px;
+            height: 320px;
+            margin: 5px auto;
+            background-image: url(../images/bg.png);
+
+            .pi-turntable-pointer
+            {
+                background-image: url(../images/pointer.png);
+            }
+        }
+
+
+        #turntable_start
+        {
+            $w: 68px;
+            $h: 66px;
+
+            @include mx_plt($left: 50%, $top: 50%);
+            width: $w;
+            height: $h;
+            margin-left: -$w / 2;
+            margin-top: -$h / 2;
+            background: url(../images/start.png) center center;
+            background-size: cover;
+            z-index: 1;
+
+            &.focus
+            {
+                opacity: 0.85;
+            }
+        }
+    }
+}
+
+
+/*loading样式*/
+#panelloading
+{
+    & > div
+    {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        border: 1px solid #eee;
+        margin: 5px;
+
+        &:after
+        {
+            content: attr(class);
+            display: block;
+            @extend .center;
+        }
+    }
+}
+
+
 /*扇形特效*/
 #panelswatchbook
 {
@@ -327,61 +406,6 @@ h3.center
         width: 45px;
         margin: 10px auto;
         background: rgba(0, 0, 0, 0.1);
-    }
-}
-
-
-/*刮刮卡*/
-#panelscratchcard
-{
-    height: 100%;
-
-    .scratchcard
-    {
-        width: 100%;
-        height: 100%;
-    }
-}
-
-
-/*转盘抽奖*/
-#panelturntable
-{
-    @at-root
-    {
-        #turntable
-        {
-            width: 320px;
-            height: 320px;
-            margin: 5px auto;
-            background-image: url(../images/bg.png);
-
-            .pi-turntable-pointer
-            {
-                background-image: url(../images/pointer.png);
-            }
-        }
-
-
-        #turntable_start
-        {
-            $w: 68px;
-            $h: 66px;
-
-            @include mx_plt($left: 50%, $top: 50%);
-            width: $w;
-            height: $h;
-            margin-left: -$w / 2;
-            margin-top: -$h / 2;
-            background: url(../images/start.png) center center;
-            background-size: cover;
-            z-index: 1;
-
-            &.focus
-            {
-                opacity: 0.85;
-            }
-        }
     }
 }
 

@@ -2,6 +2,10 @@
 picpager
 相册样式
 */
+//引入
+@import '../scss/ani_loading';
+
+
 .pi-picpager
 {
     position: relative;
@@ -23,7 +27,7 @@ picpager
 {
     @extend %ph_palt;
     @extend %ph_full;
-    @extend .spinner;
+    @extend .ani_loading;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;

@@ -12,7 +12,7 @@ $color-focus: #df2221 !default;
 $panel-bgcolor: #fff !default;
 
 //引入
-@import '../scss/var', '../scss/spinner';
+@import '../scss/var', '../scss/ani_spinner';
 
 /*元素*/
 *:focus
@@ -290,7 +290,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     visibility: hidden;
     opacity: 0;
     @extend %ph_center;
-    @include mx_spinner($dc: #fff);
+    @include ani_spinner($dc: #fff);
 
     &.visible
     {

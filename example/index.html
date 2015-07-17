@@ -18,7 +18,7 @@
     <div id="mainbox" class="transform">
 
         <!--loading-->
-        <div id="loading" class="btn-offsidebox spinner">
+        <div id="loading" class="btn-offsidebox ani_spinner">
         </div>
         <!--loading end-->
 
@@ -195,6 +195,28 @@
         </div>
         <!--自定义滚动 end-->
 
+        <!--刮刮卡-->
+        <div id="panelscratchcard" data-role="root" class="panel" title="$.fn.scratchcard">
+            <div class="scratchcard"></div>
+        </div>
+        <!--刮刮卡 end-->
+
+        <!--转盘抽奖-->
+        <div id="panelturntable" data-role="root" class="panel" title="$.fn.turntable">
+            <p class="info">turntable.js是一个简单的转盘抽奖特效</p>
+            <div id="turntable">
+                <a id="turntable_start"></a>
+            </div>
+        </div>
+        <!--转盘抽奖 end-->
+
+        <!--loading样式-->
+        <div id="panelloading" data-role="root" class="panel" title="loading样式">
+            <div class="ani_spinner"></div>
+            <div class="ani_loading"></div>
+        </div>
+        <!--loading样式 end-->
+
         <!--扇形特效-->
         <div id="panelswatchbook" data-role="root" class="panel" title="$.fn.swatchbook">
             <div class="swatchbook">
@@ -253,21 +275,6 @@
             </div>
         </div>
         <!--扇形特效 end-->
-
-        <!--刮刮卡-->
-        <div id="panelscratchcard" data-role="root" class="panel" title="$.fn.scratchcard">
-            <div class="scratchcard"></div>
-        </div>
-        <!--刮刮卡 end-->
-
-        <!--转盘抽奖-->
-        <div id="panelturntable" data-role="root" class="panel" title="$.fn.turntable">
-            <p class="info">turntable.js是一个简单的转盘抽奖特效</p>
-            <div id="turntable">
-                <a id="turntable_start"></a>
-            </div>
-        </div>
-        <!--转盘抽奖 end-->
 
         <!--一级面板 end-->
 
@@ -329,9 +336,10 @@
                     <a href="#panelflip">3d旋转切换</a>
                     <a href="#panelpicpager">相册功能</a>
                     <a href="#panelscroll">自定义滚动</a>
-                    <a href="#panelswatchbook">扇形特效</a>
                     <a href="#panelscratchcard">刮刮卡</a>
                     <a href="#panelturntable">转盘抽奖</a>
+                    <a href="#panelloading">loading样式</a>
+                    <a href="#panelswatchbook">扇形特效</a>
                 </div>
             </div>
         </nav>

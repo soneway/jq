@@ -51,7 +51,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a class="spinner" style="background: url(images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
+                        html += '<a class="ani_loading" style="background: url(images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
                     }
 
                     $(this).html(html).carousel({
@@ -78,7 +78,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a><p class="spinner" style="background: url(images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
+                        html += '<a><p class="ani_loading" style="background: url(images/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
                     }
 
                     $(this).html(html).flip({
@@ -212,9 +212,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
     })();
 
 })(window);
-},{"base":12,"carousel":4,"customalert":5,"flip":6,"jq":"NPuu+f","picpager":7,"scratchcard":8,"scroll":9,"swatchbook":10,"turntable":11,"ui":13}],"jq":[function(require,module,exports){
-module.exports=require('NPuu+f');
-},{}],"NPuu+f":[function(require,module,exports){
+},{"base":12,"carousel":4,"customalert":5,"flip":6,"jq":"hOadq2","picpager":7,"scratchcard":8,"scroll":9,"swatchbook":10,"turntable":11,"ui":13}],"hOadq2":[function(require,module,exports){
 (function (global){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 //jq.js
@@ -1142,6 +1140,8 @@ module.exports=require('NPuu+f');
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],"jq":[function(require,module,exports){
+module.exports=require('hOadq2');
 },{}],4:[function(require,module,exports){
 /*
  * carousel.js
