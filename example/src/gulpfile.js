@@ -1,10 +1,10 @@
-//npm install gulp gulp-sass gulp-minify-css gulp-browserify gulp-uglify gulp-imagemin imagemin-pngquant gulp-htmlmin --save-dev
+//npm install gulp gulp-sass gulp-minify-css gulp-browserify gulp-uglify gulp-imagemin imagemin-pngquant gulp-htmlmin gulp-base64 --save-dev
 'use strict';
 
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 0;
+var isPack = 1;
 //配置对象
 var config = {
     img: {
@@ -21,10 +21,6 @@ var config = {
         dest: out + 'css',
         //是否压缩
         isPack: undefined
-    },
-    base64: {
-        //是否base64编码
-        isPack: 1
     },
     js: {
         src: ['./js/*.js'],
@@ -74,7 +70,8 @@ gulp.task('img', function () {
 //编译sass,压缩css
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
-gulp.task('css', function (cb) {
+var base64 = require('gulp-base64');
+gulp.task('css', function () {
     var conf = config.css;
 
     var task = gulp.src(conf.src)
@@ -85,25 +82,10 @@ gulp.task('css', function (cb) {
     //压缩
     if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(minifyCss())
-            .pipe(gulp.dest(conf.dest));
-    }
-    cb();
-});
-
-//base64任务
-//base64编码(对已编译的css中url文件base64编码,依赖css,img任务)
-var base64 = require('gulp-base64');
-gulp.task('base64', ['css'], function () {
-    var conf = config.base64,
-        cssDest = config.css.dest;
-
-    //base64编码
-    if (conf && conf.isPack === undefined ? isPack : conf.isPack) {
-        gulp.src([cssDest + '/*.css'])
             .pipe(base64({
-                maxImageSize: 10 * 1024 //小于10KB的文件就编码
+                maxImageSize: 10 * 1024 //小于该设定K数的文件就编码
             }))
-            .pipe(gulp.dest(cssDest));
+            .pipe(gulp.dest(conf.dest));
     }
 });
 
@@ -156,12 +138,12 @@ gulp.task('html', function () {
 //监听任务
 gulp.task('watch', function () {
     //监听文件变化
-    gulp.watch(config.css.watch, ['css', 'base64']);
+    gulp.watch(config.css.watch, ['css']);
     gulp.watch(config.js.watch, ['js']);
     gulp.watch(config.img.watch, ['img']);
     gulp.watch(config.html.watch, ['html']);
 });
 
 
-//默认任务(img任务不依赖别的任务且耗时,所以放在第1,base64依赖img和css任务,所以放在靠后)
-gulp.task('default', ['watch', 'img', 'css', 'js', 'html', 'base64']);
+//默认任务
+gulp.task('default', ['watch', 'img', 'css', 'js', 'html']);
