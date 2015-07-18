@@ -62,9 +62,6 @@
     //文档加载完成
     $(function () {
 
-        //添加class
-        $body.addClass('loaded');
-
         //a标签touch
         $doc.on('touchstart', 'a', function () {
             $(this).addClass('focus');
@@ -94,6 +91,13 @@
         //pc端mouse转touch事件
         !$.isMobi && $.jsonp('http://img.gd.sohu.com/static/v1/desktouch.js');
 
+    });
+
+
+    //window.onload
+    $(window).on('load', function () {
+        //添加class
+        $body.addClass('loaded');
     });
 
 })(window, $);

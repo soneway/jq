@@ -4,7 +4,7 @@
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 1;
+var isPack = 0;
 //配置对象
 var config = {
     css: {
@@ -15,6 +15,10 @@ var config = {
         //输出文件夹
         dest: out + 'css',
         //是否压缩
+        isPack: undefined
+    },
+    base64: {
+        //是否base64编码
         isPack: undefined
     },
     js: {
@@ -44,11 +48,10 @@ var config = {
     }
 };
 
-
-//引入gulp
 var gulp = require('gulp');
 
 
+//css任务
 //编译sass,压缩css
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
@@ -67,7 +70,25 @@ gulp.task('css', function () {
     }
 });
 
+//base64任务
+//base64编码(对已编译的css中url文件base64编码)
+var base64 = require('gulp-base64');
+gulp.task('base64', function () {
+    var conf = config.base64,
+        cssDest = config.css.dest;
 
+    //base64编码
+    if (conf && conf.isPack === undefined ? isPack : conf.isPack) {
+        gulp.src([cssDest + '/*.css'])
+            .pipe(base64({
+                maxImageSize: 8 * 1024 //小于8KB的文件就编码
+            }))
+            .pipe(gulp.dest(cssDest));
+    }
+});
+
+
+//js任务
 //browserify编译合并,压缩文件js
 var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
@@ -89,7 +110,8 @@ gulp.task('js', function () {
 });
 
 
-//images压缩
+//img任务
+//图片压缩
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 gulp.task('img', function () {
@@ -107,6 +129,7 @@ gulp.task('img', function () {
 });
 
 
+//html任务
 //html压缩
 var htmlmin = require('gulp-htmlmin');
 gulp.task('html', function () {
@@ -132,12 +155,12 @@ gulp.task('html', function () {
 //监听任务
 gulp.task('watch', function () {
     //监听文件变化
-    gulp.watch(config.css.watch, ['css']);
+    gulp.watch(config.css.watch, ['css', 'base64']);
     gulp.watch(config.js.watch, ['js']);
     gulp.watch(config.img.watch, ['img']);
     gulp.watch(config.html.watch, ['html']);
 });
 
 
-//默认任务
-gulp.task('default', ['watch', 'css', 'js', 'img', 'html']);
+//默认任务(img任务不依赖别的任务且耗时,所以放在第1,base64依赖img和css任务,所以放在靠后)
+gulp.task('default', ['watch', 'img', 'css', 'js', 'html', 'base64']);
