@@ -4,7 +4,7 @@
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 1;
+var isPack = 0;
 //配置对象
 var config = {
     img: {
@@ -24,7 +24,7 @@ var config = {
     },
     base64: {
         //是否base64编码
-        isPack: undefined
+        isPack: 1
     },
     js: {
         src: ['./js/*.js'],
@@ -74,7 +74,7 @@ gulp.task('img', function () {
 //编译sass,压缩css
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
-gulp.task('css', function () {
+gulp.task('css', function (cb) {
     var conf = config.css;
 
     var task = gulp.src(conf.src)
@@ -87,12 +87,13 @@ gulp.task('css', function () {
         task.pipe(minifyCss())
             .pipe(gulp.dest(conf.dest));
     }
+    cb();
 });
 
 //base64任务
 //base64编码(对已编译的css中url文件base64编码,依赖css,img任务)
 var base64 = require('gulp-base64');
-gulp.task('base64', ['css', 'img'], function () {
+gulp.task('base64', ['css'], function () {
     var conf = config.base64,
         cssDest = config.css.dest;
 
