@@ -263,7 +263,7 @@ h3.center
 
         div
         {
-            background: url(../images/1.jpg);
+            background: url(../img/1.jpg);
             background-size: auto 455px;
             @include mx_transition-duration(0.4s);
         }
@@ -306,11 +306,11 @@ h3.center
             width: 320px;
             height: 320px;
             margin: 5px auto;
-            background-image: url(../images/bg.png);
+            background-image: url(../img/bg.png);
 
             .pi-turntable-pointer
             {
-                background-image: url(../images/pointer.png);
+                background-image: url(../img/pointer.png);
             }
         }
 
@@ -325,7 +325,7 @@ h3.center
             height: $h;
             margin-left: -$w / 2;
             margin-top: -$h / 2;
-            background: url(../images/start.png) center center;
+            background: url(../img/start.png) center center;
             background-size: cover;
             z-index: 1;
 
