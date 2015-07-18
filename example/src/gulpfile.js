@@ -15,13 +15,13 @@ var config = {
         //输出文件夹
         dest: out + 'css',
         //是否压缩
-        isPack: 0 || isPack
+        isPack: undefined
     },
     js: {
         src: ['./js/*.js'],
         watch: ['./js/**'],
         dest: out + 'js',
-        isPack: 0 || isPack,
+        isPack: undefined,
         //模块化js文件shim
         shim: {
             jq: {
@@ -40,7 +40,7 @@ var config = {
         src: ['./*.html'],
         watch: ['./*.html'],
         dest: out,
-        isPack: 0 || isPack
+        isPack: undefined
     }
 };
 
@@ -61,7 +61,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest(conf.dest));
 
     //压缩
-    if (conf.isPack) {
+    if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(minifyCss())
             .pipe(gulp.dest(conf.dest));
     }
@@ -82,7 +82,7 @@ gulp.task('js', function () {
         .pipe(gulp.dest(conf.dest));
 
     //压缩
-    if (conf.isPack) {
+    if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(uglify())
             .pipe(gulp.dest(conf.dest));
     }
@@ -116,7 +116,7 @@ gulp.task('html', function () {
         var task = gulp.src(conf.src)
             .pipe(gulp.dest(conf.dest));
 
-        if (conf.isPack) {
+        if (conf.isPack === undefined ? isPack : conf.isPack) {
             task.pipe(htmlmin({
                 collapseWhitespace: true,
                 removeComments: true,
