@@ -4,9 +4,14 @@
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 0;
+var isPack = 1;
 //配置对象
 var config = {
+    img: {
+        src: ['./img/**'],
+        watch: ['./img/**'],
+        dest: out + 'img'
+    },
     css: {
         //源文件
         src: ['./css/*.scss'],
@@ -35,11 +40,6 @@ var config = {
             }
         }
     },
-    img: {
-        src: ['./img/**'],
-        watch: ['./img/**'],
-        dest: out + 'img'
-    },
     html: {
         src: ['./*.html'],
         watch: ['./*.html'],
@@ -49,6 +49,25 @@ var config = {
 };
 
 var gulp = require('gulp');
+
+
+//img任务
+//图片压缩
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
+gulp.task('img', function () {
+    var conf = config.img;
+
+    if (conf) {
+        gulp.src(conf.src)
+            .pipe(imagemin({
+                progressive: true,
+                svgoPlugins: [{removeViewBox: false}],
+                use: [pngquant()]
+            }))
+            .pipe(gulp.dest(conf.dest));
+    }
+});
 
 
 //css任务
@@ -71,9 +90,9 @@ gulp.task('css', function () {
 });
 
 //base64任务
-//base64编码(对已编译的css中url文件base64编码)
+//base64编码(对已编译的css中url文件base64编码,依赖css,img任务)
 var base64 = require('gulp-base64');
-gulp.task('base64', function () {
+gulp.task('base64', ['css', 'img'], function () {
     var conf = config.base64,
         cssDest = config.css.dest;
 
@@ -81,7 +100,7 @@ gulp.task('base64', function () {
     if (conf && conf.isPack === undefined ? isPack : conf.isPack) {
         gulp.src([cssDest + '/*.css'])
             .pipe(base64({
-                maxImageSize: 8 * 1024 //小于8KB的文件就编码
+                maxImageSize: 10 * 1024 //小于10KB的文件就编码
             }))
             .pipe(gulp.dest(cssDest));
     }
@@ -105,25 +124,6 @@ gulp.task('js', function () {
     //压缩
     if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(uglify())
-            .pipe(gulp.dest(conf.dest));
-    }
-});
-
-
-//img任务
-//图片压缩
-var imagemin = require('gulp-imagemin');
-var pngquant = require('imagemin-pngquant');
-gulp.task('img', function () {
-    var conf = config.img;
-
-    if (conf) {
-        gulp.src(conf.src)
-            .pipe(imagemin({
-                progressive: true,
-                svgoPlugins: [{removeViewBox: false}],
-                use: [pngquant()]
-            }))
             .pipe(gulp.dest(conf.dest));
     }
 });
