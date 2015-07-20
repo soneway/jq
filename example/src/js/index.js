@@ -50,7 +50,7 @@
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a class="ani_loading" style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
+                        html += '<a style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
                     }
 
                     $(this).html(html).carousel({
@@ -77,7 +77,7 @@
                         html = '';
 
                     for (var i = 0; i < len; i++) {
-                        html += '<a><p class="ani_loading" style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
+                        html += '<a><p style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
                     }
 
                     $(this).html(html).flip({

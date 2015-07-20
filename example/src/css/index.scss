@@ -178,6 +178,7 @@ h3.center
         {
             height: 300px;
             position: relative;
+            @extend .ani_loading;
 
             p
             {
@@ -244,6 +245,7 @@ h3.center
         p
         {
             @extend %ph_full;
+            @extend .ani_loading;
         }
     }
 }
