@@ -244,6 +244,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     @extend %ph_transall;
     //@include mx_transition(background-color 0.3s ease);
     @extend %ph_center;
+    @extend .ani_spinner;
 
     .loaded &
     {

@@ -103,6 +103,8 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
 /*mainbox*/
 #mainbox
 {
+    @extend .transform;
+
     .onsidebox &
     {
         @include mx_transform(translate3d(-50%, 0, 0));
@@ -119,6 +121,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     background-color: $panel-bgcolor;
     z-index: 9;
     @include mx_transform(translate3d(100%, 0, 0));
+    @extend .transform;
 
     .head
     {
@@ -144,6 +147,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     @extend %ph_pflt;
     height: $head-height;
     line-height: $head-height;
+    @extend .transform;
 
     & > div
     {
@@ -253,6 +257,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     height: $navbar-height;
     z-index: 1;
     text-align: center;
+    @extend .transform;
 
     /*模拟1px边框*/
     &:after
