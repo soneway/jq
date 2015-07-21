@@ -198,7 +198,7 @@
                 });
 
                 //触摸结束事件
-                $this.on('touchend', function (evt) {
+                $this.on('touchend', function () {
                     //向右,下
                     if (swipSpan > swipThreshold) {
                         --index < 0 && (index = 0);
