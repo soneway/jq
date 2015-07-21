@@ -1,0 +1,85 @@
+﻿/*
+cardpic
+图片卡样式
+*/
+.pi-cardpic
+{
+    overflow: hidden;
+    /*防止动画过程闪烁*/
+    @include mx_backface-visibility(hidden);
+    //@include mx_perspective(1000);
+    position: relative;
+}
+
+
+/*滚动容器*/
+.pi-cardpic-wrap
+{
+    &.transform
+    {
+        @extend %ph_transtransf;
+    }
+
+    & > *
+    {
+        display: block;
+        float: left;
+        overflow: hidden;
+
+        .vertical > &
+        {
+            float: none;
+        }
+    }
+}
+
+
+/*title*/
+.pi-cardpic-title
+{
+    @extend %ph_palb;
+    width: 100%;
+    line-height: 1.1;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    /*动画*/
+    @extend %ph_transall;
+    @include mx_transform(translate3d(0, 100%, 0));
+
+    &.visible
+    {
+        @include mx_transform(translate3d(0, 0, 0));
+    }
+}
+
+
+/*pager*/
+.pi-cardpic-pager
+{
+    @include mx_prb($right: 4px, $bottom: 4px);
+
+    span
+    {
+        display: block;
+        float: left;
+        margin: 0 4px 4px 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 8px;
+        @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+        background-color: rgba(255, 255, 255, 0.5);
+
+        &.selected
+        {
+            @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .vertical > &
+        {
+            float: none;
+        }
+    }
+}
