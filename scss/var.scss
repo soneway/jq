@@ -58,6 +58,12 @@
 }
 
 
+@mixin mx_transition-timing-function($value) {
+    -webkit-transition-timing-function: $value;
+    transition-timing-function: $value;
+}
+
+
 @mixin mx_transition-transform($value...) {
     -webkit-transition: -webkit-transform $value;
     transition: transform $value;
