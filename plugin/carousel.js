@@ -146,6 +146,18 @@
                     slide();
                 };
 
+                //暴露prev方法
+                me.prev = function () {
+                    --index < 0 && (index = itemCount - 1);
+                    slide();
+                };
+
+                //暴露next方法
+                me.next = function () {
+                    ++index === itemCount && (index = 0);
+                    slide();
+                };
+
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
@@ -205,6 +217,12 @@
                     //自动轮播
                     setInter();
                 }).trigger('touchend');
+
+                //pager点击事件
+                $pagers.on('click', function () {
+                    var index = $(this).index();
+                    me.slideToIndex(index);
+                });
 
                 //屏幕尺寸改变事件
                 window.addEventListener('resize', function () {
