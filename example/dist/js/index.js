@@ -27,6 +27,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
         typeof unload === 'function' && unload($this);
     };
 
+
     var loader = {
         carousel: require('./panel/carousel.js'),
         flip: require('./panel/flip.js'),

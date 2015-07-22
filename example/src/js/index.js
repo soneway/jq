@@ -26,6 +26,7 @@
         typeof unload === 'function' && unload($this);
     };
 
+
     var loader = {
         carousel: require('./panel/carousel.js'),
         flip: require('./panel/flip.js'),
