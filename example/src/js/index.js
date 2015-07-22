@@ -25,6 +25,7 @@ $.panelUnloaded = function ($this) {
 };
 
 
+//页面模块加载对象
 var loader = {
     carousel: require('./page/carousel.js'),
     flip: require('./page/flip.js'),
