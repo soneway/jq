@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /*
+ui/base
 移动端基础样式
 包括样式重置,常用类等
 */
@@ -8,8 +9,8 @@
   -webkit-overflow-scrolling: touch; }
 
 .absolute, #mainbox, #loading, .head, .head
-.btnleft, #header > div, .panel, #navbar:after, .pi-flip > *, .pi-picpager-wrap, .pi-picpager-pic, .sb-container > div, .pi-turntable-pointer, h3.center:before, #picpager
-.info, #share_list
+.btnleft, #header > div, .panel, #navbar:after, h3.center:before, .pi-picpager-wrap, .pi-picpager-pic, #picpager
+.info, .pi-flip > *, .pi-turntable-pointer, .sb-container > div, #share_list
 a:after, .other_login
 a:after, .tologin
 .sohulogo:after {
@@ -33,9 +34,9 @@ a:after, .tologin
   right: 0;
   top: 0; }
 
-.head:after, .pi-carousel-title, .list
+.head:after, .list
 a:after, .list
-a:first-of-type:before {
+a:first-of-type:before, .pi-carousel-title {
   position: absolute;
   left: 0;
   bottom: 0; }
@@ -45,13 +46,13 @@ a:first-of-type:before {
   left: 0;
   bottom: 0; }
 
-#mainbox, #loading, #mask, #header > div, .panel, #customalert, .pi-flip > *, .pi-picpager-wrap, .pi-picpager-pic, .sb-container > div, .pi-turntable-pointer, #carousel
+#mainbox, #loading, #mask, #header > div, .panel, #customalert, #carousel
 .carousel
 a
-p, #picpager
-.picpager, #flip
+p, .pi-picpager-wrap, .pi-picpager-pic, #picpager
+.picpager, .pi-flip > *, #flip
 .flip
-p, #share_list
+p, .pi-turntable-pointer, .sb-container > div, #share_list
 a:after, .other_login
 a:after, .tologin
 .sohulogo:after {
@@ -92,11 +93,11 @@ a {
     box-pack: center;*/ }
 
 /*
-ani_spinner
+scss/ani_spinner
 spinner动画类
 */
 /*
-ani_circle
+scss/ani_circle
 旋转动画
 */
 @-webkit-keyframes ani_circle
@@ -323,10 +324,12 @@ h4 {
     opacity: 1; }
 
 /*
+ui/ui
 移动端界面样式
 包含面板,导航,边栏等样式
 */
-/*iconmoon
+/*
+scss/iconmoon
 图标字体样式
 */
 @font-face {
@@ -347,7 +350,7 @@ h4 {
   content: '\e601'; }
 
 /*
-scroll
+plugin/scroll
 自定义滚动样式
 */
 .pi-scroll-item {
@@ -519,7 +522,7 @@ a {
       padding: 0 5px; }
 
 /*
-customalert
+plugin/customalert
 自定义提示框样式
 */
 #customalert {
@@ -574,188 +577,7 @@ customalert
 #customalert-btnok {
   width: 230px; }
 
-/*
-carousel
-焦点图样式
-*/
-.pi-carousel {
-  overflow: hidden;
-  /*防止动画过程闪烁*/
-  /*防止动画过程闪烁*/
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  position: relative; }
-
-/*滚动容器*/
-.pi-carousel-wrap > * {
-  display: block;
-  float: left;
-  overflow: hidden; }
-  .vertical > .pi-carousel-wrap > * {
-    float: none; }
-
-/*title*/
-.pi-carousel-title {
-  width: 100%;
-  line-height: 1.1;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 10px;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-  /*动画*/
-  -webkit-transform: translate3d(0, 100%, 0);
-  transform: translate3d(0, 100%, 0); }
-  .pi-carousel-title.visible {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); }
-
-/*pager*/
-.pi-carousel-pager {
-  position: absolute;
-  right: 4px;
-  bottom: 4px; }
-  .pi-carousel-pager
-span {
-    display: block;
-    float: left;
-    margin: 0 4px 4px 0;
-    width: 8px;
-    height: 8px;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.5); }
-    .pi-carousel-pager
-span.selected {
-      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
-      background-color: rgba(255, 255, 255, 0.9); }
-    .vertical > .pi-carousel-pager
-span {
-      float: none; }
-
-/*
-flip
-3d翻转效果样式
-*/
-.pi-flip {
-  position: relative;
-  -webkit-perspective: 1000;
-  perspective: 1000; }
-  .pi-flip > * {
-    opacity: 0; }
-    .pi-flip > *.notrans {
-      -webkit-transition: none;
-      transition: none; }
-    .pi-flip > *.visible {
-      opacity: 1;
-      z-index: 1; }
-
-/*
-picpager
-相册样式
-*/
-/*
-ani_loading
-loading动画样式
-*/
-/*
-ani_circle
-旋转动画
-*/
-@-webkit-keyframes ani_circle
-{
-  0%
-{
-    -webkit-transform: rotateZ(0deg); }
-  100%
-{
-    -webkit-transform: rotateZ(360deg); } }
-
-@keyframes ani_circle
-{
-  0%
-{
-    transform: rotateZ(0deg); }
-  100%
-{
-    transform: rotateZ(360deg); } }
-
-/*loading动画类*/
-.ani_loading:before, .pi-picpager-pic:before, #carousel
-.carousel
-a:before, #flip
-.flip
-p:before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 40px;
-  height: 40px;
-  margin-left: -20px;
-  margin-top: -20px;
-  border-radius: 40px;
-  /*如.loading元素中还有transform,:before内容将挡不住*/
-  z-index: -1;
-  /*圆环用border生成*/
-  border-top: 4px solid rgba(51, 51, 51, 0.2);
-  border-right: 4px solid rgba(51, 51, 51, 0.2);
-  border-bottom: 4px solid rgba(51, 51, 51, 0.2);
-  border-left: 4px solid #333333;
-  /*动画*/
-  -webkit-animation: ani_circle 0.8s linear infinite;
-  animation: ani_circle 0.8s linear infinite; }
-
-.pi-picpager {
-  position: relative;
-  overflow: hidden;
-  /*防止动画过程闪烁*/
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-.pi-picpager-pic {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain; }
-  .pi-picpager-pic:nth-of-type(1) {
-    left: -100%; }
-  .pi-picpager-pic:nth-of-type(3) {
-    left: 100%; }
-
-/*
-swatchbook
-扇形特效样式
-*/
-.sb-container {
-  position: relative;
-  width: 65px;
-  height: 200px;
-  /*防止动画过程闪烁*/
-  /*防止动画过程闪烁*/
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden; }
-  .sb-container > div {
-    border-radius: 5px;
-    -webkit-transform-origin: 25% 90%;
-    transform-origin: 25% 90%;
-    -webkit-transition: -webkit-transform 0.7s ease;
-    transition: transform 0.7s ease; }
-
-/*
-turntable
-转盘抽奖样式
-*/
-.pi-turntable, .pi-turntable-pointer {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; }
-
-.pi-turntable {
-  position: relative;
-  overflow: hidden; }
-
-/*基础样式*/
+/*adhh基础样式*/
 /*表单输入元素*/
 input, select, textarea {
   height: 32px;
@@ -860,6 +682,66 @@ h3 {
     display: block; }
 
 /*焦点图 panel*/
+/*
+plugin/carousel
+焦点图样式
+*/
+.pi-carousel {
+  overflow: hidden;
+  /*防止动画过程闪烁*/
+  /*防止动画过程闪烁*/
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative; }
+
+/*滚动容器*/
+.pi-carousel-wrap > * {
+  display: block;
+  float: left;
+  overflow: hidden; }
+  .vertical > .pi-carousel-wrap > * {
+    float: none; }
+
+/*title*/
+.pi-carousel-title {
+  width: 100%;
+  line-height: 1.1;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  /*动画*/
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0); }
+  .pi-carousel-title.visible {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+
+/*pager*/
+.pi-carousel-pager {
+  position: absolute;
+  right: 4px;
+  bottom: 4px; }
+  .pi-carousel-pager
+span {
+    display: block;
+    float: left;
+    margin: 0 4px 4px 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5); }
+    .pi-carousel-pager
+span.selected {
+      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+      background-color: rgba(255, 255, 255, 0.9); }
+    .vertical > .pi-carousel-pager
+span {
+      float: none; }
+
 #carousel
 .carousel {
   width: 90%;
@@ -883,6 +765,78 @@ img {
     width: 100%; }
 
 /*相册 panel*/
+/*
+plugin/picpager
+相册样式
+*/
+/*
+scss/ani_loading
+loading动画样式
+*/
+/*
+scss/ani_circle
+旋转动画
+*/
+@-webkit-keyframes ani_circle
+{
+  0%
+{
+    -webkit-transform: rotateZ(0deg); }
+  100%
+{
+    -webkit-transform: rotateZ(360deg); } }
+
+@keyframes ani_circle
+{
+  0%
+{
+    transform: rotateZ(0deg); }
+  100%
+{
+    transform: rotateZ(360deg); } }
+
+/*loading动画类*/
+.ani_loading:before, #carousel
+.carousel
+a:before, .pi-picpager-pic:before, #flip
+.flip
+p:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 40px;
+  /*如.loading元素中还有transform,:before内容将挡不住*/
+  z-index: -1;
+  /*圆环用border生成*/
+  border-top: 4px solid rgba(51, 51, 51, 0.2);
+  border-right: 4px solid rgba(51, 51, 51, 0.2);
+  border-bottom: 4px solid rgba(51, 51, 51, 0.2);
+  border-left: 4px solid #333333;
+  /*动画*/
+  -webkit-animation: ani_circle 0.8s linear infinite;
+  animation: ani_circle 0.8s linear infinite; }
+
+.pi-picpager {
+  position: relative;
+  overflow: hidden;
+  /*防止动画过程闪烁*/
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.pi-picpager-pic {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain; }
+  .pi-picpager-pic:nth-of-type(1) {
+    left: -100%; }
+  .pi-picpager-pic:nth-of-type(3) {
+    left: 100%; }
+
 #picpager {
   height: 100%; }
   #picpager
@@ -895,6 +849,23 @@ img {
     padding-bottom: 10px; }
 
 /*3d旋转切换 panel*/
+/*
+plugin/flip
+3d翻转效果样式
+*/
+.pi-flip {
+  position: relative;
+  -webkit-perspective: 1000;
+  perspective: 1000; }
+  .pi-flip > * {
+    opacity: 0; }
+    .pi-flip > *.notrans {
+      -webkit-transition: none;
+      transition: none; }
+    .pi-flip > *.visible {
+      opacity: 1;
+      z-index: 1; }
+
 #flip
 .flip {
   width: 90%;
@@ -935,6 +906,19 @@ div {
     height: 100%; }
 
 /*转盘抽奖 panel*/
+/*
+plugin/turntable
+转盘抽奖样式
+*/
+.pi-turntable, .pi-turntable-pointer {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+.pi-turntable {
+  position: relative;
+  overflow: hidden; }
+
 #turntable
 .turntable {
   width: 320px;
@@ -963,6 +947,25 @@ div {
     opacity: 0.85; }
 
 /*扇形特效 panel*/
+/*
+plugin/swatchbook
+扇形特效样式
+*/
+.sb-container {
+  position: relative;
+  width: 65px;
+  height: 200px;
+  /*防止动画过程闪烁*/
+  /*防止动画过程闪烁*/
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+  .sb-container > div {
+    border-radius: 5px;
+    -webkit-transform-origin: 25% 90%;
+    transform-origin: 25% 90%;
+    -webkit-transition: -webkit-transform 0.7s ease;
+    transition: transform 0.7s ease; }
+
 #swatchbook {
   /*每张扇页*/
   /*开关样式*/
@@ -1057,8 +1060,9 @@ h3 {
     margin: 10px auto;
     background: rgba(0, 0, 0, 0.1); }
 
+/*分享 panel*/
 /*
-share
+scss/share
 分享图标样式
 包括8个常用分享平台图标
 */
@@ -1103,7 +1107,6 @@ a.focus:after {
   #share_list .netease:after {
     background-position: -350px 0; }
 
-/*分享 panel*/
 #share
 textarea {
   width: 85%; }
@@ -1122,8 +1125,9 @@ img {
 a.focus img {
     opacity: 0.5; }
 
+/*sidebox panel*/
 /*
-login
+scss/login
 登陆图标样式
 其他登陆方式图标
 */
@@ -1189,7 +1193,6 @@ a.focus:after {
 .icon_password:before {
   content: '\e601'; }
 
-/*sidebox panel*/
 /*未登陆*/
 .tologin {
   width: 80%;
@@ -1234,21 +1237,3 @@ input {
     border-bottom-style: solid; }
   #btn_login {
     width: 100%; }
-
-/*ui panel*/
-#ui
-h3 {
-  text-indent: 10px; }
-
-#ui
-.list > div {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  position: relative;
-  border: 1px solid #eee;
-  margin: 5px; }
-  #ui
-.list > div:after {
-    content: attr(class);
-    display: block; }

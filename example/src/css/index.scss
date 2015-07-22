@@ -5,11 +5,6 @@ $border-color: rgba(0, 0, 0, 0.1);
 @import "../../../ui/base";
 @import "../../../ui/ui";
 @import "../../../plugin/customalert";
-@import "../../../plugin/carousel";
-@import "../../../plugin/flip";
-@import "../../../plugin/picpager";
-@import "../../../plugin/swatchbook";
-@import "../../../plugin/turntable";
 
 //引入基础样式
 @import "panel/base";
@@ -25,4 +20,3 @@ $border-color: rgba(0, 0, 0, 0.1);
 @import "panel/swatchbook";
 @import "panel/share";
 @import "panel/sidebox";
-@import "panel/ui";
