@@ -26,12 +26,12 @@ $.panelUnloaded = function ($this) {
 
 
 var loader = {
-    carousel: require('./panel/carousel.js'),
-    flip: require('./panel/flip.js'),
-    picpager: require('./panel/picpager.js'),
-    scroll: require('./panel/scroll.js'),
-    scratchcard: require('./panel/scratchcard.js'),
-    turntable: require('./panel/turntable.js'),
-    swatchbook: require('./panel/swatchbook.js')
+    carousel: require('./page/carousel.js'),
+    flip: require('./page/flip.js'),
+    picpager: require('./page/picpager.js'),
+    scroll: require('./page/scroll.js'),
+    scratchcard: require('./page/scratchcard.js'),
+    turntable: require('./page/turntable.js'),
+    swatchbook: require('./page/swatchbook.js')
 };
 var unloader = {};

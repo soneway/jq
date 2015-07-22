@@ -7,16 +7,16 @@ $border-color: rgba(0, 0, 0, 0.1);
 @import "../../../plugin/customalert";
 
 //引入基础样式
-@import "panel/base";
+@import "scss/base";
 
 //引入面板样式
-@import "panel/ui";
-@import "panel/carousel";
-@import "panel/picpager";
-@import "panel/flip";
-@import "panel/scroll";
-@import "panel/scratchcard";
-@import "panel/turntable";
-@import "panel/swatchbook";
-@import "panel/share";
-@import "panel/sidebox";
+@import "page/ui";
+@import "page/carousel";
+@import "page/picpager";
+@import "page/flip";
+@import "page/scroll";
+@import "page/scratchcard";
+@import "page/turntable";
+@import "page/swatchbook";
+@import "page/share";
+@import "page/sidebox";

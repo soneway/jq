@@ -27,17 +27,17 @@ $.panelUnloaded = function ($this) {
 
 
 var loader = {
-    carousel: require('./panel/carousel.js'),
-    flip: require('./panel/flip.js'),
-    picpager: require('./panel/picpager.js'),
-    scroll: require('./panel/scroll.js'),
-    scratchcard: require('./panel/scratchcard.js'),
-    turntable: require('./panel/turntable.js'),
-    swatchbook: require('./panel/swatchbook.js')
+    carousel: require('./page/carousel.js'),
+    flip: require('./page/flip.js'),
+    picpager: require('./page/picpager.js'),
+    scroll: require('./page/scroll.js'),
+    scratchcard: require('./page/scratchcard.js'),
+    turntable: require('./page/turntable.js'),
+    swatchbook: require('./page/swatchbook.js')
 };
 var unloader = {};
 
-},{"./panel/carousel.js":2,"./panel/flip.js":3,"./panel/picpager.js":4,"./panel/scratchcard.js":5,"./panel/scroll.js":6,"./panel/swatchbook.js":7,"./panel/turntable.js":8,"base":19,"customalert":12,"jq":"U94cel","scroll":16,"ui":20}],2:[function(require,module,exports){
+},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":19,"customalert":12,"jq":"U94cel","scroll":16,"ui":20}],2:[function(require,module,exports){
 //焦点图
 require('carousel');
 
