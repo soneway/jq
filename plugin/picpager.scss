@@ -12,33 +12,35 @@ plugin/picpager
     overflow: hidden;
     @include mx_backface-visibility(hidden);
     //@include mx_perspective(1000);
-}
 
-
-.pi-picpager-wrap
-{
-    @extend %ph_palt;
-    @extend %ph_full;
-    @extend %ph_transtransf;
-}
-
-
-.pi-picpager-pic
-{
-    @extend %ph_palt;
-    @extend %ph_full;
-    @extend .ani_loading;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain;
-
-    &:nth-of-type(1)
+    @at-root
     {
-        left: -100%;
-    }
+        .pi-picpager-wrap
+        {
+            @extend %ph_palt;
+            @extend %ph_full;
+            @extend %ph_transtransf;
+        }
 
-    &:nth-of-type(3)
-    {
-        left: 100%;
+
+        .pi-picpager-pic
+        {
+            @extend %ph_palt;
+            @extend %ph_full;
+            @extend .ani_loading;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            &:nth-of-type(1)
+            {
+                left: -100%;
+            }
+
+            &:nth-of-type(3)
+            {
+                left: 100%;
+            }
+        }
     }
 }

@@ -2,23 +2,25 @@
 plugin/turntable
 转盘抽奖样式
 */
-.pi-turntable, .pi-turntable-pointer
-{
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
 .pi-turntable
 {
     position: relative;
     overflow: hidden;
-}
+
+    @at-root
+    {
+        .pi-turntable, .pi-turntable-pointer
+        {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
 
-.pi-turntable-pointer
-{
-    @extend %ph_palt;
-    @extend %ph_full;
+        .pi-turntable-pointer
+        {
+            @extend %ph_palt;
+            @extend %ph_full;
+        }
+    }
 }

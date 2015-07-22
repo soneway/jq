@@ -39,46 +39,49 @@ plugin/customalert
             @include mx_transform(scale3d(1, 1, 1));
         }
     }
-}
 
-
-#customalert-title
-{
-    line-height: 40px;
-    @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.5));
-}
-
-
-#customalert-content
-{
-    padding: 15px 20px;
-}
-
-
-#customalert-btnok, #customalert-btncancel
-{
-    width: 110px;
-    font-size: 17px;
-    @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.9));
-    color: #333;
-}
-
-
-#customalert-btnok
-{
-    margin-right: 10px;
-}
-
-
-.alert
-{
-    #customalert-btncancel
+    @at-root
     {
-        display: none;
-    }
 
-    #customalert-btnok
-    {
-        width: 230px;
+        #customalert-title
+        {
+            line-height: 40px;
+            @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+        }
+
+
+        #customalert-content
+        {
+            padding: 15px 20px;
+        }
+
+
+        #customalert-btnok, #customalert-btncancel
+        {
+            width: 110px;
+            font-size: 17px;
+            @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.9));
+            color: #333;
+        }
+
+
+        #customalert-btnok
+        {
+            margin-right: 10px;
+        }
+
+
+        .alert
+        {
+            #customalert-btncancel
+            {
+                display: none;
+            }
+
+            #customalert-btnok
+            {
+                width: 230px;
+            }
+        }
     }
 }

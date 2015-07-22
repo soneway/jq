@@ -550,34 +550,28 @@ plugin/customalert
 .box {
       -webkit-transform: scale3d(1, 1, 1);
       transform: scale3d(1, 1, 1); }
-
-#customalert-title {
-  line-height: 40px;
-  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5); }
-
-#customalert-content {
-  padding: 15px 20px; }
-
-#customalert-btnok, #customalert-btncancel {
-  width: 110px;
-  font-size: 17px;
-  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-  color: #333; }
-
-#customalert-btnok {
-  margin-right: 10px; }
-
-.alert
+  #customalert-title {
+    line-height: 40px;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5); }
+  #customalert-content {
+    padding: 15px 20px; }
+  #customalert-btnok, #customalert-btncancel {
+    width: 110px;
+    font-size: 17px;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+    color: #333; }
+  #customalert-btnok {
+    margin-right: 10px; }
+  .alert
 #customalert-btncancel {
-  display: none; }
-
-.alert
+    display: none; }
+  .alert
 #customalert-btnok {
-  width: 230px; }
+    width: 230px; }
 
-/*adhh基础样式*/
+/*项目基础样式*/
 /*表单输入元素*/
 input, select, textarea {
   height: 32px;
@@ -695,52 +689,52 @@ plugin/carousel
   position: relative; }
 
 /*滚动容器*/
-.pi-carousel-wrap > * {
-  display: block;
-  float: left;
-  overflow: hidden; }
-  .vertical > .pi-carousel-wrap > * {
-    float: none; }
-
-/*title*/
-.pi-carousel-title {
-  width: 100%;
-  line-height: 1.1;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 10px;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-  /*动画*/
-  -webkit-transform: translate3d(0, 100%, 0);
-  transform: translate3d(0, 100%, 0); }
-  .pi-carousel-title.visible {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); }
-
-/*pager*/
-.pi-carousel-pager {
-  position: absolute;
-  right: 4px;
-  bottom: 4px; }
-  .pi-carousel-pager
-span {
+  .pi-carousel-wrap > * {
     display: block;
     float: left;
-    margin: 0 4px 4px 0;
-    width: 8px;
-    height: 8px;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.5); }
-    .pi-carousel-pager
-span.selected {
-      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
-      background-color: rgba(255, 255, 255, 0.9); }
-    .vertical > .pi-carousel-pager
-span {
+    overflow: hidden; }
+    .vertical > .pi-carousel-wrap > * {
       float: none; }
+
+/*title*/
+  .pi-carousel-title {
+    width: 100%;
+    line-height: 1.1;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    /*动画*/
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0); }
+    .pi-carousel-title.visible {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0); }
+
+/*pager*/
+  .pi-carousel-pager {
+    position: absolute;
+    right: 4px;
+    bottom: 4px; }
+    .pi-carousel-pager
+span {
+      display: block;
+      float: left;
+      margin: 0 4px 4px 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      background-color: rgba(255, 255, 255, 0.5); }
+      .pi-carousel-pager
+span.selected {
+        -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+        background-color: rgba(255, 255, 255, 0.9); }
+      .vertical > .pi-carousel-pager
+span {
+        float: none; }
 
 #carousel
 .carousel {
@@ -827,15 +821,14 @@ p:before {
   /*防止动画过程闪烁*/
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden; }
-
-.pi-picpager-pic {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain; }
-  .pi-picpager-pic:nth-of-type(1) {
-    left: -100%; }
-  .pi-picpager-pic:nth-of-type(3) {
-    left: 100%; }
+  .pi-picpager-pic {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain; }
+    .pi-picpager-pic:nth-of-type(1) {
+      left: -100%; }
+    .pi-picpager-pic:nth-of-type(3) {
+      left: 100%; }
 
 #picpager {
   height: 100%; }
@@ -910,14 +903,13 @@ div {
 plugin/turntable
 转盘抽奖样式
 */
-.pi-turntable, .pi-turntable-pointer {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; }
-
 .pi-turntable {
   position: relative;
   overflow: hidden; }
+  .pi-turntable, .pi-turntable-pointer {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover; }
 
 #turntable
 .turntable {
