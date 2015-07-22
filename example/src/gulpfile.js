@@ -4,7 +4,7 @@
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 1;
+var isPack = 0;
 //配置对象
 var config = {
     img: {
@@ -19,6 +19,7 @@ var config = {
         watch: ['./css/**'],
         //输出文件夹
         dest: out + 'css',
+        base: '../../',
         //是否压缩
         isPack: undefined
     },
@@ -97,7 +98,7 @@ var uglify = require('gulp-uglify');
 gulp.task('js', function () {
     var conf = config.js;
 
-    var task = gulp.src(conf.src)
+    var task = gulp.src(conf.src, {base: conf.base})
         //编译合并
         .pipe(browserify({
             shim: conf.shim

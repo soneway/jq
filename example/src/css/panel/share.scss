@@ -1,0 +1,40 @@
+﻿//引入
+@import "../../../../scss/share";
+
+
+/*分享 panel*/
+#share
+{
+    $w: 85%;
+
+    textarea
+    {
+        width: $w;
+    }
+
+    @at-root
+    {
+        .sharebox
+        {
+            //margin-top: 200px;
+            padding: 15px 0;
+        }
+
+
+        #share_list
+        {
+            width: $w + 5%;
+            margin: 0 auto;
+            img
+            {
+                width: 55px;
+                margin: 5px;
+            }
+
+            a.focus img
+            {
+                opacity: 0.5;
+            }
+        }
+    }
+}

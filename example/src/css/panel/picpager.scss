@@ -1,0 +1,21 @@
+﻿/*相册 panel*/
+#picpager
+{
+    height: 100%;
+
+    .info
+    {
+        @extend %ph_palt;
+        top: $head-height;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        color: #fff;
+        padding-bottom: 10px;
+    }
+
+    .picpager
+    {
+        @extend %ph_full;
+    }
+}

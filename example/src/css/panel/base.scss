@@ -1,0 +1,122 @@
+﻿/*基础样式*/
+/*表单输入元素*/
+input, select, textarea
+{
+    height: 32px;
+    border-radius: 0;
+    border: 1px solid $border-color;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-indent: 0.5em;
+    color: $color;
+    font-size: 12px;
+
+    &[disabled]
+    {
+        opacity: 0.5;
+    }
+}
+
+
+/*placeholder的颜色*/
+::-webkit-input-placeholder
+{
+    color: #888;
+}
+
+
+textarea
+{
+    height: 100px;
+    text-indent: 0;
+    padding: 3px;
+}
+
+
+/*导航*/
+.navlist
+{
+    a
+    {
+        padding: 0 10px;
+
+        &.selected
+        {
+            border-bottom: 2px solid #df2221;
+            color: #df2221;
+        }
+    }
+}
+
+
+/*说明*/
+.info
+{
+    padding: 10px 10px 0 4em;
+    position: relative;
+
+    &:before
+    {
+        content: '说明：';
+        @include mx_plt($left: 10px, $top: 10px);
+        font-weight: bold;
+    }
+}
+
+
+/*列表*/
+.list
+{
+    padding: 10px;
+
+    a
+    {
+        display: block;
+        padding: 10px 5px;
+        position: relative;
+
+        p
+        {
+            color: #888;
+            padding-left: 2em;
+        }
+
+        &.title
+        {
+            background: #eee;
+            font-weight: bold;
+        }
+
+        &:after, &:first-of-type:before
+        {
+            content: '';
+            @extend %ph_palb;
+            height: 1px;
+            width: 100%;
+            @include mx_transform(scale3d(1, 0.5, 1));
+            background: #ddd;
+        }
+
+        &:first-of-type:before
+        {
+            bottom: auto;
+            top: 0;
+        }
+    }
+}
+
+
+h3.center
+{
+    position: relative;
+    margin-top: 10px;
+
+    &:before
+    {
+        content: '';
+        @extend %ph_palt;
+        height: 1px;
+        width: 100%;
+        @include mx_transform(scale3d(1, 0.5, 1));
+        background: #ddd;
+    }
+}

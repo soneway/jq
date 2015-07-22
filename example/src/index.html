@@ -27,7 +27,7 @@
 
             <!--一级面板标题-->
             <div class="roottitle">
-                <a class="btnleft" href="#panelshare">分享</a>
+                <a class="btnleft" href="#share">分享</a>
                 <h1 class="title"></h1>
             </div>
             <!--一级面板标题 end-->
@@ -48,7 +48,7 @@
         <!--一级面板-->
 
         <!--核心库-->
-        <div id="panel1" data-role="root" class="panel" title="jq.js">
+        <div id="home" data-role="root" class="panel" title="jq.js">
             <p class="info">jq.js是适用于现代浏览器的简化版jQuery,体积比zepto小(是其1/4),效率比zepto高(是其2倍左右),兼容jquery语法,实现大多常用api.</p>
             <div class="list">
                 <a href="https://github.com/soneway/soneway" target="_blank">访问GitHub</a>
@@ -118,14 +118,14 @@
         <!--核心库 end-->
 
         <!--UI库-->
-        <div id="panelui" data-role="root" class="panel" title="ui.js">
+        <div id="ui" data-role="root" class="panel" title="ui.js">
             <p class="info">ui.js是一个ui框架,包含页面切换,边栏,弹出框,导航栏等功能</p>
             <div class="list">
-                <a href="#panelsub">跳转到二级页面</a>
+                <a href="#sub">跳转到二级页面</a>
                 <a data-href="http://sohu.com">跳转到sohu
                     <p>有data-href属性的链接将不会跳出页面,以iframe显示</p>
                 </a>
-                <a onclick="$.loadPanel('#panelsub2')">$.loadPanel('#panelsub2')
+                <a onclick="$.loadPanel('#sub2')">$.loadPanel('#sub2')
                     <p>data-role="root"的panel为一级页面,除此之外为二级页面</p>
                 </a>
                 <a onclick="$.toggleHeader(0)">$.toggleHeader(0)</a>
@@ -144,7 +144,7 @@
         <!--UI库 end-->
 
         <!--焦点图-->
-        <div id="panelcarousel" data-role="root" class="panel" title="$.fn.carousel">
+        <div id="carousel" data-role="root" class="panel" title="$.fn.carousel">
             <p class="info">carousel.js插件适合有限张图片切换展示,除了图片,还适用于普通html容器</p>
             <h3 class="center">横向滚动</h3>
             <div class="carousel" data-len="5">
@@ -164,7 +164,7 @@
         <!--焦点图 end-->
 
         <!--3d旋转切换-->
-        <div id="panelflip" data-role="root" class="panel" title="$.fn.flip">
+        <div id="flip" data-role="root" class="panel" title="$.fn.flip">
             <p class="info">flip.js插件适合有限张图片3d切换展示,除了图片,还适用于普通html容器</p>
             <h3 class="center">横向切换</h3>
             <div class="flip" data-len="5">
@@ -176,7 +176,7 @@
         <!--3d旋转切换 end-->
 
         <!--相册功能-->
-        <div id="panelpicpager" data-role="root" class="panel" title="$.fn.picpager">
+        <div id="picpager" data-role="root" class="panel" title="$.fn.picpager">
             <p class="info">picpager.js插件适合无限张图片切换展示,可动态添加图片数据</p>
             <div class="picpager">
             </div>
@@ -184,7 +184,7 @@
         <!--相册功能 end-->
 
         <!--自定义滚动-->
-        <div id="panelscroll" data-role="root" class="panel" title="$.fn.scroll">
+        <div id="scroll" data-role="root" class="panel" title="$.fn.scroll">
             <p class="info">scroll.js用于模拟页面滚动效果,本DEMO中的可滚动的导航栏就是用该插件实现</p>
             <h3 class="center">竖向滚动</h3>
             <div class="scroll" data-isvertical="1">
@@ -198,22 +198,22 @@
         <!--自定义滚动 end-->
 
         <!--刮刮卡-->
-        <div id="panelscratchcard" data-role="root" class="panel" title="$.fn.scratchcard">
+        <div id="scratchcard" data-role="root" class="panel" title="$.fn.scratchcard">
             <div class="scratchcard"></div>
         </div>
         <!--刮刮卡 end-->
 
         <!--转盘抽奖-->
-        <div id="panelturntable" data-role="root" class="panel" title="$.fn.turntable">
+        <div id="turntable" data-role="root" class="panel" title="$.fn.turntable">
             <p class="info">turntable.js是一个简单的转盘抽奖特效</p>
-            <div id="turntable">
-                <a id="turntable_start"></a>
+            <div class="turntable">
+                <a class="btn_start"></a>
             </div>
         </div>
         <!--转盘抽奖 end-->
 
         <!--扇形特效-->
-        <div id="panelswatchbook" data-role="root" class="panel" title="$.fn.swatchbook">
+        <div id="swatchbook" data-role="root" class="panel" title="$.fn.swatchbook">
             <div class="swatchbook">
                 <div class="sb-item">
                     <span class="sb-icon">♈</span>
@@ -282,15 +282,15 @@
         <!--嵌入的iframe页面 end-->
 
         <!--二级页面-->
-        <div id="panelsub" class="panel" title="二级页面">
+        <div id="sub" class="panel" title="二级页面">
             <div class="list">
-                <a href="#panelsub2">跳转到三级页面</a>
+                <a href="#sub2">跳转到三级页面</a>
             </div>
         </div>
         <!--二级页面 end-->
 
         <!--三级页面-->
-        <div id="panelsub2" class="panel" title="三级页面">
+        <div id="sub2" class="panel" title="三级页面">
             <div class="list">
                 三级页面内容
             </div>
@@ -298,9 +298,8 @@
         <!--三级页面 end-->
 
         <!--分享-->
-        <div id="panelshare" class="panel" title="分享">
+        <div id="share" class="panel" title="分享">
             <div class="sharebox center bgborder maxwidth">
-                <h3 id="share_alert"></h3>
                 <input type="hidden" id="url_share"/>
                 <input type="hidden" id="pic_share"/>
                 <textarea id="txt_share"></textarea>
@@ -325,15 +324,15 @@
         <nav id="navbar">
             <div class="navbox">
                 <div class="navlist">
-                    <a href="#panel1">核心库</a>
-                    <a href="#panelui">UI库</a>
-                    <a href="#panelcarousel">焦点图</a>
-                    <a href="#panelflip">3d旋转切换</a>
-                    <a href="#panelpicpager">相册功能</a>
-                    <a href="#panelscroll">自定义滚动</a>
-                    <a href="#panelscratchcard">刮刮卡</a>
-                    <a href="#panelturntable">转盘抽奖</a>
-                    <a href="#panelswatchbook">扇形特效</a>
+                    <a href="#home">核心库</a>
+                    <a href="#ui">UI库</a>
+                    <a href="#carousel">焦点图</a>
+                    <a href="#flip">3d旋转切换</a>
+                    <a href="#picpager">相册功能</a>
+                    <a href="#scroll">自定义滚动</a>
+                    <a href="#scratchcard">刮刮卡</a>
+                    <a href="#turntable">转盘抽奖</a>
+                    <a href="#swatchbook">扇形特效</a>
                 </div>
             </div>
         </nav>

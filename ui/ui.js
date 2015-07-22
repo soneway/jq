@@ -16,10 +16,10 @@
         $mainbox = $('#mainbox');
 
     /**
-     * 首页hash(默认为#panel1)
+     * 首页hash(默认为#home)
      * @type {string}
      */
-    $.indexSelector = '#panel1';
+    $.homeSelector = '#home';
 
 
     //scrollTop处理相关
@@ -159,7 +159,7 @@
 
     /**
      * 加载panel函数
-     * @param hash panel的hash(如#panel1)
+     * @param hash panel的hash(如#home)
      */
     $.loadPanel = (function () {
 
@@ -167,10 +167,10 @@
         var $navbarA = $('#navbar a'),
         //导航容器元素
             navboxEl = document.querySelector('.navbox'),
-        //index元素
-            $index = $($.indexSelector),
+        //面板元素
+            $panel = $('.panel'),
         //panel切换动画duration
-            duration = parseFloat($index.css('transition-duration') || $index.css('-webkit-transition-duration')) * 1000,
+            duration = parseFloat($panel.css('transition-duration') || $panel.css('-webkit-transition-duration')) * 1000,
         //历史记录对象
             history = $.history = [],
         //header元素
@@ -372,7 +372,7 @@
         $navbox.length > 0 && $navbox.scroll();
 
         //初始化加载index
-        $.loadPanel($.indexSelector);
+        $.loadPanel($.homeSelector);
 
         //加载指定panel
         var hash = location.hash;

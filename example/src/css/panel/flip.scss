@@ -1,0 +1,17 @@
+﻿/*3d旋转切换 panel*/
+#flip
+{
+    .flip
+    {
+        width: 90%;
+        min-width: 300px;
+        height: 300px;
+        margin: 0 auto;
+
+        p
+        {
+            @extend %ph_full;
+            @extend .ani_loading;
+        }
+    }
+}

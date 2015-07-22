@@ -1,0 +1,36 @@
+﻿/*转盘抽奖 panel*/
+#turntable
+{
+    .turntable
+    {
+        width: 320px;
+        height: 320px;
+        margin: 5px auto;
+        background-image: url(../img/bg.png);
+
+        .pi-turntable-pointer
+        {
+            background-image: url(../img/pointer.png);
+        }
+    }
+
+    .btn_start
+    {
+        $w: 68px;
+        $h: 66px;
+
+        @include mx_plt($left: 50%, $top: 50%);
+        width: $w;
+        height: $h;
+        margin-left: -$w / 2;
+        margin-top: -$h / 2;
+        background: url(../img/start.png) center center;
+        background-size: cover;
+        z-index: 1;
+
+        &.focus
+        {
+            opacity: 0.85;
+        }
+    }
+}

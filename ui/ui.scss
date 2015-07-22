@@ -16,7 +16,8 @@ $head-bg: #006c1a 0%, #04990e 100% !default;
 $head-border-color: rgba(128, 128, 128, 0.5) !default;
 
 //引入
-@import '../scss/iconmoon';
+@import "../scss/iconmoon";
+@import "../plugin/scroll";
 
 /*重排类*/
 .reflow
