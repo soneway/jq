@@ -1,46 +1,43 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (window) {
+var $ = require('jq');
+require('base');
+require('ui');
+require('customalert');
+require('scroll');
 
-    var $ = require('jq');
-    require('base');
-    require('ui');
-    require('customalert');
-    require('scroll');
-
-    //alert方法
-    window.alert = function alert(str) {
-        $.customalert({
-            content: str
-        });
-    };
+//alert方法
+window.alert = function alert(str) {
+    $.customalert({
+        content: str
+    });
+};
 
 
-    //面板显示回调函数
-    $.panelLoaded = function ($this, isInit) {
-        var load = loader[$this.attr('id')];
-        typeof load === 'function' && load($this, isInit);
-    };
+//面板显示回调函数
+$.panelLoaded = function ($this, isInit) {
+    var load = loader[$this.attr('id')];
+    typeof load === 'function' && load($this, isInit);
+};
 
-    //面板隐藏回调函数
-    $.panelUnloaded = function ($this) {
-        var unload = unloader[$this.attr('id')];
-        typeof unload === 'function' && unload($this);
-    };
+//面板隐藏回调函数
+$.panelUnloaded = function ($this) {
+    var unload = unloader[$this.attr('id')];
+    typeof unload === 'function' && unload($this);
+};
 
 
-    var loader = {
-        carousel: require('./panel/carousel.js'),
-        flip: require('./panel/flip.js'),
-        picpager: require('./panel/picpager.js'),
-        scroll: require('./panel/scroll.js'),
-        scratchcard: require('./panel/scratchcard.js'),
-        turntable: require('./panel/turntable.js'),
-        swatchbook: require('./panel/swatchbook.js')
-    };
-    var unloader = {};
+var loader = {
+    carousel: require('./panel/carousel.js'),
+    flip: require('./panel/flip.js'),
+    picpager: require('./panel/picpager.js'),
+    scroll: require('./panel/scroll.js'),
+    scratchcard: require('./panel/scratchcard.js'),
+    turntable: require('./panel/turntable.js'),
+    swatchbook: require('./panel/swatchbook.js')
+};
+var unloader = {};
 
-})(window);
-},{"./panel/carousel.js":2,"./panel/flip.js":3,"./panel/picpager.js":4,"./panel/scratchcard.js":5,"./panel/scroll.js":6,"./panel/swatchbook.js":7,"./panel/turntable.js":8,"base":19,"customalert":12,"jq":"XSF+M5","scroll":16,"ui":20}],2:[function(require,module,exports){
+},{"./panel/carousel.js":2,"./panel/flip.js":3,"./panel/picpager.js":4,"./panel/scratchcard.js":5,"./panel/scroll.js":6,"./panel/swatchbook.js":7,"./panel/turntable.js":8,"base":19,"customalert":12,"jq":"U94cel","scroll":16,"ui":20}],2:[function(require,module,exports){
 //焦点图
 require('carousel');
 
@@ -194,8 +191,8 @@ module.exports = function ($this, isInit) {
     }
 };
 },{"turntable":18}],"jq":[function(require,module,exports){
-module.exports=require('XSF+M5');
-},{}],"XSF+M5":[function(require,module,exports){
+module.exports=require('U94cel');
+},{}],"U94cel":[function(require,module,exports){
 (function (global){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 //jq.js
