@@ -20,7 +20,7 @@ $.panelLoaded = function ($this, isInit) {
 
 //面板隐藏回调函数
 $.panelUnloaded = function ($this) {
-    var unload = unloader[$this.attr('id')];
+    var unload = (loader[$this.attr('id')] || {}).unload;
     typeof unload === 'function' && unload($this);
 };
 
@@ -34,4 +34,3 @@ var loader = {
     turntable: require('./page/turntable.js'),
     swatchbook: require('./page/swatchbook.js')
 };
-var unloader = {};

@@ -1,7 +1,6 @@
 ﻿//焦点图
 require('carousel');
 
-
 module.exports = function ($this, isInit) {
     if (isInit) {
         $('.carousel').each(function () {
@@ -21,4 +20,8 @@ module.exports = function ($this, isInit) {
 
         $('#img_car').carousel();
     }
+};
+
+module.exports.unload = function () {
+    console.log('carousel unload');
 };
