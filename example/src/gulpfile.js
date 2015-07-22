@@ -4,7 +4,7 @@
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 0;
+var isPack = 1;
 //配置对象
 var config = {
     img: {
@@ -84,7 +84,8 @@ gulp.task('css', function () {
     if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(minifyCss())
             .pipe(base64({
-                maxImageSize: 10 * 1024 //小于该设定K数的文件就编码
+                exclude: [/^http:\/\/.+$/i], //排除匹配的
+                maxImageSize: 5 * 1024 //小于该设定K数的文件就编码
             }))
             .pipe(gulp.dest(conf.dest));
     }
