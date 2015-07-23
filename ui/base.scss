@@ -13,7 +13,8 @@ $color-focus: #df2221 !default;
 $panel-bgcolor: #fff !default;
 
 //引入
-@import '../scss/var', '../scss/ani_spinner';
+@import "../scss/var";
+@import "../scss/ani_spinner";
 
 /*元素*/
 *:focus

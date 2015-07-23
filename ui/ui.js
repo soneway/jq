@@ -338,8 +338,14 @@
             $.toggleSidebox(false);
         });
 
-        //a标签点击事件切换panel
+        //iframe面板
         var $iframe = $('#paneliframe');
+        if ($iframe.length === 0) {
+            $iframe = $('<div id="paneliframe" class="panel"></div>');
+            $mainbox.append($iframe);
+        }
+
+        //a标签点击事件切换panel
         $doc.on('click', 'a', function (evt) {
             var hash = this.hash;
             if (hash) {

@@ -18,12 +18,10 @@
     <div id="mainbox">
 
         <!--loading-->
-        <div id="loading" class="btn-offsidebox">
-        </div>
+        <div id="loading" class="btn-offsidebox"></div>
         <!--loading end-->
 
         @include('lib/header.html');
-
 
         <!--一级面板-->
         @include('page/home.html');
@@ -37,25 +35,18 @@
         @include('page/swatchbook.html');
         <!--一级面板 end-->
 
-
         <!--二级面板-->
-
-        <!--嵌入的iframe页面-->
-        <div id="paneliframe" class="panel">
-        </div>
-        <!--嵌入的iframe页面 end-->
-
         @include('page/sub.html');
         @include('page/sub2.html');
         @include('page/share.html');
-
         <!--二级面板 end-->
 
         @include('lib/navbar.html');
-        @include('page/sidebox.html');
 
     </div>
     <!--mainbox end-->
+
+    @include('page/sidebox.html');
 
     <!--主代码-->
     <script type="text/javascript" src="js/index.js"></script>

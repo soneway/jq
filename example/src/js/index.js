@@ -27,11 +27,11 @@ $.panelUnloaded = function ($this) {
 
 //页面模块加载对象
 var loader = {
-    carousel: require('./page/carousel.js'),
-    flip: require('./page/flip.js'),
-    picpager: require('./page/picpager.js'),
-    scroll: require('./page/scroll.js'),
+    carousel   : require('./page/carousel.js'),
+    flip       : require('./page/flip.js'),
+    picpager   : require('./page/picpager.js'),
+    scroll     : require('./page/scroll.js'),
     scratchcard: require('./page/scratchcard.js'),
-    turntable: require('./page/turntable.js'),
-    swatchbook: require('./page/swatchbook.js')
+    turntable  : require('./page/turntable.js'),
+    swatchbook : require('./page/swatchbook.js')
 };
