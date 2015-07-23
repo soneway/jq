@@ -43,8 +43,9 @@ var config = {
         isPack: undefined
     }
 };
-
+console.log(1);
 var gulp = require('gulp');
+console.log(2);
 
 
 //img任务

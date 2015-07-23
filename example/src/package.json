@@ -1,15 +1,26 @@
 {
     "browser": {
-        "jq"         : "../../jq.js",
-        "base"       : "../../ui/base.js",
-        "ui"         : "../../ui/ui.js",
-        "carousel"   : "../../plugin/carousel.js",
-        "customalert": "../../plugin/customalert.js",
-        "flip"       : "../../plugin/flip.js",
-        "picpager"   : "../../plugin/picpager.js",
-        "scratchcard": "../../plugin/scratchcard.js",
-        "scroll"     : "../../plugin/scroll.js",
-        "swatchbook" : "../../plugin/swatchbook.js",
-        "turntable"  : "../../plugin/turntable.js"
+        "gulp"             : "/node_modules/gulp/",
+        "gulp-imagemin"    : "/node_modules/gulp-imagemin",
+        "imagemin-pngquant": "/node_modules/imagemin-pngquant",
+        "gulp-sass"        : "/node_modules/gulp-sass",
+        "gulp-minify-css"  : "/node_modules/gulp-minify-css",
+        "gulp-base64"      : "/node_modules/gulp-base64",
+        "gulp-browserify"  : "/node_modules/gulp-browserify",
+        "gulp-uglify"      : "/node_modules/gulp-uglify",
+        "gulp-htmlmin"     : "/node_modules/gulp-htmlmin",
+        "gulp-include-html": "/node_modules/gulp-include-html",
+
+        "jq"               : "../../jq.js",
+        "base"             : "../../ui/base.js",
+        "ui"               : "../../ui/ui.js",
+        "carousel"         : "../../plugin/carousel.js",
+        "customalert"      : "../../plugin/customalert.js",
+        "flip"             : "../../plugin/flip.js",
+        "picpager"         : "../../plugin/picpager.js",
+        "scratchcard"      : "../../plugin/scratchcard.js",
+        "scroll"           : "../../plugin/scroll.js",
+        "swatchbook"       : "../../plugin/swatchbook.js",
+        "turntable"        : "../../plugin/turntable.js"
     }
 }
