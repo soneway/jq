@@ -19,7 +19,6 @@ var config = {
         watch : ['./css/**'],
         //输出文件夹
         dest  : out + 'css',
-        base  : '../../',
         //是否压缩
         isPack: undefined
     },
@@ -60,7 +59,7 @@ var gulp = require('gulp');
             .pipe(imagemin({
                 progressive: true,
                 svgoPlugins: [{removeViewBox: false}],
-                use        : [pngquant()]
+                use        : [pngquant({quality: '65-80'})]
             }))
             .pipe(gulp.dest(conf.dest));
     });
@@ -104,7 +103,7 @@ var gulp = require('gulp');
 
     //browserify编译合并,压缩文件js
     gulp.task('js', function () {
-        var task = gulp.src(conf.src, {base: conf.base})
+        var task = gulp.src(conf.src)
             //编译合并
             .pipe(browserify({
                 shim: conf.shim
