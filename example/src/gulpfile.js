@@ -31,7 +31,7 @@ var config = {
         shim  : {
             jq: {
                 path   : '../../jq.js',
-                //闭包中module是undefined,js代码中将按照没有模块化的方式运行,从而使得成员变量正常添加到全局变量(var a = require('jq')时,a的值将是window.$)
+                //闭包中module是undefined,js代码中将按照没有模块化的方式运行,从而使得成员变量正常添加到全局变量(var a = require(gulpDir +'jq')时,a的值将是window.$)
                 exports: '$'
             }
         }
@@ -43,16 +43,16 @@ var config = {
         isPack: undefined
     }
 };
-console.log(1);
-var gulp = require('gulp');
-console.log(2);
+
+var gulpDir = '/Users/soneway/node_modules/';
+var gulp = require(gulpDir + 'gulp');
 
 
 //img任务
 (function () {
     var conf = config.img;
-    var imagemin = require('gulp-imagemin');
-    var pngquant = require('imagemin-pngquant');
+    var imagemin = require(gulpDir + 'gulp-imagemin');
+    var pngquant = require(gulpDir + 'imagemin-pngquant');
 
     //图片压缩
     gulp.task('img', function () {
@@ -70,9 +70,9 @@ console.log(2);
 //css任务
 (function () {
     var conf = config.css;
-    var sass = require('gulp-sass');
-    var minifyCss = require('gulp-minify-css');
-    var base64 = require('gulp-base64');
+    var sass = require(gulpDir + 'gulp-sass');
+    var minifyCss = require(gulpDir + 'gulp-minify-css');
+    var base64 = require(gulpDir + 'gulp-base64');
 
     //编译sass,压缩css
     gulp.task('css', function () {
@@ -99,8 +99,8 @@ console.log(2);
 //js任务
 (function () {
     var conf = config.js;
-    var browserify = require('gulp-browserify');
-    var uglify = require('gulp-uglify');
+    var browserify = require(gulpDir + 'gulp-browserify');
+    var uglify = require(gulpDir + 'gulp-uglify');
 
     //browserify编译合并,压缩文件js
     gulp.task('js', function () {
@@ -123,8 +123,8 @@ console.log(2);
 //html任务
 (function () {
     var conf = config.html;
-    var htmlmin = require('gulp-htmlmin');
-    var includer = require('gulp-include-html');
+    var htmlmin = require(gulpDir + 'gulp-htmlmin');
+    var includer = require(gulpDir + 'gulp-include-html');
 
     //html编译和压缩
     gulp.task('html', function () {
