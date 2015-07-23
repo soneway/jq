@@ -7,7 +7,7 @@ $border-color: rgba(0, 0, 0, 0.1);
 @import "../../../plugin/customalert";
 
 //引入基础样式
-@import "scss/base";
+@import "lib/base";
 
 //引入面板样式
 @import "page/ui";

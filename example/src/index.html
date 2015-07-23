@@ -22,39 +22,19 @@
         </div>
         <!--loading end-->
 
-        <!--头部-->
-        <header id="header" class="head">
-
-            <!--一级面板标题-->
-            <div class="roottitle">
-                <a class="btnleft" href="#share">分享</a>
-                <h1 class="title"></h1>
-            </div>
-            <!--一级面板标题 end-->
-
-            <!--二级面板标题-->
-            <div class="subtitle">
-                <a id="btn-goback" class="btnleft btnback icon-left transition">返回</a>
-                <h1 class="title"></h1>
-            </div>
-            <!--二级面板标题 end-->
-
-            <a class="btnright btn-onsidebox icon-menu"></a>
-
-        </header>
-        <!--头部 end-->
+        @include('lib/header.html');
 
 
         <!--一级面板-->
-        @include('home.html');
-        @include('ui.html');
-        @include('carousel.html');
-        @include('flip.html');
-        @include('picpager.html');
-        @include('scroll.html');
-        @include('scratchcard.html');
-        @include('turntable.html');
-        @include('swatchbook.html');
+        @include('page/home.html');
+        @include('page/ui.html');
+        @include('page/carousel.html');
+        @include('page/flip.html');
+        @include('page/picpager.html');
+        @include('page/scroll.html');
+        @include('page/scratchcard.html');
+        @include('page/turntable.html');
+        @include('page/swatchbook.html');
         <!--一级面板 end-->
 
 
@@ -65,69 +45,17 @@
         </div>
         <!--嵌入的iframe页面 end-->
 
-        @include('sub.html');
-        @include('sub2.html');
-        @include('share.html');
+        @include('page/sub.html');
+        @include('page/sub2.html');
+        @include('page/share.html');
 
         <!--二级面板 end-->
 
-
-        <!--导航-->
-        <nav id="navbar">
-            <div class="navbox">
-                <div class="navlist">
-                    <a href="#home">核心库</a>
-                    <a href="#ui">UI库</a>
-                    <a href="#carousel">焦点图</a>
-                    <a href="#flip">3d旋转切换</a>
-                    <a href="#picpager">相册功能</a>
-                    <a href="#scroll">自定义滚动</a>
-                    <a href="#scratchcard">刮刮卡</a>
-                    <a href="#turntable">转盘抽奖</a>
-                    <a href="#swatchbook">扇形特效</a>
-                </div>
-            </div>
-        </nav>
-        <!--导航 end-->
+        @include('lib/navbar.html');
+        @include('page/sidebox.html');
 
     </div>
     <!--mainbox end-->
-
-    <!--sidebox-->
-    <div id="sidebox">
-        <div class="head">
-            <a class="btn-offsidebox btnleft btnback icon-left">关闭</a>
-            <h1 class="title">菜单</h1>
-        </div>
-
-        <div class="content ofauto">
-
-            <!--未登陆-->
-            <div class="tologin center">
-                <a class="sohulogo"></a>
-                <p class="icon_userid">
-                    <input type="text" id="userid" data-msg="用户名" class="notnull" placeholder="请输入用户名"/>
-                </p>
-                <p class="icon_password">
-                    <input type="password" id="password" data-msg="密码" class="notnull" placeholder="请输入密码"/>
-                </p>
-                <a id="btn_login" class="btn">登录</a>
-                <div class="other_login">
-                    <p>其他登录方式：</p>
-                    <div>
-                        <a onclick="jtool.otherLogin('qq')" class="qq"></a>
-                        <a onclick="jtool.otherLogin('sina')" class="sina"></a>
-                        <a onclick="jtool.otherLogin('renren')" class="renren"></a>
-                        <a onclick="jtool.otherLogin('baidu')" class="baidu"></a>
-                        <a onclick="jtool.otherLogin('taobao')" class="taobao"></a>
-                    </div>
-                </div>
-            </div>
-            <!--未登陆 end-->
-
-        </div>
-    </div>
-    <!--sidebox end-->
 
     <!--主代码-->
     <script type="text/javascript" src="js/index.js"></script>

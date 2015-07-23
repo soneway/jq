@@ -39,7 +39,7 @@ var config = {
     },
     html: {
         src   : ['./*.html'],
-        watch : ['./*.html', './include/**'],
+        watch : ['./*.html', './html/**'],
         dest  : out,
         isPack: undefined
     }
@@ -129,7 +129,7 @@ gulp.task('html', function () {
             //include语法
             include: '@include',
             //base目录
-            baseDir: './include/'
+            baseDir: './html/'
         }))
         .pipe(gulp.dest(conf.dest));
 
