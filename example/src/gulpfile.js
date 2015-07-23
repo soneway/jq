@@ -1,4 +1,4 @@
-//npm install gulp gulp-sass gulp-minify-css gulp-browserify gulp-uglify gulp-imagemin imagemin-pngquant gulp-htmlmin gulp-base64 --save-dev
+//npm install gulp gulp-sass gulp-minify-css gulp-browserify gulp-uglify gulp-imagemin imagemin-pngquant gulp-base64 gulp-include-html gulp-htmlmin --save-dev
 'use strict';
 
 //输出文件夹
@@ -39,7 +39,7 @@ var config = {
     },
     html: {
         src: ['./*.html'],
-        watch: ['./*.html'],
+        watch: ['./*.html', './_include/**'],
         dest: out,
         isPack: undefined
     }
@@ -117,22 +117,26 @@ gulp.task('js', function () {
 //html任务
 //html压缩
 var htmlmin = require('gulp-htmlmin');
+var includer = require('gulp-include-html');
 gulp.task('html', function () {
     var conf = config.html;
 
-    if (conf) {
-        var task = gulp.src(conf.src)
-            .pipe(gulp.dest(conf.dest));
+    var task = gulp.src(conf.src)
+        //include编译
+        .pipe(includer({
+            include: '@include',
+            baseDir: './_include/'
+        }))
+        .pipe(gulp.dest(conf.dest));
 
-        if (conf.isPack === undefined ? isPack : conf.isPack) {
-            task.pipe(htmlmin({
-                collapseWhitespace: true,
-                removeComments: true,
-                minifyJS: true,
-                minifyCSS: true
-            }))
-                .pipe(gulp.dest(conf.dest));
-        }
+    if (conf.isPack === undefined ? isPack : conf.isPack) {
+        task.pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true,
+            minifyJS: true,
+            minifyCSS: true
+        }))
+            .pipe(gulp.dest(conf.dest));
     }
 });
 
