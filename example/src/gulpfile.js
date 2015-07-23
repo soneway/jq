@@ -49,13 +49,13 @@ var gulp = require('gulp');
 
 
 //img任务
-//图片压缩
-var imagemin = require('gulp-imagemin');
-var pngquant = require('imagemin-pngquant');
-gulp.task('img', function () {
+(function () {
     var conf = config.img;
+    var imagemin = require('gulp-imagemin');
+    var pngquant = require('imagemin-pngquant');
 
-    if (conf) {
+    //图片压缩
+    gulp.task('img', function () {
         gulp.src(conf.src)
             .pipe(imagemin({
                 progressive: true,
@@ -63,86 +63,93 @@ gulp.task('img', function () {
                 use        : [pngquant()]
             }))
             .pipe(gulp.dest(conf.dest));
-    }
-});
+    });
+})();
 
 
 //css任务
-//编译sass,压缩css
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var base64 = require('gulp-base64');
-gulp.task('css', function () {
+(function () {
     var conf = config.css;
+    var sass = require('gulp-sass');
+    var minifyCss = require('gulp-minify-css');
+    var base64 = require('gulp-base64');
 
-    var task = gulp.src(conf.src)
-        //编译
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(conf.dest));
-
-    //压缩
-    if (conf.isPack === undefined ? isPack : conf.isPack) {
-        task.pipe(minifyCss())
-            .pipe(base64({
-                //排除匹配的
-                exclude     : [/^http:\/\/.+$/i],
-                //小于该设定K数的文件就编码
-                maxImageSize: 5 * 1024
-            }))
+    //编译sass,压缩css
+    gulp.task('css', function () {
+        var task = gulp.src(conf.src)
+            //编译
+            .pipe(sass().on('error', sass.logError))
             .pipe(gulp.dest(conf.dest));
-    }
-});
+
+        //压缩
+        if (conf.isPack === undefined ? isPack : conf.isPack) {
+            task.pipe(minifyCss())
+                .pipe(base64({
+                    //排除匹配的
+                    exclude     : [/^http:\/\/.+$/i],
+                    //小于该设定K数的文件就编码
+                    maxImageSize: 5 * 1024
+                }))
+                .pipe(gulp.dest(conf.dest));
+        }
+    });
+})();
 
 
 //js任务
-//browserify编译合并,压缩文件js
-var browserify = require('gulp-browserify');
-var uglify = require('gulp-uglify');
-gulp.task('js', function () {
+(function () {
     var conf = config.js;
+    var browserify = require('gulp-browserify');
+    var uglify = require('gulp-uglify');
 
-    var task = gulp.src(conf.src, {base: conf.base})
-        //编译合并
-        .pipe(browserify({
-            shim: conf.shim
-        }))
-        .pipe(gulp.dest(conf.dest));
-
-    //压缩
-    if (conf.isPack === undefined ? isPack : conf.isPack) {
-        task.pipe(uglify())
+    //browserify编译合并,压缩文件js
+    gulp.task('js', function () {
+        var task = gulp.src(conf.src, {base: conf.base})
+            //编译合并
+            .pipe(browserify({
+                shim: conf.shim
+            }))
             .pipe(gulp.dest(conf.dest));
-    }
-});
+
+        //压缩
+        if (conf.isPack === undefined ? isPack : conf.isPack) {
+            task.pipe(uglify())
+                .pipe(gulp.dest(conf.dest));
+        }
+    });
+})();
 
 
 //html任务
-//html压缩
-var htmlmin = require('gulp-htmlmin');
-var includer = require('gulp-include-html');
-gulp.task('html', function () {
+(function () {
     var conf = config.html;
+    var htmlmin = require('gulp-htmlmin');
+    var includer = require('gulp-include-html');
 
-    var task = gulp.src(conf.src)
-        //include编译
-        .pipe(includer({
-            //include语法
-            include: '@include',
-            //base目录
-            baseDir: './html/'
-        }))
-        .pipe(gulp.dest(conf.dest));
-
-    if (conf.isPack === undefined ? isPack : conf.isPack) {
-        task.pipe(htmlmin({
-            collapseWhitespace: true,
-            removeComments    : true,
-            minifyJS          : true,
-            minifyCSS         : true
-        }))
+    //html编译和压缩
+    gulp.task('html', function () {
+        var task = gulp.src(conf.src)
+            //include编译
+            .pipe(includer({
+                //include语法
+                include: '@include',
+                //base目录
+                baseDir: './html/'
+            }))
             .pipe(gulp.dest(conf.dest));
-    }
-});
+
+        //压缩
+        if (conf.isPack === undefined ? isPack : conf.isPack) {
+            task.pipe(htmlmin({
+                collapseWhitespace: true,
+                removeComments    : true,
+                minifyJS          : true,
+                minifyCSS         : true
+            }))
+                .pipe(gulp.dest(conf.dest));
+        }
+    });
+})();
 
 
 //监听任务
