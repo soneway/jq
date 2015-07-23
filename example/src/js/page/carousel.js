@@ -18,7 +18,11 @@ module.exports = function ($this, isInit) {
             });
         });
 
-        $('#img_car').carousel();
+        var html = '';
+        for (var i = 0, len = 5; i < len; i++) {
+            html += '<img src="img/' + i + '.jpg"/>';
+        }
+        $('#img_car').html(html).carousel();
     }
 };
 

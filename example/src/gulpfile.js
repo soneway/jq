@@ -7,40 +7,40 @@ var out = '../dist/';
 var isPack = 1;
 //配置对象
 var config = {
-    img: {
-        src: ['./img/**'],
+    img : {
+        src  : ['./img/**'],
         watch: ['./img/**'],
-        dest: out + 'img'
+        dest : out + 'img'
     },
-    css: {
+    css : {
         //源文件
-        src: ['./css/*.scss'],
+        src   : ['./css/*.scss'],
         //监听文件
-        watch: ['./css/**'],
+        watch : ['./css/**'],
         //输出文件夹
-        dest: out + 'css',
-        base: '../../',
+        dest  : out + 'css',
+        base  : '../../',
         //是否压缩
         isPack: undefined
     },
-    js: {
-        src: ['./js/*.js'],
-        watch: ['./js/**'],
-        dest: out + 'js',
+    js  : {
+        src   : ['./js/*.js'],
+        watch : ['./js/**'],
+        dest  : out + 'js',
         isPack: undefined,
         //模块化js文件shim
-        shim: {
+        shim  : {
             jq: {
-                path: '../../jq.js',
+                path   : '../../jq.js',
                 //闭包中module是undefined,js代码中将按照没有模块化的方式运行,从而使得成员变量正常添加到全局变量(var a = require('jq')时,a的值将是window.$)
                 exports: '$'
             }
         }
     },
     html: {
-        src: ['./*.html'],
-        watch: ['./*.html', './_include/**'],
-        dest: out,
+        src   : ['./*.html'],
+        watch : ['./*.html', './include/**'],
+        dest  : out,
         isPack: undefined
     }
 };
@@ -60,7 +60,7 @@ gulp.task('img', function () {
             .pipe(imagemin({
                 progressive: true,
                 svgoPlugins: [{removeViewBox: false}],
-                use: [pngquant()]
+                use        : [pngquant()]
             }))
             .pipe(gulp.dest(conf.dest));
     }
@@ -84,8 +84,10 @@ gulp.task('css', function () {
     if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(minifyCss())
             .pipe(base64({
-                exclude: [/^http:\/\/.+$/i], //排除匹配的
-                maxImageSize: 5 * 1024 //小于该设定K数的文件就编码
+                //排除匹配的
+                exclude     : [/^http:\/\/.+$/i],
+                //小于该设定K数的文件就编码
+                maxImageSize: 5 * 1024
             }))
             .pipe(gulp.dest(conf.dest));
     }
@@ -124,17 +126,19 @@ gulp.task('html', function () {
     var task = gulp.src(conf.src)
         //include编译
         .pipe(includer({
+            //include语法
             include: '@include',
-            baseDir: './_include/'
+            //base目录
+            baseDir: './include/'
         }))
         .pipe(gulp.dest(conf.dest));
 
     if (conf.isPack === undefined ? isPack : conf.isPack) {
         task.pipe(htmlmin({
             collapseWhitespace: true,
-            removeComments: true,
-            minifyJS: true,
-            minifyCSS: true
+            removeComments    : true,
+            minifyJS          : true,
+            minifyCSS         : true
         }))
             .pipe(gulp.dest(conf.dest));
     }
