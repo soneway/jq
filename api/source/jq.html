@@ -436,7 +436,8 @@
             },
 
 <span id='global-method-empty'>            /**
-</span>             * 元素内容置为空
+</span>             * html清空
+             * @returns {$init}
              */
             empty: function () {
                 return this.html('');
@@ -850,8 +851,8 @@
 
 <span id='global-method-jsonp'>        /**
 </span>         * 跨域请求函数(异步加载js函数)
-         * @param url 请求地址
-         * @param fn 回调函数
+         * @param {string} url 请求地址
+         * @param {Function} fn 回调函数
          */
         $.jsonp = (function () {
             var headEl = document.getElementsByTagName('head')[0];
@@ -872,7 +873,7 @@
 
 <span id='global-method-ajax'>        /**
 </span>         * ajax请求函数
-         * @param opts ajax请求配置项
+         * @param {Object} opts ajax请求配置项
          */
         $.ajax = (function () {
             var defaults = {
@@ -918,6 +919,11 @@
 
     })();
 
+    //CommonJS
+    if (typeof exports === 'object') {
+        module.exports = $;
+        return;
+    }
     //AMD
     if (typeof define === 'function') {
         define(function () {
@@ -925,15 +931,10 @@
         });
         return;
     }
-    //CommonJS
-    if (typeof exports === 'object') {
-        module.exports = $;
-        return;
-    }
 
     //添加到全局变量
     window.jq = window.$ = $;
 
-})(this);</pre>
+})(window);</pre>
 </body>
 </html>
