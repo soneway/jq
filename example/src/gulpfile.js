@@ -44,15 +44,14 @@ var config = {
     }
 };
 
-var gulpDir = '/Users/soneway/node_modules/';
-var gulp = require(gulpDir + 'gulp');
+var gulp = require('gulp');
 
 
 //img任务
 (function () {
     var conf = config.img;
-    var imagemin = require(gulpDir + 'gulp-imagemin');
-    var pngquant = require(gulpDir + 'imagemin-pngquant');
+    var imagemin = require('gulp-imagemin');
+    var pngquant = require('imagemin-pngquant');
 
     //图片压缩
     gulp.task('img', function () {
@@ -70,9 +69,9 @@ var gulp = require(gulpDir + 'gulp');
 //css任务
 (function () {
     var conf = config.css;
-    var sass = require(gulpDir + 'gulp-sass');
-    var minifyCss = require(gulpDir + 'gulp-minify-css');
-    var base64 = require(gulpDir + 'gulp-base64');
+    var sass = require('gulp-sass');
+    var minifyCss = require('gulp-minify-css');
+    var base64 = require('gulp-base64');
 
     //编译sass,压缩css
     gulp.task('css', function () {
@@ -99,8 +98,8 @@ var gulp = require(gulpDir + 'gulp');
 //js任务
 (function () {
     var conf = config.js;
-    var browserify = require(gulpDir + 'gulp-browserify');
-    var uglify = require(gulpDir + 'gulp-uglify');
+    var browserify = require('gulp-browserify');
+    var uglify = require('gulp-uglify');
 
     //browserify编译合并,压缩文件js
     gulp.task('js', function () {
@@ -123,8 +122,8 @@ var gulp = require(gulpDir + 'gulp');
 //html任务
 (function () {
     var conf = config.html;
-    var htmlmin = require(gulpDir + 'gulp-htmlmin');
-    var includer = require(gulpDir + 'gulp-include-html');
+    var htmlmin = require('gulp-htmlmin');
+    var includer = require('gulp-include-html');
 
     //html编译和压缩
     gulp.task('html', function () {
