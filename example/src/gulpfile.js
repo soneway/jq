@@ -50,8 +50,15 @@ var gulpDir = 'D:/node_modules/';
 function gr(name) {
     return require(gulpDir + name);
 }
-
 var gulp = require('gulp');
+
+
+//出错处理
+function errorHandler(e) {
+    console.log(e.plugin + ': ' + e.message);
+}
+//出错处理对象
+var plumber = gr('gulp-plumber');
 
 
 //img任务
@@ -63,6 +70,9 @@ var gulp = require('gulp');
     //图片压缩
     gulp.task('img', function () {
         gulp.src(conf.src)
+            .pipe(plumber({
+                errorHandler: errorHandler
+            }))
             .pipe(imagemin({
                 progressive: true,
                 svgoPlugins: [{removeViewBox: false}],
@@ -83,8 +93,11 @@ var gulp = require('gulp');
     //编译sass,压缩css
     gulp.task('css', function () {
         var task = gulp.src(conf.src)
+            .pipe(plumber({
+                errorHandler: errorHandler
+            }))
             //编译
-            .pipe(sass().on('error', sass.logError))
+            .pipe(sass())
             .pipe(gulp.dest(conf.dest));
 
         //压缩
@@ -111,6 +124,9 @@ var gulp = require('gulp');
     //browserify编译合并,压缩文件js
     gulp.task('js', function () {
         var task = gulp.src(conf.src)
+            .pipe(plumber({
+                errorHandler: errorHandler
+            }))
             //编译合并
             .pipe(browserify({
                 shim: conf.shim
@@ -135,6 +151,9 @@ var gulp = require('gulp');
     //html编译和压缩
     gulp.task('html', function () {
         var task = gulp.src(conf.src)
+            .pipe(plumber({
+                errorHandler: errorHandler
+            }))
             //include编译
             .pipe(includer({
                 //include语法
