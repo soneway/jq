@@ -419,7 +419,8 @@
             },
 
             /**
-             * 元素内容置为空
+             * html清空
+             * @returns {$init}
              */
             empty: function () {
                 return this.html('');
@@ -833,8 +834,8 @@
 
         /**
          * 跨域请求函数(异步加载js函数)
-         * @param url 请求地址
-         * @param fn 回调函数
+         * @param {string} url 请求地址
+         * @param {Function} fn 回调函数
          */
         $.jsonp = (function () {
             var headEl = document.getElementsByTagName('head')[0];
@@ -855,7 +856,7 @@
 
         /**
          * ajax请求函数
-         * @param opts ajax请求配置项
+         * @param {Object} opts ajax请求配置项
          */
         $.ajax = (function () {
             var defaults = {
