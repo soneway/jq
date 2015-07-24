@@ -1,4 +1,4 @@
-//npm install gulp gulp-sass gulp-minify-css gulp-browserify gulp-uglify gulp-imagemin imagemin-pngquant gulp-base64 gulp-include-html gulp-htmlmin --save-dev
+//npm install gulp gulp-plumber gulp-sass gulp-minify-css gulp-browserify gulp-uglify gulp-imagemin imagemin-pngquant gulp-base64 gulp-include-html gulp-htmlmin --save-dev
 'use strict';
 
 //输出文件夹
@@ -47,6 +47,7 @@ var config = {
 
 //gulp插件的require函数(避免win上面初始化太久)
 var gulpDir = 'D:/node_modules/';
+//var gulpDir = '';
 function gr(name) {
     return require(gulpDir + name);
 }
