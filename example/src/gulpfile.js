@@ -45,7 +45,7 @@ var config = {
 };
 
 
-//gulp插件的require函数
+//gulp插件的require函数(避免win上面初始化太久)
 var gulpDir = 'D:/node_modules/';
 function gr(name) {
     return require(gulpDir + name);
@@ -53,7 +53,7 @@ function gr(name) {
 var gulp = require('gulp');
 
 
-//出错处理
+//出错处理(避免任务停止)
 function errorHandler(e) {
     console.log(e.plugin + ': ' + e.message);
 }
