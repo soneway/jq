@@ -55,7 +55,7 @@ var gulp = require('gulp');
 
 //出错处理(避免任务停止)
 function errorHandler(e) {
-    console.log(e.plugin + ': ' + e.message);
+    console.log('ERROR IN ' + e.plugin + ': ' + e.message);
 }
 //出错处理对象
 var plumber = gr('gulp-plumber');
