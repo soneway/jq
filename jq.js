@@ -17,6 +17,7 @@
             tmpArray = [],
             slice = tmpArray.slice,
             indexOf = tmpArray.indexOf,
+            cssPrefix = '-webkit-',
             oneSelReg = /^[\w-]*$/,
             spaceReg = /\s+/g;
 
@@ -486,19 +487,19 @@
                 if (typeof key === 'string' && val === undefined) {
                     //计算样式
                     var style = window.getComputedStyle(this[0]);
-                    return style[key];
+                    return style[key] || style[cssPrefix + key];
                 }
                 return this.forEach(function (el) {
                     var style = el.style;
                     //$().css(obj)
                     if ($.isObject(key)) {
                         for (var p in key) {
-                            style[p] = key[p];
+                            style[p] = style[cssPrefix + p] = key[p];
                         }
                     }
                     //$().css(key,val)
                     else {
-                        style[key] = val;
+                        style[key] = style[cssPrefix + key] = val;
                     }
                 });
             },
@@ -598,11 +599,11 @@
             offset: function () {
                 var el = this[0];
                 return el === window ? {
-                    left: 0,
-                    top: 0,
-                    right: 0,
+                    left  : 0,
+                    top   : 0,
+                    right : 0,
                     bottom: 0,
-                    width: window.innerWidth,
+                    width : window.innerWidth,
                     height: window.innerHeight
                 } : el.getBoundingClientRect();
             },
@@ -861,7 +862,7 @@
         $.ajax = (function () {
             var defaults = {
                 method: 'get',
-                async: true
+                async : true
             };
 
             //将data转换为str函数
