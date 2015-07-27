@@ -53,7 +53,6 @@
             function init() {
                 //兼容安卓2.x
                 $.isAndroid2 && $this.css({
-                    '-webkit-backface-visibility': 'visible',
                     'backface-visibility': 'visible'
                 });
 
@@ -79,7 +78,6 @@
                     //设定一定延时,防止计算能力差的浏览器(ucweb)打不开swatchbook
                     setTimeout(function () {
                         $this.css({
-                            '-webkit-transform': transformStr,
                             'transform': transformStr
                         });
                     }, i * openDelay);
@@ -97,7 +95,6 @@
                     else {
                         currentIdx = itemIdx;
                         $item.css({
-                            '-webkit-transform': 'rotateZ(0deg)',
                             'transform': 'rotateZ(0deg)'
                         }).addClass('selected');
                         rotateSiblings($item, itemIdx);
@@ -114,7 +111,6 @@
                 }
                 else {
                     $items.css({
-                        '-webkit-transform': 'rotateZ(0deg)',
                         'transform': 'rotateZ(0deg)'
                     });
                 }
@@ -140,7 +136,6 @@
                     var transformStr = 'rotateZ(' + rotateVal + 'deg)';
 
                     $(this).css({
-                        '-webkit-transform': transformStr,
                         'transform': transformStr
                     });
                 });

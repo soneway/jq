@@ -7,15 +7,15 @@
     $.fn.turntable = function (options) {
         $.fn.turntable.defaults = {
             //奖品格数
-            count: 12,
+            count    : 12,
             //旋转度数
             rotateDeg: 3600,
             //旋转时长
-            duration: 7000,
+            duration : 7000,
             //动画fx
-            timeFx: 'cubic-bezier(0.42,0,0.25,1)',
+            timeFx   : 'cubic-bezier(0.42,0,0.25,1)',
             //校正值
-            offset: 0
+            offset   : 0
         };
 
         //每个元素执行
@@ -74,11 +74,11 @@
                     setTimeout(function () {
                         //动画
                         $pointer.css({
-                            '-webkit-transition': '-webkit-transform ' + transition,
-                            'transition': 'transform ' + transition,
-                            '-webkit-transform': transform,
                             'transform': transform
                         });
+                        var pointerEl = $pointer[0];
+                        pointerEl.style['-webkit-transition'] = '-webkit-transform ' + transition;
+                        pointerEl.style['transition'] = 'transform ' + transition;
 
                         //动画完成后回调
                         clearTimeout(timeout);//清理上一个timeout

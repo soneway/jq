@@ -48,7 +48,7 @@
                     index = 0,
                     startX, startY,
                     swipSpan, isAnimating,
-                    duration = parseFloat($wrap.css('transition-duration') || $wrap.css('-webkit-transition-duration')) * 1000;
+                    duration = parseFloat($wrap.css('transition-duration')) * 1000;
 
                 //移动到函数
                 function slide(direction) {
@@ -90,7 +90,6 @@
                 //移动函数
                 function translate($this, val) {
                     $this.css({
-                        '-webkit-transform': val,
                         'transform': val
                     });
                 }

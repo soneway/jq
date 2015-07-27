@@ -47,7 +47,7 @@
             function initEvent() {
                 var itemCount = $items.length,
                     index = 0,
-                    duration = parseFloat($items.css('transition-duration') || $items.css('-webkit-transition-duration')) * 1000,
+                    duration = parseFloat($items.css('transition-duration')) * 1000,
                     startX, startY,
                     swipSpan, isAnimating;
 
@@ -66,14 +66,12 @@
                             if (i === index) {
                                 transform = isVertical ? 'rotate3d(1,0,0,' + -swipSpan + 'deg)' : 'rotate3d(0,1,0,' + swipSpan + 'deg)';
                                 $this.css({
-                                    '-webkit-transform': transform,
                                     'transform': transform
                                 });
                             }
                             else {
                                 transform = isVertical ? 'rotate3d(1,0,0,' + (180 - swipSpan) + 'deg)' : 'rotate3d(0,1,0,' + -(180 - swipSpan) + 'deg)';
                                 $this.css({
-                                    '-webkit-transform': transform,
                                     'transform': transform
                                 });
                             }
@@ -89,14 +87,12 @@
                             if (i === index) {
                                 transform = isVertical ? 'rotate3d(1,0,0,' + -(swipSpan ? 0 : -360) + 'deg)' : 'rotate3d(0,1,0,' + (swipSpan ? 0 : -360) + 'deg)';
                                 $this.addClass('visible').css({
-                                    '-webkit-transform': transform,
                                     'transform': transform
                                 });
                             }
                             else {
                                 transform = isVertical ? 'rotate3d(1,0,0,' + -(swipSpan ? 180 : -180) + 'deg)' : 'rotate3d(0,1,0,' + (swipSpan ? 180 : -180) + 'deg)';
                                 $this.removeClass('visible').css({
-                                    '-webkit-transform': transform,
                                     'transform': transform
                                 });
                             }

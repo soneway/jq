@@ -170,7 +170,7 @@
         //面板元素
             $panel = $('.panel'),
         //panel切换动画duration
-            duration = parseFloat($panel.css('transition-duration') || $panel.css('-webkit-transition-duration')) * 1000,
+            duration = parseFloat($panel.css('transition-duration')) * 1000,
         //历史记录对象
             history = $.history = [],
         //header元素

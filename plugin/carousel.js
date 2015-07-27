@@ -130,7 +130,6 @@
 
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
                     $wrap.css({
-                        '-webkit-transform': transform,
                         'transform': transform
                     });
                 }

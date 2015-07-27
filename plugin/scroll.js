@@ -92,7 +92,6 @@
 
                     var transform = 'translate3d(' + (isVertical ? '0,' + (translateVal = x) + 'px,0' : (translateVal = x) + 'px,0,0') + ')';
                     $items.css({
-                        '-webkit-transform': transform,
                         'transform': transform
                     });
                 }
