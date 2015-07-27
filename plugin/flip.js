@@ -115,17 +115,15 @@
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
-                    if (!isAnimating) {
-                        var touch = evt.targetTouches[0];
-                        //记录触摸开始位置
-                        startX = touch.pageX;
-                        startY = touch.pageY;
-                        //重置swipSpan
-                        swipSpan = 0;
+                    var touch = evt.targetTouches[0];
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                    //重置swipSpan
+                    swipSpan = 0;
 
-                        //去掉动画
-                        $items.addClass('notrans');
-                    }
+                    //去掉动画
+                    $items.addClass('notrans');
                 });
 
                 //触摸移动事件
