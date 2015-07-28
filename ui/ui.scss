@@ -43,7 +43,9 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
 /*head类*/
 .head
 {
-    @extend %ph_palt;
+    @extend %ph_pflt;
+    height: $head-height;
+    line-height: $head-height;
     width: 100%;
     z-index: 1;
 
@@ -125,11 +127,6 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     @include mx_transform(translate3d(100%, 0, 0));
     @extend .transform;
 
-    .head
-    {
-        line-height: $head-height;
-    }
-
     .content
     {
         height: 100%;
@@ -146,9 +143,6 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
 /*头部*/
 #header
 {
-    @extend %ph_pflt;
-    height: $head-height;
-    line-height: $head-height;
     @extend .transform;
 
     & > div
