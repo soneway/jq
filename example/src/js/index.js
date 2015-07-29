@@ -1,4 +1,4 @@
-﻿var $ = require('jq');
+var $ = require('jq');
 require('base');
 require('ui');
 require('customalert');

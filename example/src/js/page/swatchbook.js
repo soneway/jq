@@ -1,4 +1,4 @@
-﻿//扇形特效
+//扇形特效
 require('swatchbook');
 
 module.exports = function ($this, isInit) {

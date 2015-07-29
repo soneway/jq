@@ -1,4 +1,4 @@
-﻿//相册功能
+//相册功能
 require('picpager');
 
 module.exports = function ($this, isInit) {

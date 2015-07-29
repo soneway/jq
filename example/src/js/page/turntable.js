@@ -1,4 +1,4 @@
-﻿//转盘抽奖
+//转盘抽奖
 require('turntable');
 
 //文档jq对象

@@ -1,4 +1,4 @@
-﻿//焦点图
+//焦点图
 require('carousel');
 
 module.exports = function ($this, isInit) {

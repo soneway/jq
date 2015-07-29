@@ -1,4 +1,4 @@
-﻿//刮刮卡
+//刮刮卡
 require('scratchcard');
 
 module.exports = function ($this, isInit) {

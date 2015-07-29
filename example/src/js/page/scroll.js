@@ -1,4 +1,4 @@
-﻿//自定义滚动
+//自定义滚动
 require('scroll');
 
 module.exports = function ($this, isInit) {

@@ -1,4 +1,4 @@
-﻿//3d旋转切换
+//3d旋转切换
 require('flip');
 
 module.exports = function ($this, isInit) {
