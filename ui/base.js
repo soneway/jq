@@ -62,6 +62,11 @@
     //文档加载完成
     $(function () {
 
+        setTimeout(function () {
+            //添加class
+            $body.addClass('loaded');
+        }, 100);
+
         //a标签touch
         $doc.on('touchstart', 'a', function () {
             $(this).addClass('focus');
@@ -77,9 +82,9 @@
                     $qrcode = $('<div id="qrcode"></div>');
                     $body.append($qrcode);
                     new QRCode($qrcode[0], {
-                        width: $qrcode.width(),
+                        width : $qrcode.width(),
                         height: $qrcode.height(),
-                        text: location.href
+                        text  : location.href
                     });
                 }
                 $doc.on('click', '#qrcode', function () {
@@ -91,13 +96,6 @@
         //pc端mouse转touch事件
         !$.isMobi && $.jsonp('http://img.gd.sohu.com/static/v1/desktouch.js');
 
-    });
-
-
-    //window.onload
-    $(window).on('load', function () {
-        //添加class
-        $body.addClass('loaded');
     });
 
 })(window, $);
