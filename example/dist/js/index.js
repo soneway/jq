@@ -2769,7 +2769,7 @@ module.exports=require('XSF+M5');
 
             if (!hash) {
                 $toHide = history.pop();
-                $toShow = history[history.length - 1];
+                $toShow = history[history.length - 1] || $($.homeSelector);
                 hash = '#' + $toShow.attr('id');
             }
             else {
@@ -2797,14 +2797,34 @@ module.exports=require('XSF+M5');
                     }
                 });
 
+                //标题,navbar状态(与面板切换无关的操作)
+                var showRole = $toShow.attr('data-role');
+                if (showRole === 'root') {
+                    //设置标题
+                    $.setTitle($toShow.attr('title'));
+
+                    //显示navbar
+                    $.toggleNavbar(true);
+
+                    //header内容切换
+                    $header.removeClass('onsubtitle');
+                }
+                else {
+                    //设置二级页面标题
+                    $.setSubtitle($toShow.attr('title'));
+
+                    //隐藏navbar
+                    $.toggleNavbar(false);
+
+                    //header内容切换
+                    $header.addClass('onsubtitle');
+                }
+
 
                 //没有隐藏面板的特殊情况(页面第一次加载)
                 if (!$toHide) {
                     //显示panel和导航
                     $toShow.addClass('show opened');
-
-                    //设置标题
-                    $.setTitle($toShow.attr('title'));
 
                     //显示时调用函数
                     toShowPanel($toShow);
@@ -2819,8 +2839,7 @@ module.exports=require('XSF+M5');
                 //面板切换
                 if ('#' + $toHide.attr('id') !== hash) {
 
-                    var showRole = $toShow.attr('data-role'),
-                        hideRole = $toHide.attr('data-role');
+                    var hideRole = $toHide.attr('data-role');
 
                     //1.立即操作
                     $toShow.addClass('show');
@@ -2832,15 +2851,6 @@ module.exports=require('XSF+M5');
                     setTimeout(function () {
                         //显示一级面板
                         if (showRole === 'root') {
-
-                            //设置标题
-                            $.setTitle($toShow.attr('title'));
-
-                            //显示navbar
-                            $.toggleNavbar(true);
-
-                            //header内容切换
-                            $header.removeClass('onsubtitle');
 
                             //一级->一级时无动画
                             if (hideRole === 'root') {
@@ -2857,15 +2867,6 @@ module.exports=require('XSF+M5');
                         }
                         //显示二级面板
                         else {
-
-                            //设置二级页面标题
-                            $.setSubtitle($toShow.attr('title'));
-
-                            //隐藏navbar
-                            $.toggleNavbar(false);
-
-                            //header内容切换
-                            $header.addClass('onsubtitle');
 
                             $toShow.removeClass('notrans');
                             $toHide.removeClass('notrans');
@@ -2965,14 +2966,9 @@ module.exports=require('XSF+M5');
         //导航条拨动
         $navbox.length > 0 && $navbox.scroll();
 
-        //初始化加载index
-        $.loadPanel($.homeSelector);
-
-        //加载指定panel
+        //初始化加载指定panel或者首页
         var hash = location.hash;
-        hash && setTimeout(function () {
-            $.loadPanel(hash);
-        }, 400);//加上一定ms数保证panel加载动画流畅
+        $.loadPanel(hash || $.homeSelector);
 
     });
 
