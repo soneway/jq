@@ -4,7 +4,7 @@
 //输出文件夹
 var out = '../dist/';
 //是否压缩
-var isPack = 0;
+var isPack = 1;
 //配置对象
 var config = {
     img : {
