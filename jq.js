@@ -597,15 +597,7 @@
              * @returns {Object} 尺寸对象
              */
             offset: function () {
-                var el = this[0];
-                return el === window ? {
-                    left  : 0,
-                    top   : 0,
-                    right : 0,
-                    bottom: 0,
-                    width : window.innerWidth,
-                    height: window.innerHeight
-                } : el.getBoundingClientRect();
+                return this[0].getBoundingClientRect();
             },
 
             /**
@@ -632,8 +624,7 @@
              * @returns {boolean} 是否符合sel
              */
             is: function (sel) {
-                var el = this[0];
-                return sel && matchesSelector(el, sel);
+                return sel && matchesSelector(this[0], sel);
             },
 
             /**
