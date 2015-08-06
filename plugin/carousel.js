@@ -7,19 +7,19 @@
     $.fn.carousel = function (options) {
         $.fn.carousel.defaults = {
             //是否竖直方向滚动
-            isVertical: false,
+            isVertical   : false,
             //滑动阈值
             swipThreshold: 50,
             //是否自动轮播
-            isAutoPlay: true,
+            isAutoPlay   : true,
             //轮播inter
             autoPlayInter: 8000,
             //轮播回调函数
             slideCallback: null,
             //是否显示title
-            isShowTitle: true,
+            isShowTitle  : true,
             //是否显示pager
-            isShowPager: true
+            isShowPager  : true
         };
 
         //每个元素执行
@@ -117,7 +117,7 @@
                     }
                     else {
                         //滚动回调函数
-                        typeof slideCallback === 'function' && slideCallback(index);
+                        typeof slideCallback === 'function' && slideCallback.call($items[index], index);
                         //title
                         var title = $items.removeClass('current').eq(index).addClass('current').attr('data-title');
                         $title.removeClass('visible');
