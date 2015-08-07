@@ -340,3 +340,18 @@
 {
     @include mx_transform-style(preserve-3d);
 }
+
+
+//链接按钮
+%ph_abtn
+{
+    &.focus
+    {
+        background: #000;
+
+        & > *
+        {
+            opacity: 0.9;
+        }
+    }
+}
