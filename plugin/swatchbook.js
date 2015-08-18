@@ -1,4 +1,4 @@
-﻿/*
+/*
  * swatchbook.js
  * 扇形特效js
  */

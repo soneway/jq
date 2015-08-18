@@ -1,4 +1,4 @@
-﻿/*
+/*
  * picpager.js
  * 相册js
  */

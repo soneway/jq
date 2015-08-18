@@ -1,4 +1,4 @@
-﻿/*
+/*
  * turntable.js
  * 转盘抽奖js
  */

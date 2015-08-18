@@ -1,4 +1,4 @@
-﻿/*
+/*
  * scratchcard.js
  * 刮刮卡js
  */
