@@ -532,13 +532,6 @@
         module.exports = jtool;
         return;
     }
-    //AMD
-    if (typeof define === 'function') {
-        define(function () {
-            return jtool;
-        });
-        return;
-    }
 
     //添加到全局变量
     window.jtool = jtool;
