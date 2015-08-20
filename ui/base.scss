@@ -68,7 +68,7 @@ img
 a
 {
     outline: none;
-    color: $color;
+    color: inherit;
     text-decoration: none;
     cursor: pointer;
 }
@@ -116,6 +116,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     text-align: center;
     @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.9));
     background-color: #f8f8f8;
+    color: #333;
 
     &.focus
     {
