@@ -206,10 +206,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     background-color: $panel-bgcolor;
     @extend %ph_transtransf;
     @include mx_transform(translate3d(100%, 0, 0));
-    //-webkit-transition-property: -webkit-transform, -webkit-box-shadow;
-    //transition-property: transform, box-shadow;
-    //@include mx_transition-duration(5s);
-    @include mx_box-shadow(-2px 0 5px rgba(0, 0, 0, 0.3));
+    @include mx_box-shadow(-1px 0 5px rgba(0, 0, 0, 0.3));
 
     &[data-role=root]
     {
