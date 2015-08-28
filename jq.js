@@ -580,6 +580,7 @@
             appendTo: function (el) {
                 var $el = el instanceof $init ? el : $(el);
                 $el.append(this);
+                return this;
             },
 
             /**
@@ -590,6 +591,7 @@
             prependTo: function (el) {
                 var $el = el instanceof $init ? el : $(el);
                 $el.append(this, true);
+                return this;
             },
 
             /**

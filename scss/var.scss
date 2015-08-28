@@ -1,4 +1,4 @@
-//var
+﻿//var
 //移动端变量scss
 //包含默认变量,常用函数,常用点位符(全是sass运算相关的东西)
 //本文件中用//注释,可使生成文件中不包含注释信息
@@ -52,7 +52,7 @@
 }
 
 
-@mixin mx_transition-property($value) {
+@mixin mx_transition-property($value...) {
     -webkit-transition-property: $value;
     transition-property: $value;
 }
@@ -93,6 +93,30 @@
 @mixin mx_animation($value) {
     -webkit-animation: $value;
     animation: $value;
+}
+
+
+@mixin mx_animation-name($value) {
+    -webkit-animation-name: $value;
+    animation-name: $value;
+}
+
+
+@mixin mx_animation-duration($value) {
+    -webkit-animation-duration: $value;
+    animation-duration: $value;
+}
+
+
+@mixin mx_animation-iteration-count($value) {
+    -webkit-animation-iteration-count: $value;
+    animation-iteration-count: $value;
+}
+
+
+@mixin mx_animation-delay($value) {
+    -webkit-animation-delay: $value;
+    animation-delay: $value;
 }
 
 
@@ -354,4 +378,11 @@
             opacity: 0.9;
         }
     }
+}
+
+
+//无限动画
+%ph_infani
+{
+    @include mx_animation-iteration-count(infinite);
 }

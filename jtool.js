@@ -337,7 +337,7 @@
                     if (data.hasOwnProperty(p)) {
                         var txtEl = document.createElement('input');
 
-                        txtEl.type = 'text';
+                        txtEl.type = 'hidden';
                         txtEl.name = p;
                         txtEl.value = data[p];
                         formEl.appendChild(txtEl);

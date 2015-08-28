@@ -1,4 +1,4 @@
-/*
+﻿/*
 ui/base
 移动端基础样式
 包括样式重置,常用类等
@@ -142,6 +142,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .fade-out, .fade-in
 {
     @extend %ph_transall;
+    @include mx_transition-property(opacity);
 }
 
 
@@ -245,7 +246,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     z-index: 5;
     cursor: pointer; /*防止点击事件绑定不到(ios8)*/
     @extend %ph_transall;
-    //@include mx_transition(background-color 0.3s ease);
+    @include mx_transition-property(background-color, visibility);
     @extend %ph_center;
     @extend .ani_spinner;
 
@@ -256,7 +257,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 
         &:before, &:after
         {
-            visibility: hidden;
+            opacity: 0;
         }
     }
 
@@ -289,15 +290,14 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 {
     @extend %ph_pflt;
     @extend %ph_full;
-    z-index: 9999;
     background-color: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
+    z-index: -1;
     opacity: 0;
     @include ani_spinner($dc: #fff);
 
     &.visible
     {
-        visibility: visible;
+        z-index: 9999;
         opacity: 1;
     }
 }

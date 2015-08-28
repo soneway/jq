@@ -165,7 +165,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     .onsubtitle &
     {
         opacity: 0;
-        visibility: hidden;
+        z-index: -1;
     }
 }
 
@@ -174,7 +174,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
 .subtitle
 {
     opacity: 0;
-    visibility: hidden;
+    z-index: -1;
 
     .btnleft
     {
@@ -184,7 +184,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     .onsubtitle &
     {
         opacity: 1;
-        visibility: visible;
+        z-index: auto;
 
         .btnleft
         {
@@ -206,7 +206,10 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     background-color: $panel-bgcolor;
     @extend %ph_transtransf;
     @include mx_transform(translate3d(100%, 0, 0));
-    @include mx_box-shadow(-2px 0 0 rgba(0, 0, 0, 0.2));
+    //-webkit-transition-property: -webkit-transform, -webkit-box-shadow;
+    //transition-property: transform, box-shadow;
+    //@include mx_transition-duration(5s);
+    @include mx_box-shadow(-2px 0 5px rgba(0, 0, 0, 0.3));
 
     &[data-role=root]
     {
@@ -221,6 +224,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     &.opened
     {
         @include mx_transform(translate3d(0%, 0, 0));
+        //@include mx_box-shadow(-2px 0 5px rgba(0, 0, 0, 0.4));
     }
 
     .offheader &
