@@ -136,7 +136,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     .onsidebox &
     {
         @include mx_transform(translate3d(0, 0, 0));
-        @include mx_box-shadow(-4px 0 8px rgba(0, 0, 0, 0.3));
+        @include mx_box-shadow(-4px 0 8px rgba(0, 0, 0, 0.2));
     }
 }
 
