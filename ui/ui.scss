@@ -149,7 +149,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     {
         @extend %ph_palt;
         @extend %ph_full;
-        @extend %ph_transall;
+        @extend .transition;
     }
 
     .offheader &
@@ -204,7 +204,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     padding-top: $head-height;
     display: none;
     background-color: $panel-bgcolor;
-    @extend %ph_transtransf;
+    @extend .transform;
     @include mx_transform(translate3d(100%, 0, 0));
     @include mx_box-shadow(-1px 0 5px rgba(0, 0, 0, 0.3));
 
