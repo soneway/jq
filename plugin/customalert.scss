@@ -8,11 +8,13 @@ plugin/customalert
     @extend %ph_full;
     color: #333;
     background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    @extend %ph_center;
     /*动画*/
     @extend %ph_transall;
+    @include mx_transition-property(opacity, visibility);
     opacity: 0;
-    z-index: -1;
-    @extend %ph_center;
+    visibility: hidden;
 
     .box
     {
@@ -21,8 +23,8 @@ plugin/customalert
         @extend %ph_hauto;
         padding: 0 0 15px 0;
         border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.95);
-        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        @extend .center;
         /*动画*/
         @extend %ph_transtransf;
         @include mx_transform(scale3d(0, 0, 1));
@@ -32,7 +34,7 @@ plugin/customalert
     &.visible
     {
         opacity: 1;
-        z-index: 9999;
+        visibility: visible;
 
         .box
         {
@@ -71,6 +73,7 @@ plugin/customalert
         }
 
 
+        /*隐藏取消按钮*/
         .alert
         {
             #customalert-btncancel
