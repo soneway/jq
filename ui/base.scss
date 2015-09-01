@@ -142,7 +142,6 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .fade-out, .fade-in
 {
     @extend %ph_transall;
-    @include mx_transition-property(opacity);
 }
 
 
@@ -292,12 +291,10 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     @extend %ph_full;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
-    opacity: 0;
     @include ani_spinner($dc: #fff);
 
     &.visible
     {
         z-index: 9999;
-        opacity: 1;
     }
 }
