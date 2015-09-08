@@ -174,7 +174,8 @@
         //历史记录对象
             history = $.history = [],
         //header元素
-            $header = $('#header');
+            $header = $('#header'),
+            $reflow = $('#mainbox,#header');
 
         return function (hash) {
             var $toShow, $toHide;
@@ -257,7 +258,7 @@
                     $toShow.addClass('show');
 
                     //切换面板时强制重排一次,以免出现横向滚动条
-                    $mainbox.addClass('reflow');
+                    $reflow.addClass('reflow');
 
                     //2.延迟保证显示动画
                     setTimeout(function () {
@@ -306,8 +307,8 @@
 
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
-                            $mainbox.removeClass('reflow');//切换面板时强制重排一次
-                        }, 500);
+                            $reflow.removeClass('reflow');//切换面板时强制重排一次
+                        }, 100);
 
                         //如果是打开iframe页面的面板
                         $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
