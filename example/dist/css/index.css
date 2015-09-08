@@ -423,16 +423,15 @@ plugin/scroll
   background-color: #fff;
   z-index: 9;
   -webkit-transform: translate3d(100%, 0, 0);
-  transform: translate3d(100%, 0, 0); }
+  transform: translate3d(100%, 0, 0);
+  outline: 3px solid rgba(0, 0, 0, 0.1); }
   #sidebox
 .content {
     height: 100%;
     padding-top: 40px; }
   .onsidebox #sidebox {
     -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
-    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2); }
+    transform: translate3d(0, 0, 0); }
 
 /*头部*/
 .offheader #header {
@@ -471,7 +470,8 @@ plugin/scroll
   background-color: #fff;
   -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
-  outline: 3px solid rgba(0, 0, 0, 0.3); }
+  outline: 4px solid rgba(0, 0, 0, 0.1);
+  /*box-shadow对安卓动画性能影响太明显*/ }
   .panel[data-role=root] {
     padding-bottom: 50px; }
   .panel.subopened {

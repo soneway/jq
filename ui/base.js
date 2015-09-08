@@ -64,7 +64,7 @@
         $doc.on('touchstart', 'a', function () {
             $(this).addClass('focus');
         });
-        $doc.on('touchend', 'a', function () {
+        $doc.on('touchend touchmove', 'a', function () {
             $(this).removeClass('focus');
         });
 
