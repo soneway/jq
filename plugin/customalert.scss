@@ -30,7 +30,7 @@ plugin/customalert
     }
 
     /*显示时*/
-    &.visible
+    .oncustomalert &
     {
         opacity: 1;
         visibility: visible;
