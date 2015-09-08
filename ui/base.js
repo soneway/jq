@@ -9,13 +9,19 @@
     //文档$对象
         $doc = $(document),
     //body $对象
-        $body = $(document.body);
+        $body = $(document.body),
+    //mainbox $对象
+        $mainbox = $('#mainbox');
 
 
+    //是否body滚动
+    var isBodyScroll = $mainbox.css('overflow') !== 'hidden';
     //去掉部分浏览器地址栏(ucweb,qq有效)
-    $body.addClass('very-high');
-    window.scrollTo(0, 1);
-    $body.removeClass('very-high');
+    if (!isBodyScroll) {
+        $body.addClass('very-high');
+        window.scrollTo(0, 1);
+        $body.removeClass('very-high');
+    }
 
 
     /**
