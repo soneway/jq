@@ -19,7 +19,9 @@
             //是否显示title
             isShowTitle  : true,
             //是否显示pager
-            isShowPager  : true
+            isShowPager  : true,
+            //初始index
+            initIndex    : 0
         };
 
         //每个元素执行
@@ -33,7 +35,8 @@
                 autoPlayInter = opts.autoPlayInter,
                 slideCallback = opts.slideCallback,
                 isShowTitle = opts.isShowTitle,
-                isShowPager = opts.isShowPager;
+                isShowPager = opts.isShowPager,
+                initIndex = opts.initIndex;
 
             //变量
             var $this = $(this),
@@ -70,7 +73,7 @@
 
             //初始化事件函数
             function initEvent() {
-                var width, height, inter, index = 0,
+                var width, height, inter, index = initIndex,
                     startX, startY,
                     swipSpan;
 
