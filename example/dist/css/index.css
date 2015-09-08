@@ -9,7 +9,7 @@ ui/base
   -webkit-overflow-scrolling: touch; }
 
 .head, .head
-.btnleft, .panel, #navbar:after, h3.center:before, #customalert
+.btnleft, .panel, #navbar:after, h3.center:before, h3#navbar:before, #customalert
 h3.box:before, #picpager
 .info {
   position: absolute;
@@ -34,7 +34,8 @@ a:first-of-type:before, .pi-carousel-title {
   left: 0;
   bottom: 0; }
 
-#carousel
+#paneliframe
+iframe, #carousel
 .carousel
 a
 p, #picpager
@@ -252,7 +253,7 @@ h4 {
   float: right; }
 
 /*居中*/
-.center, #customalert
+.center, #navbar, #customalert
 .box, #ui
 .list > div:after {
   text-align: center; }
@@ -377,7 +378,7 @@ plugin/scroll
 .head {
   height: 40px;
   line-height: 40px;
-  width: 100%;
+  right: 0;
   z-index: 1;
   /*模拟1px边框*/
   /*返回按钮类*/ }
@@ -488,17 +489,14 @@ plugin/scroll
   height: 100%; }
   #paneliframe
 iframe {
-    width: 100%;
-    height: 100%;
     border: none; }
 
 /*导航*/
 #navbar {
   /*safari中,在滚动页面隐藏工具栏的情况下,点击屏幕下方bottom:约50px以内的范围内,都会触发显示工具栏操作,而导致点击失效,必须点第二次*/
-  width: 100%;
+  right: 0;
   height: 50px;
   z-index: 1;
-  text-align: center;
   /*模拟1px边框*/ }
   #navbar:after {
     content: '';
@@ -675,11 +673,11 @@ a:first-of-type:before {
       bottom: auto;
       top: 0; }
 
-h3.center, #customalert
+h3.center, h3#navbar, #customalert
 h3.box {
   position: relative;
   margin-top: 10px; }
-  h3.center:before, #customalert
+  h3.center:before, h3#navbar:before, #customalert
 h3.box:before {
     content: '';
     height: 1px;
