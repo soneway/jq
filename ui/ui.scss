@@ -199,8 +199,9 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
 .panel
 {
     /*二级面板会出现横向滚动条的bug,可以通过对二级面板的重排来解决,比如显示面板时,padding-bottom的值的改变*/
-
-    @extend %ph_pafull;
+    @extend %ph_palt;
+    right: 0;
+    height: 100%;
     @extend %ph_ofauto;
     padding-top: $head-height;
     display: none;

@@ -16,7 +16,7 @@ body可滚动页面样式
 
 #header, #navbar
 {
-    position: fixed;
+    @extend %ph_fixed;
 }
 
 
