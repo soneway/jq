@@ -37,8 +37,7 @@ scss/login
         &:after
         {
             content: '';
-            @extend %ph_palt;
-            @extend %ph_full;
+            @extend %ph_pafull;
             background: url(http://img.gd.sohu.com/static/v1/images/icon_login.png);
             background-size: auto $height;
             border-radius: $height * 0.2;

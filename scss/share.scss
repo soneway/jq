@@ -22,8 +22,7 @@ scss/share
         &:after
         {
             content: '';
-            @extend %ph_palt;
-            @extend %ph_full;
+            @extend %ph_pafull;
             background: url(http://img.gd.sohu.com/static/v1/images/icon_share.png);
             background-size: auto $height;
             border-radius: $height * 0.2;

@@ -17,16 +17,14 @@ plugin/picpager
     {
         .pi-picpager-wrap
         {
-            @extend %ph_palt;
-            @extend %ph_full;
+            @extend %ph_pafull;
             @extend %ph_transtransf;
         }
 
 
         .pi-picpager-pic
         {
-            @extend %ph_palt;
-            @extend %ph_full;
+            @extend %ph_pafull;
             @extend .ani_loading;
             background-position: center center;
             background-repeat: no-repeat;

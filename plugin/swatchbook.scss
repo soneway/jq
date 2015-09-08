@@ -13,8 +13,7 @@ plugin/swatchbook
 
     & > div
     {
-        @extend %ph_palt;
-        @extend %ph_full;
+        @extend %ph_pafull;
         border-radius: 5px;
         @include mx_transform-origin(25% 90%);
         @include mx_transition-transform(0.7s ease);

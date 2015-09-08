@@ -182,19 +182,6 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 }
 
 
-/*定位*/
-.absolute
-{
-    @extend %ph_palt;
-}
-
-
-.fixed
-{
-    @extend %ph_pflt;
-}
-
-
 /*动画*/
 .transition
 {
@@ -231,8 +218,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*mainbox*/
 #mainbox
 {
-    @extend %ph_palt;
-    @extend %ph_full;
+    @extend %ph_pafull;
     overflow: hidden;
 }
 
@@ -240,8 +226,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*loading*/
 #loading
 {
-    @extend %ph_palt;
-    @extend %ph_full;
+    @extend %ph_pafull;
     background-color: $panel-bgcolor;
     z-index: 5;
     cursor: pointer; /*防止点击事件绑定不到(ios8)*/
@@ -288,16 +273,14 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*mask*/
 #mask
 {
-    @extend %ph_pflt;
-    @extend %ph_full;
+    @extend %ph_pffull;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
     visibility: hidden;
     @include ani_spinner($dc: #fff);
+    z-index: 9999;
 
     &.visible
     {
-        z-index: 9999;
         visibility: visible;
     }
 }

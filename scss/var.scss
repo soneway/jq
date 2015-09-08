@@ -271,11 +271,51 @@
 }
 
 
-//宽度高度100
+//宽度高度100%
 %ph_full
 {
     width: 100%;
     height: 100%;
+}
+
+
+//定位方式的宽度高度100%
+%ph_pfull
+{
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+//绝对定位
+%ph_absolute
+{
+    position: absolute;
+}
+
+
+//fixed定位
+%ph_fixed
+{
+    position: fixed;
+}
+
+
+//绝对定位宽度高度100%
+%ph_pafull
+{
+    @extend %ph_absolute;
+    @extend %ph_pfull;
+}
+
+
+//fixed定位宽度高度100%
+%ph_pffull
+{
+    @extend %ph_fixed;
+    @extend %ph_pfull;
 }
 
 

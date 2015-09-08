@@ -4,8 +4,7 @@ plugin/customalert
 */
 #customalert
 {
-    @extend %ph_pflt;
-    @extend %ph_full;
+    @extend %ph_pffull;
     color: #333;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 9999;

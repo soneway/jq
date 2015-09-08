@@ -33,8 +33,7 @@
                 &:after
                 {
                     content: '';
-                    @extend %ph_palt;
-                    @extend %ph_full;
+                    @extend %ph_pafull;
                     background: url(http://img.gd.sohu.com/static/v1/images/sohulogo.jpg);
                     background-size: cover;
                     border-radius: $h;

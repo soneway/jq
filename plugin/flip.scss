@@ -9,8 +9,7 @@ plugin/flip
 
     & > *
     {
-        @extend %ph_palt;
-        @extend %ph_full;
+        @extend %ph_pafull;
         @extend %ph_transall;
         opacity: 0;
 

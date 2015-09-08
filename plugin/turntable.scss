@@ -19,8 +19,7 @@ plugin/turntable
 
         .pi-turntable-pointer
         {
-            @extend %ph_palt;
-            @extend %ph_full;
+            @extend %ph_pafull;
         }
     }
 }
