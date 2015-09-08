@@ -471,8 +471,7 @@ plugin/scroll
   background-color: #fff;
   -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
-  -webkit-box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
-  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2); }
+  outline: 3px solid rgba(0, 0, 0, 0.3); }
   .panel[data-role=root] {
     padding-bottom: 50px; }
   .panel.subopened {
