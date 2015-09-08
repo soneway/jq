@@ -245,7 +245,7 @@
 
 
                 //a.记录scrollTop(必须放在隐藏之前)
-                scrollTop($toHide.attr('id'), true);
+                scrollTop($toHide.attr('id'), 1);
 
 
                 //面板切换
@@ -307,7 +307,7 @@
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
                             $mainbox.removeClass('reflow');//切换面板时强制重排一次
-                        }, 100);
+                        }, 500);
 
                         //如果是打开iframe页面的面板
                         $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
@@ -332,11 +332,11 @@
 
         //btn-onsidebox点击
         $doc.on('click', '.btn-onsidebox', function () {
-            $.toggleSidebox(true);
+            $.toggleSidebox(1);
         });
         //btn-offsidebox点击
         $doc.on('click', '.btn-offsidebox', function () {
-            $.toggleSidebox(false);
+            $.toggleSidebox(0);
         });
 
         //iframe面板
