@@ -293,6 +293,9 @@
                             }
                         }
 
+                        //b.设置scrollTop(必须放在显示之后)
+                        scrollTop($toShow.attr('id'), false);
+
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
                     }, 10);
@@ -300,9 +303,6 @@
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
                         $toHide.removeClass('show');
-
-                        //b.设置scrollTop(必须放在显示之后)
-                        scrollTop($toShow.attr('id'), false);
 
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {

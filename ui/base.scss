@@ -271,16 +271,21 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 
 
 /*mask*/
-#mask
+.onmask
 {
-    @extend %ph_pffull;
-    background-color: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
     @include ani_spinner($dc: #fff);
-    z-index: 9999;
 
-    &.visible
+    &:before
     {
-        visibility: visible;
+        z-index: 10000;
+        position: fixed;
+    }
+
+    &:after
+    {
+        content: '';
+        @extend %ph_pffull;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
     }
 }

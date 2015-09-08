@@ -47,16 +47,9 @@
      * 显示/隐藏mask函数
      * @param isShow 是否显示
      */
-    $.toggleMask = (function () {
-        var $mask = $('#mask');
-        if ($mask.length === 0) {
-            $mask = $('<div id="mask"></div>');
-            $body.append($mask);
-        }
-        return function (isShow) {
-            isShow ? $mask.addClass('visible') : $mask.removeClass('visible');
-        };
-    })();
+    $.toggleMask = function (isShow) {
+        isShow ? $body.addClass('onmask') : $body.removeClass('onmask');
+    };
 
 
     //文档加载完成
