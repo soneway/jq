@@ -30,16 +30,20 @@ $panel-bgcolor: #fff !default;
 
 body
 {
-    background-color: $panel-bgcolor; /*加背景色可减缓页面闪烁*/
+    /*加背景色可减缓页面闪烁*/
+    background-color: $panel-bgcolor;
     overflow-x: hidden;
     /*可继承*/
     color: $color;
     line-height: $line-height;
     font-size: $font-size;
     -webkit-text-size-adjust: none;
-    @include mx_user-select(none); /*禁止选中文本*/
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /*部分浏览器点选时会有淡蓝色框,这样可以去掉*/
-    -webkit-touch-callout: none; /*禁止保存图片*/
+    /*禁止选中文本*/
+    @include mx_user-select(none);
+    /*部分浏览器点选时会有淡蓝色框,这样可以去掉*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /*禁止保存图片*/
+    -webkit-touch-callout: none;
 }
 
 
@@ -105,14 +109,15 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .btn
 {
     display: inline-block;
-    line-height: 2em;
+    font-size: 16px;
+    line-height: 2;
     min-width: 5.5em;
     padding: 0 1.25em;
     border-radius: 0.5em;
-    font-size: 1.15em;
     text-align: center;
     @include mx_box-shadow(0 0 2px -1px #000);
     background-color: #f8f8f8;
+    /*固定颜色*/
     color: #333;
 
     &.focus
@@ -226,7 +231,8 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     @extend %ph_pafull;
     background-color: $panel-bgcolor;
     z-index: 5;
-    cursor: pointer; /*防止点击事件绑定不到(ios8)*/
+    /*防止点击事件绑定不到(ios8)*/
+    cursor: pointer;
     @extend .transition;
     @include mx_transition-property(background-color, visibility);
     @extend %ph_center;

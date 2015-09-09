@@ -149,21 +149,21 @@ scss/ani_circle
   /*@extend %ph_border-box;*/ }
 
 body {
-  background-color: #fff;
   /*加背景色可减缓页面闪烁*/
+  background-color: #fff;
   overflow-x: hidden;
   /*可继承*/
   color: #333;
   line-height: 1.5;
   font-size: 14px;
   -webkit-text-size-adjust: none;
+  /*禁止选中文本*/
   -webkit-user-select: none;
   user-select: none;
-  /*禁止选中文本*/
-  -webkit-tap-highlight-color: transparent;
   /*部分浏览器点选时会有淡蓝色框,这样可以去掉*/
-  -webkit-touch-callout: none;
-  /*禁止保存图片*/ }
+  -webkit-tap-highlight-color: transparent;
+  /*禁止保存图片*/
+  -webkit-touch-callout: none; }
 
 input, textarea {
   -webkit-user-select: text;
@@ -208,15 +208,16 @@ h4 {
 /*btn*/
 .btn {
   display: inline-block;
-  line-height: 2em;
+  font-size: 16px;
+  line-height: 2;
   min-width: 5.5em;
   padding: 0 1.25em;
   border-radius: 0.5em;
-  font-size: 1.15em;
   text-align: center;
   -webkit-box-shadow: 0 0 2px -1px #000;
   box-shadow: 0 0 2px -1px #000;
   background-color: #f8f8f8;
+  /*固定颜色*/
   color: #333; }
   .btn.focus {
     background-color: #eee; }
@@ -274,8 +275,8 @@ h4 {
 #loading {
   background-color: #fff;
   z-index: 5;
-  cursor: pointer;
   /*防止点击事件绑定不到(ios8)*/
+  cursor: pointer;
   -webkit-transition-property: background-color, visibility;
   transition-property: background-color, visibility; }
   .loaded #loading {
