@@ -3,6 +3,9 @@
 //包含默认变量,常用函数,常用点位符(全是sass运算相关的东西)
 //本文件中用//注释,可使生成文件中不包含注释信息
 
+//变量
+$duration: 0.3s !default;
+
 //混入
 //定位
 @mixin mx_plt($position: absolute, $left: 0, $top: 0) {
@@ -339,14 +342,14 @@
 //all动画
 %ph_transall
 {
-    @include mx_transition(all 0.3s ease);
+    @include mx_transition(all $duration ease);
 }
 
 
 //transform动画
 %ph_transtransf
 {
-    @include mx_transition-transform(0.3s ease);
+    @include mx_transition-transform($duration ease);
 }
 
 
