@@ -15,6 +15,8 @@ $head-bgcolor: rgba(255, 255, 255, 0.9) !default;
 $head-bg: #006c1a 0%, #04990e 100% !default;
 //边框颜色
 $head-border-color: rgba(128, 128, 128, 0.5) !default;
+//颜色
+$head-color: $color !default;
 
 //引入
 @import "../plugin/scroll";
@@ -29,6 +31,8 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
 /*head导航条背景*/
 .head, #navbar
 {
+    overflow: hidden;
+
     @if $bg-type == 1
     {
         background-color: $head-bgcolor;
@@ -47,6 +51,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     line-height: $head-height;
     right: 0;
     z-index: 1;
+    color: $head-color;
 
     /*模拟1px边框*/
     &:after
@@ -92,7 +97,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
             margin-top: -$w / 2;
             width: $w;
             height: $w;
-            @include mx_box-shadow(-1px -1px 0 $color);
+            @include mx_box-shadow(-1px -1px 0 $head-color);
             @include mx_transform(rotateZ(-45deg));
         }
 
@@ -116,7 +121,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
             height: 1px;
             width: 20px;
             vertical-align: top;
-            @include mx_box-shadow(0 6px 0 0 $color, 0 -8px 0 0 $color, 0 -1px 0 0 $color);
+            @include mx_box-shadow(0 6px 0 0 $head-color, 0 -8px 0 0 $head-color, 0 -1px 0 0 $head-color);
         }
 
         &.focus:before

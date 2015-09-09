@@ -142,11 +142,12 @@
         /**
          * 隐藏panel时函数
          * @param {$init} $toHide 隐藏的$对象
+         * @param {boolean} isShow 是否不隐藏元素
          * @ignore
          */
-        function toHidePanel($toHide) {
+        function toHidePanel($toHide, isShow) {
             //隐藏
-            $toHide.removeClass('show');
+            !isShow && $toHide.removeClass('show');
 
             //如果是打开iframe页面的面板
             $toHide[0].id === 'paneliframe' && ($toHide.html(''));
@@ -172,7 +173,7 @@
                     //显示时调用函数
                     toShowPanel($sidebox);
                     //隐藏原页面
-                    toHidePanel($panel);
+                    toHidePanel($panel, true);
                 }
                 else {
                     $body.removeClass('onsidebox');
@@ -305,19 +306,20 @@
 
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
-                    }, 0);
+                    }, 10);
 
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
 
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
-                            $mainbox.removeClass('reflow');//切换面板时强制重排一次
+                            //切换面板时强制重排一次
+                            $mainbox.removeClass('reflow');
                         }, 100);
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration);
+                    }, duration + 20);
                 }
             }
             //没有显示面板

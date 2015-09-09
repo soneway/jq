@@ -10,7 +10,7 @@ ui/base
 
 .head, .head
 .btnleft, .panel, #navbar:after, h3.center:before, h3#navbar:before, #customalert
-h3.box:before, .pi-picpager-pic, #picpager
+h3.ca-box:before, .pi-picpager-pic, #picpager
 .info {
   position: absolute;
   left: 0;
@@ -72,7 +72,7 @@ a {
   line-height: normal; }
 
 #customalert
-.box {
+.ca-box {
   height: auto;
   overflow: hidden; }
 
@@ -81,7 +81,7 @@ a {
   transition: all 0.3s ease; }
 
 .transform, #mainbox, #sidebox, #header, .panel, #navbar, #customalert
-.box, .pi-carousel-wrap.transform, .pi-carousel-wrap.panel, .pi-picpager-wrap {
+.ca-box, .pi-carousel-wrap.transform, .pi-carousel-wrap.panel, .pi-picpager-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease; }
 
@@ -214,8 +214,8 @@ h4 {
   border-radius: 0.5em;
   font-size: 1.15em;
   text-align: center;
-  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: 0 0 2px -1px #000;
+  box-shadow: 0 0 2px -1px #000;
   background-color: #f8f8f8;
   color: #333; }
   .btn.focus {
@@ -252,7 +252,7 @@ h4 {
 
 /*居中*/
 .center, #navbar, #customalert
-.box, #ui
+.ca-box, #ui
 .list > div:after {
   text-align: center; }
 
@@ -349,6 +349,7 @@ plugin/scroll
 
 /*head导航条背景*/
 .head, #navbar {
+  overflow: hidden;
   background-color: rgba(255, 255, 255, 0.9); }
 
 /*head类*/
@@ -357,6 +358,7 @@ plugin/scroll
   line-height: 40px;
   right: 0;
   z-index: 1;
+  color: #333;
   /*模拟1px边框*/
   /*返回按钮*/
   /*菜单按钮*/ }
@@ -553,7 +555,6 @@ plugin/customalert
 自定义提示框样式
 */
 #customalert {
-  color: #333;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999;
   /*动画*/
@@ -561,9 +562,10 @@ plugin/customalert
   transition-property: opacity, visibility;
   opacity: 0;
   visibility: hidden;
-  /*显示时*/ }
+  /*显示时*/
+  /*alert样式*/ }
   #customalert
-.box {
+.ca-box {
     width: 280px;
     padding: 0 0 15px 0;
     border-radius: 8px;
@@ -571,35 +573,33 @@ plugin/customalert
     /*动画*/
     -webkit-transform: scale3d(0, 0, 1);
     transform: scale3d(0, 0, 1); }
+  #customalert
+.ca-title {
+    line-height: 40px;
+    -webkit-box-shadow: 0 0 2px -1px #000;
+    box-shadow: 0 0 2px -1px #000; }
+  #customalert
+.ca-content {
+    padding: 15px 20px; }
+  #customalert
+.btn {
+    width: 110px; }
+  #customalert
+.ca-ok {
+    margin-right: 10px; }
   .oncustomalert #customalert {
     opacity: 1;
     visibility: visible; }
     .oncustomalert #customalert
-.box {
+.ca-box {
       -webkit-transform: scale3d(1, 1, 1);
       transform: scale3d(1, 1, 1); }
-  #customalert-title {
-    line-height: 40px;
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5); }
-  #customalert-content {
-    padding: 15px 20px; }
-  #customalert-btnok, #customalert-btncancel {
-    width: 110px;
-    font-size: 17px;
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-    color: #333; }
-  #customalert-btnok {
-    margin-right: 10px; }
-
-/*隐藏取消按钮*/
-  .alert
-#customalert-btncancel {
-    display: none; }
-  .alert
-#customalert-btnok {
+  #customalert.alert
+.ca-ok {
     width: 230px; }
+  #customalert.alert
+.ca-cancel {
+    display: none; }
 
 /*项目基础样式*/
 /*表单输入元素*/
@@ -677,11 +677,11 @@ a:first-of-type:before {
       top: 0; }
 
 h3.center, h3#navbar, #customalert
-h3.box {
+h3.ca-box {
   position: relative;
   margin-top: 10px; }
   h3.center:before, h3#navbar:before, #customalert
-h3.box:before {
+h3.ca-box:before {
     content: '';
     height: 1px;
     width: 100%;

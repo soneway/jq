@@ -1400,34 +1400,34 @@ module.exports=require('U94cel');
     (function () {
         if ($customalert.length === 0) {
             $customalert = $('<div id="customalert">' +
-                '<div class="box">' +
-                '<h1 id="customalert-title">提示</h1>' +
-                '<p id="customalert-content">是否转到登陆</p>' +
-                '<a id="customalert-btnok" class="btn">确定</a>' +
-                '<a id="customalert-btncancel" class="btn">关闭</a>' +
+                '<div class="ca-box">' +
+                '<h1 class="ca-title">提示</h1>' +
+                '<p class="ca-content">是否转到登陆</p>' +
+                '<a class="btn ca-ok">确定</a>' +
+                '<a class="btn ca-cancel">关闭</a>' +
                 '</div>' +
                 '</div>');
             //添加html元素
             $body.append($customalert);
         }
 
-        $title = $('#customalert-title');
-        $content = $('#customalert-content');
-        $btnOk = $('#customalert-btnok');
-        $btnCancel = $('#customalert-btncancel');
+        $title = $customalert.find('.ca-title');
+        $content = $customalert.find('.ca-content');
+        $btnOk = $customalert.find('.ca-ok');
+        $btnCancel = $customalert.find('.ca-cancel');
     })();
 
 
     //3.事件
     //确定按钮
-    $doc.on('click', '#customalert-btnok', function () {
+    $doc.on('click', '#customalert .ca-ok', function () {
         //隐藏
         $body.removeClass('oncustomalert');
         typeof onHide === 'function' && onHide();
         typeof btnOkClick == 'function' && btnOkClick();
     });
     //关闭按钮
-    $doc.on('click', '#customalert-btncancel', function () {
+    $doc.on('click', '#customalert .ca-cancel', function () {
         //隐藏
         $body.removeClass('oncustomalert');
         typeof onHide === 'function' && onHide();
@@ -2734,11 +2734,12 @@ module.exports=require('U94cel');
         /**
          * 隐藏panel时函数
          * @param {$init} $toHide 隐藏的$对象
+         * @param {boolean} isShow 是否不隐藏元素
          * @ignore
          */
-        function toHidePanel($toHide) {
+        function toHidePanel($toHide, isShow) {
             //隐藏
-            $toHide.removeClass('show');
+            !isShow && $toHide.removeClass('show');
 
             //如果是打开iframe页面的面板
             $toHide[0].id === 'paneliframe' && ($toHide.html(''));
@@ -2764,7 +2765,7 @@ module.exports=require('U94cel');
                     //显示时调用函数
                     toShowPanel($sidebox);
                     //隐藏原页面
-                    toHidePanel($panel);
+                    toHidePanel($panel, true);
                 }
                 else {
                     $body.removeClass('onsidebox');
@@ -2897,19 +2898,20 @@ module.exports=require('U94cel');
 
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
-                    }, 0);
+                    }, 10);
 
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
 
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
-                            $mainbox.removeClass('reflow');//切换面板时强制重排一次
+                            //切换面板时强制重排一次
+                            $mainbox.removeClass('reflow');
                         }, 100);
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration);
+                    }, duration + 20);
                 }
             }
             //没有显示面板

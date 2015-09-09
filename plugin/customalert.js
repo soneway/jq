@@ -19,34 +19,34 @@
     (function () {
         if ($customalert.length === 0) {
             $customalert = $('<div id="customalert">' +
-                '<div class="box">' +
-                '<h1 id="customalert-title">提示</h1>' +
-                '<p id="customalert-content">是否转到登陆</p>' +
-                '<a id="customalert-btnok" class="btn">确定</a>' +
-                '<a id="customalert-btncancel" class="btn">关闭</a>' +
+                '<div class="ca-box">' +
+                '<h1 class="ca-title">提示</h1>' +
+                '<p class="ca-content">是否转到登陆</p>' +
+                '<a class="btn ca-ok">确定</a>' +
+                '<a class="btn ca-cancel">关闭</a>' +
                 '</div>' +
                 '</div>');
             //添加html元素
             $body.append($customalert);
         }
 
-        $title = $('#customalert-title');
-        $content = $('#customalert-content');
-        $btnOk = $('#customalert-btnok');
-        $btnCancel = $('#customalert-btncancel');
+        $title = $customalert.find('.ca-title');
+        $content = $customalert.find('.ca-content');
+        $btnOk = $customalert.find('.ca-ok');
+        $btnCancel = $customalert.find('.ca-cancel');
     })();
 
 
     //3.事件
     //确定按钮
-    $doc.on('click', '#customalert-btnok', function () {
+    $doc.on('click', '#customalert .ca-ok', function () {
         //隐藏
         $body.removeClass('oncustomalert');
         typeof onHide === 'function' && onHide();
         typeof btnOkClick == 'function' && btnOkClick();
     });
     //关闭按钮
-    $doc.on('click', '#customalert-btncancel', function () {
+    $doc.on('click', '#customalert .ca-cancel', function () {
         //隐藏
         $body.removeClass('oncustomalert');
         typeof onHide === 'function' && onHide();

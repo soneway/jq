@@ -5,7 +5,6 @@ plugin/customalert
 #customalert
 {
     @extend %ph_pffull;
-    color: #333;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 9999;
     @extend %ph_center;
@@ -15,7 +14,7 @@ plugin/customalert
     opacity: 0;
     visibility: hidden;
 
-    .box
+    .ca-box
     {
         //display: inline-block;
         width: 280px;
@@ -29,61 +28,50 @@ plugin/customalert
         @include mx_transform(scale3d(0, 0, 1));
     }
 
+    .ca-title
+    {
+        line-height: 40px;
+        @include mx_box-shadow(0 0 2px -1px #000);
+    }
+
+    .ca-content
+    {
+        padding: 15px 20px;
+    }
+
+    .btn
+    {
+        width: 110px;
+    }
+
+    .ca-ok
+    {
+        margin-right: 10px;
+    }
+
     /*显示时*/
     .oncustomalert &
     {
         opacity: 1;
         visibility: visible;
 
-        .box
+        .ca-box
         {
             @include mx_transform(scale3d(1, 1, 1));
         }
     }
 
-    @at-root
+    /*alert样式*/
+    &.alert
     {
-
-        #customalert-title
+        .ca-ok
         {
-            line-height: 40px;
-            @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+            width: 230px;
         }
 
-
-        #customalert-content
+        .ca-cancel
         {
-            padding: 15px 20px;
-        }
-
-
-        #customalert-btnok, #customalert-btncancel
-        {
-            width: 110px;
-            font-size: 17px;
-            @include mx_box-shadow(0 0 1px rgba(0, 0, 0, 0.9));
-            color: #333;
-        }
-
-
-        #customalert-btnok
-        {
-            margin-right: 10px;
-        }
-
-
-        /*隐藏取消按钮*/
-        .alert
-        {
-            #customalert-btncancel
-            {
-                display: none;
-            }
-
-            #customalert-btnok
-            {
-                width: 230px;
-            }
+            display: none;
         }
     }
 }
