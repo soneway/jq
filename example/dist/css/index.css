@@ -214,8 +214,8 @@ h4 {
   padding: 0 1.25em;
   border-radius: 0.5em;
   text-align: center;
-  -webkit-box-shadow: 0 0 2px -1px #000, 0 0 2px -1px #000;
-  box-shadow: 0 0 2px -1px #000, 0 0 2px -1px #000;
+  -webkit-box-shadow: 0 0 2px -1px #000;
+  box-shadow: 0 0 2px -1px #000;
   background-color: #f8f8f8;
   /*固定颜色*/
   color: #333; }
@@ -577,8 +577,8 @@ plugin/customalert
   #customalert
 .ca-title {
     line-height: 40px;
-    -webkit-box-shadow: 0 0 2px -1px #000, 0 0 2px -1px #000;
-    box-shadow: 0 0 2px -1px #000, 0 0 2px -1px #000; }
+    -webkit-box-shadow: 0 0 2px -1px #000;
+    box-shadow: 0 0 2px -1px #000; }
   #customalert
 .ca-content {
     padding: 15px 20px; }
