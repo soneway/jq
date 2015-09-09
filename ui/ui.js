@@ -34,33 +34,6 @@
 
 
     /**
-     * 显示/隐藏边栏函数
-     * @param {boolean} isShow 是否显示
-     */
-    $.toggleSidebox = (function () {
-        var $sidebox = $('#sidebox');
-
-        return function (isShow) {
-            //相关panel
-            var $panel = $.history[$.history.length - 1];
-            if (isShow) {
-                $body.addClass('onsidebox');
-                //显示时调用函数
-                toShowPanel($sidebox);
-                //隐藏原页面
-                toHidePanel($panel);
-            }
-            else {
-                $body.removeClass('onsidebox');
-                //隐藏时调用函数
-                toHidePanel($sidebox);
-                //显示原页面
-                toShowPanel($panel);
-            }
-        };
-    })();
-
-    /**
      * 显示/隐藏头部函数
      * @param {boolean} isShow 是否显示
      */
@@ -163,6 +136,34 @@
             var panelUnloaded = $.panelUnloaded;
             typeof panelUnloaded === 'function' && panelUnloaded($toHide);
         }
+
+
+        /**
+         * 显示/隐藏边栏函数
+         * @param {boolean} isShow 是否显示
+         */
+        $.toggleSidebox = (function () {
+            var $sidebox = $('#sidebox');
+
+            return function (isShow) {
+                //相关panel
+                var $panel = $.history[$.history.length - 1];
+                if (isShow) {
+                    $body.addClass('onsidebox');
+                    //显示时调用函数
+                    toShowPanel($sidebox);
+                    //隐藏原页面
+                    toHidePanel($panel);
+                }
+                else {
+                    $body.removeClass('onsidebox');
+                    //隐藏时调用函数
+                    toHidePanel($sidebox);
+                    //显示原页面
+                    toShowPanel($panel);
+                }
+            };
+        })();
 
         return function (hash) {
             var $toShow, $toHide;
