@@ -1178,26 +1178,26 @@ module.exports=require('U94cel');
 
             //初始化函数
             function init() {
-                $this.addClass('pi-carousel').html('<div class="pi-carousel-wrap">' + $this.html() + '</div>' + (isShowTitle ? '<div class="pi-carousel-title"></div>' : ''));
+                $this.addClass('pi-carousel').html('<div class="pi-wrap">' + $this.html() + '</div>' + (isShowTitle ? '<div class="pi-title"></div>' : ''));
 
-                $wrap = $this.find('.pi-carousel-wrap');
+                $wrap = $this.find('.pi-wrap');
                 wrapElStyle = $wrap[0].style;
                 $items = $wrap.children('*');
                 itemCount = $items.length;
 
                 isVertical && $this.addClass('vertical');
-                $title = $this.find('.pi-carousel-title');
+                $title = $this.find('.pi-title');
 
                 //pager
                 var html = '';
                 if (isShowPager) {
-                    html += '<div class="pi-carousel-pager">';
+                    html += '<div class="pi-pager">';
                     for (var i = 0, len = itemCount; i < len; i++) {
                         html += '<span></span>';
                     }
                     html += '</div>';
                 }
-                $pagers = $this.append(html).find('.pi-carousel-pager span');
+                $pagers = $this.append(html).find('.pi-pager span');
 
                 //初始化事件
                 initEvent();
@@ -1702,9 +1702,9 @@ module.exports=require('U94cel');
 
             //初始化函数
             function init() {
-                $this.addClass('pi-picpager').html('<div class="pi-picpager-wrap"><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div></div>');
-                $wrap = $this.find('.pi-picpager-wrap');
-                $pics = $this.find('.pi-picpager-pic');
+                $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
+                $wrap = $this.find('.pi-wrap');
+                $pics = $this.find('.pi-pic');
 
                 //初始化事件
                 initEvent();
@@ -2422,7 +2422,7 @@ module.exports=require('U94cel');
 
             //初始化函数
             function init() {
-                $pointer = $('<div class="pi-turntable-pointer"></div>');
+                $pointer = $('<div class="pi-pointer"></div>');
                 $this.addClass('pi-turntable').prepend($pointer);
 
                 //初始化事件

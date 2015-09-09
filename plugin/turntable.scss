@@ -7,19 +7,15 @@ plugin/turntable
     position: relative;
     overflow: hidden;
 
-    @at-root
+    &, .pi-pointer
     {
-        .pi-turntable, .pi-turntable-pointer
-        {
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-
-        .pi-turntable-pointer
-        {
-            @extend %ph_pafull;
-        }
+    .pi-pointer
+    {
+        @extend %ph_pafull;
     }
 }

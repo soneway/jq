@@ -36,7 +36,7 @@
 
             //初始化函数
             function init() {
-                $pointer = $('<div class="pi-turntable-pointer"></div>');
+                $pointer = $('<div class="pi-pointer"></div>');
                 $this.addClass('pi-turntable').prepend($pointer);
 
                 //初始化事件

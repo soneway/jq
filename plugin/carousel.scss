@@ -10,78 +10,73 @@ plugin/carousel
     //@include mx_perspective(1000);
     position: relative;
 
-    @at-root
+    /*滚动容器*/
+    .pi-wrap
     {
-        /*滚动容器*/
-        .pi-carousel-wrap
+        &.transform
         {
-            &.transform
-            {
-                @extend %ph_transtransf;
-            }
-
-            & > *
-            {
-                display: block;
-                float: left;
-                overflow: hidden;
-
-                .vertical > &
-                {
-                    float: none;
-                }
-            }
+            @extend %ph_transtransf;
         }
 
-
-        /*title*/
-        .pi-carousel-title
+        & > *
         {
-            @extend %ph_palb;
-            width: 100%;
-            line-height: 1.1;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
-            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-            /*动画*/
-            @extend %ph_transall;
-            @include mx_transform(translate3d(0, 100%, 0));
+            display: block;
+            float: left;
+            overflow: hidden;
 
-            &.visible
+            .vertical > &
             {
-                @include mx_transform(translate3d(0, 0, 0));
+                float: none;
             }
         }
+    }
 
+    /*title*/
+    .pi-title
+    {
+        @extend %ph_palb;
+        width: 100%;
+        line-height: 1.1;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 10px;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+        /*动画*/
+        @extend %ph_transall;
+        @include mx_transform(translate3d(0, 100%, 0));
 
-        /*pager*/
-        .pi-carousel-pager
+        &.visible
         {
-            @include mx_prb($right: 4px, $bottom: 4px);
+            @include mx_transform(translate3d(0, 0, 0));
+        }
+    }
 
-            span
+    /*pager*/
+    .pi-pager
+    {
+        @include mx_prb($right: 4px, $bottom: 4px);
+
+        span
+        {
+            display: block;
+            float: left;
+            margin: 0 4px 4px 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+
+            &.selected
             {
-                display: block;
-                float: left;
-                margin: 0 4px 4px 0;
-                width: 8px;
-                height: 8px;
-                border-radius: 8px;
-                @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
-                background-color: rgba(255, 255, 255, 0.5);
-                cursor: pointer;
+                @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+                background-color: rgba(255, 255, 255, 0.9);
+            }
 
-                &.selected
-                {
-                    @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.9));
-                    background-color: rgba(255, 255, 255, 0.9);
-                }
-
-                .vertical > &
-                {
-                    float: none;
-                }
+            .vertical > &
+            {
+                float: none;
             }
         }
     }

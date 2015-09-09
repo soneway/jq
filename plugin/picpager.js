@@ -34,9 +34,9 @@
 
             //初始化函数
             function init() {
-                $this.addClass('pi-picpager').html('<div class="pi-picpager-wrap"><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div><div class="pi-picpager-pic"></div></div>');
-                $wrap = $this.find('.pi-picpager-wrap');
-                $pics = $this.find('.pi-picpager-pic');
+                $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
+                $wrap = $this.find('.pi-wrap');
+                $pics = $this.find('.pi-pic');
 
                 //初始化事件
                 initEvent();

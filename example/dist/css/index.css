@@ -10,7 +10,8 @@ ui/base
 
 .head, .head
 .btnleft, .panel, #navbar:after, h3.center:before, h3#navbar:before, #customalert
-h3.ca-box:before, .pi-picpager-pic, #picpager
+h3.ca-box:before, .pi-picpager
+.pi-pic, #picpager
 .info {
   position: absolute;
   left: 0;
@@ -29,7 +30,8 @@ h3.ca-box:before, .pi-picpager-pic, #picpager
 
 .head:after, #navbar, .list
 a:after, .list
-a:first-of-type:before, .pi-carousel-title {
+a:first-of-type:before, .pi-carousel
+.pi-title {
   position: absolute;
   left: 0;
   bottom: 0; }
@@ -38,7 +40,8 @@ a:first-of-type:before, .pi-carousel-title {
 iframe, #carousel
 .carousel
 a
-p, .pi-picpager-pic, #picpager
+p, .pi-picpager
+.pi-pic, #picpager
 .picpager, #flip
 .flip
 p, #scratchcard
@@ -46,7 +49,9 @@ p, #scratchcard
   width: 100%;
   height: 100%; }
 
-#mainbox, #loading, #header > div, .pi-picpager-wrap, .pi-flip > *, .pi-turntable-pointer, .sb-container > div, #share_list
+#mainbox, #loading, #header > div, .pi-picpager
+.pi-wrap, .pi-flip > *, .pi-turntable
+.pi-pointer, .sb-container > div, #share_list
 a:after, .other_login
 a:after, .tologin
 .sohulogo:after, .onmask:after, #customalert {
@@ -55,7 +60,9 @@ a:after, .tologin
   bottom: 0;
   right: 0; }
 
-#mainbox, #loading, #header > div, .pi-picpager-wrap, .pi-flip > *, .pi-turntable-pointer, .sb-container > div, #share_list
+#mainbox, #loading, #header > div, .pi-picpager
+.pi-wrap, .pi-flip > *, .pi-turntable
+.pi-pointer, .sb-container > div, #share_list
 a:after, .other_login
 a:after, .tologin
 .sohulogo:after {
@@ -76,12 +83,16 @@ a {
   height: auto;
   overflow: hidden; }
 
-.fade-out, .fade-in, .transition, #loading, #header > div, #customalert, .pi-carousel-title, .pi-flip > * {
+.fade-out, .fade-in, .transition, #loading, #header > div, #customalert, .pi-carousel
+.pi-title, .pi-flip > * {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
 .transform, #mainbox, #sidebox, #header, .panel, #navbar, #customalert
-.ca-box, .pi-carousel-wrap.transform, .pi-carousel-wrap.panel, .pi-picpager-wrap {
+.ca-box, .pi-carousel
+.pi-wrap.transform, .pi-carousel
+.pi-wrap.panel, .pi-picpager
+.pi-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease; }
 
@@ -719,18 +730,20 @@ plugin/carousel
   /*防止动画过程闪烁*/
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  position: relative; }
-
-/*滚动容器*/
-  .pi-carousel-wrap > * {
+  position: relative;
+  /*滚动容器*/
+  /*title*/
+  /*pager*/ }
+  .pi-carousel
+.pi-wrap > * {
     display: block;
     float: left;
     overflow: hidden; }
-    .vertical > .pi-carousel-wrap > * {
+    .vertical > .pi-carousel
+.pi-wrap > * {
       float: none; }
-
-/*title*/
-  .pi-carousel-title {
+  .pi-carousel
+.pi-title {
     width: 100%;
     line-height: 1.1;
     background-color: rgba(0, 0, 0, 0.5);
@@ -740,16 +753,17 @@ plugin/carousel
     /*动画*/
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0); }
-    .pi-carousel-title.visible {
+    .pi-carousel
+.pi-title.visible {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0); }
-
-/*pager*/
-  .pi-carousel-pager {
+  .pi-carousel
+.pi-pager {
     position: absolute;
     right: 4px;
     bottom: 4px; }
-    .pi-carousel-pager
+    .pi-carousel
+.pi-pager
 span {
       display: block;
       float: left;
@@ -761,12 +775,14 @@ span {
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
       background-color: rgba(255, 255, 255, 0.5);
       cursor: pointer; }
-      .pi-carousel-pager
+      .pi-carousel
+.pi-pager
 span.selected {
         -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
         background-color: rgba(255, 255, 255, 0.9); }
-      .vertical > .pi-carousel-pager
+      .vertical > .pi-carousel
+.pi-pager
 span {
         float: none; }
 
@@ -826,7 +842,8 @@ scss/ani_circle
 /*loading动画类*/
 .ani_loading:before, #carousel
 .carousel
-a:before, .pi-picpager-pic:before, #flip
+a:before, .pi-picpager
+.pi-pic:before, #flip
 .flip
 p:before {
   content: '';
@@ -855,13 +872,16 @@ p:before {
   /*防止动画过程闪烁*/
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden; }
-  .pi-picpager-pic {
+  .pi-picpager
+.pi-pic {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain; }
-    .pi-picpager-pic:nth-of-type(1) {
+    .pi-picpager
+.pi-pic:nth-of-type(1) {
       left: -100%; }
-    .pi-picpager-pic:nth-of-type(3) {
+    .pi-picpager
+.pi-pic:nth-of-type(3) {
       left: 100%; }
 
 #picpager {
@@ -936,7 +956,8 @@ plugin/turntable
 .pi-turntable {
   position: relative;
   overflow: hidden; }
-  .pi-turntable, .pi-turntable-pointer {
+  .pi-turntable, .pi-turntable
+.pi-pointer {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover; }
@@ -949,7 +970,7 @@ plugin/turntable
   background-image: url(../img/bg.png); }
   #turntable
 .turntable
-.pi-turntable-pointer {
+.pi-pointer {
     background-image: url(../img/pointer.png); }
 
 #turntable
