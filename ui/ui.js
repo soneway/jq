@@ -23,17 +23,19 @@
 
 
     //header及navbar宽度(解决ios中header宽度的bug)
-    var $toFix = $('#header');
-    $.isBodyScroll && $(window).on('resize', function () {
-        $toFix.css({
-            width: window.innerWidth + 'px'
-        });
-    }).trigger('resize');
+    $.isBodyScroll && $(window).on('resize', (function () {
+        var $toFix = $('#header,#navbar');
+        return function () {
+            $toFix.css({
+                width: window.innerWidth + 'px'
+            });
+        };
+    })()).trigger('resize');
 
 
     /**
      * 显示/隐藏边栏函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleSidebox = (function () {
         var $sidebox = $('#sidebox');
@@ -60,7 +62,7 @@
 
     /**
      * 显示/隐藏头部函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleHeader = function (isShow) {
         isShow ? $mainbox.removeClass('offheader') : $mainbox.addClass('offheader');
@@ -68,7 +70,7 @@
 
     /**
      * 显示/隐藏导航条函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleNavbar = function (isShow) {
         isShow ? $mainbox.removeClass('offnavbar') : $mainbox.addClass('offnavbar');
@@ -76,7 +78,7 @@
 
     /**
      * 设置标题函数
-     * @param title 标题
+     * @param {string} title 标题
      */
     $.setTitle = (function () {
         var $title = $('.roottitle .title');
@@ -87,7 +89,7 @@
 
     /**
      * 设置二级页面标题函数
-     * @param title 二级页面标题
+     * @param {string} title 二级页面标题
      */
     $.setSubtitle = (function () {
         var $title = $('.subtitle .title');
@@ -99,7 +101,7 @@
 
     /**
      * 加载panel函数
-     * @param hash panel的hash(如#home)
+     * @param {string} hash panel的hash(如#home)
      */
     $.loadPanel = (function () {
 
@@ -116,7 +118,12 @@
         //header元素
             $header = $('#header');
 
-        //scrollTop处理相关
+        /**
+         * scrollTop处理相关
+         * @param {string} id 元素id
+         * @param {boolean} isCache 是否是存储scrollTop
+         * @ignore
+         */
         var scrollTop = (function () {
             var cache = {};
             return function (id, isCache) {
@@ -129,7 +136,7 @@
 
         /**
          * 显示panel时函数
-         * @param $toShow 显示的$对象
+         * @param {$init} $toShow 显示的$对象
          * @ignore
          */
         var toShowPanel = (function () {
@@ -148,7 +155,7 @@
 
         /**
          * 隐藏panel时函数
-         * @param $toHide 隐藏的$对象
+         * @param {$init} $toHide 隐藏的$对象
          * @ignore
          */
         function toHidePanel($toHide) {

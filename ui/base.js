@@ -21,7 +21,10 @@
     $.isShowQrcode = true;
 
 
-    //是否body滚动
+    /**
+     * 是否body滚动
+     * @type {string}
+     */
     $.isBodyScroll = $mainbox.css('overflow') !== 'hidden';
     //去掉部分浏览器地址栏(ucweb,qq有效)
     if (!$.isBodyScroll) {
@@ -39,19 +42,19 @@
     $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(ua);
     /**
      * 是否为安卓
-     * @type {string}
+     * @type {boolean}
      */
     $.isAndroid = /(android)/i.test(ua);
     /**
      * 是否为ios
-     * @type {string}
+     * @type {boolean}
      */
     $.isIos = /(iPhone|iPod|iPad)/i.test(ua);
 
 
     /**
      * 显示/隐藏mask函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleMask = function (isShow) {
         isShow ? $body.addClass('onmask') : $body.removeClass('onmask');

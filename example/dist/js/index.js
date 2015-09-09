@@ -2501,7 +2501,10 @@ module.exports=require('XSF+M5');
     $.isShowQrcode = true;
 
 
-    //是否body滚动
+    /**
+     * 是否body滚动
+     * @type {string}
+     */
     $.isBodyScroll = $mainbox.css('overflow') !== 'hidden';
     //去掉部分浏览器地址栏(ucweb,qq有效)
     if (!$.isBodyScroll) {
@@ -2519,19 +2522,19 @@ module.exports=require('XSF+M5');
     $.isMobi = /(iPhone|iPod|iPad|android|windows phone os|iemobile)/i.test(ua);
     /**
      * 是否为安卓
-     * @type {string}
+     * @type {boolean}
      */
     $.isAndroid = /(android)/i.test(ua);
     /**
      * 是否为ios
-     * @type {string}
+     * @type {boolean}
      */
     $.isIos = /(iPhone|iPod|iPad)/i.test(ua);
 
 
     /**
      * 显示/隐藏mask函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleMask = function (isShow) {
         isShow ? $body.addClass('onmask') : $body.removeClass('onmask');
@@ -2603,18 +2606,20 @@ module.exports=require('XSF+M5');
     $.homeSelector = '#home';
 
 
-    //header及navbar宽度(解决ios8中header的bug)
-    var $toFix = $('#header');
-    $.isBodyScroll && $(window).on('resize', function () {
-        $toFix.css({
-            width: window.innerWidth + 'px'
-        });
-    }).trigger('resize');
+    //header及navbar宽度(解决ios中header宽度的bug)
+    $.isBodyScroll && $(window).on('resize', (function () {
+        var $toFix = $('#header,#navbar');
+        return function () {
+            $toFix.css({
+                width: window.innerWidth + 'px'
+            });
+        };
+    })()).trigger('resize');
 
 
     /**
      * 显示/隐藏边栏函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleSidebox = (function () {
         var $sidebox = $('#sidebox');
@@ -2641,7 +2646,7 @@ module.exports=require('XSF+M5');
 
     /**
      * 显示/隐藏头部函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleHeader = function (isShow) {
         isShow ? $mainbox.removeClass('offheader') : $mainbox.addClass('offheader');
@@ -2649,7 +2654,7 @@ module.exports=require('XSF+M5');
 
     /**
      * 显示/隐藏导航条函数
-     * @param isShow 是否显示
+     * @param {boolean} isShow 是否显示
      */
     $.toggleNavbar = function (isShow) {
         isShow ? $mainbox.removeClass('offnavbar') : $mainbox.addClass('offnavbar');
@@ -2657,7 +2662,7 @@ module.exports=require('XSF+M5');
 
     /**
      * 设置标题函数
-     * @param title 标题
+     * @param {string} title 标题
      */
     $.setTitle = (function () {
         var $title = $('.roottitle .title');
@@ -2668,7 +2673,7 @@ module.exports=require('XSF+M5');
 
     /**
      * 设置二级页面标题函数
-     * @param title 二级页面标题
+     * @param {string} title 二级页面标题
      */
     $.setSubtitle = (function () {
         var $title = $('.subtitle .title');
@@ -2680,7 +2685,7 @@ module.exports=require('XSF+M5');
 
     /**
      * 加载panel函数
-     * @param hash panel的hash(如#home)
+     * @param {string} hash panel的hash(如#home)
      */
     $.loadPanel = (function () {
 
@@ -2697,7 +2702,12 @@ module.exports=require('XSF+M5');
         //header元素
             $header = $('#header');
 
-        //scrollTop处理相关
+        /**
+         * scrollTop处理相关
+         * @param {string} id 元素id
+         * @param {boolean} isCache 是否是存储scrollTop
+         * @ignore
+         */
         var scrollTop = (function () {
             var cache = {};
             return function (id, isCache) {
@@ -2710,7 +2720,7 @@ module.exports=require('XSF+M5');
 
         /**
          * 显示panel时函数
-         * @param $toShow 显示的$对象
+         * @param {$init} $toShow 显示的$对象
          * @ignore
          */
         var toShowPanel = (function () {
@@ -2729,7 +2739,7 @@ module.exports=require('XSF+M5');
 
         /**
          * 隐藏panel时函数
-         * @param $toHide 隐藏的$对象
+         * @param {$init} $toHide 隐藏的$对象
          * @ignore
          */
         function toHidePanel($toHide) {
