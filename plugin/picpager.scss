@@ -24,7 +24,8 @@ plugin/picpager
 
         .pi-picpager-pic
         {
-            @extend %ph_pafull;
+            @extend %ph_palt;
+            @extend %ph_full;
             @extend .ani_loading;
             background-position: center center;
             background-repeat: no-repeat;

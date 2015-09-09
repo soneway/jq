@@ -14,21 +14,21 @@
         $mainbox = $('#mainbox');
 
 
-    //是否body滚动
-    var isBodyScroll = $mainbox.css('overflow') !== 'hidden';
-    //去掉部分浏览器地址栏(ucweb,qq有效)
-    if (!isBodyScroll) {
-        $body.addClass('very-high');
-        window.scrollTo(0, 1);
-        $body.removeClass('very-high');
-    }
-
-
     /**
      * 是否显示二维码(默认为true)
      * @type {boolean}
      */
     $.isShowQrcode = true;
+
+
+    //是否body滚动
+    $.isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+    //去掉部分浏览器地址栏(ucweb,qq有效)
+    if (!$.isBodyScroll) {
+        $body.addClass('very-high');
+        window.scrollTo(0, 1);
+        $body.removeClass('very-high');
+    }
 
 
     var ua = navigator.userAgent;

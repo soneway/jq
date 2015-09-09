@@ -22,74 +22,14 @@
     $.homeSelector = '#home';
 
 
-    //scrollTop处理相关
-    var scrollTop = (function () {
-        var cache = {},
-        //是否body滚动
-            isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+    //header及navbar宽度(解决ios中header宽度的bug)
+    var $toFix = $('#header');
+    $.isBodyScroll && $(window).on('resize', function () {
+        $toFix.css({
+            width: window.innerWidth + 'px'
+        });
+    }).trigger('resize');
 
-        return function (id, isCache) {
-            if (isBodyScroll) {
-                //是否是存储scrollTop
-                isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
-            }
-        };
-    })();
-
-
-    /**
-     * 页面滚动到函数
-     * @param toScrollTop 滚动到的scrollTop
-     * @param rate 比率
-     * @param el 滚动元素
-     */
-    $.scrollTo = function (toScrollTop, rate, el) {
-        rate || (rate = 20);
-        el || (el = bodyEl);
-
-        var scrollTop = el.scrollTop,
-            scrollSpan = (toScrollTop - scrollTop) / rate;
-
-        function scroll() {
-            scrollTop += scrollSpan;
-            el.scrollTop = scrollTop;
-            scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
-        }
-
-        //定位滚动
-        scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
-    };
-
-
-    /**
-     * 显示panel时函数
-     * @param $toShow 显示的$对象
-     * @ignore
-     */
-    var toShowPanel = (function () {
-        var cache = {};
-        return function ($toShow) {
-            var panelLoaded = $.panelLoaded,
-                id = $toShow[0].id;
-
-            //显示时调用函数
-            typeof panelLoaded === 'function' && panelLoaded($toShow, !cache[id]);
-
-            //记录panel是否初始化过
-            cache[id] = true;
-        };
-    })();
-
-    /**
-     * 隐藏panel时函数
-     * @param $toHide 隐藏的$对象
-     * @ignore
-     */
-    function toHidePanel($toHide) {
-        //隐藏时调用函数
-        var panelUnloaded = $.panelUnloaded;
-        typeof panelUnloaded === 'function' && panelUnloaded($toHide);
-    }
 
     /**
      * 显示/隐藏边栏函数
@@ -175,6 +115,47 @@
             history = $.history = [],
         //header元素
             $header = $('#header');
+
+        //scrollTop处理相关
+        var scrollTop = (function () {
+            var cache = {};
+            return function (id, isCache) {
+                if ($.isBodyScroll) {
+                    //是否是存储scrollTop
+                    isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
+                }
+            };
+        })();
+
+        /**
+         * 显示panel时函数
+         * @param $toShow 显示的$对象
+         * @ignore
+         */
+        var toShowPanel = (function () {
+            var cache = {};
+            return function ($toShow) {
+                var panelLoaded = $.panelLoaded,
+                    id = $toShow[0].id;
+
+                //显示时调用函数
+                typeof panelLoaded === 'function' && panelLoaded($toShow, !cache[id]);
+
+                //记录panel是否初始化过
+                cache[id] = true;
+            };
+        })();
+
+        /**
+         * 隐藏panel时函数
+         * @param $toHide 隐藏的$对象
+         * @ignore
+         */
+        function toHidePanel($toHide) {
+            //隐藏时调用函数
+            var panelUnloaded = $.panelUnloaded;
+            typeof panelUnloaded === 'function' && panelUnloaded($toHide);
+        }
 
         return function (hash) {
             var $toShow, $toHide;
@@ -269,6 +250,8 @@
                                 $toShow.addClass('notrans');
                                 $toHide.addClass('notrans');
                             }
+
+                            //二级->一级时有动画
                             else {
                                 $toShow.removeClass('notrans');
                                 $toHide.removeClass('notrans');

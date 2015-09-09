@@ -36,7 +36,7 @@ $.panelUnloaded = function ($this) {
     typeof unload === 'function' && unload($this);
 };
 
-},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":19,"customalert":12,"jq":"U94cel","scroll":16,"ui":20}],2:[function(require,module,exports){
+},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":19,"customalert":12,"jq":"XSF+M5","scroll":16,"ui":20}],2:[function(require,module,exports){
 //焦点图
 require('carousel');
 
@@ -196,7 +196,9 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"turntable":18}],"U94cel":[function(require,module,exports){
+},{"turntable":18}],"jq":[function(require,module,exports){
+module.exports=require('XSF+M5');
+},{}],"XSF+M5":[function(require,module,exports){
 (function (global){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 //jq.js
@@ -1119,8 +1121,6 @@ module.exports = function ($this, isInit) {
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"jq":[function(require,module,exports){
-module.exports=require('U94cel');
 },{}],11:[function(require,module,exports){
 /*
  * carousel.js
@@ -2494,21 +2494,21 @@ module.exports=require('U94cel');
         $mainbox = $('#mainbox');
 
 
-    //是否body滚动
-    var isBodyScroll = $mainbox.css('overflow') !== 'hidden';
-    //去掉部分浏览器地址栏(ucweb,qq有效)
-    if (!isBodyScroll) {
-        $body.addClass('very-high');
-        window.scrollTo(0, 1);
-        $body.removeClass('very-high');
-    }
-
-
     /**
      * 是否显示二维码(默认为true)
      * @type {boolean}
      */
     $.isShowQrcode = true;
+
+
+    //是否body滚动
+    $.isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+    //去掉部分浏览器地址栏(ucweb,qq有效)
+    if (!$.isBodyScroll) {
+        $body.addClass('very-high');
+        window.scrollTo(0, 1);
+        $body.removeClass('very-high');
+    }
 
 
     var ua = navigator.userAgent;
@@ -2603,74 +2603,14 @@ module.exports=require('U94cel');
     $.homeSelector = '#home';
 
 
-    //scrollTop处理相关
-    var scrollTop = (function () {
-        var cache = {},
-        //是否body滚动
-            isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+    //header及navbar宽度(解决ios8中header的bug)
+    var $toFix = $('#header');
+    $.isBodyScroll && $(window).on('resize', function () {
+        $toFix.css({
+            width: window.innerWidth + 'px'
+        });
+    }).trigger('resize');
 
-        return function (id, isCache) {
-            if (isBodyScroll) {
-                //是否是存储scrollTop
-                isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
-            }
-        };
-    })();
-
-
-    /**
-     * 页面滚动到函数
-     * @param toScrollTop 滚动到的scrollTop
-     * @param rate 比率
-     * @param el 滚动元素
-     */
-    $.scrollTo = function (toScrollTop, rate, el) {
-        rate || (rate = 20);
-        el || (el = bodyEl);
-
-        var scrollTop = el.scrollTop,
-            scrollSpan = (toScrollTop - scrollTop) / rate;
-
-        function scroll() {
-            scrollTop += scrollSpan;
-            el.scrollTop = scrollTop;
-            scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
-        }
-
-        //定位滚动
-        scrollSpan > 0 ? ( toScrollTop > scrollTop && requestAnimationFrame(scroll)) : ( toScrollTop < scrollTop && requestAnimationFrame(scroll));
-    };
-
-
-    /**
-     * 显示panel时函数
-     * @param $toShow 显示的$对象
-     * @ignore
-     */
-    var toShowPanel = (function () {
-        var cache = {};
-        return function ($toShow) {
-            var panelLoaded = $.panelLoaded,
-                id = $toShow[0].id;
-
-            //显示时调用函数
-            typeof panelLoaded === 'function' && panelLoaded($toShow, !cache[id]);
-
-            //记录panel是否初始化过
-            cache[id] = true;
-        };
-    })();
-
-    /**
-     * 隐藏panel时函数
-     * @param $toHide 隐藏的$对象
-     * @ignore
-     */
-    function toHidePanel($toHide) {
-        //隐藏时调用函数
-        var panelUnloaded = $.panelUnloaded;
-        typeof panelUnloaded === 'function' && panelUnloaded($toHide);
-    }
 
     /**
      * 显示/隐藏边栏函数
@@ -2756,6 +2696,47 @@ module.exports=require('U94cel');
             history = $.history = [],
         //header元素
             $header = $('#header');
+
+        //scrollTop处理相关
+        var scrollTop = (function () {
+            var cache = {};
+            return function (id, isCache) {
+                if ($.isBodyScroll) {
+                    //是否是存储scrollTop
+                    isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
+                }
+            };
+        })();
+
+        /**
+         * 显示panel时函数
+         * @param $toShow 显示的$对象
+         * @ignore
+         */
+        var toShowPanel = (function () {
+            var cache = {};
+            return function ($toShow) {
+                var panelLoaded = $.panelLoaded,
+                    id = $toShow[0].id;
+
+                //显示时调用函数
+                typeof panelLoaded === 'function' && panelLoaded($toShow, !cache[id]);
+
+                //记录panel是否初始化过
+                cache[id] = true;
+            };
+        })();
+
+        /**
+         * 隐藏panel时函数
+         * @param $toHide 隐藏的$对象
+         * @ignore
+         */
+        function toHidePanel($toHide) {
+            //隐藏时调用函数
+            var panelUnloaded = $.panelUnloaded;
+            typeof panelUnloaded === 'function' && panelUnloaded($toHide);
+        }
 
         return function (hash) {
             var $toShow, $toHide;
@@ -2850,6 +2831,8 @@ module.exports=require('U94cel');
                                 $toShow.addClass('notrans');
                                 $toHide.addClass('notrans');
                             }
+
+                            //二级->一级时有动画
                             else {
                                 $toShow.removeClass('notrans');
                                 $toHide.removeClass('notrans');
