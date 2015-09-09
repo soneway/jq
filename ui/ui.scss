@@ -152,6 +152,7 @@ $head-color: $color !default;
 /*边栏*/
 #sidebox
 {
+    /*必须fixed定位,absolute在qq浏览器中有bug(横向滚动条)*/
     @extend %ph_pfrt;
     height: 100%;
     width: 80%;

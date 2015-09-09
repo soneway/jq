@@ -117,18 +117,19 @@
         /**
          * 显示panel时函数
          * @param {$init} $toShow 显示的$对象
+         * @param {boolean} isNoScroll 是否不恢复scrollTop
          * @ignore
          */
         var toShowPanel = (function () {
             var cache = {};
-            return function ($toShow) {
+            return function ($toShow, isNoScroll) {
                 var id = $toShow[0].id;
 
                 //显示
                 $toShow.addClass('show opened');
 
                 //b.设置scrollTop(必须放在显示之后)
-                scrollTop(id, false);
+                !isNoScroll && scrollTop(id, false);
 
                 //显示时调用函数
                 var panelLoaded = $.panelLoaded;
@@ -180,7 +181,7 @@
                     //隐藏时调用函数
                     toHidePanel($sidebox);
                     //显示原页面
-                    toShowPanel($panel);
+                    toShowPanel($panel, true);
                 }
             };
         })();

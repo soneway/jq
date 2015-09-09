@@ -25,7 +25,3 @@ module.exports = function ($this, isInit) {
         $('#img_car').html(html).carousel();
     }
 };
-
-module.exports.unload = function () {
-    console.log('carousel unload');
-};
