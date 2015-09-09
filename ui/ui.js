@@ -75,6 +75,7 @@
     /**
      * 加载panel函数
      * @param {string} hash panel的hash(如#home)
+     * @param {boolean} isAnimation 是否动画
      */
     $.loadPanel = (function () {
 
@@ -90,6 +91,12 @@
             history = $.history = [],
         //header元素
             $header = $('#header');
+
+        /**
+         * 页面加载是否动画(默认为true)
+         * @type {boolean}
+         */
+        $.isLoadAnimation = true;
 
         /**
          * scrollTop处理相关
@@ -115,13 +122,19 @@
         var toShowPanel = (function () {
             var cache = {};
             return function ($toShow) {
-                var panelLoaded = $.panelLoaded,
-                    id = $toShow[0].id;
+                var id = $toShow[0].id;
+
+                //显示
+                $toShow.addClass('show opened');
+
+                //b.设置scrollTop(必须放在显示之后)
+                scrollTop(id, false);
 
                 //显示时调用函数
+                var panelLoaded = $.panelLoaded;
                 typeof panelLoaded === 'function' && panelLoaded($toShow, !cache[id]);
 
-                //记录panel是否初始化过
+                //记录panel是否初始化过(放在最后)
                 cache[id] = true;
             };
         })();
@@ -132,6 +145,12 @@
          * @ignore
          */
         function toHidePanel($toHide) {
+            //隐藏
+            $toHide.removeClass('show');
+
+            //如果是打开iframe页面的面板
+            $toHide[0].id === 'paneliframe' && ($toHide.html(''));
+
             //隐藏时调用函数
             var panelUnloaded = $.panelUnloaded;
             typeof panelUnloaded === 'function' && panelUnloaded($toHide);
@@ -165,13 +184,13 @@
             };
         })();
 
-        return function (hash) {
+        return function (hash, isAnimation) {
             var $toShow, $toHide;
 
             if (!hash) {
                 $toHide = history.pop();
                 $toShow = history[history.length - 1] || $($.homeSelector);
-                hash = '#' + $toShow.attr('id');
+                hash = '#' + $toShow[0].id;
             }
             else {
                 $toShow = $(hash);
@@ -224,25 +243,37 @@
 
                 //没有隐藏面板的特殊情况(页面第一次加载)
                 if (!$toHide) {
-                    //显示panel和导航
-                    $toShow.addClass('show opened');
-
                     //显示时调用函数
                     toShowPanel($toShow);
                     return;
                 }
 
 
-                //a.记录scrollTop(必须放在隐藏之前)
-                scrollTop($toHide.attr('id'), 1);
-
-
                 //面板切换
-                if ('#' + $toHide.attr('id') !== hash) {
-
+                if ('#' + $toHide[0].id !== hash) {
                     var hideRole = $toHide.attr('data-role');
 
-                    //1.立即操作
+                    //a.记录scrollTop(必须放在隐藏之前)
+                    scrollTop($toHide[0].id, 1);
+
+
+                    //一级->一级或无动画
+                    var isAni = isAnimation === undefined ? $.isLoadAnimation : isAnimation;
+                    if (!isAni || showRole === 'root' && hideRole === 'root') {
+                        //无动画
+                        $toShow.addClass('notrans');
+                        $toHide.addClass('notrans');
+
+                        //显示时调用函数(放在靠后)
+                        toShowPanel($toShow);
+                        //隐藏时调用函数(放在靠后)
+                        toHidePanel($toHide);
+                        return;
+                    }
+
+
+                    //其他切换
+                    //1.显示
                     $toShow.addClass('show');
 
                     //切换面板时强制重排一次,以免出现横向滚动条
@@ -250,62 +281,43 @@
 
                     //2.延迟保证显示动画
                     setTimeout(function () {
-                        //显示一级面板
+                        //有动画
+                        $toShow.removeClass('notrans');
+                        $toHide.removeClass('notrans');
+
+                        //二级->一级
                         if (showRole === 'root') {
-
-                            //一级->一级时无动画
-                            if (hideRole === 'root') {
-                                $toShow.addClass('notrans');
-                                $toHide.addClass('notrans');
-                            }
-
-                            //二级->一级时有动画
-                            else {
-                                $toShow.removeClass('notrans');
-                                $toHide.removeClass('notrans');
-                            }
-
-                            $toShow.removeClass('subopened').addClass('opened');
+                            $toShow.removeClass('subopened');
                             $toHide.removeClass('opened');
                         }
                         //显示二级面板
                         else {
-
-                            $toShow.removeClass('notrans');
-                            $toHide.removeClass('notrans');
-
+                            //一级->二级
                             if ($toShow.hasClass('subopened')) {
-                                $toShow.removeClass('subopened').addClass('opened');
+                                $toShow.removeClass('subopened');
                                 $toHide.removeClass('opened');
                             }
+                            //二级->二级
                             else {
-                                $toShow.addClass('opened');
                                 $toHide.addClass('subopened').removeClass('opened');
                             }
                         }
 
-                        //b.设置scrollTop(必须放在显示之后)
-                        scrollTop($toShow.attr('id'), false);
-
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
-                    }, 10);
+                    }, 0);
 
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
-                        $toHide.removeClass('show');
 
                         //延迟重排(延迟100ms在ios8上才有效果)
                         setTimeout(function () {
                             $mainbox.removeClass('reflow');//切换面板时强制重排一次
                         }, 100);
 
-                        //如果是打开iframe页面的面板
-                        $toHide.attr('id') === 'paneliframe' && ($toHide.html(''));
-
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration + 20);
+                    }, duration);
                 }
             }
             //没有显示面板

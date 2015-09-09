@@ -206,20 +206,20 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     z-index: -1;
     overflow: hidden;
 
-    .btnleft
+    /*.btnleft
     {
         @include mx_transform(translate3d(100vw, 0, 0));
-    }
+    }*/
 
     .onsubtitle &
     {
         opacity: 1;
         z-index: auto;
 
-        .btnleft
+        /*.btnleft
         {
             @include mx_transform(translate3d(0, 0, 0));
-        }
+        }*/
     }
 }
 
