@@ -17,17 +17,14 @@ $panel-bgcolor: #fff !default;
 @import "../scss/ani_spinner";
 
 /*元素*/
-*:focus
-{
-    outline: none;
-}
-
-
 *, *:before, *:after
 {
     margin: 0;
     padding: 0;
-    @extend %ph_border-box; /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/
+    /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/
+    @include mx_box-sizing(border-box);
+    /*不使用占位符生成css代码,是避免多一次选择器的匹配*/
+    /*@extend %ph_border-box;*/
 }
 
 

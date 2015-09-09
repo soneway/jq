@@ -17,7 +17,6 @@ $head-bg: #006c1a 0%, #04990e 100% !default;
 $head-border-color: rgba(128, 128, 128, 0.5) !default;
 
 //引入
-@import "../scss/iconmoon";
 @import "../plugin/scroll";
 
 /*重排类*/
@@ -64,7 +63,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     .btnleft, .btnright
     {
         z-index: 2;
-        padding: 0 8px;
+        padding: 0 10px;
         height: 100%;
     }
 
@@ -84,16 +83,51 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
         }
     }
 
-    /*返回按钮类*/
+    /*返回按钮*/
     .btnback
     {
+        padding-left: 24px;
         font-size: 16px;
-        padding-left: 4px;
 
         &:before
         {
-            font-size: 20px;
-            vertical-align: sub;
+            $w: 14px;
+
+            content: '';
+            @include mx_plt($left: $w, $top: 50%);
+            margin-top: -$w / 2;
+            width: $w;
+            height: $w;
+            @include mx_box-shadow(-1px -1px 0 $color);
+            @include mx_transform(rotateZ(-45deg));
+        }
+
+        &.focus:before
+        {
+            @include mx_box-shadow(-1px -1px 0 $color_focus);
+        }
+    }
+
+    /*菜单按钮*/
+    .btnmenu
+    {
+        font-size: 0;
+        line-height: 0;
+        padding-top: $head-height / 2;
+
+        &:before
+        {
+            content: '';
+            display: inline-block;
+            height: 1px;
+            width: 20px;
+            vertical-align: top;
+            @include mx_box-shadow(0 6px 0 0 $color, 0 -8px 0 0 $color, 0 -1px 0 0 $color);
+        }
+
+        &.focus:before
+        {
+            @include mx_box-shadow(0 6px 0 0 $color_focus, 0 -8px 0 0 $color_focus, 0 -1px 0 0 $color_focus);
         }
     }
 

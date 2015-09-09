@@ -2616,6 +2616,7 @@ module.exports=require('XSF+M5');
         };
     })()).trigger('resize');
 
+
     /**
      * 显示/隐藏头部函数
      * @param {boolean} isShow 是否显示

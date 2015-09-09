@@ -85,10 +85,6 @@ a {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease; }
 
-*, *:before, *:after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
-
 #loading, #customalert {
   display: -webkit-box;
   -webkit-box-align: center;
@@ -143,13 +139,14 @@ scss/ani_circle
   animation: ani_circle 1s ease infinite; }
 
 /*元素*/
-*:focus {
-  outline: none; }
-
 *, *:before, *:after {
   margin: 0;
   padding: 0;
-  /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/ }
+  /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /*不使用占位符生成css代码,是避免多一次选择器的匹配*/
+  /*@extend %ph_border-box;*/ }
 
 body {
   background-color: #fff;
@@ -339,27 +336,6 @@ ui/ui
 包含面板,导航,边栏等样式
 */
 /*
-scss/iconmoon
-图标字体样式
-*/
-@font-face {
-  font-family: iconmoon;
-  src: url(data:application/x-font-woff;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SAysAAAC8AAAAYGNtYXAaVcxYAAABHAAAAExnYXNwAAAAEAAAAWgAAAAIZ2x5ZvwFkJgAAAFwAAABNGhlYWQFBe7SAAACpAAAADZoaGVhB20DxwAAAtwAAAAkaG10eAoAAVoAAAMAAAAAGGxvY2EAwgBaAAADGAAAAA5tYXhwAAoAOwAAAygAAAAgbmFtZVcZpu4AAANIAAABRXBvc3QAAwAAAAAEkAAAACAAAwQAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADmAQPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEADgAAAAKAAgAAgACAAEAIOYB//3//wAAAAAAIOYA//3//wAB/+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQEFAB8CxwN7ABMAACUWFAcOAScBJjQ3ATYyFxYUBwkBAscLCwodCv5vCwsBkQodCgsL/pMBbVEKHgoKAQsBlQodCwGVCgoLHQr+hP6EAAADAFUAgAOrAtUAEgAlADgAABMhMhcWFRQHBiMhIicmNTQ3NjMRITIXFhUUBwYjISInJjU0NzYzESEyFxYVFAcGIyEiJyY1NDc2M4ADABIMDQ0MEv0AEgwNDQwSAwASDA0NDBL9ABIMDQ0MEgMAEgwNDQwS/QASDA0NDBIC1QwNERINDAwNEhENDP4ADA0REg0MDA0SEQ0MAQAMDRESDQwMDRIRDQwAAAABAAAAAAAAFqQjNF8PPPUACwQAAAAAANEe1S0AAAAA0R7VLQAAAAADqwN7AAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAAOrAAEAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAgAAAAQAAQUEAABVAAAAAAAKABQAHgBGAJoAAAABAAAABgA5AAMAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEADgAAAAEAAAAAAAIADgBHAAEAAAAAAAMADgAkAAEAAAAAAAQADgBVAAEAAAAAAAUAFgAOAAEAAAAAAAYABwAyAAEAAAAAAAoANABjAAMAAQQJAAEADgAAAAMAAQQJAAIADgBHAAMAAQQJAAMADgAkAAMAAQQJAAQADgBVAAMAAQQJAAUAFgAOAAMAAQQJAAYADgA5AAMAAQQJAAoANABjAGkAYwBvAG0AbwBvAG4AVgBlAHIAcwBpAG8AbgAgADEALgAwAGkAYwBvAG0AbwBvAG5pY29tb29uAGkAYwBvAG0AbwBvAG4AUgBlAGcAdQBsAGEAcgBpAGMAbwBtAG8AbwBuAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) format("truetype");
-  font-weight: normal;
-  font-style: normal; }
-
-[class^='icon-']:before, [class*=' icon-']:before, [class^='icon-']:after, [class*=' icon-']:after {
-  font-family: iconmoon;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased; }
-
-.icon-left:before {
-  content: '\e600'; }
-
-.icon-menu:before {
-  content: '\e601'; }
-
-/*
 plugin/scroll
 自定义滚动样式
 */
@@ -382,7 +358,8 @@ plugin/scroll
   right: 0;
   z-index: 1;
   /*模拟1px边框*/
-  /*返回按钮类*/ }
+  /*返回按钮*/
+  /*菜单按钮*/ }
   .head:after {
     content: '';
     width: 100%;
@@ -395,7 +372,7 @@ plugin/scroll
   .head .btnleft, .head
 .btnright {
     z-index: 2;
-    padding: 0 8px;
+    padding: 0 10px;
     height: 100%; }
   .head
 .btnright:before {
@@ -403,12 +380,43 @@ plugin/scroll
     vertical-align: sub; }
   .head
 .btnback {
-    font-size: 16px;
-    padding-left: 4px; }
+    padding-left: 24px;
+    font-size: 16px; }
     .head
 .btnback:before {
-      font-size: 20px;
-      vertical-align: sub; }
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      margin-top: -7px;
+      width: 14px;
+      height: 14px;
+      -webkit-box-shadow: -1px -1px 0 #333;
+      box-shadow: -1px -1px 0 #333;
+      -webkit-transform: rotateZ(-45deg);
+      transform: rotateZ(-45deg); }
+    .head
+.btnback.focus:before {
+      -webkit-box-shadow: -1px -1px 0 #df2221;
+      box-shadow: -1px -1px 0 #df2221; }
+  .head
+.btnmenu {
+    font-size: 0;
+    line-height: 0;
+    padding-top: 20px; }
+    .head
+.btnmenu:before {
+      content: '';
+      display: inline-block;
+      height: 1px;
+      width: 20px;
+      vertical-align: top;
+      -webkit-box-shadow: 0 6px 0 0 #333, 0 -8px 0 0 #333, 0 -1px 0 0 #333;
+      box-shadow: 0 6px 0 0 #333, 0 -8px 0 0 #333, 0 -1px 0 0 #333; }
+    .head
+.btnmenu.focus:before {
+      -webkit-box-shadow: 0 6px 0 0 #df2221, 0 -8px 0 0 #df2221, 0 -1px 0 0 #df2221;
+      box-shadow: 0 6px 0 0 #df2221, 0 -8px 0 0 #df2221, 0 -1px 0 0 #df2221; }
   .head
 .title {
     text-align: center; }
