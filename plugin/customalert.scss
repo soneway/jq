@@ -31,7 +31,7 @@ plugin/customalert
     .ca-title
     {
         line-height: 40px;
-        @include mx_box-shadow(0 0 2px -1px #000);
+        @include mx_box-shadow(0 0 2px -1px #000, 0 0 2px -1px #000);
     }
 
     .ca-content
