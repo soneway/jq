@@ -38,7 +38,7 @@ var loader = {
 
 //$.isLoadAnimation = false;
 
-},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":19,"customalert":12,"jq":"XSF+M5","scroll":16,"ui":20}],2:[function(require,module,exports){
+},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":19,"customalert":12,"jq":"U94cel","scroll":16,"ui":20}],2:[function(require,module,exports){
 //焦点图
 require('carousel');
 
@@ -105,18 +105,24 @@ module.exports = function ($this, isInit) {
 
             //请求数据
             proxy.pushData({
-                url: 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
+                url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
+                onStart      : function () {
+                    $.toggleMask(1);
+                },
+                onEnd        : function () {
+                    $.toggleMask(0);
+                },
                 success: function (rs) {
                     var $picpager = $('.picpager').picpager({
-                        imgData: rs.data.detail,
-                        imgAttrName: 'image',
+                        imgData      : rs.data.detail,
+                        imgAttrName  : 'image',
                         slideCallback: function (index) {
                             if (index + 1 === page * 10) {
                                 page++;
 
                                 //请求数据
                                 proxy.pushData({
-                                    url: 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
+                                    url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
                                     success: function (rs) {
                                         $picpager[0].addItem(rs.data.detail);
                                     }
@@ -198,9 +204,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"turntable":18}],"jq":[function(require,module,exports){
-module.exports=require('XSF+M5');
-},{}],"XSF+M5":[function(require,module,exports){
+},{"turntable":18}],"U94cel":[function(require,module,exports){
 (function (global){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 //jq.js
@@ -1123,6 +1127,8 @@ module.exports=require('XSF+M5');
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],"jq":[function(require,module,exports){
+module.exports=require('U94cel');
 },{}],11:[function(require,module,exports){
 /*
  * carousel.js
