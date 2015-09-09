@@ -373,15 +373,11 @@ plugin/scroll
 .btnright {
     z-index: 2;
     padding: 0 10px;
-    height: 100%; }
-  .head
-.btnright:before {
-    font-size: 24px;
-    vertical-align: sub; }
+    height: 100%;
+    font-size: 16px; }
   .head
 .btnback {
-    padding-left: 24px;
-    font-size: 16px; }
+    padding-left: 22px; }
     .head
 .btnback:before {
       content: '';

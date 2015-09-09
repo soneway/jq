@@ -65,6 +65,7 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
         z-index: 2;
         padding: 0 10px;
         height: 100%;
+        font-size: 16px;
     }
 
     .btnleft
@@ -75,19 +76,12 @@ $head-border-color: rgba(128, 128, 128, 0.5) !default;
     .btnright
     {
         @extend %ph_part;
-
-        &:before
-        {
-            font-size: 24px;
-            vertical-align: sub;
-        }
     }
 
     /*返回按钮*/
     .btnback
     {
-        padding-left: 24px;
-        font-size: 16px;
+        padding-left: 22px;
 
         &:before
         {
