@@ -307,20 +307,22 @@
 
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
-                    }, 0);
 
-                    //3.延迟保证隐藏动画
-                    setTimeout(function () {
 
-                        //延迟重排(延迟100ms在ios8上才有效果)
+                        //3.延迟保证隐藏动画
                         setTimeout(function () {
-                            //切换面板时强制重排一次
-                            $mainbox.removeClass('reflow');
-                        }, 100);
 
-                        //隐藏时调用函数(放在靠后)
-                        toHidePanel($toHide);
-                    }, duration);
+                            //延迟重排(延迟100ms在ios8上才有效果)
+                            setTimeout(function () {
+                                //切换面板时强制重排一次
+                                $mainbox.removeClass('reflow');
+                            }, 100);
+
+                            //隐藏时调用函数(放在靠后)
+                            toHidePanel($toHide);
+                        }, duration);
+
+                    }, 10);
                 }
             }
             //没有显示面板
