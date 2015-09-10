@@ -37,6 +37,7 @@ body
     color: $color;
     line-height: $line-height;
     font-size: $font-size;
+    font-family: arial, helvetica, sans-serif;
     -webkit-text-size-adjust: none;
     /*禁止选中文本*/
     @include mx_user-select(none);
