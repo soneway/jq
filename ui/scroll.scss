@@ -27,8 +27,8 @@ body可滚动页面样式
     overflow: visible;
 
     /*避免页面不够高,挡不住隐藏页面*/
-    //.reflow &
-    //{
-    //    height: 99999px !important;
-    //}
+    .reflow &:before
+    {
+        height: 99999px !important;
+    }
 }
