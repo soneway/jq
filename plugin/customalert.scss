@@ -46,7 +46,7 @@ plugin/customalert
         @extend %ph_hauto;
         padding: 0 0 15px 0;
         border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(#fff, 0.9);
         @extend .center;
         /*动画*/
         @extend %ph_transtransf;
