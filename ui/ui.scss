@@ -179,7 +179,7 @@ $head-color: $color !default;
 /*头部*/
 #header
 {
-    @extend .transform;
+    @extend .fade-in;
 
     & > div
     {
@@ -189,7 +189,9 @@ $head-color: $color !default;
 
     .offheader &
     {
-        @include mx_transform(translate3d(0, -100%, 0));
+        //兼容性不太好
+        //@include mx_transform(translate3d(0, -100%, 0));
+        @extend .fade-out;
     }
 }
 
@@ -292,7 +294,7 @@ $head-color: $color !default;
     height: $navbar-height;
     z-index: 1;
     @extend .center;
-    @extend .transform;
+    @extend .fade-in;
 
     /*模拟1px边框*/
     &:after
@@ -308,7 +310,8 @@ $head-color: $color !default;
 
     .offnavbar > &
     {
-        @include mx_transform(translate3d(0, 100%, 0));
+        //@include mx_transform(translate3d(0, 100%, 0));
+        @extend .fade-out;
     }
 
     .navbox

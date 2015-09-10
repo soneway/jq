@@ -27,7 +27,7 @@
         var $toFix = $('#header,#navbar');
         return function () {
             $toFix.css({
-                width: window.innerWidth + 'px'
+                width: $mainbox.width() + 'px'
             });
         };
     })()).trigger('resize');
