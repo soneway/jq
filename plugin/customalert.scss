@@ -6,51 +6,18 @@ plugin/customalert
 {
     @extend %ph_pffull;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
     @extend %ph_center;
     /*动画*/
     @extend %ph_transall;
-    @extend .fade-out;
-
-    .ca-box
-    {
-        //display: inline-block;
-        width: 280px;
-        @extend %ph_hauto;
-        padding: 0 0 15px 0;
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.9);
-        @extend .center;
-        /*动画*/
-        @extend %ph_transtransf;
-        @include mx_transform(scale3d(0, 0, 1));
-    }
-
-    .ca-title
-    {
-        line-height: 40px;
-        @include mx_box-shadow(0 0 2px -1px #000);
-    }
-
-    .ca-content
-    {
-        padding: 15px 20px;
-    }
-
-    .btn
-    {
-        width: 110px;
-    }
-
-    .ca-ok
-    {
-        margin-right: 10px;
-    }
+    opacity: 0;
+    /*用z-index:-1这种方式可以防止安卓4.2打不开弹框*/
+    z-index: -1;
 
     /*显示时*/
     .oncustomalert &
     {
-        @extend .fade-in;
+        z-index: 9999;
+        opacity: 1;
 
         .ca-box
         {
@@ -70,5 +37,40 @@ plugin/customalert
         {
             display: none;
         }
+    }
+
+    .ca-box
+    {
+        //display: inline-block;
+        width: 280px;
+        @extend %ph_hauto;
+        padding: 0 0 15px 0;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+        @extend .center;
+        /*动画*/
+        @extend %ph_transtransf;
+        @include mx_transform(scale3d(0, 0, 1));
+    }
+
+    .ca-title
+    {
+        line-height: 40px;
+        @include mx_box-shadow(0 0 1px rgba(#000, 0.5));
+    }
+
+    .ca-content
+    {
+        padding: 15px 20px;
+    }
+
+    .btn
+    {
+        width: 110px;
+    }
+
+    .ca-ok
+    {
+        margin-right: 10px;
     }
 }
