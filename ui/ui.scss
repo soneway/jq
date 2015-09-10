@@ -199,6 +199,8 @@ $head-color: $color !default;
 /*一级页面标题*/
 .roottitle
 {
+    z-index: 1;
+
     .onsubtitle &
     {
         opacity: 0;
@@ -222,7 +224,7 @@ $head-color: $color !default;
     .onsubtitle &
     {
         opacity: 1;
-        z-index: auto;
+        z-index: 1;
 
         /*.btnleft
         {

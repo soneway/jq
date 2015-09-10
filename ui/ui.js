@@ -307,7 +307,7 @@
 
                         //显示时调用函数(放在靠后)
                         toShowPanel($toShow);
-                    }, 10);
+                    }, 0);
 
                     //3.延迟保证隐藏动画
                     setTimeout(function () {
@@ -320,7 +320,7 @@
 
                         //隐藏时调用函数(放在靠后)
                         toHidePanel($toHide);
-                    }, duration + 20);
+                    }, duration);
                 }
             }
             //没有显示面板
