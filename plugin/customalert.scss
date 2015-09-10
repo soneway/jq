@@ -6,11 +6,11 @@ plugin/customalert
 {
     @extend %ph_pffull;
     background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
     @extend %ph_center;
     /*动画*/
     @extend %ph_transall;
     @extend .fade-out;
-    z-index: -1;
 
     .ca-box
     {
@@ -51,7 +51,6 @@ plugin/customalert
     .oncustomalert &
     {
         @extend .fade-in;
-        z-index: 9999;
 
         .ca-box
         {
