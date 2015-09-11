@@ -37,7 +37,7 @@ var loader = {
 };
 
 //$.isLoadAnimation = false;
-alert(navigator.userAgent);
+//alert(navigator.userAgent);
 
 },{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":20,"customalert":13,"jq":"XSF+M5","scroll":17,"ui":21}],2:[function(require,module,exports){
 //焦点图
@@ -3149,12 +3149,12 @@ module.exports=require('XSF+M5');
     $.homeSelector = '#home';
 
 
-    //header及navbar宽度(解决ios中header宽度的bug)
+    //header,navbar,panel宽度(可避免横向滚动条的bug)
     $.isBodyScroll && $(window).on('resize', (function () {
-        var $toFix = $('#header,#navbar');
+        var $toFix = $('#header,#navbar,.panel');
         return function () {
             $toFix.css({
-                width: $mainbox.width() + 'px'
+                width: bodyEl.offsetWidth + 'px'
             });
         };
     })()).trigger('resize');

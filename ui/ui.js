@@ -22,12 +22,12 @@
     $.homeSelector = '#home';
 
 
-    //header及navbar宽度(解决ios中header宽度的bug)
+    //header,navbar,panel宽度(可避免横向滚动条的bug)
     $.isBodyScroll && $(window).on('resize', (function () {
-        var $toFix = $('#header,#navbar');
+        var $toFix = $('#header,#navbar,.panel');
         return function () {
             $toFix.css({
-                width: $mainbox.width() + 'px'
+                width: bodyEl.offsetWidth + 'px'
             });
         };
     })()).trigger('resize');

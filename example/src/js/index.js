@@ -36,4 +36,4 @@ var loader = {
 };
 
 //$.isLoadAnimation = false;
-alert(navigator.userAgent);
+//alert(navigator.userAgent);
