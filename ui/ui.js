@@ -22,9 +22,9 @@
     $.homeSelector = '#home';
 
 
-    //header,navbar,panel宽度(可避免横向滚动条的bug)
-    $.isBodyScroll && $(window).on('resize', (function () {
-        var $toFix = $('#header,#navbar,.panel');
+    //body scroll时设置宽度(ios中header宽度的bug)
+    $.isBodyScroll && $.isIos && $(window).on('resize', (function () {
+        var $toFix = $('#header,#navbar');
         return function () {
             $toFix.css({
                 width: bodyEl.offsetWidth + 'px'
@@ -315,11 +315,11 @@
                         //3.延迟保证隐藏动画
                         setTimeout(function () {
 
-                            //延迟重排(延迟100ms在ios8上才有效果)
+                            //延迟重排(延迟100ms+在ios8上才有效果,安卓4.2需要400ms+)
                             setTimeout(function () {
                                 //切换面板时强制重排一次
                                 $mainbox.removeClass('reflow');
-                            }, 100);
+                            }, 400);
 
                             //隐藏时调用函数(放在靠后)
                             toHidePanel($toHide);
