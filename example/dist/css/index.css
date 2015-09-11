@@ -28,9 +28,7 @@ h3.ca-box:before, .pi-picpager
   right: 0;
   top: 0; }
 
-.head:after, #navbar, .list
-a:after, .list
-a:first-of-type:before, .pi-carousel
+.head:after, #navbar, .pi-carousel
 .pi-title {
   position: absolute;
   left: 0;
@@ -578,7 +576,7 @@ plugin/customalert
     width: 280px;
     padding: 0 0 15px 0;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
     /*动画*/
     -webkit-transform: scale3d(0, 0, 1);
     transform: scale3d(0, 0, 1); }
@@ -648,7 +646,8 @@ a.selected {
 a {
     display: block;
     padding: 10px 5px;
-    position: relative; }
+    position: relative;
+    border-bottom: 1px solid #eee; }
     .list
 a
 p {
@@ -659,18 +658,8 @@ a.title {
       background: #eee;
       font-weight: bold; }
     .list
-a:after, .list
-a:first-of-type:before {
-      content: '';
-      height: 1px;
-      width: 100%;
-      -webkit-transform: scale3d(1, 0.5, 1);
-      transform: scale3d(1, 0.5, 1);
-      background: #ddd; }
-    .list
-a:first-of-type:before {
-      bottom: auto;
-      top: 0; }
+a:first-of-type {
+      border-top: 1px solid #eee; }
 
 h3.center, h3#navbar, #customalert
 h3.ca-box {

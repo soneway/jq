@@ -73,6 +73,7 @@ textarea
         display: block;
         padding: 10px 5px;
         position: relative;
+        border-bottom: 1px solid #eee;
 
         p
         {
@@ -86,20 +87,9 @@ textarea
             font-weight: bold;
         }
 
-        &:after, &:first-of-type:before
+        &:first-of-type
         {
-            content: '';
-            @extend %ph_palb;
-            height: 1px;
-            width: 100%;
-            @include mx_transform(scale3d(1, 0.5, 1));
-            background: #ddd;
-        }
-
-        &:first-of-type:before
-        {
-            bottom: auto;
-            top: 0;
+            border-top: 1px solid #eee;
         }
     }
 }
