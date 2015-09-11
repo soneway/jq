@@ -129,7 +129,9 @@
                 $toShow.addClass('show opened');
 
                 //b.设置scrollTop(必须放在显示之后)
-                !isNoScroll && scrollTop(id, false);
+                setTimeout(function () {
+                    !isNoScroll && scrollTop(id);
+                }, 0);
 
                 //显示时调用函数
                 var panelLoaded = $.panelLoaded;
@@ -189,7 +191,8 @@
         return function (hash, isAnimation) {
             var $toShow, $toHide;
 
-            if (!hash) {
+            //没有hash(表示后退)
+            if (hash === undefined) {
                 $toHide = history.pop();
                 $toShow = history[history.length - 1] || $($.homeSelector);
                 hash = '#' + $toShow[0].id;
