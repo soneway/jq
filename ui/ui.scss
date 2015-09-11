@@ -28,6 +28,17 @@ $head-color: $color !default;
 }
 
 
+/*左阴影*/
+.left-sd
+{
+    /*outline会导致下边框问题*/
+    //outline: 4px solid rgba(0, 0, 0, 0.1);
+    //border-left: 2px solid rgba(#000, 0.2);
+    /*box-shadow对安卓动画性能影响太明显*/
+    @include mx_box-shadow(-4px 0 3px -3px rgba(0, 0, 0, 0.3));
+}
+
+
 /*head导航条背景*/
 .head, #navbar
 {
@@ -170,8 +181,7 @@ $head-color: $color !default;
     .onsidebox &
     {
         @include mx_transform(translate3d(0, 0, 0));
-        //outline: 3px solid rgba(0, 0, 0, 0.2);
-        //@include mx_box-shadow(-4px 0 3px -3px rgba(0, 0, 0, 0.2));
+        @extend .left-sd;
     }
 }
 
@@ -247,26 +257,8 @@ $head-color: $color !default;
     display: none;
     @extend .transform;
     @include mx_transform(translate3d(100%, 0, 0));
-
-    //模拟背景
-    &:before
-    {
-        content: '';
-        @extend %ph_palt;
-        @extend %ph_full;
-        background-color: $panel-bgcolor;
-        /*outline会导致下边框问题*/
-        //outline: 4px solid rgba(0, 0, 0, 0.1);
-        /*box-shadow对安卓动画性能影响太明显*/
-        //@include mx_box-shadow(-4px 0 0 -3px rgba(0, 0, 0, 0.2));
-        z-index: -1;
-    }
-
-    /*动画时显示左边框*/
-    .reflow &:before
-    {
-        border-left: 2px solid rgba(#000, 0.2);
-    }
+    background-color: $panel-bgcolor;
+    @extend .left-sd;
 
     &[data-role=root]
     {

@@ -3443,7 +3443,7 @@ module.exports=require('XSF+M5');
 
                             //延迟重排(延迟100ms+在ios8上才有效果,安卓4.2需要400ms+)
                             setTimeout(function () {
-                                //切换面板时强制重排一次
+                                //切换面板时强制重排一次,以免出现横向滚动条
                                 $mainbox.removeClass('reflow');
                             }, 400);
 

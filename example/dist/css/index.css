@@ -9,7 +9,7 @@ ui/base
   -webkit-overflow-scrolling: touch; }
 
 .head, .head
-.btnleft, .panel, .panel:before, #navbar:after, h3.center:before, h3#navbar:before, #customalert
+.btnleft, .panel, #navbar:after, h3.center:before, h3#navbar:before, #customalert
 h3.ca-box:before, .pi-picpager
 .pi-pic, #picpager
 .info {
@@ -36,7 +36,7 @@ a:first-of-type:before, .pi-carousel
   left: 0;
   bottom: 0; }
 
-.panel:before, #paneliframe
+#paneliframe
 iframe, #carousel
 .carousel
 a
@@ -68,7 +68,7 @@ a:after, .tologin
 .sohulogo:after {
   position: absolute; }
 
-.onmask:after, #customalert, #header, #navbar {
+.onmask:after, #customalert {
   position: fixed; }
 
 #navbar
@@ -360,6 +360,13 @@ plugin/scroll
 .reflow {
   padding-bottom: 1px !important; }
 
+/*左阴影*/
+.left-sd, .onsidebox #sidebox, .panel {
+  /*outline会导致下边框问题*/
+  /*box-shadow对安卓动画性能影响太明显*/
+  -webkit-box-shadow: -4px 0 3px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: -4px 0 3px -3px rgba(0, 0, 0, 0.3); }
+
 /*head导航条背景*/
 .head, #navbar {
   overflow: hidden;
@@ -489,15 +496,7 @@ plugin/scroll
   display: none;
   -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
-  /*动画时显示左边框*/ }
-  .panel:before {
-    content: '';
-    background-color: #fff;
-    /*outline会导致下边框问题*/
-    /*box-shadow对安卓动画性能影响太明显*/
-    z-index: -1; }
-  .reflow .panel:before {
-    border-left: 2px solid rgba(0, 0, 0, 0.2); }
+  background-color: #fff; }
   .panel[data-role=root] {
     padding-bottom: 50px; }
   .panel.subopened {
@@ -548,24 +547,6 @@ iframe {
 .navlist
 a {
       padding: 0 5px; }
-
-/*
-ui/base
-body可滚动页面样式
-复写了overflow:hidden;等样式,使得页面可以body滚动
-*/
-#mainbox {
-  overflow: visible; }
-  .onsidebox #mainbox {
-    overflow: hidden; }
-
-.panel {
-  height: auto;
-  min-height: 100%;
-  overflow: visible;
-  /*避免页面不够高,挡不住隐藏页面*/ }
-  .reflow .panel:before {
-    height: 99999px !important; }
 
 /*
 plugin/customalert

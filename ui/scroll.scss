@@ -25,10 +25,23 @@ body可滚动页面样式
     height: auto;
     min-height: 100%;
     overflow: visible;
+    background-color: transparent;
+    @include mx_box-shadow(none);
 
-    /*避免页面不够高,挡不住隐藏页面*/
+    //填充背景
+    &:before
+    {
+        content: '';
+        @extend %ph_palt;
+        @extend %ph_full;
+        background-color: $panel-bgcolor;
+        @extend .left-sd;
+        z-index: -1;
+    }
+
+    /*避免页面不够高,挡不住隐藏页面以及左边框*/
     .reflow &:before
     {
-        height: 99999px !important;
+        height: 99999px;
     }
 }
