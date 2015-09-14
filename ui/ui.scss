@@ -35,7 +35,7 @@ $head-color: $color !default;
     //outline: 4px solid rgba(0, 0, 0, 0.1);
     //border-left: 2px solid rgba(#000, 0.2);
     /*box-shadow对安卓动画性能影响太明显*/
-    @include mx_box-shadow(-6px 0 3px -3px rgba(0, 0, 0, 0.2));
+    @include mx_box-shadow(-5px 0 3px -3px rgba(0, 0, 0, 0.2));
 }
 
 
