@@ -10,24 +10,23 @@ plugin/carousel
     //@include mx_perspective(1000);
     position: relative;
 
+    /*垂直滚动样式*/
+    &.vertical
+    {
+        .pi-wrap > *, .pi-pager span
+        {
+            float: none;
+        }
+    }
+
     /*滚动容器*/
     .pi-wrap
     {
-        &.transform
-        {
-            @extend %ph_transtransf;
-        }
-
         & > *
         {
             display: block;
             float: left;
             overflow: hidden;
-
-            .vertical > &
-            {
-                float: none;
-            }
         }
     }
 
@@ -37,10 +36,10 @@ plugin/carousel
         @extend %ph_palb;
         width: 100%;
         line-height: 1.1;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(#000, 0.5);
         color: #fff;
         padding: 10px;
-        text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+        text-shadow: 0 0 3px rgba(#000, 0.8);
         /*动画*/
         @extend %ph_transall;
         @include mx_transform(translate3d(0, 100%, 0));
@@ -64,19 +63,14 @@ plugin/carousel
             width: 8px;
             height: 8px;
             border-radius: 8px;
-            @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
-            background-color: rgba(255, 255, 255, 0.5);
+            @include mx_box-shadow(0 0 3px rgba(#000, 0.5));
+            background-color: rgba(#fff, 0.5);
             cursor: pointer;
 
             &.selected
             {
-                @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.9));
-                background-color: rgba(255, 255, 255, 0.9);
-            }
-
-            .vertical > &
-            {
-                float: none;
+                @include mx_box-shadow(0 0 3px rgba(#000, 0.9));
+                background-color: rgba(#fff, 0.9);
             }
         }
     }
