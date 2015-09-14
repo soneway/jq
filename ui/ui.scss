@@ -35,7 +35,7 @@ $head-color: $color !default;
     //outline: 4px solid rgba(0, 0, 0, 0.1);
     //border-left: 2px solid rgba(#000, 0.2);
     /*box-shadow对安卓动画性能影响太明显*/
-    @include mx_box-shadow(-4px 0 3px -3px rgba(0, 0, 0, 0.3));
+    @include mx_box-shadow(-6px 0 3px -3px rgba(0, 0, 0, 0.2));
 }
 
 
@@ -203,44 +203,45 @@ $head-color: $color !default;
         //@include mx_transform(translate3d(0, -100%, 0));
         @extend .fade-out;
     }
-}
 
-
-/*一级页面标题*/
-.roottitle
-{
-    z-index: 1;
-
-    .onsubtitle &
+    @at-root
     {
-        opacity: 0;
-        z-index: -1;
-    }
-}
-
-
-/*二级页面标题*/
-.subtitle
-{
-    opacity: 0;
-    z-index: -1;
-    overflow: hidden;
-
-    /*动画不太好*/
-    /*.btnleft
-    {
-        @include mx_transform(translate3d(100vw, 0, 0));
-    }*/
-
-    .onsubtitle &
-    {
-        opacity: 1;
-        z-index: 1;
-
-        /*.btnleft
+        /*一级页面标题*/
+        .roottitle
         {
-            @include mx_transform(translate3d(0, 0, 0));
-        }*/
+            z-index: 1;
+
+            .onsubtitle &
+            {
+                opacity: 0;
+                z-index: -1;
+            }
+        }
+
+        /*二级页面标题*/
+        .subtitle
+        {
+            opacity: 0;
+            z-index: -1;
+            overflow: hidden;
+
+            /*动画不太好*/
+            /*.btnleft
+            {
+                @include mx_transform(translate3d(100vw, 0, 0));
+            }*/
+
+            .onsubtitle &
+            {
+                opacity: 1;
+                z-index: 1;
+
+                /*.btnleft
+                {
+                    @include mx_transform(translate3d(0, 0, 0));
+                }*/
+            }
+        }
     }
 }
 
