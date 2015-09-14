@@ -13,7 +13,7 @@ plugin/carousel
     /*垂直滚动样式*/
     &.vertical
     {
-        .pi-wrap > *, .pi-pager span
+        .pi-wrap > *, .pi-pager > span
         {
             float: none;
         }
@@ -41,7 +41,7 @@ plugin/carousel
         padding: 10px;
         text-shadow: 0 0 3px rgba(#000, 0.8);
         /*动画*/
-        @extend %ph_transall;
+        @extend %ph_transtransf;
         @include mx_transform(translate3d(0, 100%, 0));
 
         &.visible
@@ -55,7 +55,7 @@ plugin/carousel
     {
         @include mx_prb($right: 4px, $bottom: 4px);
 
-        span
+        & > span
         {
             display: block;
             float: left;

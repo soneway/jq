@@ -78,13 +78,13 @@ a {
   height: auto;
   overflow: hidden; }
 
-.fade-out, .offheader #header, .offnavbar > #navbar, .fade-in, #header, #navbar, .transition, #loading, #header > div, #customalert, .pi-carousel
-.pi-title, .pi-flip > * {
+.fade-out, .offheader #header, .offnavbar > #navbar, .fade-in, #header, #navbar, .transition, #loading, #header > div, #customalert, .pi-flip > * {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
 .transform, #mainbox, #sidebox, .panel, #customalert
-.ca-box, .pi-picpager
+.ca-box, .pi-carousel
+.pi-title, .pi-picpager
 .pi-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease; }
@@ -726,7 +726,7 @@ plugin/carousel
   /*title*/
   /*pager*/ }
   .pi-carousel.vertical .pi-wrap > *, .pi-carousel.vertical
-.pi-pager span {
+.pi-pager > span {
     float: none; }
   .pi-carousel
 .pi-wrap > * {
@@ -754,8 +754,7 @@ plugin/carousel
     right: 4px;
     bottom: 4px; }
     .pi-carousel
-.pi-pager
-span {
+.pi-pager > span {
       display: block;
       float: left;
       margin: 0 4px 4px 0;
@@ -767,8 +766,7 @@ span {
       background-color: rgba(255, 255, 255, 0.5);
       cursor: pointer; }
       .pi-carousel
-.pi-pager
-span.selected {
+.pi-pager > span.selected {
         -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
         background-color: rgba(255, 255, 255, 0.9); }
