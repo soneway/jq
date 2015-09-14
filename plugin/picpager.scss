@@ -10,7 +10,7 @@ plugin/picpager
 {
     position: relative;
     overflow: hidden;
-    @include mx_backface-visibility(hidden);
+    @extend %ph_bvhidden;
     //@include mx_perspective(1000);
 
     .pi-wrap

@@ -13,11 +13,6 @@ plugin/flip
         @extend %ph_transall;
         opacity: 0;
 
-        &.notrans
-        {
-            @include mx_transition(none);
-        }
-
         &.visible
         {
             opacity: 1;

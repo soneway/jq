@@ -720,9 +720,6 @@ plugin/carousel
 .pi-carousel {
   overflow: hidden;
   /*防止动画过程闪烁*/
-  /*防止动画过程闪烁*/
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
   position: relative;
   /*垂直滚动样式*/
   /*滚动容器*/
@@ -858,10 +855,7 @@ p:before {
 
 .pi-picpager {
   position: relative;
-  overflow: hidden;
-  /*防止动画过程闪烁*/
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden; }
+  overflow: hidden; }
   .pi-picpager
 .pi-pic {
     background-position: center center;
@@ -896,9 +890,6 @@ plugin/flip
   perspective: 1000; }
   .pi-flip > * {
     opacity: 0; }
-    .pi-flip > *.notrans {
-      -webkit-transition: none;
-      transition: none; }
     .pi-flip > *.visible {
       opacity: 1;
       z-index: 1; }
@@ -988,10 +979,7 @@ plugin/swatchbook
   position: relative;
   width: 65px;
   height: 200px;
-  /*防止动画过程闪烁*/
-  /*防止动画过程闪烁*/
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden; }
+  /*防止动画过程闪烁*/ }
   .sb-container > div {
     border-radius: 5px;
     -webkit-transform-origin: 25% 90%;

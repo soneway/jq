@@ -429,3 +429,10 @@ $duration: 0.3s !default;
 {
     @include mx_animation-iteration-count(infinite);
 }
+
+
+//backface:hidden
+%ph_bvhidden
+{
+    @extend %ph_bvhidden;
+}
