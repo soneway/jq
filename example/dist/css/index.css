@@ -725,8 +725,7 @@ plugin/carousel
   /*滚动容器*/
   /*title*/
   /*pager*/ }
-  .pi-carousel.vertical .pi-wrap > *, .pi-carousel.vertical
-.pi-pager > span {
+  .pi-carousel.vertical > .pi-wrap > *, .pi-carousel.vertical > .pi-pager > span {
     float: none; }
   .pi-carousel
 .pi-wrap > * {

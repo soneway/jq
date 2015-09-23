@@ -1809,8 +1809,9 @@ module.exports=require('XSF+M5');
                 setSize();
 
                 //暴露slideToIndex方法
-                me.slideToIndex = function (i) {
+                me.slideToIndex = function (i, isNoAnimation) {
                     index = i;
+                    isNoAnimation ? $wrap.removeClass('transform') : $wrap.addClass('transform');
                     slide();
                 };
 

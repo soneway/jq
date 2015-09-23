@@ -434,5 +434,5 @@ $duration: 0.3s !default;
 //backface:hidden
 %ph_bvhidden
 {
-    @extend %ph_bvhidden;
+    @include mx_backface-visibility(hidden);
 }

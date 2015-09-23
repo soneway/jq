@@ -896,6 +896,9 @@
 
     })();
 
+    //添加到全局变量
+    window.jq = window.$ = $;
+
     //CommonJS
     if (typeof exports === 'object') {
         module.exports = $;
@@ -906,10 +909,6 @@
         define(function () {
             return $;
         });
-        return;
     }
-
-    //添加到全局变量
-    window.jq = window.$ = $;
 
 })(window);
