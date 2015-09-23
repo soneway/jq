@@ -1,4 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var $ = require('jq');
 require('base');
 require('ui');
@@ -38,7 +38,7 @@ var loader = {
 
 //$.isLoadAnimation = false;
 //alert(navigator.userAgent);
-},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":20,"customalert":13,"jq":"XSF+M5","scroll":17,"ui":21}],2:[function(require,module,exports){
+},{"./page/carousel.js":2,"./page/flip.js":3,"./page/picpager.js":4,"./page/scratchcard.js":5,"./page/scroll.js":6,"./page/swatchbook.js":7,"./page/turntable.js":8,"base":19,"customalert":12,"jq":9,"scroll":16,"ui":20}],2:[function(require,module,exports){
 //焦点图
 require('carousel');
 
@@ -66,7 +66,7 @@ module.exports = function ($this, isInit) {
         $('#img_car').html(html).carousel();
     }
 };
-},{"carousel":12}],3:[function(require,module,exports){
+},{"carousel":11}],3:[function(require,module,exports){
 //3d旋转切换
 require('flip');
 
@@ -87,7 +87,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"flip":14}],4:[function(require,module,exports){
+},{"flip":13}],4:[function(require,module,exports){
 //相册功能
 require('picpager');
 var jtool = require('jtool');
@@ -130,7 +130,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"jtool":11,"picpager":15}],5:[function(require,module,exports){
+},{"jtool":10,"picpager":14}],5:[function(require,module,exports){
 //刮刮卡
 require('scratchcard');
 
@@ -144,7 +144,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"scratchcard":16}],6:[function(require,module,exports){
+},{"scratchcard":15}],6:[function(require,module,exports){
 //自定义滚动
 require('scroll');
 
@@ -157,7 +157,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"scroll":17}],7:[function(require,module,exports){
+},{"scroll":16}],7:[function(require,module,exports){
 //扇形特效
 require('swatchbook');
 
@@ -177,7 +177,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"swatchbook":18}],8:[function(require,module,exports){
+},{"swatchbook":17}],8:[function(require,module,exports){
 //转盘抽奖
 require('turntable');
 
@@ -198,11 +198,7 @@ module.exports = function ($this, isInit) {
         });
     }
 };
-},{"turntable":19}],"jq":[function(require,module,exports){
-module.exports=require('XSF+M5');
-},{}],"XSF+M5":[function(require,module,exports){
-(function (global){
-(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
+},{"turntable":18}],9:[function(require,module,exports){
 //jq.js
 (function (window) {
 
@@ -1101,6 +1097,9 @@ module.exports=require('XSF+M5');
 
     })();
 
+    //添加到全局变量
+    window.jq = window.$ = $;
+
     //CommonJS
     if (typeof exports === 'object') {
         module.exports = $;
@@ -1111,19 +1110,10 @@ module.exports=require('XSF+M5');
         define(function () {
             return $;
         });
-        return;
     }
 
-    //添加到全局变量
-    window.jq = window.$ = $;
-
 })(window);
-; browserify_shim__define__module__export__(typeof $ != "undefined" ? $ : window.$);
-
-}).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (window) {
     //文档对象
     var document = window.document,
@@ -1663,7 +1653,7 @@ module.exports=require('XSF+M5');
     window.jtool = jtool;
 
 })(window);
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*
  * carousel.js
  * 焦点图js
@@ -1913,7 +1903,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*
  * customalert.js
  * 自定义提示框js
@@ -2021,7 +2011,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*
  * flip.js
  * 3d翻转效果js
@@ -2200,7 +2190,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*
  * picpager.js
  * 相册js
@@ -2426,7 +2416,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*
  * scratchcard.js
  * 刮刮卡js
@@ -2557,7 +2547,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
  * scroll.js
  * 自定义滚动js
@@ -2759,7 +2749,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*
  * swatchbook.js
  * 扇形特效js
@@ -2918,7 +2908,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*
  * turntable.js
  * 转盘抽奖js
@@ -3020,7 +3010,7 @@ module.exports=require('XSF+M5');
     };
 
 })(window, $);
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*
  * base.js
  * 移动端基础js,包含pc端二维码,mask,a标签触摸等基础功能
@@ -3124,7 +3114,7 @@ module.exports=require('XSF+M5');
     });
 
 })(window, $);
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*
  * ui.js
  * 移动端界面js,包括面板切换,导航,边栏等功能

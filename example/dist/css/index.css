@@ -78,7 +78,7 @@ a {
   height: auto;
   overflow: hidden; }
 
-.fade-out, .offheader #header, .offnavbar > #navbar, .fade-in, #header, #navbar, .transition, #loading, #header > div, #customalert, .pi-flip > * {
+.fade-out, .fade-in, .transition, #loading, #header > div, #customalert, .pi-flip > * {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
@@ -89,10 +89,23 @@ a {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease; }
 
+#header {
+  visibility: visible;
+  opacity: 1; }
+
+.offheader #header, .offnavbar > #navbar {
+  visibility: hidden;
+  opacity: 0; }
+
 #loading, #customalert {
   display: -webkit-box;
   -webkit-box-align: center;
   -webkit-box-pack: center; }
+
+.pi-carousel, .pi-picpager, .sb-container {
+  /*防止动画过程闪烁*/
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
 
 /*
 scss/ani_spinner
@@ -235,17 +248,17 @@ h4 {
 .show {
   display: block !important; }
 
-.fade-out, .offheader #header, .offnavbar > #navbar, .fade-in, #header, #navbar {
+.fade-out, .fade-in {
   -webkit-transition-property: opacity, visibility;
   transition-property: opacity, visibility; }
 
 /*渐隐*/
-.fade-out, .offheader #header, .offnavbar > #navbar {
+.fade-out {
   visibility: hidden !important;
   opacity: 0 !important; }
 
 /*渐显*/
-.fade-in, #header, #navbar {
+.fade-in {
   visibility: visible !important;
   opacity: 1 !important; }
 
@@ -357,8 +370,8 @@ plugin/scroll
 .left-sd, .onsidebox #sidebox, .panel, .panel:before {
   /*outline会导致下边框问题*/
   /*box-shadow对安卓动画性能影响太明显*/
-  -webkit-box-shadow: -4px 0 3px -3px rgba(0, 0, 0, 0.3);
-  box-shadow: -4px 0 3px -3px rgba(0, 0, 0, 0.3); }
+  -webkit-box-shadow: -5px 0 3px -3px rgba(0, 0, 0, 0.2);
+  box-shadow: -5px 0 3px -3px rgba(0, 0, 0, 0.2); }
 
 /*head导航条背景*/
 .head, #navbar {
@@ -469,16 +482,16 @@ plugin/scroll
   overflow: hidden;
   /*动画不太好*/
   /*.btnleft
-    {
-        @include mx_transform(translate3d(100vw, 0, 0));
-    }*/ }
+            {
+                @include mx_transform(translate3d(100vw, 0, 0));
+            }*/ }
   .onsubtitle .subtitle {
     opacity: 1;
     z-index: 1;
     /*.btnleft
-        {
-            @include mx_transform(translate3d(0, 0, 0));
-        }*/ }
+                {
+                    @include mx_transform(translate3d(0, 0, 0));
+                }*/ }
 
 /*面板*/
 .panel {
