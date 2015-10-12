@@ -1,0 +1,51 @@
+﻿/*
+plugin/piccut
+图片裁切插件样式
+*/
+.pi-piccut
+{
+    cursor: move;
+    position: relative;
+
+    *
+    {
+        visibility: hidden;
+    }
+
+    &.on
+    {
+        *
+        {
+            visibility: visible;
+        }
+    }
+
+    @at-root
+    {
+        .pi-piccut-mask
+        {
+            @extend %ph_palt;
+        }
+
+
+        .pi-piccut-cutter
+        {
+            position: absolute;
+            @include mx_box-shadow(0 0 1px #000);
+        }
+
+
+        .pi-piccut-resizer
+        {
+            $w: 10px;
+
+            position: absolute;
+            border: $w solid #fff;
+            border-radius: 50%;
+            right: -$w/2;
+            bottom: -$w/2;
+            cursor: se-resize;
+            @include mx_box-shadow(0 0 1px 1px #000);
+        }
+    }
+}

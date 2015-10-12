@@ -29,6 +29,7 @@ var loader = {
     carousel   : require('./page/carousel.js'),
     flip       : require('./page/flip.js'),
     picpager   : require('./page/picpager.js'),
+    piccut     : require('./page/piccut.js'),
     scroll     : require('./page/scroll.js'),
     scratchcard: require('./page/scratchcard.js'),
     turntable  : require('./page/turntable.js'),

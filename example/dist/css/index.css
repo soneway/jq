@@ -12,7 +12,7 @@ ui/base
 .btnleft, .panel, #navbar:after, .panel:before, h3.center:before, h3#navbar:before, #customalert
 h3.ca-box:before, .pi-picpager
 .pi-pic, #picpager
-.info {
+.info, .pi-piccut-mask {
   position: absolute;
   left: 0;
   top: 0; }
@@ -888,6 +888,44 @@ p:before {
     z-index: 1;
     color: #fff;
     padding-bottom: 10px; }
+
+/*图片裁切 panel*/
+/*
+plugin/piccut
+图片裁切插件样式
+*/
+.pi-piccut {
+  cursor: move;
+  position: relative; }
+  .pi-piccut
+* {
+    visibility: hidden; }
+  .pi-piccut.on
+* {
+    visibility: visible; }
+  .pi-piccut-cutter {
+    position: absolute;
+    -webkit-box-shadow: 0 0 1px #000;
+    box-shadow: 0 0 1px #000; }
+  .pi-piccut-resizer {
+    position: absolute;
+    border: 10px solid #fff;
+    border-radius: 50%;
+    right: -5px;
+    bottom: -5px;
+    cursor: se-resize;
+    -webkit-box-shadow: 0 0 1px 1px #000;
+    box-shadow: 0 0 1px 1px #000; }
+
+#piccut
+.avator_up {
+  width: 320px;
+  height: 320px;
+  margin: 5px auto; }
+
+#shower {
+  max-width: 320px;
+  margin: 5px; }
 
 /*3d旋转切换 panel*/
 /*
