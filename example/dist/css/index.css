@@ -923,6 +923,9 @@ plugin/piccut
   height: 320px;
   margin: 5px auto; }
 
+#file {
+  width: 100px; }
+
 #shower {
   max-width: 320px;
   margin: 5px; }
