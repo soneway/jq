@@ -928,7 +928,8 @@ plugin/piccut
 
 #shower {
   max-width: 320px;
-  margin: 5px; }
+  display: block;
+  margin: 5px auto; }
 
 /*3d旋转切换 panel*/
 /*
