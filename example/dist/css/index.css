@@ -895,7 +895,6 @@ plugin/piccut
 图片裁切插件样式
 */
 .pi-piccut {
-  cursor: move;
   position: relative; }
   .pi-piccut
 * {
@@ -905,6 +904,7 @@ plugin/piccut
     visibility: visible; }
   .pi-piccut-cutter {
     position: absolute;
+    cursor: move;
     -webkit-box-shadow: 0 0 1px #000;
     box-shadow: 0 0 1px #000; }
   .pi-piccut-resizer {
@@ -920,7 +920,7 @@ plugin/piccut
 #piccut
 .avator_up {
   width: 320px;
-  height: 320px;
+  height: 400px;
   margin: 5px auto; }
 
 #file {

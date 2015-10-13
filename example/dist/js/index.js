@@ -100,7 +100,8 @@ module.exports = function ($this, isInit) {
     module.exports = function ($this, isInit) {
         if (isInit) {
             var upEl = $('.avator_up').piccut({
-                fileEl      : document.getElementById('file')
+                fileEl     : document.getElementById('file')
+                , cutHeight: 200
                 //, isMinLimit: false
                 //, cutX: 0
             })[0];
@@ -2237,8 +2238,8 @@ module.exports = function ($this, isInit) {
             fileEl     : null,
             //遮罩样式
             layerStyle : 'rgba(128,128,128,0.7)',
-            //图片是否缩放
-            imgScalable: true,
+            //是否如背景图的background-size:contain;
+            isContain  : true,
             //截图是否保持比例
             isKeepScale: true,
             //是否有最小限制(默认限制为裁切宽度和裁切高度)
@@ -2260,7 +2261,7 @@ module.exports = function ($this, isInit) {
                 cutHeight = opts.cutHeight,
                 fileEl = opts.fileEl,
                 layerStyle = opts.layerStyle,
-                imgScalable = opts.imgScalable,
+                isContain = opts.isContain,
                 isKeepScale = opts.isKeepScale,
                 isMinLimit = opts.isMinLimit,
                 scale = opts.scale;
@@ -2356,8 +2357,8 @@ module.exports = function ($this, isInit) {
                         var imgWidth = img.width,
                             imgHeight = img.height;
 
-                        //缩放图片
-                        if (imgScalable) {
+                        //是否如背景图的background-size:contain;那样
+                        if (isContain) {
                             var ratio = imgWidth / imgHeight;
                             if (ratio > canvasWidth / canvasHeight) {
                                 if (imgWidth > canvasWidth) {
@@ -2414,41 +2415,69 @@ module.exports = function ($this, isInit) {
                     startY = touch.pageY;
                 });
 
+                //在容器上touchmove时,作形变操作
                 $this.on('touchmove', function (evt) {
-                    evt.preventDefault();
-                    evt.stopPropagation();
-
-                    //计算位移
-                    var touch = evt.targetTouches[0],
-                        swipSpanX = touch.pageX - startX,
-                        swipSpanY = touch.pageY - startY;
-
-                    //是否正在形变
+                    //正在形变
                     if (isResing) {
-                        //计算尺寸
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        //计算位移
+                        var touch = evt.targetTouches[0],
+                            swipSpanX = touch.pageX - startX,
+                            swipSpanY = touch.pageY - startY;
+
+                        //宽度
+                        cutCurWidth = cutWidth + swipSpanX;
+                        //高度
                         cutCurHeight = cutHeight + swipSpanY;
-                        cutCurWidth = isKeepScale ? cutCurHeight * cutRatio : cutWidth + swipSpanX;
+                        cutWidth / cutCurHeight > cutRatio ? (cutCurHeight = cutCurWidth / cutRatio) : (cutCurWidth = cutCurHeight * cutRatio);
 
-                        //不能超出范围内
-                        isMinLimit && cutCurWidth < opts.cutWidth && (cutCurWidth = opts.cutWidth);
+                        //不能超出范围内(有最小限制,将不能小于配置项中的裁切尺寸)
                         isMinLimit && cutCurHeight < opts.cutHeight && (cutCurHeight = opts.cutHeight);
-                        cutCurX + cutCurWidth > meWidth && (cutCurWidth = meWidth - cutCurX);
-                        cutCurY + cutCurHeight > meHeight && (cutCurHeight = meHeight - cutCurY );
-                    }
-                    else {
-                        //计算位置
-                        cutCurX = cutX + swipSpanX;
-                        cutCurY = cutY + swipSpanY;
+                        if (cutCurY + cutCurHeight > meHeight) {
+                            cutCurHeight = meHeight - cutCurY;
+                            cutCurWidth = cutCurHeight * cutRatio;
+                        }
+                        isMinLimit && cutCurWidth < opts.cutWidth && (cutCurWidth = opts.cutWidth);
+                        if (cutCurX + cutCurWidth > meWidth) {
+                            cutCurWidth = meWidth - cutCurX;
+                            cutCurHeight = cutCurWidth / cutRatio;
+                        }
 
+                        //刷新遮罩
+                        refreshMask();
+                    }
+                });
+
+                //cutter上touchmove时,移动遮罩
+                $cutter.on('touchmove', function (evt) {
+                    //不是形变
+                    if (!isResing) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        //计算位移
+                        var touch = evt.targetTouches[0],
+                            swipSpanX = touch.pageX - startX,
+                            swipSpanY = touch.pageY - startY;
+
+                        //X轴
+                        cutCurX = cutX + swipSpanX;
                         //不能超出范围内
                         cutCurX < 0 && (cutCurX = 0);
-                        cutCurY < 0 && (cutCurY = 0);
                         cutCurX + cutCurWidth > meWidth && (cutCurX = meWidth - cutCurWidth);
+
+                        //Y轴
+                        cutCurY = cutY + swipSpanY;
+                        //不能超出范围内
+                        cutCurY < 0 && (cutCurY = 0);
                         cutCurY + cutCurHeight > meHeight && (cutCurY = meHeight - cutCurHeight);
+
+                        //刷新遮罩
+                        refreshMask();
                     }
 
-                    //刷新遮罩
-                    refreshMask();
                 });
 
                 $this.on('touchend', function () {
@@ -2463,6 +2492,7 @@ module.exports = function ($this, isInit) {
 
                 //resizer的事件
                 $resizer.on('touchstart', function () {
+                    //标识正在作形变
                     isResing = true;
                 });
 
