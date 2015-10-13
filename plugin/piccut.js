@@ -102,7 +102,7 @@
 
                 //刷新遮罩函数
                 function refreshMask() {
-                    //cutter的位置的尺寸
+                    //cutter的位置和尺寸
                     $cutter.css({
                         transform: 'translate3d(' + cutCurX + 'px, ' + cutCurY + 'px, 0)',
                         width    : cutCurWidth + 'px',
@@ -220,19 +220,31 @@
                         cutCurWidth = cutWidth + swipSpanX;
                         //高度
                         cutCurHeight = cutHeight + swipSpanY;
-                        cutWidth / cutCurHeight > cutRatio ? (cutCurHeight = cutCurWidth / cutRatio) : (cutCurWidth = cutCurHeight * cutRatio);
 
-                        //不能超出范围内(有最小限制,将不能小于配置项中的裁切尺寸)
+                        //保持比例
+                        if (isKeepScale) {
+                            //计算出按比例的宽度,高度
+                            cutWidth / cutCurHeight > cutRatio ? (cutCurHeight = cutCurWidth / cutRatio) : (cutCurWidth = cutCurHeight * cutRatio);
+
+                            //不能超出范围内
+                            if (cutCurY + cutCurHeight > meHeight) {
+                                cutCurHeight = meHeight - cutCurY;
+                                cutCurWidth = cutCurHeight * cutRatio;
+                            }
+                            if (cutCurX + cutCurWidth > meWidth) {
+                                cutCurWidth = meWidth - cutCurX;
+                                cutCurHeight = cutCurWidth / cutRatio;
+                            }
+                        }
+                        else {
+                            //不能超出范围内
+                            cutCurY + cutCurHeight > meHeight && (cutCurHeight = meHeight - cutCurY);
+                            cutCurX + cutCurWidth > meWidth && (cutCurWidth = meWidth - cutCurX);
+                        }
+
+                        //有最小限制时,将不能小于配置项中的裁切尺寸
                         isMinLimit && cutCurHeight < opts.cutHeight && (cutCurHeight = opts.cutHeight);
-                        if (cutCurY + cutCurHeight > meHeight) {
-                            cutCurHeight = meHeight - cutCurY;
-                            cutCurWidth = cutCurHeight * cutRatio;
-                        }
                         isMinLimit && cutCurWidth < opts.cutWidth && (cutCurWidth = opts.cutWidth);
-                        if (cutCurX + cutCurWidth > meWidth) {
-                            cutCurWidth = meWidth - cutCurX;
-                            cutCurHeight = cutCurWidth / cutRatio;
-                        }
 
                         //刷新遮罩
                         refreshMask();

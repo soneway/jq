@@ -9,7 +9,8 @@
     module.exports = function ($this, isInit) {
         if (isInit) {
             var upEl = $('.avator_up').piccut({
-                fileEl     : document.getElementById('file')
+                fileEl: document.getElementById('file')
+                //, isKeepScale: false
                 //, cutHeight: 200
                 //, isMinLimit: false
                 //, cutX: 0
