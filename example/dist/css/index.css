@@ -905,7 +905,9 @@ plugin/piccut
   .pi-piccut-cutter {
     cursor: move;
     -webkit-box-shadow: 0 0 1px #000;
-    box-shadow: 0 0 1px #000; }
+    box-shadow: 0 0 1px #000;
+    -webkit-transform-origin: left top;
+    transform-origin: left top; }
   .pi-piccut-resizer {
     position: absolute;
     border: 10px solid #fff;

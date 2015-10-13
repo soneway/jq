@@ -124,6 +124,7 @@
                     maskContext.fillRect(cutCurX * scale, cutCurY * scale, cutCurWidth * scale, cutCurHeight * scale);
                 }
 
+
                 //文件选择事件
                 fileEl.onchange = function () {
                     var file = fileEl.files[0],
@@ -165,13 +166,16 @@
                         //画图片层
                         context.drawImage(img, (canvasWidth - imgWidth) / 2, (canvasHeight - imgHeight) / 2, imgWidth, imgHeight);
 
-                        //刷新遮罩
-                        refreshMask();
+                        //刷新遮罩(加个延迟,以避免安卓4.2后面的绘图功能不生效)
+                        setTimeout(function () {
+                            refreshMask();
+                        }, 0);
 
                         //显示裁切相关元素
                         $this.addClass('on');
                     };
                 };
+
 
                 //暴露getDataURL函数
                 me.getDataURL = function () {
@@ -262,7 +266,6 @@
                         //刷新遮罩
                         refreshMask();
                     }
-
                 });
 
                 $this.on('touchend', function () {

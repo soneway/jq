@@ -2344,6 +2344,7 @@ module.exports = function ($this, isInit) {
                     maskContext.fillRect(cutCurX * scale, cutCurY * scale, cutCurWidth * scale, cutCurHeight * scale);
                 }
 
+
                 //文件选择事件
                 fileEl.onchange = function () {
                     var file = fileEl.files[0],
@@ -2386,12 +2387,15 @@ module.exports = function ($this, isInit) {
                         context.drawImage(img, (canvasWidth - imgWidth) / 2, (canvasHeight - imgHeight) / 2, imgWidth, imgHeight);
 
                         //刷新遮罩
-                        refreshMask();
+                        setTimeout(function () {
+                            refreshMask();
+                        }, 100);
 
                         //显示裁切相关元素
                         $this.addClass('on');
                     };
                 };
+
 
                 //暴露getDataURL函数
                 me.getDataURL = function () {
@@ -2482,7 +2486,6 @@ module.exports = function ($this, isInit) {
                         //刷新遮罩
                         refreshMask();
                     }
-
                 });
 
                 $this.on('touchend', function () {
