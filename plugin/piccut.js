@@ -103,7 +103,12 @@
                 //刷新遮罩函数
                 function refreshMask() {
                     //cutter的位置的尺寸
-                    cutterEl.style.cssText = 'width:' + cutCurWidth + 'px; height:' + cutCurHeight + 'px; left:' + cutCurX + 'px; top:' + cutCurY + 'px;';
+                    $cutter.css({
+                        transform: 'translate3d(' + cutCurX + 'px, ' + cutCurY + 'px, 0)',
+                        width    : cutCurWidth + 'px',
+                        height   : cutCurHeight + 'px'
+                    });
+                    //cutterEl.style.cssText = 'width:' + cutCurWidth + 'px; height:' + cutCurHeight + 'px; left:' + cutCurX + 'px; top:' + cutCurY + 'px;';
 
                     //清理画布
                     maskContext.clearRect(0, 0, canvasWidth, canvasHeight);

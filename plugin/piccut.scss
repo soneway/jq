@@ -29,7 +29,7 @@ plugin/piccut
 
         .pi-piccut-cutter
         {
-            position: absolute;
+            @extend %ph_palt;
             cursor: move;
             @include mx_box-shadow(0 0 1px #000);
         }
@@ -42,10 +42,10 @@ plugin/piccut
             position: absolute;
             border: $w solid #fff;
             border-radius: 50%;
-            right: -$w/2;
-            bottom: -$w/2;
+            right: -$w;
+            bottom: -$w;
             cursor: se-resize;
-            @include mx_box-shadow(0 0 1px 1px #000);
+            @include mx_box-shadow(0 0 1px #000);
         }
     }
 }

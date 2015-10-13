@@ -10,7 +10,7 @@
         if (isInit) {
             var upEl = $('.avator_up').piccut({
                 fileEl     : document.getElementById('file')
-                , cutHeight: 200
+                //, cutHeight: 200
                 //, isMinLimit: false
                 //, cutX: 0
             })[0];
