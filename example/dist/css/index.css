@@ -34,6 +34,12 @@ h3.ca-box:before, .pi-picpager
   left: 0;
   bottom: 0; }
 
+.pi-carousel
+.pi-pager {
+  position: absolute;
+  right: 0;
+  bottom: 0; }
+
 #paneliframe
 iframe, .panel:before, .pi-picpager
 .pi-pic, #picpager
@@ -762,9 +768,7 @@ plugin/carousel
       transform: translate3d(0, 0, 0); }
   .pi-carousel
 .pi-pager {
-    position: absolute;
-    right: 4px;
-    bottom: 4px; }
+    padding: 0 4px 4px 0; }
     .pi-carousel
 .pi-pager > span {
       display: block;

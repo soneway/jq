@@ -53,7 +53,8 @@ plugin/carousel
     /*pager*/
     .pi-pager
     {
-        @include mx_prb($right: 4px, $bottom: 4px);
+        @extend %ph_parb;
+        padding: 0 4px 4px 0;
 
         & > span
         {
