@@ -7,18 +7,20 @@
     $.fn.scroll = function (options) {
         $.fn.scroll.defaults = {
             //是否竖直方向滚动
-            isVertical: false,
+            isVertical       : false,
             //滚动率
-            rate: 400,
+            rate             : 400,
             //时间间隙阈值
             timeSpanThreshold: 300,
             //滚动最大值
-            maxScroll: 400,
+            maxScroll        : 400,
             //安卓响应率
-            androidRate: 2,
+            androidRate      : 1,
             //是否调整点击元素居中
-            isAdjust: false
+            isAdjust         : false
         };
+
+        var Math = window.Math;
 
         //每个元素执行
         return this.each(function () {
@@ -34,7 +36,8 @@
 
             //变量
             var $this = $(this),
-                $items = $this.children('*');
+                $items = $this.children('*'),
+                isAndroid = /(android)/i.test(window.navigator.userAgent);
 
 
             //初始化函数
@@ -160,7 +163,7 @@
                     //计算校正值(更加拟物化)
                     var timeSpan = endTime - startTime,
                     //安卓的touch响应时间较长故除以一定比率
-                        swipSpanAdjust = timeSpan > timeSpanThreshold ? 0 : swipSpan / timeSpan,
+                        swipSpanAdjust = timeSpan > timeSpanThreshold ? 0 : swipSpan / (isAndroid ? timeSpan /= androidRate : timeSpan),
                         span = Math.abs(swipSpanAdjust) * rate;
 
                     //设置最大滚动值
