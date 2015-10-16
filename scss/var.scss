@@ -216,6 +216,23 @@ $duration: 0.3s !default;
 }
 
 
+//margin居中
+@mixin mx_margin-center($width: -1, $height: -1) {
+    left: 50%;
+    top: 50%;
+    @if ($width != -1)
+    {
+        width: $width;
+        margin-left: -$width/2;
+    }
+    @if ($height != -1)
+    {
+        height: $height;
+        margin-top: -$height/2;
+    }
+}
+
+
 //占位符
 //滚动
 %ph_ofauto

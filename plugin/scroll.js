@@ -34,8 +34,7 @@
 
             //变量
             var $this = $(this),
-                $items = $this.children('*'),
-                isAndroid = /(android)/i.test(window.navigator.userAgent);
+                $items = $this.children('*');
 
 
             //初始化函数
@@ -161,7 +160,7 @@
                     //计算校正值(更加拟物化)
                     var timeSpan = endTime - startTime,
                     //安卓的touch响应时间较长故除以一定比率
-                        swipSpanAdjust = timeSpan > timeSpanThreshold ? 0 : swipSpan / (isAndroid ? timeSpan /= androidRate : timeSpan),
+                        swipSpanAdjust = timeSpan > timeSpanThreshold ? 0 : swipSpan / timeSpan,
                         span = Math.abs(swipSpanAdjust) * rate;
 
                     //设置最大滚动值

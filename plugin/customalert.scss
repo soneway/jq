@@ -12,6 +12,8 @@ plugin/customalert
     opacity: 0;
     /*用z-index:-1这种方式可以防止安卓4.2打不开弹框*/
     z-index: -1;
+    /*不能跟着base走,要有自己的颜色,以名base设置为白色时,颜色看不见了*/
+    color: #333;
 
     /*显示时*/
     .oncustomalert &
