@@ -1,93 +1,105 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var $ = require('jq');
-require('base');
-require('ui');
-require('customalert');
-require('scroll');
+(function (window) {
 
-//alert方法
-alert = function alert(str) {
-    $.customalert({
-        content: str
-    });
-};
+    var $ = require('jq');
+    require('base');
+    require('ui');
+    require('customalert');
+    require('scroll');
 
-
-//面板显示回调函数
-$.panelLoaded = function ($this, isInit) {
-    var load = loader[$this.attr('id')];
-    typeof load === 'function' && load($this, isInit);
-};
-//面板隐藏回调函数
-$.panelUnloaded = function ($this) {
-    var unload = (loader[$this.attr('id')] || {}).unload;
-    typeof unload === 'function' && unload($this);
-};
+    //alert方法
+    window.alert = function alert(str) {
+        $.customalert({
+            content: str
+        });
+    };
 
 
-//页面模块加载对象
-var loader = {
-    carousel   : require('./page/carousel.js'),
-    flip       : require('./page/flip.js'),
-    picpager   : require('./page/picpager.js'),
-    piccut     : require('./page/piccut.js'),
-    scroll     : require('./page/scroll.js'),
-    scratchcard: require('./page/scratchcard.js'),
-    turntable  : require('./page/turntable.js'),
-    swatchbook : require('./page/swatchbook.js')
-};
+    //面板显示回调函数
+    $.panelLoaded = function ($this, isInit) {
+        var load = loader[$this.attr('id')];
+        typeof load === 'function' && load($this, isInit);
+    };
+    //面板隐藏回调函数
+    $.panelUnloaded = function ($this) {
+        var unload = (loader[$this.attr('id')] || {}).unload;
+        typeof unload === 'function' && unload($this);
+    };
 
-//$.isLoadAnimation = false;
-//alert(navigator.userAgent);
+
+    //页面模块加载对象
+    var loader = {
+        carousel   : require('./page/carousel.js'),
+        flip       : require('./page/flip.js'),
+        picpager   : require('./page/picpager.js'),
+        piccut     : require('./page/piccut.js'),
+        scroll     : require('./page/scroll.js'),
+        scratchcard: require('./page/scratchcard.js'),
+        turntable  : require('./page/turntable.js'),
+        swatchbook : require('./page/swatchbook.js')
+    };
+
+    //$.isLoadAnimation = false;
+    //alert(navigator.userAgent);
+
+})(window);
 },{"./page/carousel.js":2,"./page/flip.js":3,"./page/piccut.js":4,"./page/picpager.js":5,"./page/scratchcard.js":6,"./page/scroll.js":7,"./page/swatchbook.js":8,"./page/turntable.js":9,"base":21,"customalert":13,"jq":10,"scroll":18,"ui":22}],2:[function(require,module,exports){
 //焦点图
-require('carousel');
+(function (window, $) {
 
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        $('.carousel').each(function () {
-            var len = this.getAttribute('data-len'),
-                part = this.getAttribute('data-part'),
-                html = '';
+    require('carousel');
 
-            for (var i = 0; i < len; i++) {
-                html += '<a style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
-            }
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            $('.carousel').each(function () {
+                var len = this.getAttribute('data-len'),
+                    part = this.getAttribute('data-part'),
+                    html = '';
 
-            $(this).html(html).carousel({
-                isVertical: this.getAttribute('data-isvertical') === '1',
-                isAutoPlay: false
+                for (var i = 0; i < len; i++) {
+                    html += '<a style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="焦点图示例 ' + (i + 1) + '"></a>';
+                }
+
+                $(this).html(html).carousel({
+                    isVertical: this.getAttribute('data-isvertical') === '1',
+                    isAutoPlay: false
+                });
             });
-        });
 
-        var html = '';
-        for (var i = 0, len = 5; i < len; i++) {
-            html += '<img src="img/' + i + '.jpg"/>';
+            var html = '';
+            for (var i = 0, len = 5; i < len; i++) {
+                html += '<img src="img/' + i + '.jpg"/>';
+            }
+            $('#img_car').html(html).carousel();
         }
-        $('#img_car').html(html).carousel();
-    }
-};
+    };
+
+})(window, $);
 },{"carousel":12}],3:[function(require,module,exports){
 //3d旋转切换
-require('flip');
+(function (window, $) {
 
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        $('.flip').each(function () {
-            var len = this.getAttribute('data-len'),
-                part = this.getAttribute('data-part'),
-                html = '';
+    require('flip');
 
-            for (var i = 0; i < len; i++) {
-                html += '<a><p style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
-            }
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            $('.flip').each(function () {
+                var len = this.getAttribute('data-len'),
+                    part = this.getAttribute('data-part'),
+                    html = '';
 
-            $(this).html(html).flip({
-                isVertical: this.getAttribute('data-isvertical') === '1'
+                for (var i = 0; i < len; i++) {
+                    html += '<a><p style="background: url(img/' + (part ? part + '/' : '') + '' + i + '.jpg) center center no-repeat; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
+                }
+
+                $(this).html(html).flip({
+                    isVertical: this.getAttribute('data-isvertical') === '1'
+                });
             });
-        });
-    }
-};
+        }
+    };
+
+})(window, $);
 },{"flip":14}],4:[function(require,module,exports){
 (function (window, $) {
 
@@ -117,115 +129,135 @@ module.exports = function ($this, isInit) {
 })(window, $);
 },{"piccut":15}],5:[function(require,module,exports){
 //相册功能
-require('picpager');
-var jtool = require('jtool');
+(function (window, $) {
 
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        var page = 1,
-            perpage = 10;
+    require('picpager');
+    var jtool = require('jtool');
 
-        var proxy = jtool.proxy;
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            var page = 1,
+                perpage = 10;
 
-        //请求数据
-        proxy.pushData({
-            url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
-            onStart: function () {
-                $.toggleMask(1);
-            },
-            onEnd  : function () {
-                $.toggleMask(0);
-            },
-            success: function (rs) {
-                var $picpager = $('.picpager').picpager({
-                    imgData      : rs.data.detail,
-                    imgAttrName  : 'image',
-                    slideCallback: function (index) {
-                        if (index + 1 === page * 10) {
-                            page++;
+            var proxy = jtool.proxy;
 
-                            //请求数据
-                            proxy.pushData({
-                                url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
-                                success: function (rs) {
-                                    $picpager[0].addItem(rs.data.detail);
-                                }
-                            });
+            //请求数据
+            proxy.pushData({
+                url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
+                onStart: function () {
+                    $.toggleMask(1);
+                },
+                onEnd  : function () {
+                    $.toggleMask(0);
+                },
+                success: function (rs) {
+                    var $picpager = $('.picpager').picpager({
+                        imgData      : rs.data.detail,
+                        imgAttrName  : 'image',
+                        slideCallback: function (index) {
+                            if (index + 1 === page * 10) {
+                                page++;
+
+                                //请求数据
+                                proxy.pushData({
+                                    url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&page=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
+                                    success: function (rs) {
+                                        $picpager[0].addItem(rs.data.detail);
+                                    }
+                                });
+                            }
                         }
-                    }
-                });
-            }
-        });
-    }
-};
-},{"jtool":11,"picpager":16}],6:[function(require,module,exports){
-//刮刮卡
-require('scratchcard');
-
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        $('.scratchcard').each(function () {
-            $(this).scratchcard({
-                text: '刮开有奖',
-                imgSrc: 'img/3.jpg'
-            });
-        });
-    }
-};
-},{"scratchcard":17}],7:[function(require,module,exports){
-//自定义滚动
-require('scroll');
-
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        $('.scroll').each(function () {
-            $(this).scroll({
-                isVertical: this.getAttribute('data-isvertical') === '1'
-            });
-        });
-    }
-};
-},{"scroll":18}],8:[function(require,module,exports){
-//扇形特效
-require('swatchbook');
-
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        $('.swatchbook').each(function () {
-            $(this).swatchbook({
-                angleInc: 25,
-                neighbor: 15,
-                proximity: 80,
-                initIsClosed: true,
-                closeIdx: 12,
-                selectCallback: function (index) {
-                    console.log(index);
+                    });
                 }
             });
-        });
-    }
-};
+        }
+    };
+
+})(window, $);
+},{"jtool":11,"picpager":16}],6:[function(require,module,exports){
+//刮刮卡
+(function (window, $) {
+
+    require('scratchcard');
+
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            $('.scratchcard').each(function () {
+                $(this).scratchcard({
+                    text  : '刮开有奖',
+                    imgSrc: 'img/3.jpg'
+                });
+            });
+        }
+    };
+
+})(window, $);
+},{"scratchcard":17}],7:[function(require,module,exports){
+//自定义滚动
+(function (window, $) {
+
+    require('scroll');
+
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            $('.scroll').each(function () {
+                $(this).scroll({
+                    isVertical: this.getAttribute('data-isvertical') === '1'
+                });
+            });
+        }
+    };
+
+})(window, $);
+},{"scroll":18}],8:[function(require,module,exports){
+//扇形特效
+(function (window, $) {
+
+    require('swatchbook');
+
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            $('.swatchbook').each(function () {
+                $(this).swatchbook({
+                    angleInc      : 25,
+                    neighbor      : 15,
+                    proximity     : 80,
+                    initIsClosed  : true,
+                    closeIdx      : 12,
+                    selectCallback: function (index) {
+                        console.log(index);
+                    }
+                });
+            });
+        }
+    };
+
+})(window, $);
 },{"swatchbook":19}],9:[function(require,module,exports){
 //转盘抽奖
-require('turntable');
+(function (window, $) {
 
-//文档jq对象
-var $doc = $(window.document);
+    require('turntable');
 
-module.exports = function ($this, isInit) {
-    if (isInit) {
-        var turntableEl = $('.turntable').turntable({
-            count: 10
-        })[0];
+    //文档jq对象
+    var $doc = $(window.document);
 
-        $doc.on('click', '.turntable .btn_start', function () {
-            var index = parseInt(Math.random() * 10);
-            turntableEl.turnToIndex(index, function () {
-                alert(index + 1);
+    module.exports = function ($this, isInit) {
+        if (isInit) {
+            var turntableEl = $('.turntable').turntable({
+                count: 10
+            })[0];
+
+            $doc.on('click', '.turntable .btn_start', function () {
+                var index = parseInt(Math.random() * 10);
+                turntableEl.turnToIndex(index, function () {
+                    alert(index + 1);
+                });
             });
-        });
-    }
-};
+        }
+    };
+
+})(window, $);
 },{"turntable":20}],10:[function(require,module,exports){
 //jq.js
 (function (window) {
@@ -2913,7 +2945,7 @@ module.exports = function ($this, isInit) {
         };
 
         var Math = window.Math;
-        
+
         //每个元素执行
         return this.each(function () {
             var opts = $.extend({}, $.fn.scroll.defaults, options);
