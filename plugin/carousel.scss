@@ -2,6 +2,8 @@
 plugin/carousel
 焦点图样式
 */
+$pi-carousel-pager-radius: 4px !default;
+
 .pi-carousel
 {
     overflow: hidden;
@@ -13,9 +15,14 @@ plugin/carousel
     /*垂直滚动样式*/
     &.vertical
     {
-        & > .pi-wrap > *, & > .pi-pager > span
+        & > .pi-wrap > *
         {
             float: none;
+        }
+
+        & > .pi-pager > span
+        {
+            display: block;
         }
     }
 
@@ -54,24 +61,22 @@ plugin/carousel
     .pi-pager
     {
         @extend %ph_parb;
-        padding: 0 4px 4px 0;
+        line-height: 0;
+        padding: $pi-carousel-pager-radius;
 
         & > span
         {
-            display: block;
-            float: left;
-            margin: 0 4px 4px 0;
-            width: 8px;
-            height: 8px;
-            border-radius: 8px;
+            display: inline-block;
+            margin: $pi-carousel-pager-radius;
+            border: $pi-carousel-pager-radius solid rgba(#fff, 0.5);
+            border-radius: 50%;
             @include mx_box-shadow(0 0 3px rgba(#000, 0.5));
-            background-color: rgba(#fff, 0.5);
             cursor: pointer;
 
             &.selected
             {
                 @include mx_box-shadow(0 0 3px rgba(#000, 0.9));
-                background-color: rgba(#fff, 0.9);
+                border-color: rgba(#fff, 0.9);
             }
         }
     }
