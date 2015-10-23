@@ -244,11 +244,19 @@ $duration: 0.3s !default;
 
 
 //左边箭头
-@mixin mx_left-arrow($width: 14px, $deg: 0deg, $color: #000, $line-width: 1px) {
+@mixin mx_left-arrow($width: 14px, $deg: 0deg, $color: #000, $line-width: 1px, $color-focus: 0) {
     width: $width;
     height: $width;
-    @include mx_box-shadow(-$line-width -$line-width 0 $color);
+    @include mx_box-shadow((-$line-width) (-$line-width) 0 $color);
     @include mx_transform(rotateZ(-45deg + $deg));
+
+    @if ($color-focus != 0)
+    {
+        &.focus
+        {
+            @include mx_box-shadow((-$line-width) (-$line-width) 0 $color-focus);
+        }
+    }
 }
 
 
