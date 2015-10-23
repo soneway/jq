@@ -106,10 +106,7 @@ $head-color: $color !default;
             content: '';
             @include mx_plt($left: $w, $top: 50%);
             margin-top: -$w / 2;
-            width: $w;
-            height: $w;
-            @include mx_box-shadow(-1px -1px 0 $head-color);
-            @include mx_transform(rotateZ(-45deg));
+            @include mx_left-arrow($width: $w, $color: $head-color);
         }
 
         &.focus:before
@@ -217,6 +214,7 @@ $head-color: $color !default;
                 z-index: -1;
             }
         }
+
 
         /*二级页面标题*/
         .subtitle

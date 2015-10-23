@@ -233,6 +233,25 @@ $duration: 0.3s !default;
 }
 
 
+//最大宽度
+@mixin mx_maxwidth($width: 300px, $target-width: 320px) {
+    width: $width / $target-width * 100%;
+    min-width: $width;
+    max-width: $width * 2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+//左边箭头
+@mixin mx_left-arrow($width: 14px, $deg: 0deg, $color: #000, $line-width: 1px) {
+    width: $width;
+    height: $width;
+    @include mx_box-shadow(-$line-width -$line-width 0 $color);
+    @include mx_transform(rotateZ(-45deg + $deg));
+}
+
+
 //占位符
 //滚动
 %ph_ofauto
