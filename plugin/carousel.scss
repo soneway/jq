@@ -48,12 +48,12 @@ $pi-carousel-pager-radius: 4px !default;
         padding: 10px;
         text-shadow: 0 0 3px rgba(#000, 0.8);
         /*动画*/
-        @extend %ph_transtransf;
-        @include mx_transform(translate3d(0, 100%, 0));
+        @extend %ph_transall;
+        opacity: 0;
 
         &.visible
         {
-            @include mx_transform(translate3d(0, 0, 0));
+            opacity: 1;
         }
     }
 

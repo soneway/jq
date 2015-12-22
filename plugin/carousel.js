@@ -7,21 +7,23 @@
     $.fn.carousel = function (options) {
         $.fn.carousel.defaults = {
             //是否竖直方向滚动
-            isVertical   : false,
+            isVertical      : false,
             //滑动阈值
-            swipThreshold: 50,
+            swipThreshold   : 50,
             //是否自动轮播
-            isAutoPlay   : true,
+            isAutoPlay      : true,
             //轮播inter
-            autoPlayInter: 8000,
+            autoPlayInter   : 8000,
             //轮播回调函数
-            slideCallback: null,
+            slideCallback   : null,
             //是否显示title
-            isShowTitle  : true,
+            isShowTitle     : true,
             //是否显示pager
-            isShowPager  : true,
+            isShowPager     : true,
+            //移除class延迟
+            removeClassDelay: 0,
             //初始index
-            initIndex    : 0
+            initIndex       : 0
         };
 
         //每个元素执行
@@ -36,6 +38,7 @@
                 slideCallback = opts.slideCallback,
                 isShowTitle = opts.isShowTitle,
                 isShowPager = opts.isShowPager,
+                removeClassDelay = opts.removeClassDelay,
                 initIndex = opts.initIndex;
 
             //变量
@@ -122,11 +125,19 @@
                         //滚动回调函数
                         typeof slideCallback === 'function' && slideCallback.call($items[index], index);
                         //title
-                        var title = $items.removeClass('current').eq(index).addClass('current').attr('data-title');
+                        var title = $items.eq(index).addClass('current').attr('data-title');
+                        //延迟removeClass('current')
+                        setTimeout(function () {
+                            $items.each(function () {
+                                var $this = $(this),
+                                    i = $this.index();
+                                i !== index && $this.removeClass('current');
+                            });
+                        }, removeClassDelay);
                         $title.removeClass('visible');
                         title && setTimeout(function () {
                             $title.addClass('visible').html(title);
-                        }, 200);
+                        }, 150);
                         //pager状态
                         $pagers.removeClass('selected').eq(index).addClass('selected');
                     }

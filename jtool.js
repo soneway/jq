@@ -25,7 +25,6 @@
     //异步加载js函数
     var jsonp = (function () {
         var headEl = document.getElementsByTagName('head')[0];
-
         return function (url, fn) {
             //是否js文件
             var isJs = /(\.js)$/.test(url),
@@ -44,23 +43,6 @@
 
     //工具类属性或方法
     var jtool = (function () {
-        var jtool,
-            guid = 0;
-
-        //pv监测
-        function pvCheck(tab) {
-            var url = 'http://js.app.gd.sohu.com:8080/pv.gif?',
-                host = location.host,
-                href = location.href,
-                referrer = document.referrer;
-
-            referrer.length === 0 && (referrer = 'null');
-            href = href + '&tab=' + encodeURIComponent(tab);
-            url += (host + '|' + href + '|' + referrer);
-
-            jsonp(url);
-        }
-
         //获取参数
         function getQueryString(key) {
             key = key.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
@@ -138,16 +120,20 @@
             location.href = 'http://passport.sohu.com/openlogin/request.action?provider=' + provider + '&appid=1030&hun=1&ru=' + (ru || location.href);
         }
 
+        //获取guid函数
+        var getGuid = (function () {
+            var guid = 0;
+            return function () {
+                return guid++;
+            };
+        })();
+
 
         //初始化对象
-        jtool = {
-            //1.info
+        var jtool = {
             constructor: 'jtool',
             ver        : '1.0',
 
-            //2.属性
-
-            //3.方法
             //是否为函数
             isFunction    : isFunction,
             //显示信息函数
@@ -156,8 +142,6 @@
             mergeOpts     : mergeOpts,
             //跨域请求
             jsonp         : jsonp,
-            //pv监测
-            pvCheck       : pvCheck,
             //获取参数
             getQueryString: getQueryString,
             //表单验证
@@ -165,9 +149,7 @@
             //其他平台登陆
             otherLogin    : otherLogin,
             //获取guid函数
-            getGuid       : function () {
-                return guid++;
-            }
+            getGuid       : getGuid
         };
 
         //返回对象
@@ -178,10 +160,9 @@
 
     //数据请求类
     jtool.proxy = (function () {
-        var proxy, pushData;
 
         //初始化对象
-        proxy = {
+        var proxy = {
             //状态对应信息
             statusMsg: {
                 100: '正常',
@@ -195,12 +176,14 @@
             defaults : {
                 method   : 'get',
                 isShowMsg: false,
-                ru       : location.protocol + '//' + location.host + '/proxy/callback.html'
+                ru       : location.protocol + '//' + location.host + '/static/v3/jtool.html'
             }
         };
 
-        //提交数据函数
-        pushData = (function () {
+
+        //扩展属性
+        //提交数据
+        var pushData = proxy.pushData = (function () {
             var statusMsg = proxy.statusMsg;
 
             //get
@@ -416,11 +399,6 @@
 
         })();
 
-
-        //扩展属性
-        //提交数据
-        proxy.pushData = pushData;
-
         //通行证
         proxy.passport = (function () {
             var defaults = {
@@ -429,26 +407,10 @@
             };
 
             return {
-                //检测
-                check: function (opts) {
-                    defaults.method = 'get';
-                    defaults.url = defaults.api + 'get.php?act=check';
-
-                    pushData(opts, defaults);
-                },
-
                 //登陆
                 login: function (opts) {
                     defaults.method = 'post';
                     defaults.url = defaults.api + 'put.php?act=login';
-
-                    pushData(opts, defaults);
-                },
-
-                //退出
-                logout: function (opts) {
-                    defaults.method = 'get';
-                    defaults.url = 'http://app.gd.sohu.com/minisite/SohuPassport/logout.php';
 
                     pushData(opts, defaults);
                 }
@@ -470,26 +432,6 @@
                     defaults.url = defaults.api + 'put.php?act=upload';
 
                     pushData(opts, defaults);
-                },
-
-                //读取(比较特殊,返回的是一个图片链接)
-                view: function (opts) {
-                    var data,
-                        code = defaults.code,
-                        url = defaults.api + 'get.php?act=show';
-
-                    !opts && (opts = {});
-
-                    //加code参数
-                    code && (url += '&code=' + code);
-
-                    //加传入参数
-                    data = opts.data;
-                    for (var p in opts.data) {
-                        url += '&' + p + '=' + data[p];
-                    }
-
-                    return url;
                 },
 
                 //旋转

@@ -1,5 +1,5 @@
 //jq.js
-(function (window) {
+(function (window, undefined) {
 
     var $ = (function () {
 
@@ -13,6 +13,8 @@
         };
 
         var document = window.document,
+            Node = window.Node,
+            NodeList = window.NodeList,
             toString = {}.toString,
             tmpArray = [],
             slice = tmpArray.slice,
@@ -485,9 +487,13 @@
             css: function (key, val) {
                 //$().css(key)
                 if (typeof key === 'string' && val === undefined) {
-                    //计算样式
-                    var style = window.getComputedStyle(this[0]);
-                    return style[key] || style[cssPrefix + key];
+                    //必须是node
+                    if (this[0] instanceof Node) {
+                        //计算样式
+                        var style = window.getComputedStyle(this[0]);
+                        return style[key] || style[cssPrefix + key];
+                    }
+                    return undefined;
                 }
                 return this.forEach(function (el) {
                     var style = el.style;
@@ -853,10 +859,12 @@
          * @param {Object} opts ajax请求配置项
          */
         $.ajax = (function () {
-            var defaults = {
-                method: 'get',
-                async : true
-            };
+            var XMLHttpRequest = window.XMLHttpRequest,
+                defaults = {
+                    type: 'GET',
+                    contentType: 'application/x-www-form-urlencoded',
+                    async: true
+                };
 
             //将data转换为str函数
             function getDataStr(data) {
@@ -871,24 +879,36 @@
                 opts = $.extend({}, defaults, opts);
                 //xhr对象
                 var xhr = new XMLHttpRequest();
+
                 //打开链接
-                xhr.open(opts.method, opts.url, opts.async);
+                xhr.open(opts.type.toUpperCase(), opts.url, opts.async);
+
                 //设置header
-                var header = opts.header;
-                if (header) {
-                    for (var p in header) {
-                        xhr.setRequestHeader(p, header[p]);
-                    }
+                var header = opts.header || {};
+                //contentType
+                header['Content-Type'] = opts.contentType;
+                for (var p in header) {
+                    xhr.setRequestHeader(p, header[p]);
                 }
+
                 //xhr状态改变事件
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var fn = opts.callback;
-                        typeof fn === 'function' && fn(xhr.responseText);
+                    if (xhr.readyState === 4) {
+                        //成功
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                            var success = opts.success;
+                            typeof success === 'function' && success(xhr.responseText);
+                        }
+                        //失败
+                        else {
+                            var error = opts.error;
+                            typeof error === 'function' && error(xhr);
+                        }
                     }
                 };
+
                 //发送数据
-                xhr.send(getDataStr(opts.data));
+                xhr.send(getDataStr(opts.data) || null);
             };
         })();
 
