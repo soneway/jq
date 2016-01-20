@@ -48,10 +48,15 @@ body
 }
 
 
+input, textarea, select
+{
+    text-indent: 5px;
+}
+
+
 input, textarea
 {
     @include mx_user-select(text);
-    color: $color;
 }
 
 
