@@ -1,0 +1,22 @@
+{
+    "browser": {
+        "artmpl"     : "./_lib/js/artmpl.js",
+        "share"      : "./_lib/js/share.js",
+        "comp/share" : "./_lib/comp/share.js",
+        "comp/login" : "./_lib/comp/login.js",
+
+        "jq"         : "../../../jq/jq.js",
+        "base"       : "../../../jq/ui/base.js",
+        "ui"         : "../../../jq/ui/ui.js",
+        "carousel"   : "../../../jq/plugin/carousel.js",
+        "customalert": "../../../jq/plugin/customalert.js",
+        "flip"       : "../../../jq/plugin/flip.js",
+        "piccut"     : "../../../jq/plugin/piccut.js",
+        "picpager"   : "../../../jq/plugin/picpager.js",
+        "scratchcard": "../../../jq/plugin/scratchcard.js",
+        "scroll"     : "../../../jq/plugin/scroll.js",
+        "scrollto"   : "../../../jq/plugin/scrollto.js",
+        "swatchbook" : "../../../jq/plugin/swatchbook.js",
+        "turntable"  : "../../../jq/plugin/turntable.js"
+    }
+}

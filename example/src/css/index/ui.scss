@@ -1,0 +1,25 @@
+﻿/*ui panel*/
+#ui
+{
+    h3
+    {
+        text-indent: 10px;
+    }
+
+    .list > div
+    {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        border: 1px solid #eee;
+        margin: 5px;
+
+        &:after
+        {
+            content: attr(class);
+            display: block;
+            @extend .center;
+        }
+    }
+}

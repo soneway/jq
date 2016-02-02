@@ -1,0 +1,41 @@
+/*焦点图 panel*/
+//引入
+@import "jq/plugin/carousel";
+
+
+#carousel
+{
+    .carousel
+    {
+        width: 90%;
+        min-width: 300px;
+        margin: 0 auto;
+
+        a
+        {
+            height: 300px;
+            position: relative;
+            @extend .ani_loading;
+        }
+
+        &.vertical
+        {
+            height: 300px;
+        }
+    }
+
+    @at-root
+    {
+        #img_car
+        {
+            width: 90%;
+            min-width: 300px;
+            margin: 0 auto;
+
+            img
+            {
+                width: 100%;
+            }
+        }
+    }
+}

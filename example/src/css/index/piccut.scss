@@ -1,0 +1,30 @@
+/*图片裁切 panel*/
+//引入
+@import "jq/plugin/piccut";
+
+
+#piccut
+{
+    .avator_up
+    {
+        width: 320px;
+        height: 320px;
+        margin: 5px auto;
+    }
+
+    @at-root
+    {
+        #file
+        {
+            width: 100px;
+        }
+
+
+        #shower
+        {
+            max-width: 320px;
+            display: block;
+            margin: 5px auto;
+        }
+    }
+}

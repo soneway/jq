@@ -1,0 +1,49 @@
+﻿/*
+scss/ani_spinner
+spinner动画类
+*/
+//引入
+@import 'ani_circle';
+
+
+//ani_spinner函数
+//$cw 容器尺寸
+//$dw 点尺寸
+//$dc 点颜色
+@mixin ani_spinner($cw: 50px, $dw: 10px, $dc: $color) {
+    &:before
+    {
+        /*负数*/
+        $neg: ($cw - $dw) / 2;
+        /*负数1*/
+        $neg1: $neg * 0.7;
+
+        content: '';
+        @include mx_plt($left: 50%, $top: 50%);
+        width: $dw;
+        height: $dw;
+        margin-left: -$dw / 2;
+        margin-top: -$dw / 2;
+        border-radius: $dw;
+        /*如.ani_spinner元素中有transform,:before内容将不能被背景图挡住*/
+        z-index: -1;
+        /*8个圆点用阴影生成*/
+        @include mx_box-shadow(0 (-$neg) 0 rgba($dc, 1),
+                        (-$neg1) (-$neg1) 0 rgba($dc, 0.875),
+                        (-$neg) 0 0 rgba($dc, 0.75),
+                        (-$neg1) $neg1 0 rgba($dc, 0.625),
+                0 $neg 0 rgba($dc, 0.5),
+                $neg1 $neg1 0 rgba($dc, 0.375),
+                $neg 0 0 rgba($dc, 0.25),
+                $neg1 (-$neg1) 0 rgba($dc, 0.125));
+        /*动画*/
+        @include mx_animation(ani_circle 1s ease infinite);
+    }
+}
+
+
+/*spinner动画类*/
+.ani_spinner
+{
+    @include ani_spinner;
+}

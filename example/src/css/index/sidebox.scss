@@ -1,0 +1,12 @@
+/*sidebox panel*/
+//引入
+@import "comp/login";
+
+
+#sidebox
+{
+    .content
+    {
+        @include mx_maxwidth($width: 210px, $target-width: 250px);
+    }
+}

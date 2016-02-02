@@ -78,7 +78,7 @@
         });
 
         //pc端二维码
-        $.isShowQrcode && !$.isMobi && $.jsonp('http://img.gd.sohu.com/static/v3/qrcode.js', function () {
+        $.isShowQrcode && !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/qrcode.js', function () {
                 var $qrcode = $('#qrcode');
                 if ($qrcode.length === 0) {
                     $qrcode = $('<div id="qrcode"></div>');
@@ -96,7 +96,7 @@
         );
 
         //pc端mouse转touch事件
-        !$.isMobi && $.jsonp('http://img.gd.sohu.com/static/v3/desktouch.js');
+        !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/desktouch.js');
 
     });
 

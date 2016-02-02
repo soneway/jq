@@ -1,0 +1,40 @@
+/*
+scss/ani_loading
+loading动画样式
+*/
+//引入
+@import 'ani_circle';
+
+
+//ani_loading函数
+//$cw 容器尺寸
+//$lw loading圆环宽度
+//$lc loading圆环颜色
+@mixin ani_loading($cw: 40px, $lw: 4px, $lc: $color) {
+    &:before
+    {
+        content: '';
+        @include mx_plt($left: 50%, $top: 50%);
+        width: $cw;
+        height: $cw;
+        margin-left: -$cw / 2;
+        margin-top: -$cw / 2;
+        border-radius: $cw;
+        /*如.loading元素中还有transform,:before内容将挡不住*/
+        z-index: -1;
+        /*圆环用border生成*/
+        border-top: $lw solid rgba($lc, 0.2);
+        border-right: $lw solid rgba($lc, 0.2);
+        border-bottom: $lw solid rgba($lc, 0.2);
+        border-left: $lw solid rgba($lc, 1);
+        /*动画*/
+        @include mx_animation(ani_circle 0.8s linear infinite);
+    }
+}
+
+
+/*loading动画类*/
+.ani_loading
+{
+    @include ani_loading;
+}

@@ -1,0 +1,25 @@
+//变量
+$border-color: rgba(0, 0, 0, 0.1);
+//$duration: 5s;
+
+//引入
+@import "jq/ui/base";
+@import "jq/ui/ui";
+@import "jq/ui/body_scroll";
+@import "jq/plugin/customalert";
+
+//引入基础样式
+@import "./base/base";
+
+//引入面板样式
+@import "./index/ui";
+@import "./index/carousel";
+@import "./index/picpager";
+@import "./index/piccut";
+@import "./index/flip";
+@import "./index/scroll";
+@import "./index/scratchcard";
+@import "./index/turntable";
+@import "./index/swatchbook";
+@import "./index/share";
+@import "./index/sidebox";

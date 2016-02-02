@@ -1,0 +1,10 @@
+﻿/*刮刮卡 panel*/
+#scratchcard
+{
+    height: 100%;
+
+    .scratchcard
+    {
+        @extend %ph_full;
+    }
+}
