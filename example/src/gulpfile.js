@@ -48,21 +48,58 @@
             dest : out + 'img'
         },
         css : {
-            src     : ['./css/*.scss'],
-            watch   : ['./css/**'],
-            dest    : out + 'css',
-            loadPath: ['../../../', libDir]
+            src  : ['./css/*.scss'],
+            watch: ['./css/**'],
+            dest : out + 'css',
+            opts : {
+                includePaths: ['../../../', libDir],
+
+                //排除匹配的
+                exclude     : [/^http:\/\/.+$/i],
+                //小于该设定K数的文件就编码
+                maxImageSize: isPC ? 1 : 5 * 1024
+            }
         },
         js  : {
             src  : ['./js/*.js'],
             watch: ['./js/**'],
-            dest : out + 'js'
+            dest : out + 'js',
+            opts : {
+                paths       : [],
+                browserField: {
+                    "artmpl"    : "./_lib/js/artmpl.js",
+                    "share"     : "./_lib/js/share.js",
+                    "comp/share": "./_lib/comp/share.js",
+                    "comp/login": "./_lib/comp/login.js",
+
+                    "jq"         : "../../../jq/jq.js",
+                    "base"       : "../../../jq/ui/base.js",
+                    "ui"         : "../../../jq/ui/ui.js",
+                    "carousel"   : "../../../jq/plugin/carousel.js",
+                    "customalert": "../../../jq/plugin/customalert.js",
+                    "flip"       : "../../../jq/plugin/flip.js",
+                    "piccut"     : "../../../jq/plugin/piccut.js",
+                    "picpager"   : "../../../jq/plugin/picpager.js",
+                    "scratchcard": "../../../jq/plugin/scratchcard.js",
+                    "scroll"     : "../../../jq/plugin/scroll.js",
+                    "scrollto"   : "../../../jq/plugin/scrollto.js",
+                    "swatchbook" : "../../../jq/plugin/swatchbook.js",
+                    "turntable"  : "../../../jq/plugin/turntable.js"
+                }
+            }
         },
         html: {
-            src    : ['./*.html'],
-            watch  : ['./*.html', './html/**'],
-            dest   : out,
-            baseDir: libDir
+            src  : ['./*.html'],
+            watch: ['./*.html', './html/**'],
+            dest : out,
+            opts : {
+                includePaths: [libDir],
+
+                collapseWhitespace: true,
+                removeComments    : true,
+                minifyJS          : true,
+                minifyCSS         : true
+            }
         }
     };
 
@@ -98,20 +135,13 @@
                     errorHandler: errorHandler
                 }))
                 //编译
-                .pipe(sass({
-                    includePaths: conf.loadPath
-                }))
+                .pipe(sass(conf.opts))
                 .pipe(gulp.dest(conf.dest));
 
             //压缩
             if (isPack) {
                 task.pipe(minifyCss())
-                    .pipe(base64({
-                        //排除匹配的
-                        exclude: [/^http:\/\/.+$/i],
-                        //小于该设定K数的文件就编码
-                        maxImageSize: isPC ? 1 : 5 * 1024
-                    }))
+                    .pipe(base64(conf.opts))
                     .pipe(gulp.dest(conf.dest));
             }
         });
@@ -131,7 +161,7 @@
                     errorHandler: errorHandler
                 }))
                 //编译合并
-                .pipe(browserify())
+                .pipe(browserify(conf.opts))
                 .pipe(gulp.dest(conf.dest));
 
             //压缩
@@ -156,17 +186,12 @@
                     errorHandler: errorHandler
                 }))
                 //include编译
-                .pipe(include())
+                .pipe(include(conf.opts))
                 .pipe(gulp.dest(conf.dest));
 
             //压缩
             if (isPack) {
-                task.pipe(htmlmin({
-                        collapseWhitespace: true,
-                        removeComments    : true,
-                        minifyJS          : true,
-                        minifyCSS         : true
-                    }))
+                task.pipe(htmlmin(conf.opts))
                     .pipe(gulp.dest(conf.dest));
             }
         });
