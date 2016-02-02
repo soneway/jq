@@ -837,7 +837,7 @@
          * @param {string} url 请求地址
          * @param {Function} fn 回调函数
          */
-        $.jsonp = (function () {
+        $.getScript = (function () {
             var headEl = document.getElementsByTagName('head')[0];
 
             return function (url, fn) {
@@ -859,12 +859,7 @@
          * @param {Object} opts ajax请求配置项
          */
         $.ajax = (function () {
-            var XMLHttpRequest = window.XMLHttpRequest,
-                defaults = {
-                    type: 'GET',
-                    contentType: 'application/x-www-form-urlencoded',
-                    async: true
-                };
+            var XMLHttpRequest = window.XMLHttpRequest;
 
             //将data转换为str函数
             function getDataStr(data) {
@@ -876,7 +871,7 @@
             }
 
             return function (opts) {
-                opts = $.extend({}, defaults, opts);
+                opts = $.extend({}, $.ajax.defaults, opts);
                 //xhr对象
                 var xhr = new XMLHttpRequest();
 
@@ -911,6 +906,11 @@
                 xhr.send(getDataStr(opts.data) || null);
             };
         })();
+        $.ajax.defaults = {
+            type       : 'GET',
+            contentType: 'application/x-www-form-urlencoded',
+            async      : true
+        };
 
         return $;
 
