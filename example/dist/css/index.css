@@ -93,7 +93,9 @@ a {
 .ca-box, .pi-picpager
 .pi-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
-  transition: transform 0.3s ease; }
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease; }
 
 #header {
   visibility: visible;
@@ -134,10 +136,12 @@ scss/ani_circle
 {
   0%
 {
-    transform: rotateZ(0deg); }
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg); }
   100%
 {
-    transform: rotateZ(360deg); } }
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg); } }
 
 /*spinner动画类*/
 .ani_spinner:before, #loading:before {
@@ -155,7 +159,6 @@ scss/ani_circle
   /*如.ani_spinner元素中有transform,:before内容将不能被背景图挡住*/
   z-index: -1;
   /*8个圆点用阴影生成*/
-  -webkit-box-shadow: 0 -20px 0 #333333, -14px -14px 0 rgba(51, 51, 51, 0.875), -20px 0 0 rgba(51, 51, 51, 0.75), -14px 14px 0 rgba(51, 51, 51, 0.625), 0 20px 0 rgba(51, 51, 51, 0.5), 14px 14px 0 rgba(51, 51, 51, 0.375), 20px 0 0 rgba(51, 51, 51, 0.25), 14px -14px 0 rgba(51, 51, 51, 0.125);
   box-shadow: 0 -20px 0 #333333, -14px -14px 0 rgba(51, 51, 51, 0.875), -20px 0 0 rgba(51, 51, 51, 0.75), -14px 14px 0 rgba(51, 51, 51, 0.625), 0 20px 0 rgba(51, 51, 51, 0.5), 14px 14px 0 rgba(51, 51, 51, 0.375), 20px 0 0 rgba(51, 51, 51, 0.25), 14px -14px 0 rgba(51, 51, 51, 0.125);
   /*动画*/
   -webkit-animation: ani_circle 1s ease infinite;
@@ -166,7 +169,6 @@ scss/ani_circle
   margin: 0;
   padding: 0;
   /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   /*不使用占位符生成css代码,是避免多一次选择器的匹配*/
   /*@extend %ph_border-box;*/ }
@@ -183,7 +185,9 @@ body {
   -webkit-text-size-adjust: none;
   /*禁止选中文本*/
   -webkit-user-select: none;
-  user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
   /*部分浏览器点选时会有淡蓝色框,这样可以去掉*/
   -webkit-tap-highlight-color: transparent;
   /*禁止保存图片*/
@@ -194,7 +198,9 @@ input, textarea, select {
 
 input, textarea {
   -webkit-user-select: text;
-  user-select: text; }
+  -moz-user-select: text;
+   -ms-user-select: text;
+       user-select: text; }
 
 img, input {
   vertical-align: middle; }
@@ -240,7 +246,6 @@ h4 {
   padding: 0 1.25em;
   border-radius: 0.5em;
   text-align: center;
-  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   background-color: #f8f8f8;
   /*固定颜色*/
@@ -342,7 +347,6 @@ h4 {
   /*如.ani_spinner元素中有transform,:before内容将不能被背景图挡住*/
   z-index: -1;
   /*8个圆点用阴影生成*/
-  -webkit-box-shadow: 0 -20px 0 white, -14px -14px 0 rgba(255, 255, 255, 0.875), -20px 0 0 rgba(255, 255, 255, 0.75), -14px 14px 0 rgba(255, 255, 255, 0.625), 0 20px 0 rgba(255, 255, 255, 0.5), 14px 14px 0 rgba(255, 255, 255, 0.375), 20px 0 0 rgba(255, 255, 255, 0.25), 14px -14px 0 rgba(255, 255, 255, 0.125);
   box-shadow: 0 -20px 0 white, -14px -14px 0 rgba(255, 255, 255, 0.875), -20px 0 0 rgba(255, 255, 255, 0.75), -14px 14px 0 rgba(255, 255, 255, 0.625), 0 20px 0 rgba(255, 255, 255, 0.5), 14px 14px 0 rgba(255, 255, 255, 0.375), 20px 0 0 rgba(255, 255, 255, 0.25), 14px -14px 0 rgba(255, 255, 255, 0.125);
   /*动画*/
   -webkit-animation: ani_circle 1s ease infinite;
@@ -368,7 +372,9 @@ plugin/scroll
 */
 .pi-scroll-item {
   -webkit-transition: -webkit-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out; }
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out; }
 
 /*重排类*/
 .reflow {
@@ -378,7 +384,6 @@ plugin/scroll
 .left-sd, .onsidebox #sidebox, .panel, .panel:before {
   /*outline会导致下边框问题*/
   /*box-shadow对安卓动画性能影响太明显*/
-  -webkit-box-shadow: -5px 0 3px -3px rgba(0, 0, 0, 0.2);
   box-shadow: -5px 0 3px -3px rgba(0, 0, 0, 0.2); }
 
 /*head导航条背景*/
@@ -423,13 +428,11 @@ plugin/scroll
       margin-top: -7px;
       width: 14px;
       height: 14px;
-      -webkit-box-shadow: -1px -1px 0 #333;
       box-shadow: -1px -1px 0 #333;
       -webkit-transform: rotateZ(-45deg);
       transform: rotateZ(-45deg); }
     .head
 .btnback.focus:before {
-      -webkit-box-shadow: -1px -1px 0 #df2221;
       box-shadow: -1px -1px 0 #df2221; }
   .head
 .btnmenu {
@@ -443,11 +446,9 @@ plugin/scroll
       height: 1px;
       width: 20px;
       vertical-align: top;
-      -webkit-box-shadow: 0 6px 0 0 #333, 0 -8px 0 0 #333, 0 -1px 0 0 #333;
       box-shadow: 0 6px 0 0 #333, 0 -8px 0 0 #333, 0 -1px 0 0 #333; }
     .head
 .btnmenu.focus:before {
-      -webkit-box-shadow: 0 6px 0 0 #df2221, 0 -8px 0 0 #df2221, 0 -1px 0 0 #df2221;
       box-shadow: 0 6px 0 0 #df2221, 0 -8px 0 0 #df2221, 0 -1px 0 0 #df2221; }
   .head
 .title {
@@ -577,7 +578,6 @@ body可滚动页面样式
   min-height: 100%;
   overflow: visible;
   background-color: transparent;
-  -webkit-box-shadow: none;
   box-shadow: none;
   /*避免页面不够高,挡不住隐藏页面以及左边框*/ }
   .panel:before {
@@ -626,7 +626,6 @@ plugin/customalert
   #customalert
 .ca-title {
     line-height: 40px;
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5); }
   #customalert
 .ca-content {
@@ -780,12 +779,10 @@ plugin/carousel
       margin: 4px;
       border: 4px solid rgba(255, 255, 255, 0.5);
       border-radius: 50%;
-      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
       cursor: pointer; }
       .pi-carousel
 .pi-pager > span.selected {
-        -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
         border-color: rgba(255, 255, 255, 0.9); }
 
@@ -837,10 +834,12 @@ scss/ani_circle
 {
   0%
 {
-    transform: rotateZ(0deg); }
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg); }
   100%
 {
-    transform: rotateZ(360deg); } }
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg); } }
 
 /*loading动画类*/
 .ani_loading:before, #carousel
@@ -910,7 +909,6 @@ plugin/piccut
     visibility: visible; }
   .pi-piccut-cutter {
     cursor: move;
-    -webkit-box-shadow: 0 0 1px #000;
     box-shadow: 0 0 1px #000;
     -webkit-transform-origin: left top;
     transform-origin: left top; }
@@ -921,7 +919,6 @@ plugin/piccut
     right: -10px;
     bottom: -10px;
     cursor: se-resize;
-    -webkit-box-shadow: 0 0 1px #000;
     box-shadow: 0 0 1px #000; }
 
 #piccut
@@ -1044,7 +1041,9 @@ plugin/swatchbook
     -webkit-transform-origin: 25% 90%;
     transform-origin: 25% 90%;
     -webkit-transition: -webkit-transform 0.7s ease;
-    transition: transform 0.7s ease; }
+    transition: -webkit-transform 0.7s ease;
+    transition: transform 0.7s ease;
+    transition: transform 0.7s ease, -webkit-transform 0.7s ease; }
 
 #swatchbook {
   /*每张扇页*/
@@ -1059,7 +1058,6 @@ plugin/swatchbook
     margin: 10px auto; }
   #swatchbook
 .sb-item {
-    -webkit-box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.2);
     box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.2); }
     #swatchbook
 .sb-item h3 {
@@ -1123,9 +1121,9 @@ h3 {
       border-radius: 50%;
       background-image: -webkit-linear-gradient(-45deg, #ddd 0%, #58535e 48%, #889396 100%);
       /*安卓4.0-4.4*/
+      background-image: -webkit-linear-gradient(135deg, #ddd 0%, #58535e 48%, #889396 100%);
       background-image: linear-gradient(-45deg, #ddd 0%, #58535e 48%, #889396 100%);
       /*css3标准*/
-      -webkit-box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.1);
       box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.1); }
   #swatchbook
 .sb-toggle {
@@ -1141,11 +1139,7 @@ h3 {
     background: rgba(0, 0, 0, 0.1); }
 
 /*分享 panel*/
-/*
-module/share
-分享模块样式
-包括8个常用分享平台图标
-*/
+/*分享图标*/
 .icon_share {
   text-align: center;
   font-size: 0; }
@@ -1267,7 +1261,6 @@ a.focus:after {
     width: 110px;
     height: 110px;
     border-radius: 110px;
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     position: relative; }
     .loginbox

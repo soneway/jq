@@ -5,7 +5,6 @@ loading动画样式
 //引入
 @import 'ani_circle';
 
-
 //ani_loading函数
 //$cw 容器尺寸
 //$lw loading圆环宽度
@@ -28,7 +27,7 @@ loading动画样式
         border-bottom: $lw solid rgba($lc, 0.2);
         border-left: $lw solid rgba($lc, 1);
         /*动画*/
-        @include mx_animation(ani_circle 0.8s linear infinite);
+        animation: ani_circle 0.8s linear infinite;
     }
 }
 

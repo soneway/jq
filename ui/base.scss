@@ -11,6 +11,7 @@ $line-height: 1.5 !default;
 $color-focus: #df2221 !default;
 //面板背景
 $panel-bgcolor: #fff !default;
+$duration: 0.3s !default;
 
 //引入
 @import "../scss/var";
@@ -22,9 +23,8 @@ $panel-bgcolor: #fff !default;
     margin: 0;
     padding: 0;
     /*将元素的padding,border也纳入宽度,相当于IE5的盒子模型*/
-    @include mx_box-sizing(border-box);
+    box-sizing: border-box;
     /*不使用占位符生成css代码,是避免多一次选择器的匹配*/
-    /*@extend %ph_border-box;*/
 }
 
 
@@ -40,7 +40,7 @@ body
     font-family: arial, helvetica, sans-serif;
     -webkit-text-size-adjust: none;
     /*禁止选中文本*/
-    @include mx_user-select(none);
+    user-select: none;
     /*部分浏览器点选时会有淡蓝色框,这样可以去掉*/
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     /*禁止保存图片*/
@@ -56,7 +56,7 @@ input, textarea, select
 
 input, textarea
 {
-    @include mx_user-select(text);
+    user-select: text;
 }
 
 
@@ -121,7 +121,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     padding: 0 1.25em;
     border-radius: 0.5em;
     text-align: center;
-    @include mx_box-shadow(0 0 1px rgba(#000, 0.5));
+    box-shadow: 0 0 1px rgba(#000, 0.5);
     background-color: #f8f8f8;
     /*固定颜色*/
     color: #333;
@@ -150,7 +150,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .fade-out, .fade-in
 {
     @extend %ph_transall;
-    @include mx_transition-property(opacity, visibility);
+    transition-property: opacity, visibility;
 }
 
 
@@ -193,19 +193,19 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*动画*/
 .transition
 {
-    @extend %ph_transall;
+    transition: all $duration ease;
 }
 
 
 .transform
 {
-    @extend %ph_transtransf;
+    transition: transform $duration ease;
 }
 
 
 .notrans
 {
-    @include mx_transition(none !important);
+    transition: none !important;
 }
 
 
@@ -240,7 +240,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     /*防止点击事件绑定不到(ios8)*/
     cursor: pointer;
     @extend .transition;
-    @include mx_transition-property(background-color, visibility);
+    transition-property: background-color, visibility;
     @extend %ph_center;
     @extend .ani_spinner;
 

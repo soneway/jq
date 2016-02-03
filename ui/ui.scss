@@ -35,7 +35,7 @@ $head-color: $color !default;
     //outline: 4px solid rgba(0, 0, 0, 0.1);
     //border-left: 2px solid rgba(#000, 0.2);
     /*box-shadow对安卓动画性能影响太明显*/
-    @include mx_box-shadow(-5px 0 3px -3px rgba(0, 0, 0, 0.2));
+    box-shadow: -5px 0 3px -3px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -72,8 +72,8 @@ $head-color: $color !default;
         width: 100%;
         height: 1px;
         background-color: $head-border-color;
-        @include mx_transform(scale3d(1, 0.5, 1));
-        @include mx_transform-origin(50% 100%);
+        transform: scale3d(1, 0.5, 1);
+        transform-origin: 50% 100%;
     }
 
     .btnleft, .btnright
@@ -111,7 +111,7 @@ $head-color: $color !default;
 
         &.focus:before
         {
-            @include mx_box-shadow(-1px -1px 0 $color_focus);
+            box-shadow: -1px -1px 0 $color_focus;
         }
     }
 
@@ -129,12 +129,12 @@ $head-color: $color !default;
             height: 1px;
             width: 20px;
             vertical-align: top;
-            @include mx_box-shadow(0 6px 0 0 $head-color, 0 -8px 0 0 $head-color, 0 -1px 0 0 $head-color);
+            box-shadow: 0 6px 0 0 $head-color, 0 -8px 0 0 $head-color, 0 -1px 0 0 $head-color;
         }
 
         &.focus:before
         {
-            @include mx_box-shadow(0 6px 0 0 $color_focus, 0 -8px 0 0 $color_focus, 0 -1px 0 0 $color_focus);
+            box-shadow: 0 6px 0 0 $color_focus, 0 -8px 0 0 $color_focus, 0 -1px 0 0 $color_focus;
         }
     }
 
@@ -152,7 +152,7 @@ $head-color: $color !default;
 
     .onsidebox &
     {
-        @include mx_transform(translate3d(-50%, 0, 0));
+        transform: translate3d(-50%, 0, 0);
     }
 }
 
@@ -166,7 +166,7 @@ $head-color: $color !default;
     width: 80%;
     background-color: $panel-bgcolor;
     z-index: 9;
-    @include mx_transform(translate3d(100%, 0, 0));
+    transform: translate3d(100%, 0, 0);
     @extend .transform;
 
     .content
@@ -177,7 +177,7 @@ $head-color: $color !default;
 
     .onsidebox &
     {
-        @include mx_transform(translate3d(0, 0, 0));
+        transform: translate3d(0, 0, 0);
         @extend .left-sd;
     }
 }
@@ -197,7 +197,7 @@ $head-color: $color !default;
     .offheader &
     {
         //兼容性不太好
-        //@include mx_transform(translate3d(0, -100%, 0));
+        //transform:translate3d(0, -100%, 0);
         @extend %ph_hidden;
     }
 
@@ -226,7 +226,7 @@ $head-color: $color !default;
             /*动画不太好*/
             /*.btnleft
             {
-                @include mx_transform(translate3d(100vw, 0, 0));
+                transform:translate3d(100vw, 0, 0);
             }*/
 
             .onsubtitle &
@@ -236,7 +236,7 @@ $head-color: $color !default;
 
                 /*.btnleft
                 {
-                    @include mx_transform(translate3d(0, 0, 0));
+                    transform:translate3d(0, 0, 0);
                 }*/
             }
         }

@@ -8,11 +8,30 @@
 
     <div class="content ofauto">
 
-        @include("module/login");
+        <!--登录模块-->
+        <div class="loginbox tologin center">
+            <a class="sohulogo"></a>
+            <p class="icon_userid">
+                <input type="text" id="userid" data-msg="用户名" class="notnull" placeholder="请输入用户名"/>
+            </p>
+            <p class="icon_password">
+                <input type="password" id="password" data-msg="密码" class="notnull" placeholder="请输入密码"/>
+            </p>
+            <a class="btn-login btn">登录</a>
 
-        <div class="logined">
-            <p class="nickname"></p>
+            <div class="other_login">
+                <p>其他登录方式：</p>
+
+                <div class="icon_login">
+                    <a class="qq"></a>
+                    <a class="sina"></a>
+                    <a class="renren"></a>
+                    <a class="baidu"></a>
+                    <a class="taobao"></a>
+                </div>
+            </div>
         </div>
+        <!--登录模块 end-->
 
     </div>
 </div>

@@ -26,7 +26,7 @@ body可滚动页面样式
     min-height: 100%;
     overflow: visible;
     background-color: transparent;
-    @include mx_box-shadow(none);
+    box-shadow: none;
 
     //填充背景
     &:before

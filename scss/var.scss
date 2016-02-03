@@ -3,9 +3,6 @@
 //包含默认变量,常用函数,常用点位符(全是sass运算相关的东西)
 //本文件中用//注释,可使生成文件中不包含注释信息
 
-//变量
-$duration: 0.3s !default;
-
 //混入
 //定位
 @mixin mx_plt($position: absolute, $left: 0, $top: 0) {
@@ -36,93 +33,6 @@ $duration: 0.3s !default;
 }
 
 
-//transition
-@mixin mx_transition($value) {
-    -webkit-transition: $value;
-    transition: $value;
-}
-
-
-@mixin mx_transition-duration($value) {
-    -webkit-transition-duration: $value;
-    transition-duration: $value;
-}
-
-
-@mixin mx_transition-delay($value) {
-    -webkit-transition-delay: $value;
-    transition-delay: $value;
-}
-
-
-@mixin mx_transition-property($value...) {
-    -webkit-transition-property: $value;
-    transition-property: $value;
-}
-
-
-@mixin mx_transition-timing-function($value) {
-    -webkit-transition-timing-function: $value;
-    transition-timing-function: $value;
-}
-
-
-@mixin mx_transition-transform($value...) {
-    -webkit-transition: -webkit-transform $value;
-    transition: transform $value;
-}
-
-
-//transform
-@mixin mx_transform($value) {
-    -webkit-transform: $value;
-    transform: $value;
-}
-
-
-@mixin mx_transform-origin($value) {
-    -webkit-transform-origin: $value;
-    transform-origin: $value;
-}
-
-
-@mixin mx_transform-style($value) {
-    -webkit-transform-style: $value;
-    transform-style: $value;
-}
-
-
-//animation
-@mixin mx_animation($value) {
-    -webkit-animation: $value;
-    animation: $value;
-}
-
-
-@mixin mx_animation-name($value) {
-    -webkit-animation-name: $value;
-    animation-name: $value;
-}
-
-
-@mixin mx_animation-duration($value) {
-    -webkit-animation-duration: $value;
-    animation-duration: $value;
-}
-
-
-@mixin mx_animation-iteration-count($value) {
-    -webkit-animation-iteration-count: $value;
-    animation-iteration-count: $value;
-}
-
-
-@mixin mx_animation-delay($value) {
-    -webkit-animation-delay: $value;
-    animation-delay: $value;
-}
-
-
 //渐变背景
 @mixin mx_gradient($value...) {
     background-image: -webkit-linear-gradient($value); /*安卓4.0-4.4*/
@@ -133,49 +43,6 @@ $duration: 0.3s !default;
 @mixin mx_radial-gradient($value...) {
     background-image: -webkit-radial-gradient($value); /*安卓4.0-4.4*/
     background-image: radial-gradient($value); /*css3标准*/
-}
-
-
-//backface-visibility
-@mixin mx_backface-visibility($value) {
-    /*防止动画过程闪烁*/
-    -webkit-backface-visibility: $value;
-    backface-visibility: $value;
-}
-
-
-//perspective
-@mixin mx_perspective($value) {
-    -webkit-perspective: $value;
-    perspective: $value;
-}
-
-
-//盒子阴影
-@mixin mx_box-shadow($value...) {
-    -webkit-box-shadow: $value;
-    box-shadow: $value;
-}
-
-
-//user-select
-@mixin mx_user-select($value) {
-    -webkit-user-select: $value;
-    user-select: $value;
-}
-
-
-//box-sizing
-@mixin mx_box-sizing($value) {
-    -webkit-box-sizing: $value;
-    box-sizing: $value;
-}
-
-
-//行高与高度相同
-@mixin mx_line-height($value) {
-    height: $value;
-    line-height: $value;
 }
 
 
@@ -196,8 +63,8 @@ $duration: 0.3s !default;
         {
             border: 1px $style $color;
         }
-        @include mx_transform(scale3d(0.5, 0.5, 1));
-        @include mx_transform-origin(0 0);
+        transform: scale3d(0.5, 0.5, 1);
+        transform-origin: 0 0;
         z-index: 0;
     }
 
@@ -206,13 +73,6 @@ $duration: 0.3s !default;
         position: relative;
         z-index: 1;
     }
-}
-
-
-//滤镜
-@mixin mx_filter($value) {
-    -webkit-filter: $value;
-    filter: $value;
 }
 
 
@@ -247,14 +107,14 @@ $duration: 0.3s !default;
 @mixin mx_left-arrow($width: 14px, $deg: 0deg, $color: #000, $line-width: 1px, $color-focus: 0) {
     width: $width;
     height: $width;
-    @include mx_box-shadow((-$line-width) (-$line-width) 0 $color);
-    @include mx_transform(rotateZ(-45deg + $deg));
+    box-shadow: (-$line-width) (-$line-width) 0 $color;
+    transform: rotateZ(-45deg + $deg);
 
     @if ($color-focus != 0)
     {
         &.focus
         {
-            @include mx_box-shadow((-$line-width) (-$line-width) 0 $color-focus);
+            box-shadow: (-$line-width) (-$line-width) 0 $color-focus;
         }
     }
 }
@@ -265,7 +125,7 @@ $duration: 0.3s !default;
 %ph_ofauto
 {
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
 }
 
 
@@ -383,50 +243,6 @@ $duration: 0.3s !default;
 }
 
 
-//all动画
-%ph_transall
-{
-    @include mx_transition(all $duration ease);
-}
-
-
-//transform动画
-%ph_transtransf
-{
-    @include mx_transition-transform($duration ease);
-}
-
-
-//visible
-%ph_visible
-{
-    visibility: visible;
-    opacity: 1;
-}
-
-
-//hidden
-%ph_hidden
-{
-    visibility: hidden;
-    opacity: 0;
-}
-
-
-//border-box(IE5盒子模型)
-%ph_border-box
-{
-    @include mx_box-sizing(border-box);
-}
-
-
-//content-box
-%ph_content-box
-{
-    @include mx_box-sizing(content-box);
-}
-
-
 //1px边框(全边框)
 %ph_ptborder
 {
@@ -444,39 +260,4 @@ $duration: 0.3s !default;
     //display: box;
     //box-align: center;
     //box-pack: center;
-}
-
-
-%ph_preserve-3d
-{
-    @include mx_transform-style(preserve-3d);
-}
-
-
-//链接按钮
-%ph_abtn
-{
-    &.focus
-    {
-        background: #000;
-
-        & > *
-        {
-            opacity: 0.9;
-        }
-    }
-}
-
-
-//无限动画
-%ph_infani
-{
-    @include mx_animation-iteration-count(infinite);
-}
-
-
-//backface:hidden
-%ph_bvhidden
-{
-    @include mx_backface-visibility(hidden);
 }

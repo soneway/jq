@@ -1,3 +1,48 @@
 /*分享 panel*/
-//引入
-@import "comp/share";
+
+/*分享图标*/
+.icon_share
+{
+    text-align: center;
+    font-size: 0;
+
+    $height: 50px;
+    a
+    {
+        display: inline-block;
+        width: $height;
+        height: $height;
+        vertical-align: middle;
+        border-radius: $height * 0.2;
+        margin: 8px;
+        position: relative;
+
+        &:after
+        {
+            content: '';
+            @extend %ph_pafull;
+            background: url(http://img.gd.sohu.com/static/v3/img/icon_share.png);
+            background-size: auto $height;
+            border-radius: $height * 0.2;
+        }
+
+        &.focus
+        {
+            background: #000;
+
+            &:after
+            {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    $providers: weibosina, qq, renren, tieba, tqq, douban, kaixin001, netease;
+    @each $provider in $providers
+    {
+        .#{$provider}:after
+        {
+            background-position: #{ -$height * (index($providers, $provider) - 1)} 0;
+        }
+    }
+}

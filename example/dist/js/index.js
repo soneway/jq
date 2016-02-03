@@ -1,19 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-//分享
-(function (window, $) {
-
-    var document = window.document,
-        $doc = $(document);
-
-    //share函数
-    var share = require('share');
-    //分享按钮点击
-    $doc.on('click', '.icon_share a', function () {
-        share(module.exports.urlShare, module.exports.txtShare, module.exports.picShare, this.getAttribute('data-provider'));
-    });
-
-})(window, $);
-},{"share":2}],2:[function(require,module,exports){
 (function (window) {
 
     var share = (function () {
@@ -103,7 +88,7 @@
     window.share = share;
 
 })(window);
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 (function (window) {
 
     var $ = require('jq');
@@ -147,7 +132,7 @@
     };
 
 })(window);
-},{"./index/carousel.js":4,"./index/flip.js":5,"./index/piccut.js":6,"./index/picpager.js":7,"./index/scratchcard.js":8,"./index/scroll.js":9,"./index/share.js":10,"./index/sidebox.js":11,"./index/swatchbook.js":12,"./index/turntable.js":13,"base":24,"customalert":16,"jq":14,"scroll":21,"ui":25}],4:[function(require,module,exports){
+},{"./index/carousel.js":3,"./index/flip.js":4,"./index/piccut.js":5,"./index/picpager.js":6,"./index/scratchcard.js":7,"./index/scroll.js":8,"./index/share.js":9,"./index/sidebox.js":10,"./index/swatchbook.js":11,"./index/turntable.js":12,"base":23,"customalert":15,"jq":13,"scroll":20,"ui":24}],3:[function(require,module,exports){
 //焦点图
 (function (window, $) {
 
@@ -185,7 +170,7 @@
     });
 
 })(window, $);
-},{"carousel":15}],5:[function(require,module,exports){
+},{"carousel":14}],4:[function(require,module,exports){
 //3d旋转切换
 (function (window, $) {
 
@@ -216,7 +201,7 @@
     });
 
 })(window, $);
-},{"flip":17}],6:[function(require,module,exports){
+},{"flip":16}],5:[function(require,module,exports){
 (function (window, $) {
 
     //焦点图
@@ -249,7 +234,7 @@
     });
 
 })(window, $);
-},{"piccut":18}],7:[function(require,module,exports){
+},{"piccut":17}],6:[function(require,module,exports){
 //相册功能
 (function (window, $) {
 
@@ -259,39 +244,17 @@
     //加载时执行
     function load($this, isInit) {
         if (isInit) {
-            var page = 1,
-                perpage = 10;
-
-            var proxy = jtool.proxy;
-
-            //请求数据
-            proxy.pushData({
-                url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&index=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
-                onStart: function () {
-                    $.toggleMask(1);
-                },
-                onEnd  : function () {
-                    $.toggleMask(0);
-                },
-                success: function (rs) {
-                    var $picpager = $('.picpager').picpager({
-                        imgData      : rs.data.detail,
-                        imgAttrName  : 'image',
-                        slideCallback: function (index) {
-                            if (index + 1 === page * 10) {
-                                page++;
-
-                                //请求数据
-                                proxy.pushData({
-                                    url    : 'http://app.gd.sohu.com/minisite/xtep/20140530/get.php?act=list&index=' + page + '&perpage=' + perpage + '&order=' + 0 + '&code=aa1c9153608a7755b7c20e97c0eade27',
-                                    success: function (rs) {
-                                        $picpager[0].addItem(rs.data.detail);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                }
+            var page = 1;
+            $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
+                var $picpager = $('.picpager').picpager({
+                    imgData      : rs.data.detail,
+                    imgAttrName  : 'image',
+                    slideCallback: function (index) {
+                        index + 1 === page * 10 && $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + ++page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
+                            $picpager[0].addItem(rs.data.detail);
+                        });
+                    }
+                });
             });
         }
     }
@@ -301,7 +264,7 @@
     });
 
 })(window, $);
-},{"picpager":19}],8:[function(require,module,exports){
+},{"picpager":18}],7:[function(require,module,exports){
 //刮刮卡
 (function (window, $) {
 
@@ -325,7 +288,7 @@
     });
 
 })(window, $);
-},{"scratchcard":20}],9:[function(require,module,exports){
+},{"scratchcard":19}],8:[function(require,module,exports){
 //自定义滚动
 (function (window, $) {
 
@@ -348,22 +311,29 @@
     });
 
 })(window, $);
-},{"scroll":21}],10:[function(require,module,exports){
+},{"scroll":20}],9:[function(require,module,exports){
 //分享
 (function (window, $) {
 
-    var share = require('comp/share');
-    share.txtShare = document.title;
-    share.picShare = 'http://www.sohu.com/upload/images20140108/sohulogo.png';
-    share.urlShare = location.href;
+    var $doc = $(document),
+        share = require('share');
+
+    var txtShare = document.title,
+        picShare = 'http://www.sohu.com/upload/images20140108/sohulogo.png',
+        urlShare = location.href;
+
+    //分享按钮点击
+    $doc.on('click', '.icon_share a', function () {
+        share(urlShare, txtShare, picShare, this.getAttribute('data-provider'));
+    });
 
 })(window, $);
-},{"comp/share":1}],11:[function(require,module,exports){
+},{"share":1}],10:[function(require,module,exports){
 //sidebox.js
 (function (window, $) {
 
 })(window, $);
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 //扇形特效
 (function (window, $) {
 
@@ -391,7 +361,7 @@
     });
 
 })(window, $);
-},{"swatchbook":22}],13:[function(require,module,exports){
+},{"swatchbook":21}],12:[function(require,module,exports){
 //转盘抽奖
 (function (window, $) {
 
@@ -420,7 +390,7 @@
     });
 
 })(window, $);
-},{"turntable":23}],14:[function(require,module,exports){
+},{"turntable":22}],13:[function(require,module,exports){
 //jq.js
 (function (window, undefined) {
 
@@ -1355,7 +1325,7 @@
     }
 
 })(window);
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*
  * carousel.js
  * 焦点图js
@@ -1616,7 +1586,7 @@
     };
 
 })(window, $);
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*
  * customalert.js
  * 自定义提示框js
@@ -1724,7 +1694,7 @@
     };
 
 })(window, $);
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
  * flip.js
  * 3d翻转效果js
@@ -1903,7 +1873,7 @@
     };
 
 })(window, $);
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*
  * piccut.js
  * 图片裁切功能js
@@ -2217,7 +2187,7 @@
     };
 
 })(window, $);
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*
  * picpager.js
  * 相册js
@@ -2443,7 +2413,7 @@
     };
 
 })(window, $);
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*
  * scratchcard.js
  * 刮刮卡js
@@ -2574,7 +2544,7 @@
     };
 
 })(window, $);
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*
  * scroll.js
  * 自定义滚动js
@@ -2778,7 +2748,7 @@
     };
 
 })(window, $);
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*
  * swatchbook.js
  * 扇形特效js
@@ -2937,7 +2907,7 @@
     };
 
 })(window, $);
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*
  * turntable.js
  * 转盘抽奖js
@@ -3039,7 +3009,7 @@
     };
 
 })(window, $);
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*
  * base.js
  * 移动端基础js,包含pc端二维码,mask,a标签触摸等基础功能
@@ -3143,7 +3113,7 @@
     });
 
 })(window, $);
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /*
  * ui.js
  * 移动端界面js,包括面板切换,导航,边栏等功能
@@ -3542,4 +3512,4 @@
     });
 
 })(window, $);
-},{}]},{},[3])
+},{}]},{},[2])

@@ -52,8 +52,17 @@
             watch: ['./css/**'],
             dest : out + 'css',
             opts : {
-                includePaths: ['../../../', libDir],
+                //sass
+                includePaths: [libDir, '../../../'],
 
+                //autoprefixer
+                browsers: [
+                    'last 2 versions',
+                    'ios 7',
+                    'android 4'
+                ],
+
+                //base64
                 //排除匹配的
                 exclude     : [/^http:\/\/.+$/i],
                 //小于该设定K数的文件就编码
@@ -65,27 +74,7 @@
             watch: ['./js/**'],
             dest : out + 'js',
             opts : {
-                paths       : [],
-                browserField: {
-                    "artmpl"    : "./_lib/js/artmpl.js",
-                    "share"     : "./_lib/js/share.js",
-                    "comp/share": "./_lib/comp/share.js",
-                    "comp/login": "./_lib/comp/login.js",
-
-                    "jq"         : "../../../jq/jq.js",
-                    "base"       : "../../../jq/ui/base.js",
-                    "ui"         : "../../../jq/ui/ui.js",
-                    "carousel"   : "../../../jq/plugin/carousel.js",
-                    "customalert": "../../../jq/plugin/customalert.js",
-                    "flip"       : "../../../jq/plugin/flip.js",
-                    "piccut"     : "../../../jq/plugin/piccut.js",
-                    "picpager"   : "../../../jq/plugin/picpager.js",
-                    "scratchcard": "../../../jq/plugin/scratchcard.js",
-                    "scroll"     : "../../../jq/plugin/scroll.js",
-                    "scrollto"   : "../../../jq/plugin/scrollto.js",
-                    "swatchbook" : "../../../jq/plugin/swatchbook.js",
-                    "turntable"  : "../../../jq/plugin/turntable.js"
-                }
+                paths: [libDir]
             }
         },
         html: {
@@ -93,7 +82,8 @@
             watch: ['./*.html', './html/**'],
             dest : out,
             opts : {
-                includePaths: [libDir],
+                prefix  : '@',
+                basepath: './html/',
 
                 collapseWhitespace: true,
                 removeComments    : true,
@@ -125,6 +115,7 @@
     (function (require) {
         var conf = config.css;
         var sass = require('gulp-sass');
+        var autoprefixer = require('gulp-autoprefixer');
         var minifyCss = require('gulp-minify-css');
         var base64 = require('gulp-base64');
 
@@ -136,6 +127,7 @@
                 }))
                 //编译
                 .pipe(sass(conf.opts))
+                .pipe(autoprefixer(conf.opts))
                 .pipe(gulp.dest(conf.dest));
 
             //压缩
@@ -177,7 +169,7 @@
     (function (require) {
         var conf = config.html;
         var htmlmin = require('gulp-htmlmin');
-        var include = require('gulp-include');
+        var include = require('gulp-file-include');
 
         //html编译和压缩
         gulp.task('html', function () {

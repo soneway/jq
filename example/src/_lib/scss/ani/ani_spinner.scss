@@ -5,7 +5,6 @@ spinner动画类
 //引入
 @import 'ani_circle';
 
-
 //ani_spinner函数
 //$cw 容器尺寸
 //$dw 点尺寸
@@ -28,16 +27,16 @@ spinner动画类
         /*如.ani_spinner元素中有transform,:before内容将不能被背景图挡住*/
         z-index: -1;
         /*8个圆点用阴影生成*/
-        @include mx_box-shadow(0 (-$neg) 0 rgba($dc, 1),
-                        (-$neg1) (-$neg1) 0 rgba($dc, 0.875),
-                        (-$neg) 0 0 rgba($dc, 0.75),
-                        (-$neg1) $neg1 0 rgba($dc, 0.625),
-                0 $neg 0 rgba($dc, 0.5),
-                $neg1 $neg1 0 rgba($dc, 0.375),
-                $neg 0 0 rgba($dc, 0.25),
-                $neg1 (-$neg1) 0 rgba($dc, 0.125));
+        box-shadow: 0 (-$neg) 0 rgba($dc, 1),
+                (-$neg1) (-$neg1) 0 rgba($dc, 0.875),
+                (-$neg) 0 0 rgba($dc, 0.75),
+                (-$neg1) $neg1 0 rgba($dc, 0.625),
+        0 $neg 0 rgba($dc, 0.5),
+        $neg1 $neg1 0 rgba($dc, 0.375),
+        $neg 0 0 rgba($dc, 0.25),
+        $neg1 (-$neg1) 0 rgba($dc, 0.125);
         /*动画*/
-        @include mx_animation(ani_circle 1s ease infinite);
+        animation: ani_circle 1s ease infinite;
     }
 }
 
