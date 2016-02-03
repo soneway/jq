@@ -106,7 +106,7 @@ h3.center
         @extend %ph_palt;
         height: 1px;
         width: 100%;
-        @include mx_transform(scale3d(1, 0.5, 1));
+        transform: scale3d(1, 0.5, 1);
         background: #ddd;
     }
 }

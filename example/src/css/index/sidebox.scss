@@ -1,12 +1,161 @@
 /*sidebox panel*/
-//引入
-@import "comp/login";
-
 
 #sidebox
 {
     .content
     {
         @include mx_maxwidth($width: 210px, $target-width: 250px);
+    }
+}
+
+
+/*第三方登陆图标*/
+.icon_login
+{
+    @extend .center;
+    font-size: 0;
+
+    $height: 30px;
+    a
+    {
+        display: inline-block;
+        width: $height;
+        height: $height;
+        vertical-align: middle;
+        border-radius: $height * 0.2;
+        margin-left: 14px;
+        position: relative;
+
+        &:first-of-type
+        {
+            margin-left: 0;
+        }
+
+        &:after
+        {
+            content: '';
+            @extend %ph_pafull;
+            background: url(http://img.gd.sohu.com/static/v3/img/icon_login.png);
+            background-size: auto $height;
+            border-radius: $height * 0.2;
+        }
+
+        &.focus
+        {
+            background: #000;
+
+            &:after
+            {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    $providers: qq, sina, renren, baidu, taobao;
+    @each $provider in $providers
+    {
+        .#{$provider}:after
+        {
+            background-position: #{ -$height * (index($providers, $provider) - 1)} 0;
+        }
+    }
+}
+
+
+/*用户名密码图标*/
+@font-face
+{
+    font-family: icon_login;
+    src: url(data:application/x-font-woff;charset=utf-8;base64,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) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.loginbox
+{
+    .icon_userid, .icon_password
+    {
+        font-size: 0;
+
+        &:before
+        {
+            width: 30px;
+            font-family: icon_login;
+            -webkit-font-smoothing: antialiased;
+            font-size: 20px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+    }
+
+    .icon_userid:before
+    {
+        content: '\e600';
+    }
+
+    .icon_password:before
+    {
+        content: '\e601';
+    }
+
+    & > *
+    {
+        margin-top: 15px;
+    }
+
+    /*搜狐logo*/
+    .sohulogo
+    {
+        $h: 110px;
+        display: inline-block;
+        width: $h;
+        height: $h;
+        border-radius: $h;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        position: relative;
+
+        &:after
+        {
+            content: '';
+            @extend %ph_palt;
+            @extend %ph_full;
+            background: url(http://img.gd.sohu.com/static/v3/img/sohulogo.jpg);
+            background-size: cover;
+            border-radius: $h;
+        }
+
+        &.focus
+        {
+            background: #000;
+
+            &:after
+            {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    input
+    {
+        width: 85%;
+    }
+
+    /*登陆按钮*/
+    .btn-login
+    {
+        width: 100%;
+    }
+
+    /*第三方登陆*/
+    .other_login
+    {
+        margin-bottom: 15px;
+
+        p
+        {
+            padding-bottom: 10px;
+            text-align: left;
+        }
     }
 }

@@ -5,12 +5,12 @@ plugin/flip
 .pi-flip
 {
     position: relative;
-    @include mx_perspective(1000);
+    perspective: 1000;
 
     & > *
     {
         @extend %ph_pafull;
-        @extend %ph_transall;
+        @extend .transition;
         opacity: 0;
 
         &.visible

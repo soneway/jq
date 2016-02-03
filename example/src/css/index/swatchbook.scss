@@ -17,7 +17,9 @@
     /*每张扇页*/
     .sb-item
     {
-        @include mx_box-shadow(-1px -1px 3px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.2));
+        box-shadow: - 1 px - 1 px 3px rgba(0, 0, 0, 0.1),
+        3px 3px 3px rgba(0, 0, 0, 0.2),
+        inset 0 3px 0 rgba(255, 255, 255, 0.2);
 
         & h3
         {
@@ -53,8 +55,8 @@
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
-                @include mx_gradient(-45deg, #ddd 0%, #58535e 48%, #889396 100%);
-                @include mx_box-shadow(-1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.1));
+                background: linear-gradient(-45deg, #ddd 0%, #58535e 48%, #889396 100%);
+                box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.1);
             }
         }
     }

@@ -8,14 +8,13 @@ plugin/swatchbook
     width: 65px;
     height: 200px;
     /*防止动画过程闪烁*/
-    @extend %ph_bvhidden;
-    //@include mx_perspective(1000);
+    backface-visibility: hidden;
 
     & > div
     {
         @extend %ph_pafull;
         border-radius: 5px;
-        @include mx_transform-origin(25% 90%);
-        @include mx_transition-transform(0.7s ease);
+        transform-origin: 25% 90%;
+        transition: transform 0.7s ease;
     }
 }

@@ -31,8 +31,8 @@ plugin/piccut
         {
             @extend %ph_palt;
             cursor: move;
-            @include mx_box-shadow(0 0 1px #000);
-            @include mx_transform-origin(left top);
+            box-shadow: 0 0 1px #000;
+            transform-origin: left top;
         }
 
 
@@ -46,7 +46,7 @@ plugin/piccut
             right: -$w;
             bottom: -$w;
             cursor: se-resize;
-            @include mx_box-shadow(0 0 1px #000);
+            box-shadow: 0 0 1px #000;
         }
     }
 }

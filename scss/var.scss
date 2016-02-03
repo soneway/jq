@@ -33,19 +33,6 @@
 }
 
 
-//渐变背景
-@mixin mx_gradient($value...) {
-    background-image: -webkit-linear-gradient($value); /*安卓4.0-4.4*/
-    background-image: linear-gradient($value); /*css3标准*/
-}
-
-
-@mixin mx_radial-gradient($value...) {
-    background-image: -webkit-radial-gradient($value); /*安卓4.0-4.4*/
-    background-image: radial-gradient($value); /*css3标准*/
-}
-
-
 //1px边框
 @mixin mx_ptborder($style: solid, $color: #ccc, $trbl: none) {
     position: relative;
@@ -260,4 +247,20 @@
     //display: box;
     //box-align: center;
     //box-pack: center;
+}
+
+
+//可见
+%ph_visible
+{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+//不可见
+%ph_hidden
+{
+    visibility: hidden;
+    opacity: 0;
 }

@@ -8,7 +8,7 @@ plugin/customalert
     background-color: rgba(0, 0, 0, 0.7);
     @extend %ph_center;
     /*动画*/
-    @extend %ph_transall;
+    @extend .transition;
     opacity: 0;
     /*用z-index:-1这种方式可以防止安卓4.2打不开弹框*/
     z-index: -1;
@@ -23,7 +23,7 @@ plugin/customalert
 
         .ca-box
         {
-            @include mx_transform(scale3d(1, 1, 1));
+            transform: scale3d(1, 1, 1);
         }
     }
 
@@ -51,14 +51,14 @@ plugin/customalert
         background-color: rgba(#fff, 0.95);
         @extend .center;
         /*动画*/
-        @extend %ph_transtransf;
-        @include mx_transform(scale3d(0, 0, 1));
+        @extend .transform;
+        transform: scale3d(0, 0, 1);
     }
 
     .ca-title
     {
         line-height: 40px;
-        @include mx_box-shadow(0 0 1px rgba(#000, 0.5));
+        box-shadow: 0 0 1px rgba(#000, 0.5);
     }
 
     .ca-content

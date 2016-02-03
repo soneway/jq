@@ -14,7 +14,7 @@
         {
             background: url(../img/1.jpg);
             background-size: auto 455px;
-            @include mx_transition-duration(0.4s);
+            transition-duration: 0.4s;
         }
 
         &:nth-of-type(1) > div

@@ -8,8 +8,7 @@ $pi-carousel-pager-radius: 4px !default;
 {
     overflow: hidden;
     /*防止动画过程闪烁*/
-    @extend %ph_bvhidden;
-    //@include mx_perspective(1000);
+    backface-visibility: hidden;
     position: relative;
 
     /*垂直滚动样式*/
@@ -48,7 +47,7 @@ $pi-carousel-pager-radius: 4px !default;
         padding: 10px;
         text-shadow: 0 0 3px rgba(#000, 0.8);
         /*动画*/
-        @extend %ph_transall;
+        @extend .transition;
         opacity: 0;
 
         &.visible
@@ -70,12 +69,12 @@ $pi-carousel-pager-radius: 4px !default;
             margin: $pi-carousel-pager-radius;
             border: $pi-carousel-pager-radius solid rgba(#fff, 0.5);
             border-radius: 50%;
-            @include mx_box-shadow(0 0 3px rgba(#000, 0.5));
+            box-shadow: 0 0 3px rgba(#000, 0.5);
             cursor: pointer;
 
             &.selected
             {
-                @include mx_box-shadow(0 0 3px rgba(#000, 0.9));
+                box-shadow: 0 0 3px rgba(#000, 0.9);
                 border-color: rgba(#fff, 0.9);
             }
         }

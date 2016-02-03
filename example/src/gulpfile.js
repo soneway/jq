@@ -14,24 +14,6 @@
         isPC  : 0
     };
 
-    //gulp插件require函数(避免win上面初始化太久)
-    var grequire = (function () {
-        var gulpDir = process.platform === 'darwin' ? '' : 'D:/node_modules/';
-        return function (name) {
-            return require(gulpDir + name);
-        };
-    })();
-
-
-
-    //出错处理函数(避免任务停止)
-    function errorHandler(e) {
-        console.log('ERROR IN ' + e.plugin + ': ' + e.message);
-    }
-
-    //出错处理对象
-    var plumber = grequire('gulp-plumber');
-
     var out = opts.out,
         libDir = opts.libDir,
         isPack = opts.isPack,
@@ -57,7 +39,6 @@
 
                 //autoprefixer
                 browsers: [
-                    'last 2 versions',
                     'ios 7',
                     'android 4'
                 ],
@@ -92,6 +73,24 @@
             }
         }
     };
+
+    //gulp插件require函数(避免win上面初始化太久)
+    var grequire = (function () {
+        var gulpDir = process.platform === 'darwin' ? '' : 'D:/node_modules/';
+        return function (name) {
+            return require(gulpDir + name);
+        };
+    })();
+
+
+
+    //出错处理函数(避免任务停止)
+    function errorHandler(e) {
+        console.log('ERROR IN ' + e.plugin + ': ' + e.message);
+    }
+
+    //出错处理对象
+    var plumber = grequire('gulp-plumber');
 
 
     //img任务
