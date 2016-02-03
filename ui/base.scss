@@ -5,7 +5,7 @@ ui/base
 */
 
 //默认变量
-$font-size: 14px !default;
+$font-size: .28em !default;
 $color: #333 !default;
 $line-height: 1.5 !default;
 $color-focus: #df2221 !default;
@@ -16,6 +16,12 @@ $duration: 0.3s !default;
 //引入
 @import "../scss/var";
 @import "scss/ani/ani_spinner";
+
+html
+{
+    font-size: 100px;
+}
+
 
 /*元素*/
 *, *:before, *:after

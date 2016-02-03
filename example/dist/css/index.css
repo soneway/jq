@@ -114,6 +114,9 @@ scss/ani_circle
   -webkit-animation: ani_circle 1s ease infinite;
           animation: ani_circle 1s ease infinite; }
 
+html {
+  font-size: 100px; }
+
 /*元素*/
 *, *:before, *:after {
   margin: 0;
@@ -129,7 +132,7 @@ body {
   /*可继承*/
   color: #333;
   line-height: 1.5;
-  font-size: 14px;
+  font-size: 0.28em;
   font-family: arial, helvetica, sans-serif;
   -webkit-text-size-adjust: none;
   /*禁止选中文本*/
