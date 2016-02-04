@@ -23,8 +23,9 @@
         height: $height;
         vertical-align: middle;
         border-radius: $height * 0.2;
-        margin-left: 0.14rem;
+        margin-left: 0.15rem;
         position: relative;
+        box-shadow: 0 0 2px rgba(#000, 0.3);
 
         &:first-of-type
         {
