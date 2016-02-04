@@ -45,7 +45,7 @@ plugin/customalert
     {
         //display: inline-block;
         width: 5.6rem;
-        @extend %ph_hauto;
+        overflow: hidden;
         padding: 0 0 0.3rem 0;
         border-radius: 0.16rem;
         background-color: rgba(#fff, 0.95);
