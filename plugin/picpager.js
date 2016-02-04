@@ -5,16 +5,6 @@
 (function (window, $) {
 
     $.fn.picpager = function (options) {
-        $.fn.picpager.defaults = {
-            //图片数据
-            imgData: null,
-            //表示图片地址属性名
-            imgAttrName: null,
-            //滑动阈值
-            swipThreshold: 100,
-            //轮播回调函数
-            slideCallback: null
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -220,6 +210,16 @@
 
         });
 
+    };
+    $.fn.picpager.defaults = {
+        //图片数据
+        imgData: null,
+        //表示图片地址属性名
+        imgAttrName: null,
+        //滑动阈值
+        swipThreshold: 100,
+        //轮播回调函数
+        slideCallback: null
     };
 
 })(window, $);

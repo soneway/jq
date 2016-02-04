@@ -5,22 +5,6 @@
 (function (window, $) {
 
     $.fn.scratchcard = function (options) {
-        $.fn.scratchcard.deflunt = {
-            //画笔大小
-            fineness: 30,
-            //覆盖层颜色
-            paintStyle: '#ccc',
-            //文字
-            text: '',
-            //字体颜色
-            fontColor: '#f00',
-            //字体相关
-            font: 'bold 60px sans-serif',
-            //图片地址
-            imgSrc: '',
-            //缩放比例
-            scale: 1
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -125,6 +109,22 @@
             init();
 
         });
+    };
+    $.fn.scratchcard.deflunt = {
+        //画笔大小
+        fineness: 30,
+        //覆盖层颜色
+        paintStyle: '#ccc',
+        //文字
+        text: '',
+        //字体颜色
+        fontColor: '#f00',
+        //字体相关
+        font: 'bold 60px sans-serif',
+        //图片地址
+        imgSrc: '',
+        //缩放比例
+        scale: 1
     };
 
 })(window, $);

@@ -5,26 +5,6 @@
 (function (window, $) {
 
     $.fn.carousel = function (options) {
-        $.fn.carousel.defaults = {
-            //是否竖直方向滚动
-            isVertical      : false,
-            //滑动阈值
-            swipThreshold   : 100,
-            //是否自动轮播
-            isAutoPlay      : true,
-            //轮播inter
-            autoPlayInter   : 8000,
-            //轮播回调函数
-            slideCallback   : null,
-            //是否显示title
-            isShowTitle     : true,
-            //是否显示pager
-            isShowPager     : true,
-            //移除class延迟
-            removeClassDelay: 0,
-            //初始index
-            initIndex       : 0
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -255,6 +235,26 @@
 
         });
 
+    };
+    $.fn.carousel.defaults = {
+        //是否竖直方向滚动
+        isVertical      : false,
+        //滑动阈值
+        swipThreshold   : 100,
+        //是否自动轮播
+        isAutoPlay      : true,
+        //轮播inter
+        autoPlayInter   : 8000,
+        //轮播回调函数
+        slideCallback   : null,
+        //是否显示title
+        isShowTitle     : true,
+        //是否显示pager
+        isShowPager     : true,
+        //移除class延迟
+        removeClassDelay: 0,
+        //初始index
+        initIndex       : 0
     };
 
 })(window, $);

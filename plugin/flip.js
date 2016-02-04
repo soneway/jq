@@ -5,16 +5,6 @@
 (function (window, $) {
 
     $.fn.flip = function (options) {
-        $.fn.flip.defaults = {
-            //是否竖直方向滚动
-            isVertical: false,
-            //滑动阈值
-            swipThreshold: 80,
-            //比率
-            rate: 1.3,
-            //轮播回调函数
-            slideCallback: null
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -173,6 +163,16 @@
 
         });
 
+    };
+    $.fn.flip.defaults = {
+        //是否竖直方向滚动
+        isVertical: false,
+        //滑动阈值
+        swipThreshold: 60,
+        //比率
+        rate: 1.3,
+        //轮播回调函数
+        slideCallback: null
     };
 
 })(window, $);

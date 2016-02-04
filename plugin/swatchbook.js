@@ -5,26 +5,6 @@
 (function (window, $) {
 
     $.fn.swatchbook = function (options) {
-        $.fn.swatchbook.defaults = {
-            //打开的index
-            centerIdx: 6,
-            //item之间的角度(center右边的item)
-            angleInc: 8,
-            //打开的item与右边item之间的角度
-            proximity: 45,
-            //item之间的角度(center左边的item)
-            neighbor: 4,
-            //初始化时是否关闭
-            initIsClosed: false,
-            //能打开和关闭的index
-            closeIdx: -1,
-            //打开项
-            openAt: -1,
-            //点选状态下再点击时触发函数
-            selectCallback: null,
-            //打开延迟
-            openDelay: 25
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -153,6 +133,26 @@
             init();
 
         });
+    };
+    $.fn.swatchbook.defaults = {
+        //打开的index
+        centerIdx: 6,
+        //item之间的角度(center右边的item)
+        angleInc: 8,
+        //打开的item与右边item之间的角度
+        proximity: 45,
+        //item之间的角度(center左边的item)
+        neighbor: 4,
+        //初始化时是否关闭
+        initIsClosed: false,
+        //能打开和关闭的index
+        closeIdx: -1,
+        //打开项
+        openAt: -1,
+        //点选状态下再点击时触发函数
+        selectCallback: null,
+        //打开延迟
+        openDelay: 25
     };
 
 })(window, $);

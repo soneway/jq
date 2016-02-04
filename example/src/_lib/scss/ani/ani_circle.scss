@@ -3,20 +3,6 @@ scss/ani_circle
 旋转动画
 */
 
-@-webkit-keyframes ani_circle
-{
-    0%
-    {
-        -webkit-transform: rotateZ(0deg);
-    }
-
-    100%
-    {
-        -webkit-transform: rotateZ(360deg);
-    }
-}
-
-
 @keyframes ani_circle
 {
     0%

@@ -5,18 +5,6 @@
 (function (window, $) {
 
     $.fn.turntable = function (options) {
-        $.fn.turntable.defaults = {
-            //奖品格数
-            count    : 12,
-            //旋转度数
-            rotateDeg: 3600,
-            //旋转时长
-            duration : 7000,
-            //动画fx
-            timeFx   : 'cubic-bezier(0.42,0,0.25,1)',
-            //校正值
-            offset   : 0
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -96,6 +84,18 @@
             init();
 
         });
+    };
+    $.fn.turntable.defaults = {
+        //奖品格数
+        count    : 12,
+        //旋转度数
+        rotateDeg: 3600,
+        //旋转时长
+        duration : 7000,
+        //动画fx
+        timeFx   : 'cubic-bezier(0.42,0,0.25,1)',
+        //校正值
+        offset   : 0
     };
 
 })(window, $);

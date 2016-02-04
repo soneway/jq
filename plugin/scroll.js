@@ -5,20 +5,6 @@
 (function (window, $) {
 
     $.fn.scroll = function (options) {
-        $.fn.scroll.defaults = {
-            //是否竖直方向滚动
-            isVertical       : false,
-            //滚动率
-            rate             : 400,
-            //时间间隙阈值
-            timeSpanThreshold: 300,
-            //滚动最大值
-            maxScroll        : 400,
-            //安卓响应率
-            androidRate      : 1,
-            //是否调整点击元素居中
-            isAdjust         : false
-        };
 
         var Math = window.Math;
 
@@ -198,6 +184,20 @@
 
         });
 
+    };
+    $.fn.scroll.defaults = {
+        //是否竖直方向滚动
+        isVertical       : false,
+        //滚动率
+        rate             : 400,
+        //时间间隙阈值
+        timeSpanThreshold: 300,
+        //滚动最大值
+        maxScroll        : 400,
+        //安卓响应率
+        androidRate      : 1,
+        //是否调整点击元素居中
+        isAdjust         : false
     };
 
 })(window, $);

@@ -5,28 +5,6 @@
 (function (window, $) {
 
     $.fn.piccut = function (options) {
-        $.fn.piccut.defaults = {
-            //裁切起点x值
-            cutX       : undefined,
-            //裁切起点y值
-            cutY       : undefined,
-            //裁切宽度
-            cutWidth   : 320,
-            //裁切高度
-            cutHeight  : 320,
-            //file元素
-            fileEl     : null,
-            //遮罩样式
-            layerStyle : 'rgba(128,128,128,0.7)',
-            //是否如背景图的background-size:contain;
-            isContain  : true,
-            //截图是否保持比例
-            isKeepScale: true,
-            //是否有最小限制(默认限制为裁切宽度和裁切高度)
-            isMinLimit : true,
-            //缩放比例
-            scale      : 1
-        };
 
         var URL = window.URL || window.webkitURL;
 
@@ -308,6 +286,28 @@
 
         });
 
+    };
+    $.fn.piccut.defaults = {
+        //裁切起点x值
+        cutX       : undefined,
+        //裁切起点y值
+        cutY       : undefined,
+        //裁切宽度
+        cutWidth   : 320,
+        //裁切高度
+        cutHeight  : 320,
+        //file元素
+        fileEl     : null,
+        //遮罩样式
+        layerStyle : 'rgba(128,128,128,0.7)',
+        //是否如背景图的background-size:contain;
+        isContain  : true,
+        //截图是否保持比例
+        isKeepScale: true,
+        //是否有最小限制(默认限制为裁切宽度和裁切高度)
+        isMinLimit : true,
+        //缩放比例
+        scale      : 1
     };
 
 })(window, $);
