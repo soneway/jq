@@ -1,5 +1,22 @@
 {
-    "browser": {
+    "name"        : "jq",
+    "version"     : "0.0.0",
+
+    "dependencies": {
+        "gulp"             : "",
+        "gulp-plumber"     : "",
+        "gulp-image"       : "",
+        "gulp-sass"        : "",
+        "gulp-autoprefixer": "",
+        "gulp-minify-css"  : "",
+        "gulp-base64"      : "",
+        "gulp-browserify"  : "",
+        "gulp-uglify"      : "",
+        "gulp-htmlmin"     : "",
+        "gulp-file-include": ""
+    },
+
+    "browser"     : {
         "artmpl"     : "./_lib/js/artmpl.js",
         "share"      : "./_lib/js/share.js",
         "comp/share" : "./_lib/comp/share.js",
