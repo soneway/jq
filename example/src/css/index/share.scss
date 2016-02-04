@@ -6,7 +6,7 @@
     text-align: center;
     font-size: 0;
 
-    $height: 100px;
+    $height: 1rem;
     a
     {
         display: inline-block;
@@ -14,7 +14,7 @@
         height: $height;
         vertical-align: middle;
         border-radius: $height * 0.2;
-        margin: 16px;
+        margin: 0.16rem;
         position: relative;
 
         &:after

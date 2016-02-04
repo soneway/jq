@@ -3,17 +3,17 @@
 {
     h3
     {
-        text-indent: 20px;
+        text-indent: 0.2rem;
     }
 
     .list > div
     {
         display: inline-block;
-        width: 200px;
-        height: 200px;
+        width: 2rem;
+        height: 2rem;
         position: relative;
-        border: 1px solid #eee;
-        margin: 10px;
+        border: 1px solid $border-color;
+        margin: 0.1rem;
 
         &:after
         {

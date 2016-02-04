@@ -7,7 +7,7 @@
     $.fn.scratchcard = function (options) {
         $.fn.scratchcard.deflunt = {
             //画笔大小
-            fineness: 15,
+            fineness: 30,
             //覆盖层颜色
             paintStyle: '#ccc',
             //文字

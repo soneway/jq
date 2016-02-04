@@ -15,7 +15,7 @@
     @extend .center;
     font-size: 0;
 
-    $height: 60px;
+    $height: 0.6rem;
     a
     {
         display: inline-block;
@@ -23,7 +23,7 @@
         height: $height;
         vertical-align: middle;
         border-radius: $height * 0.2;
-        margin-left: 14px;
+        margin-left: 0.14rem;
         position: relative;
 
         &:first-of-type
@@ -79,10 +79,10 @@
 
         &:before
         {
-            width: 30px;
+            width: 0.6rem;
             font-family: icon_login;
             -webkit-font-smoothing: antialiased;
-            font-size: 20px;
+            font-size: 0.4rem;
             vertical-align: middle;
             display: inline-block;
         }
@@ -100,13 +100,13 @@
 
     & > *
     {
-        margin-top: 15px;
+        margin-top: 0.3rem;
     }
 
     /*搜狐logo*/
     .sohulogo
     {
-        $h: 110px;
+        $h: 2.2rem;
         display: inline-block;
         width: $h;
         height: $h;
@@ -138,6 +138,9 @@
     input
     {
         width: 85%;
+        background: none;
+        border: none;
+        border-bottom: 1px solid $border-color;
     }
 
     /*登陆按钮*/
@@ -149,11 +152,11 @@
     /*第三方登陆*/
     .other_login
     {
-        margin-bottom: 15px;
+        margin-bottom: 0.3rem;
 
         p
         {
-            padding-bottom: 10px;
+            padding-bottom: 0.2rem;
             text-align: left;
         }
     }

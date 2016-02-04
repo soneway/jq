@@ -5,15 +5,15 @@ plugin/swatchbook
 .sb-container
 {
     position: relative;
-    width: 130px;
-    height: 400px;
+    width: 1.3rem;
+    height: 4rem;
     /*防止动画过程闪烁*/
     backface-visibility: hidden;
 
     & > div
     {
         @extend %ph_pafull;
-        border-radius: 5px;
+        border-radius: 0.1rem;
         transform-origin: 25% 90%;
         transition: transform 0.7s ease;
     }

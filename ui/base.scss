@@ -56,7 +56,7 @@ body
 
 input, textarea, select
 {
-    text-indent: 0.1rem;
+    font-size: inherit;
 }
 
 
@@ -70,6 +70,13 @@ input, select
 {
     height: 0.64rem;
     font-size: 0.24rem;
+    text-indent: 0.1rem;
+}
+
+
+textarea
+{
+    padding: 0.1rem;
 }
 
 

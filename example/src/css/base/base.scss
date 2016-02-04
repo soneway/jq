@@ -1,4 +1,7 @@
 /*项目基础样式*/
+//变量
+$border-color: rgba(#000, 0.1);
+
 /*表单输入元素*/
 input, select, textarea
 {
@@ -22,9 +25,7 @@ input, select, textarea
 
 textarea
 {
-    height: 100px;
-    text-indent: 0;
-    padding: 3px;
+    height: 1rem;
 }
 
 
@@ -37,8 +38,8 @@ textarea
 
         &.selected
         {
-            border-bottom: 2px solid #df2221;
-            color: #df2221;
+            border-bottom: 2px solid $color-focus;
+            color: $color-focus;
         }
     }
 
@@ -48,13 +49,13 @@ textarea
 /*说明*/
 .info
 {
-    padding: 10px 10px 0 4em;
+    padding: 0.2rem 0.2rem 0 4em;
     position: relative;
 
     &:before
     {
         content: '说明：';
-        @include mx_plt($left: 10px, $top: 10px);
+        @include mx_plt($left: 0.2rem, $top: 0.2rem);
         font-weight: bold;
     }
 }
@@ -63,14 +64,14 @@ textarea
 /*列表*/
 .list
 {
-    padding: 10px;
+    padding: 0.2rem;
 
     a
     {
         display: block;
-        padding: 10px 5px;
+        padding: 0.2rem 0.1rem;
         position: relative;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid $border-color;
 
         p
         {
@@ -86,7 +87,7 @@ textarea
 
         &:first-of-type
         {
-            border-top: 1px solid #eee;
+            border-top: 1px solid $border-color;
         }
     }
 }
@@ -95,15 +96,6 @@ textarea
 h3.center
 {
     position: relative;
-    margin-top: 10px;
-
-    &:before
-    {
-        content: '';
-        @extend %ph_palt;
-        height: 1px;
-        width: 100%;
-        transform: scale3d(1, 0.5, 1);
-        background: #ddd;
-    }
+    margin-top: 0.2rem;
+    border-top: 1px solid $border-color;
 }
