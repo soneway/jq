@@ -15,7 +15,7 @@
     @extend .center;
     font-size: 0;
 
-    $height: 30px;
+    $height: 60px;
     a
     {
         display: inline-block;
@@ -36,7 +36,6 @@
             content: '';
             @extend %ph_pafull;
             background: url(http://img.gd.sohu.com/static/v3/img/icon_login.png);
-            background-size: auto $height;
             border-radius: $height * 0.2;
         }
 

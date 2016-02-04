@@ -11,9 +11,9 @@
             //裁切起点y值
             cutY       : undefined,
             //裁切宽度
-            cutWidth   : 160,
+            cutWidth   : 320,
             //裁切高度
-            cutHeight  : 160,
+            cutHeight  : 320,
             //file元素
             fileEl     : null,
             //遮罩样式
@@ -25,7 +25,7 @@
             //是否有最小限制(默认限制为裁切宽度和裁切高度)
             isMinLimit : true,
             //缩放比例
-            scale      : 2
+            scale      : 1
         };
 
         var URL = window.URL || window.webkitURL;

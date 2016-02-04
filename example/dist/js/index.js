@@ -126,13 +126,12 @@
         scroll     : require('./index/scroll.js'),
         scratchcard: require('./index/scratchcard.js'),
         turntable  : require('./index/turntable.js'),
-        swatchbook : require('./index/swatchbook.js'),
         sidebox    : require('./index/sidebox.js'),
         share      : require('./index/share.js')
     };
 
 })(window);
-},{"./index/carousel.js":3,"./index/flip.js":4,"./index/piccut.js":5,"./index/picpager.js":6,"./index/scratchcard.js":7,"./index/scroll.js":8,"./index/share.js":9,"./index/sidebox.js":10,"./index/swatchbook.js":11,"./index/turntable.js":12,"base":23,"customalert":15,"jq":13,"scroll":20,"ui":24}],3:[function(require,module,exports){
+},{"./index/carousel.js":3,"./index/flip.js":4,"./index/piccut.js":5,"./index/picpager.js":6,"./index/scratchcard.js":7,"./index/scroll.js":8,"./index/share.js":9,"./index/sidebox.js":10,"./index/turntable.js":11,"base":21,"customalert":14,"jq":12,"scroll":19,"ui":22}],3:[function(require,module,exports){
 //焦点图
 (function (window, $) {
 
@@ -170,7 +169,7 @@
     });
 
 })(window, $);
-},{"carousel":14}],4:[function(require,module,exports){
+},{"carousel":13}],4:[function(require,module,exports){
 //3d旋转切换
 (function (window, $) {
 
@@ -201,7 +200,7 @@
     });
 
 })(window, $);
-},{"flip":16}],5:[function(require,module,exports){
+},{"flip":15}],5:[function(require,module,exports){
 (function (window, $) {
 
     //焦点图
@@ -234,7 +233,7 @@
     });
 
 })(window, $);
-},{"piccut":17}],6:[function(require,module,exports){
+},{"piccut":16}],6:[function(require,module,exports){
 //相册功能
 (function (window, $) {
 
@@ -264,7 +263,7 @@
     });
 
 })(window, $);
-},{"picpager":18}],7:[function(require,module,exports){
+},{"picpager":17}],7:[function(require,module,exports){
 //刮刮卡
 (function (window, $) {
 
@@ -288,7 +287,7 @@
     });
 
 })(window, $);
-},{"scratchcard":19}],8:[function(require,module,exports){
+},{"scratchcard":18}],8:[function(require,module,exports){
 //自定义滚动
 (function (window, $) {
 
@@ -311,7 +310,7 @@
     });
 
 })(window, $);
-},{"scroll":20}],9:[function(require,module,exports){
+},{"scroll":19}],9:[function(require,module,exports){
 //分享
 (function (window, $) {
 
@@ -334,34 +333,6 @@
 
 })(window, $);
 },{}],11:[function(require,module,exports){
-//扇形特效
-(function (window, $) {
-
-    require('swatchbook');
-
-    function load($this, isInit) {
-        if (isInit) {
-            $('.swatchbook').each(function () {
-                $(this).swatchbook({
-                    angleInc      : 25,
-                    neighbor      : 15,
-                    proximity     : 80,
-                    initIsClosed  : true,
-                    closeIdx      : 12,
-                    selectCallback: function (index) {
-                        console.log(index);
-                    }
-                });
-            });
-        }
-    }
-
-    $.extend(exports, {
-        load: load
-    });
-
-})(window, $);
-},{"swatchbook":21}],12:[function(require,module,exports){
 //转盘抽奖
 (function (window, $) {
 
@@ -390,7 +361,7 @@
     });
 
 })(window, $);
-},{"turntable":22}],13:[function(require,module,exports){
+},{"turntable":20}],12:[function(require,module,exports){
 //jq.js
 (function (window, undefined) {
 
@@ -1325,7 +1296,7 @@
     }
 
 })(window);
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*
  * carousel.js
  * 焦点图js
@@ -1337,7 +1308,7 @@
             //是否竖直方向滚动
             isVertical      : false,
             //滑动阈值
-            swipThreshold   : 50,
+            swipThreshold   : 100,
             //是否自动轮播
             isAutoPlay      : true,
             //轮播inter
@@ -1586,7 +1557,7 @@
     };
 
 })(window, $);
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*
  * customalert.js
  * 自定义提示框js
@@ -1694,7 +1665,7 @@
     };
 
 })(window, $);
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*
  * flip.js
  * 3d翻转效果js
@@ -1706,7 +1677,7 @@
             //是否竖直方向滚动
             isVertical: false,
             //滑动阈值
-            swipThreshold: 40,
+            swipThreshold: 80,
             //比率
             rate: 1.3,
             //轮播回调函数
@@ -1873,7 +1844,7 @@
     };
 
 })(window, $);
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
  * piccut.js
  * 图片裁切功能js
@@ -1887,9 +1858,9 @@
             //裁切起点y值
             cutY       : undefined,
             //裁切宽度
-            cutWidth   : 160,
+            cutWidth   : 320,
             //裁切高度
-            cutHeight  : 160,
+            cutHeight  : 320,
             //file元素
             fileEl     : null,
             //遮罩样式
@@ -1901,7 +1872,7 @@
             //是否有最小限制(默认限制为裁切宽度和裁切高度)
             isMinLimit : true,
             //缩放比例
-            scale      : 2
+            scale      : 1
         };
 
         var URL = window.URL || window.webkitURL;
@@ -2187,7 +2158,7 @@
     };
 
 })(window, $);
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*
  * picpager.js
  * 相册js
@@ -2201,7 +2172,7 @@
             //表示图片地址属性名
             imgAttrName: null,
             //滑动阈值
-            swipThreshold: 40,
+            swipThreshold: 100,
             //轮播回调函数
             slideCallback: null
         };
@@ -2413,7 +2384,7 @@
     };
 
 })(window, $);
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*
  * scratchcard.js
  * 刮刮卡js
@@ -2435,7 +2406,7 @@
             //图片地址
             imgSrc: '',
             //缩放比例
-            scale: 2
+            scale: 1
         };
 
         //每个元素执行
@@ -2544,7 +2515,7 @@
     };
 
 })(window, $);
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*
  * scroll.js
  * 自定义滚动js
@@ -2748,166 +2719,7 @@
     };
 
 })(window, $);
-},{}],21:[function(require,module,exports){
-/*
- * swatchbook.js
- * 扇形特效js
- */
-(function (window, $) {
-
-    $.fn.swatchbook = function (options) {
-        $.fn.swatchbook.defaults = {
-            //打开的index
-            centerIdx: 6,
-            //item之间的角度(center右边的item)
-            angleInc: 8,
-            //打开的item与右边item之间的角度
-            proximity: 45,
-            //item之间的角度(center左边的item)
-            neighbor: 4,
-            //初始化时是否关闭
-            initIsClosed: false,
-            //能打开和关闭的index
-            closeIdx: -1,
-            //打开项
-            openAt: -1,
-            //点选状态下再点击时触发函数
-            selectCallback: null,
-            //打开延迟
-            openDelay: 25
-        };
-
-        //每个元素执行
-        return this.each(function () {
-            var opts = $.extend({}, $.fn.swatchbook.defaults, options);
-
-            //配置项
-            var centerIdx = opts.centerIdx,
-                angleInc = opts.angleInc,
-                proximity = opts.proximity,
-                neighbor = opts.neighbor,
-                initIsClosed = opts.initIsClosed,
-                closeIdx = opts.closeIdx,
-                openAt = opts.openAt,
-                selectCallback = opts.selectCallback,
-                openDelay = opts.openDelay;
-
-            //变量
-            var $this = $(this),
-                $items = $this.addClass('sb-container').children('*'),
-                itemsCount = $items.length,
-                currentIdx = -1,
-                cache = [],
-                isClosed;
-
-            //初始化函数
-            function init() {
-                //兼容安卓2.x
-                $.isAndroid2 && $this.css({
-                    'backface-visibility': 'visible'
-                });
-
-                if (!initIsClosed) {
-                    center(centerIdx);
-                }
-                else {
-                    isClosed = true;
-                }
-
-                if (openAt >= 0 && openAt < itemsCount) {
-                    openItem($items.eq(openAt));
-                }
-
-                initEvents();
-            }
-
-            function center(idx) {
-                $items.each(function (i) {
-                    var $this = $(this),
-                        transformStr = 'rotateZ(' + (angleInc * (i - idx)) + 'deg)';
-
-                    //设定一定延时,防止计算能力差的浏览器(ucweb)打不开swatchbook
-                    setTimeout(function () {
-                        $this.css({
-                            'transform': transformStr
-                        });
-                    }, i * openDelay);
-                });
-            }
-
-            function openItem($item) {
-                var itemIdx = $item.index();
-                if (itemIdx !== currentIdx) {
-                    $items.removeClass('selected');
-                    if (closeIdx !== -1 && itemIdx === closeIdx) {
-                        currentIdx = -1;
-                        openClose();
-                    }
-                    else {
-                        currentIdx = itemIdx;
-                        $item.css({
-                            'transform': 'rotateZ(0deg)'
-                        }).addClass('selected');
-                        rotateSiblings($item, itemIdx);
-                    }
-                }
-                else if (itemIdx === currentIdx && typeof selectCallback === 'function') {
-                    selectCallback(itemIdx);
-                }
-            }
-
-            function openClose() {
-                if (isClosed) {
-                    center(centerIdx);
-                }
-                else {
-                    $items.css({
-                        'transform': 'rotateZ(0deg)'
-                    });
-                }
-                isClosed = !isClosed;
-            }
-
-            function rotateSiblings($item, itemIdx) {
-                var $cached = cache[itemIdx],
-                    $siblings;
-
-                if ($cached) {
-                    $siblings = $cached;
-                }
-                else {
-                    $siblings = $item.siblings();
-                    cache[itemIdx] = $siblings;
-                }
-
-                $siblings.each(function (i) {
-                    var rotateVal = i < itemIdx ?
-                    angleInc * (i - itemIdx) : i - itemIdx === 1 ?
-                        proximity : proximity + (i - itemIdx - 1) * neighbor;
-                    var transformStr = 'rotateZ(' + rotateVal + 'deg)';
-
-                    $(this).css({
-                        'transform': transformStr
-                    });
-                });
-            }
-
-            //初始化事件函数
-            function initEvents() {
-                $items.on('click', function () {
-                    openItem($(this));
-                });
-            }
-
-
-            //初始化
-            init();
-
-        });
-    };
-
-})(window, $);
-},{}],22:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*
  * turntable.js
  * 转盘抽奖js
@@ -3009,7 +2821,7 @@
     };
 
 })(window, $);
-},{}],23:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*
  * base.js
  * 移动端基础js,包含pc端二维码,mask,a标签触摸等基础功能
@@ -3113,7 +2925,7 @@
     });
 
 })(window, $);
-},{}],24:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*
  * ui.js
  * 移动端界面js,包括面板切换,导航,边栏等功能

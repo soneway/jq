@@ -8,19 +8,18 @@
     .carousel
     {
         width: 90%;
-        min-width: 300px;
         margin: 0 auto;
 
         a
         {
-            height: 300px;
+            height: 6rem;
             position: relative;
             @extend .ani_loading;
         }
 
         &.vertical
         {
-            height: 300px;
+            height: 6rem;;
         }
     }
 
@@ -29,7 +28,6 @@
         #img_car
         {
             width: 90%;
-            min-width: 300px;
             margin: 0 auto;
 
             img

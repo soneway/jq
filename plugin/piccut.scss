@@ -31,14 +31,14 @@ plugin/piccut
         {
             @extend %ph_palt;
             cursor: move;
-            box-shadow: 0 0 1px #000;
+            box-shadow: 0 0 2px #000;
             transform-origin: left top;
         }
 
 
         .pi-piccut-resizer
         {
-            $w: 10px;
+            $w: 0.2rem;
 
             position: absolute;
             border: $w solid #fff;
@@ -46,7 +46,7 @@ plugin/piccut
             right: -$w;
             bottom: -$w;
             cursor: se-resize;
-            box-shadow: 0 0 1px #000;
+            box-shadow: 0 0 2px #000;
         }
     }
 }

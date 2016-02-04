@@ -5,7 +5,7 @@ ui/base
 */
 
 //默认变量
-$font-size: .28em !default;
+$font-size: 0.28rem !default;
 $color: #333 !default;
 $line-height: 1.5 !default;
 $color-focus: #df2221 !default;
@@ -56,13 +56,20 @@ body
 
 input, textarea, select
 {
-    text-indent: 5px;
+    text-indent: 0.1rem;
 }
 
 
 input, textarea
 {
     user-select: text;
+}
+
+
+input, select
+{
+    height: 0.64rem;
+    font-size: 0.24rem;
 }
 
 
@@ -120,17 +127,19 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*btn*/
 .btn
 {
+    $c: #333;
+
     display: inline-block;
-    font-size: 16px;
+    font-size: 0.32rem;
     line-height: 2;
     min-width: 5.5em;
     padding: 0 1.25em;
-    border-radius: 0.5em;
-    text-align: center;
-    box-shadow: 0 0 1px rgba(#000, 0.5);
+    border-radius: 0.4em;
+    @extend .center;
+    border: 1px solid rgba(#000, 0.3);
     background-color: #f8f8f8;
     /*固定颜色*/
-    color: #333;
+    color: $c;
 
     &.focus
     {
@@ -270,7 +279,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     &:after
     {
         display: block;
-        padding-top: 80px;
+        padding-top: 1.6rem;
         content: '拼命加载...';
     }
 }
@@ -279,7 +288,7 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 /*二维码*/
 #qrcode
 {
-    @include mx_prt(fixed, 10px, 50px);
+    @include mx_prt(fixed, 10px, 90px);
     width: 200px;
     height: 200px;
 }
@@ -304,3 +313,11 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
         z-index: 9999;
     }
 }
+
+
+//@media screen and(min-width: 641px) {
+//    html
+//    {
+//        font-size: 50px;
+//    }
+//}

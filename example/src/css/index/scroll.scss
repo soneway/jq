@@ -5,15 +5,15 @@
     {
 
         width: 90%;
-        min-width: 300px;
-        height: 300px;
+        min-width: 6rem;
+        height: 6rem;
         margin: 0 auto;
         overflow: hidden;
 
         div
         {
             background: url(../img/1.jpg);
-            background-size: auto 455px;
+            background-size: 6rem auto;
             transition-duration: 0.4s;
         }
 

@@ -5,7 +5,7 @@ $border-color: rgba(0, 0, 0, 0.1);
 //引入
 @import "jq/ui/base";
 @import "jq/ui/ui";
-@import "jq/ui/body_scroll";
+//@import "jq/ui/body_scroll";
 @import "jq/plugin/customalert";
 
 //引入基础样式
@@ -20,6 +20,5 @@ $border-color: rgba(0, 0, 0, 0.1);
 @import "./index/scroll";
 @import "./index/scratchcard";
 @import "./index/turntable";
-@import "./index/swatchbook";
 @import "./index/share";
 @import "./index/sidebox";

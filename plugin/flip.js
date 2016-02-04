@@ -9,7 +9,7 @@
             //是否竖直方向滚动
             isVertical: false,
             //滑动阈值
-            swipThreshold: 40,
+            swipThreshold: 80,
             //比率
             rate: 1.3,
             //轮播回调函数

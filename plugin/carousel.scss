@@ -2,7 +2,7 @@
 plugin/carousel
 焦点图样式
 */
-$pi-carousel-pager-radius: 4px !default;
+$pi-carousel-pager-radius: 0.08rem !default;
 
 .pi-carousel
 {
@@ -44,8 +44,8 @@ $pi-carousel-pager-radius: 4px !default;
         line-height: 1.1;
         background-color: rgba(#000, 0.5);
         color: #fff;
-        padding: 10px;
-        text-shadow: 0 0 3px rgba(#000, 0.8);
+        padding: 0.2rem;
+        text-shadow: 0 0 0.06rem rgba(#000, 0.8);
         /*动画*/
         @extend .transition;
         opacity: 0;
@@ -69,12 +69,12 @@ $pi-carousel-pager-radius: 4px !default;
             margin: $pi-carousel-pager-radius;
             border: $pi-carousel-pager-radius solid rgba(#fff, 0.5);
             border-radius: 50%;
-            box-shadow: 0 0 3px rgba(#000, 0.5);
+            box-shadow: 0 0 0.06rem rgba(#000, 0.5);
             cursor: pointer;
 
             &.selected
             {
-                box-shadow: 0 0 3px rgba(#000, 0.9);
+                box-shadow: 0 0 0.06rem rgba(#000, 0.9);
                 border-color: rgba(#fff, 0.9);
             }
         }

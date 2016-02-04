@@ -2,13 +2,9 @@
 /*表单输入元素*/
 input, select, textarea
 {
-    height: 32px;
     border-radius: 0;
     border: 1px solid $border-color;
     background-color: rgba(0, 0, 0, 0.1);
-    text-indent: 0.5em;
-    color: $color;
-    font-size: 12px;
 
     &[disabled]
     {
@@ -37,7 +33,7 @@ textarea
 {
     a
     {
-        padding: 0 10px;
+        padding: 0 0.5em;
 
         &.selected
         {
@@ -45,6 +41,7 @@ textarea
             color: #df2221;
         }
     }
+
 }
 
 

@@ -32,7 +32,7 @@ plugin/customalert
     {
         .ca-ok
         {
-            width: 230px;
+            width: 4.6rem;
         }
 
         .ca-cancel
@@ -44,10 +44,10 @@ plugin/customalert
     .ca-box
     {
         //display: inline-block;
-        width: 280px;
+        width: 5.6rem;
         @extend %ph_hauto;
-        padding: 0 0 15px 0;
-        border-radius: 8px;
+        padding: 0 0 0.3rem 0;
+        border-radius: 0.16rem;
         background-color: rgba(#fff, 0.95);
         @extend .center;
         /*动画*/
@@ -57,22 +57,22 @@ plugin/customalert
 
     .ca-title
     {
-        line-height: 40px;
-        box-shadow: 0 0 1px rgba(#000, 0.5);
+        box-shadow: 0 0 2px rgba(#000, 0.5);
+        line-height: 2.4;
     }
 
     .ca-content
     {
-        padding: 15px 20px;
+        padding: 0.3rem 0.4rem;
     }
 
     .btn
     {
-        width: 110px;
+        width: 1.1rem;
     }
 
     .ca-ok
     {
-        margin-right: 10px;
+        margin-right: 0.2rem;
     }
 }

@@ -35,7 +35,6 @@
         scroll     : require('./index/scroll.js'),
         scratchcard: require('./index/scratchcard.js'),
         turntable  : require('./index/turntable.js'),
-        swatchbook : require('./index/swatchbook.js'),
         sidebox    : require('./index/sidebox.js'),
         share      : require('./index/share.js')
     };

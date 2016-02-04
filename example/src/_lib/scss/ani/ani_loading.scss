@@ -9,7 +9,7 @@ loading动画样式
 //$cw 容器尺寸
 //$lw loading圆环宽度
 //$lc loading圆环颜色
-@mixin ani_loading($cw: 40px, $lw: 4px, $lc: $color) {
+@mixin ani_loading($cw: 0.8rem, $lw: 0.08rem, $lc: $color) {
     &:before
     {
         content: '';

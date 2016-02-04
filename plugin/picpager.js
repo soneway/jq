@@ -11,7 +11,7 @@
             //表示图片地址属性名
             imgAttrName: null,
             //滑动阈值
-            swipThreshold: 40,
+            swipThreshold: 100,
             //轮播回调函数
             slideCallback: null
         };

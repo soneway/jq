@@ -9,7 +9,7 @@
             //是否竖直方向滚动
             isVertical      : false,
             //滑动阈值
-            swipThreshold   : 50,
+            swipThreshold   : 100,
             //是否自动轮播
             isAutoPlay      : true,
             //轮播inter

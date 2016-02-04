@@ -6,7 +6,7 @@
     text-align: center;
     font-size: 0;
 
-    $height: 50px;
+    $height: 100px;
     a
     {
         display: inline-block;
@@ -14,7 +14,7 @@
         height: $height;
         vertical-align: middle;
         border-radius: $height * 0.2;
-        margin: 8px;
+        margin: 16px;
         position: relative;
 
         &:after
@@ -22,7 +22,6 @@
             content: '';
             @extend %ph_pafull;
             background: url(http://img.gd.sohu.com/static/v3/img/icon_share.png);
-            background-size: auto $height;
             border-radius: $height * 0.2;
         }
 

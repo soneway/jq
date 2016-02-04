@@ -7,24 +7,24 @@
 {
     .avator_up
     {
-        width: 320px;
-        height: 320px;
-        margin: 5px auto;
+        width: 6.4rem;
+        height: 6.4rem;
+        margin: 10px auto;
     }
 
     @at-root
     {
         #file
         {
-            width: 100px;
+            width: 200px;
         }
 
 
         #shower
         {
-            max-width: 320px;
+            max-width: 6.4rem;
             display: block;
-            margin: 5px auto;
+            margin: 10px auto;
         }
     }
 }

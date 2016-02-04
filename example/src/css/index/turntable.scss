@@ -7,9 +7,9 @@
 {
     .turntable
     {
-        width: 320px;
-        height: 320px;
-        margin: 5px auto;
+        width: 6.4rem;
+        height: 6.4rem;
+        margin: 10px auto;
         background-image: url(../img/bg.png);
 
         .pi-pointer
@@ -20,8 +20,8 @@
 
     .btn_start
     {
-        $w: 68px;
-        $h: 66px;
+        $w: 1.3rem;
+        $h: 1.3rem;
 
         @include mx_plt($left: 50%, $top: 50%);
         width: $w;
