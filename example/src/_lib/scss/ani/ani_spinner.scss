@@ -9,7 +9,7 @@ spinner动画类
 //$cw 容器尺寸
 //$dw 点尺寸
 //$dc 点颜色
-@mixin ani_spinner($cw: 1rem, $dw: 0.2rem, $dc: $color) {
+@mixin ani_spinner($cw: 0.8rem, $dw: 0.14rem, $dc: $color) {
     &:before
     {
         /*负数*/

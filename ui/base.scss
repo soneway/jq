@@ -286,8 +286,9 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
     &:after
     {
         display: block;
-        padding-top: 1.6rem;
+        padding-top: 1.2rem;
         content: '拼命加载...';
+        font-size: 0.2rem;
     }
 }
 
