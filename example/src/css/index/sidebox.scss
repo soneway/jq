@@ -120,7 +120,7 @@
             content: '';
             @extend %ph_palt;
             @extend %ph_full;
-            background: url(http://img.gd.sohu.com/static/v3/img/sohulogo.jpg);
+            background: url(../img/sohulogo.jpg);
             background-size: cover;
             border-radius: $h;
         }
