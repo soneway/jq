@@ -11,40 +11,18 @@
         min-width: 6rem;
         margin: 0 auto;
 
-        a
+        img
         {
-            height: 6rem;
-            position: relative;
-            @extend .ani_loading;
-            background-size: cover;
-            background-position: center center;
-
-            @for $i from 1 through 5
-            {
-                &:nth-of-type(#{$i})
-                {
-                    background-image: url(../img/#{$i}.jpg);
-                }
-            }
+            width: 100%;
         }
 
         &.vertical
         {
-            height: 6rem;;
-        }
-    }
-
-    @at-root
-    {
-        #img_car
-        {
-            width: 90%;
-            min-width: 6rem;
-            margin: 0 auto;
+            height: 6rem;
 
             img
             {
-                width: 100%;
+                height: 100%;
             }
         }
     }
