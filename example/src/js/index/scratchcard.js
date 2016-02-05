@@ -10,7 +10,7 @@
             $('.scratchcard').each(function () {
                 $(this).scratchcard({
                     text  : '刮开有奖',
-                    imgSrc: 'img/3.jpg'
+                    imgSrc: 'img/4.jpg'
                 });
             });
         }

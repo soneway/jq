@@ -16,6 +16,16 @@
             height: 6rem;
             position: relative;
             @extend .ani_loading;
+            background-size: cover;
+            background-position: center center;
+
+            @for $i from 1 through 5
+            {
+                &:nth-of-type(#{$i})
+                {
+                    background-image: url(../img/#{$i}.jpg);
+                }
+            }
         }
 
         &.vertical
