@@ -13,6 +13,7 @@
 .icon_login
 {
     @extend .center;
+    /*a标签间隔为0*/
     font-size: 0;
 
     $height: 0.6rem;

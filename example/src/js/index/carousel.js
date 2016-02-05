@@ -3,7 +3,6 @@
 
     require('carousel');
 
-
     //加载时执行
     function load($this, isInit) {
         if (isInit) {

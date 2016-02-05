@@ -5,6 +5,7 @@ ui/base
 */
 
 //默认变量
+$root-font-size: 100px !default;
 $font-size: 0.28rem !default;
 $color: #333 !default;
 $line-height: 1.5 !default;
@@ -19,7 +20,7 @@ $duration: 0.3s !default;
 
 html
 {
-    font-size: 100px;
+    font-size: $root-font-size;
 }
 
 
@@ -69,7 +70,6 @@ input, textarea
 input, select
 {
     height: 0.64rem;
-    font-size: 0.24rem;
     text-indent: 0.1rem;
 }
 
