@@ -19,8 +19,6 @@
     "browser"     : {
         "artmpl"     : "./_lib/js/artmpl.js",
         "share"      : "./_lib/js/share.js",
-        "comp/share" : "./_lib/comp/share.js",
-        "comp/login" : "./_lib/comp/login.js",
 
         "jq"         : "../../../jq/jq.js",
         "base"       : "../../../jq/ui/base.js",
