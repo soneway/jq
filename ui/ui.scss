@@ -167,13 +167,7 @@ $head-color: $color !default;
 /*头部*/
 #header
 {
-    @extend %ph_visible;
-
-    & > div
-    {
-        @extend %ph_pafull;
-        @extend .transition;
-    }
+    @extend .transition;
 
     .offheader &
     {
@@ -182,44 +176,30 @@ $head-color: $color !default;
         @extend %ph_hidden;
     }
 
-    @at-root
+    .roottitle, .subtitle
     {
-        /*一级页面标题*/
+        @extend %ph_pafull;
+        @extend .transition;
+        overflow: hidden;
+    }
+
+    /*二级页面标题*/
+    .subtitle
+    {
+        @extend %ph_hidden;
+    }
+
+    /*显示二级页面标题*/
+    &.onsubtitle
+    {
         .roottitle
         {
-            z-index: 1;
-
-            .onsubtitle &
-            {
-                opacity: 0;
-                z-index: -1;
-            }
+            @extend %ph_hidden;
         }
 
-
-        /*二级页面标题*/
         .subtitle
         {
-            opacity: 0;
-            z-index: -1;
-            overflow: hidden;
-
-            /*动画不太好*/
-            /*.btnleft
-            {
-                transform:translate3d(100vw, 0, 0);
-            }*/
-
-            .onsubtitle &
-            {
-                opacity: 1;
-                z-index: 1;
-
-                /*.btnleft
-                {
-                    transform:translate3d(0, 0, 0);
-                }*/
-            }
+            @extend %ph_visible;
         }
     }
 }
