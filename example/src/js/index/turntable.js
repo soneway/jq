@@ -3,7 +3,7 @@
 require('turntable');
 
 //文档jq对象
-var $doc = $(window.document);
+var $doc = $(document);
 
 exports.load = function ($this, isInit) {
     if (isInit) {
