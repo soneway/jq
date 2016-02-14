@@ -284,8 +284,8 @@ $head-color: $color !default;
     height: $navbar-height;
     z-index: 1;
     @extend .center;
-    @extend .ph_visible;
     border-top: 1px solid $head-border-color;
+    @extend .transition;
 
     .offnavbar > &
     {
