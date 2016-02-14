@@ -16,14 +16,14 @@ alert = function (str) {
 
 //页面模块加载对象
 var loader = {
-    carousel   : require('./index/carousel.js'),
-    flip       : require('./index/flip.js'),
-    picpager   : require('./index/picpager.js'),
-    piccut     : require('./index/piccut.js'),
-    scroll     : require('./index/scroll.js'),
-    scratchcard: require('./index/scratchcard.js'),
-    turntable  : require('./index/turntable.js'),
-    share      : require('./index/share.js')
+    carousel   : require('./index/carousel'),
+    flip       : require('./index/flip'),
+    picpager   : require('./index/picpager'),
+    piccut     : require('./index/piccut'),
+    scroll     : require('./index/scroll'),
+    scratchcard: require('./index/scratchcard'),
+    turntable  : require('./index/turntable'),
+    share      : require('./index/share')
 };
 
 
