@@ -55,6 +55,7 @@
             watch: ['./js/**'],
             dest : out + 'js',
             opts : {
+                //browserify
                 paths: [libDir]
             }
         },
@@ -63,9 +64,11 @@
             watch: ['./*.html', './html/**'],
             dest : out,
             opts : {
+                //include
                 prefix  : '@',
                 basepath: './html/',
 
+                //htmlmin
                 collapseWhitespace: true,
                 removeComments    : true,
                 minifyJS          : true,
