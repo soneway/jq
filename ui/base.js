@@ -39,7 +39,7 @@
      * 是否为移动端
      * @type {boolean}
      */
-    $.isMobi = /(iPhone|iPod|android)/i.test(ua);
+    $.isMobi = /(iPhone|iPod|iPad|android)/i.test(ua);
     /**
      * 是否为安卓
      * @type {boolean}
