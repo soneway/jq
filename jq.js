@@ -912,6 +912,16 @@
             async      : true
         };
 
+
+        /**
+         * 去除字符前后空格函数
+         * @param {string} str 处理前字符
+         * @returns {string} 处理后字符
+         */
+        $.trim = function (str) {
+            return typeof str === 'string' && str.trim();
+        };
+
         return $;
 
     })();

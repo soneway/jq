@@ -19,6 +19,7 @@
                 isShowTitle = opts.isShowTitle,
                 isShowPager = opts.isShowPager,
                 removeClassDelay = opts.removeClassDelay,
+                inited = opts.inited,
                 initIndex = opts.initIndex;
 
             //变量
@@ -35,6 +36,9 @@
                 wrapElStyle = $wrap[0].style;
                 $items = $wrap.children('*');
                 itemCount = $items.length;
+
+                //html初始化完成回调
+                typeof inited === 'function' && inited($items);
 
                 isVertical && $this.addClass('vertical');
                 $title = $this.find('.pi-title');
@@ -86,7 +90,7 @@
                 }
 
                 //移动到函数
-                function slide(swipSpan) {
+                function slide(swipSpan, isNoAni) {
                     var translate = -index * (isVertical ? height : width),
                         transform;
 
@@ -102,6 +106,9 @@
                         translate += swipSpan;
                     }
                     else {
+                        //是否有动画
+                        isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
+
                         //滚动回调函数
                         typeof slideCallback === 'function' && slideCallback.call($items[index], index);
                         //title
@@ -114,15 +121,27 @@
                                 i !== index && $this.removeClass('current');
                             });
                         }, removeClassDelay);
-                        $title.removeClass('visible');
-                        title && setTimeout(function () {
-                            $title.addClass('visible').html(title);
-                        }, 150);
+
+                        //title
+                        if (isShowTitle) {
+                            $title.removeClass('visible');
+                            title && setTimeout(function () {
+                                $title.addClass('visible').html(title);
+                            }, 150);
+                        }
+
                         //pager状态
-                        $pagers.removeClass('selected').eq(index).addClass('selected');
+                        if (isShowPager) {
+                            $pagers.removeClass('selected');
+                            //下一队列执行,以防某些情况下无效
+                            setTimeout(function () {
+                                $pagers.eq(index).addClass('selected');
+                            }, 0);
+                        }
                     }
 
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
+                    //作动画
                     $wrap.css({
                         'transform': transform
                     });
@@ -134,10 +153,13 @@
                 setSize();
 
                 //暴露slideToIndex方法
-                me.slideToIndex = function (i, isNoAnimation) {
+                me.slideToIndex = function (i, isNoAni) {
+                    if (typeof i !== 'number') {
+                        return console.log('index应为数字');
+                    }
+
                     index = i;
-                    isNoAnimation ? $wrap.removeClass('transform') : $wrap.addClass('transform');
-                    slide();
+                    slide(null, isNoAni);
                 };
 
                 //暴露prev方法
@@ -205,8 +227,8 @@
                     //加上动画
                     $wrap.addClass('transform');
 
-                    //滚动
-                    swipSpan !== 0 && slide();
+                    //滚动(swipSpan === undefined时无动画)
+                    swipSpan !== 0 && slide(null, swipSpan === undefined);
 
                     //自动轮播
                     setInter();
@@ -253,6 +275,8 @@
         isShowPager     : true,
         //移除class延迟
         removeClassDelay: 0,
+        //初始化完成回调函数
+        inited          : null,
         //初始index
         initIndex       : 0
     };
