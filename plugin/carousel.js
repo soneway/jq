@@ -106,13 +106,10 @@
                         translate += swipSpan;
                     }
                     else {
-                        //是否有动画
-                        isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
 
                         //滚动回调函数
                         typeof slideCallback === 'function' && slideCallback.call($items[index], index);
-                        //title
-                        var title = $items.eq(index).addClass('current').attr('data-title');
+
                         //延迟removeClass('current')
                         setTimeout(function () {
                             $items.each(function () {
@@ -124,6 +121,7 @@
 
                         //title
                         if (isShowTitle) {
+                            var title = $items.eq(index).addClass('current').attr('data-title');
                             $title.removeClass('visible');
                             title && setTimeout(function () {
                                 $title.addClass('visible').html(title);
@@ -140,6 +138,8 @@
                         }
                     }
 
+                    //是否有动画
+                    isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
                     //作动画
                     $wrap.css({
