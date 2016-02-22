@@ -90,7 +90,7 @@
                 }
 
                 //移动到函数
-                function slide(swipSpan, isNoAni) {
+                function slide(swipSpan) {
                     var translate = -index * (isVertical ? height : width),
                         transform;
 
@@ -138,8 +138,6 @@
                         }
                     }
 
-                    //是否有动画
-                    isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
                     //作动画
                     $wrap.css({
@@ -158,8 +156,11 @@
                         return console.log('index应为数字');
                     }
 
+                    //是否有动画
+                    isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
+
                     index = i;
-                    slide(null, isNoAni);
+                    slide();
                 };
 
                 //暴露prev方法
@@ -228,7 +229,7 @@
                     $wrap.addClass('transform');
 
                     //滚动(swipSpan === undefined时无动画)
-                    swipSpan !== 0 && slide(null, swipSpan === undefined);
+                    swipSpan !== 0 && slide();
 
                     //自动轮播
                     setInter();
