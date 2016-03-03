@@ -892,13 +892,15 @@
                         //成功
                         if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                             var success = opts.success;
-                            typeof success === 'function' && success(xhr.responseText);
+                            typeof success === 'function' && success(xhr);
                         }
                         //失败
                         else {
                             var error = opts.error;
                             typeof error === 'function' && error(xhr);
                         }
+                        var complete = opts.complete;
+                        typeof complete === 'function' && complete(xhr);
                     }
                 };
 
