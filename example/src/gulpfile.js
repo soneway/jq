@@ -36,10 +36,7 @@ var config = {
             includePaths: [libDir, '../../../'],
 
             //autoprefixer
-            browsers: [
-                'ios 7',
-                'android 4'
-            ],
+            browsers: isPC ? ['ie 6'] : ['ios 7', 'android 4'],
 
             //base64
             //排除匹配的
