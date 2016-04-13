@@ -7,7 +7,7 @@ var opts = {
     //打包生成代码的路径
     out   : '../dist/',
     //是否压缩
-    isPack: 1,
+    isPack: 0,
     //是否PC端
     isPC  : 0
 };
