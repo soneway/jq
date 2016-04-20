@@ -923,8 +923,7 @@
 
     //CommonJS
     if (typeof exports === 'object') {
-        module.exports = $;
-        return;
+        return module.exports = $;
     }
     //AMD
     if (typeof define === 'function') {
