@@ -8,17 +8,12 @@ ui/base
   overflow: auto;
   -webkit-overflow-scrolling: touch; }
 
-.head, .head
-.btnleft, .panel, .pi-picpager
-.pi-pic, #picpager
-.info, .pi-piccut-mask, .pi-piccut-cutter, .loginbox
-.sohulogo:after {
+.head, .head .btnleft, .panel, .pi-picpager .pi-pic, #picpager .info, .pi-piccut-mask, .pi-piccut-cutter, .loginbox .sohulogo:after {
   position: absolute;
   left: 0;
   top: 0; }
 
-.head
-.btnright {
+.head .btnright {
   position: absolute;
   right: 0;
   top: 0; }
@@ -28,54 +23,33 @@ ui/base
   right: 0;
   top: 0; }
 
-#navbar, .pi-carousel
-.pi-title {
+#navbar, .pi-carousel .pi-title {
   position: absolute;
   left: 0;
   bottom: 0; }
 
-.pi-carousel
-.pi-pager {
+.pi-carousel .pi-pager {
   position: absolute;
   right: 0;
   bottom: 0; }
 
-#paneliframe
-iframe, .pi-picpager
-.pi-pic, #picpager
-.picpager, #flip
-.flip
-p, #scratchcard
-.scratchcard, .loginbox
-.sohulogo:after {
+#paneliframe iframe, .pi-picpager .pi-pic, #picpager .picpager, #flip .flip p, #scratchcard .scratchcard, .loginbox .sohulogo:after {
   width: 100%;
   height: 100%; }
 
-#mainbox, #loading, #header .roottitle, #header
-.subtitle, .pi-picpager
-.pi-wrap, .pi-flip > *, .pi-turntable
-.pi-pointer, .icon_share
-a:after, .icon_login
-a:after, .onmask:after, #customalert {
+#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after, .onmask:after, #customalert {
   left: 0;
   top: 0;
   bottom: 0;
   right: 0; }
 
-#mainbox, #loading, #header .roottitle, #header
-.subtitle, .pi-picpager
-.pi-wrap, .pi-flip > *, .pi-turntable
-.pi-pointer, .icon_share
-a:after, .icon_login
-a:after {
+#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after {
   position: absolute; }
 
 .onmask:after, #customalert {
   position: fixed; }
 
-#navbar
-.navlist
-a {
+#navbar .navlist a {
   display: table-cell;
   vertical-align: middle;
   line-height: normal; }
@@ -85,14 +59,11 @@ a {
   -webkit-box-align: center;
   -webkit-box-pack: center; }
 
-#header.onsubtitle
-.subtitle {
+#header.onsubtitle .subtitle {
   visibility: visible;
   opacity: 1; }
 
-.offheader #header, #header
-.subtitle, #header.onsubtitle
-.roottitle, .offnavbar > #navbar {
+.offheader #header, #header .subtitle, #header.onsubtitle .roottitle, .offnavbar > #navbar {
   visibility: hidden;
   opacity: 0; }
 
@@ -104,24 +75,18 @@ spinner动画类
 scss/ani_circle
 旋转动画
 */
-@-webkit-keyframes ani_circle
-{
-  0%
-{
+@-webkit-keyframes ani_circle {
+  0% {
     -webkit-transform: rotateZ(0deg);
             transform: rotateZ(0deg); }
-  100%
-{
+  100% {
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg); } }
-@keyframes ani_circle
-{
-  0%
-{
+@keyframes ani_circle {
+  0% {
     -webkit-transform: rotateZ(0deg);
             transform: rotateZ(0deg); }
-  100%
-{
+  100% {
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg); } }
 
@@ -269,21 +234,15 @@ h4 {
   float: right; }
 
 /*居中*/
-.center, .btn, #navbar, #customalert
-.ca-box, #ui
-.list > div:after, .icon_login {
+.center, .btn, #navbar, #customalert .ca-box, #ui .list > div:after, .icon_login {
   text-align: center; }
 
 /*动画*/
-.transition, .fade-out, .fade-in, #loading, #header, #header .roottitle, #header
-.subtitle, #navbar, #customalert, .pi-carousel
-.pi-title, .pi-flip > * {
+.transition, .fade-out, .fade-in, #loading, #header, #header .roottitle, #header .subtitle, #navbar, #customalert, .pi-carousel .pi-title, .pi-flip > * {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
-.transform, .pi-scroll-item, #mainbox, #sidebox, .panel, #customalert
-.ca-box, .pi-picpager
-.pi-wrap {
+.transform, .pi-scroll-item, #mainbox, #sidebox, .panel, #customalert .ca-box, .pi-picpager .pi-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
@@ -400,17 +359,14 @@ plugin/scroll
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   /*返回按钮*/
   /*菜单按钮*/ }
-  .head .btnleft, .head
-.btnright {
+  .head .btnleft, .head .btnright {
     z-index: 2;
     padding: 0 0.6em;
     height: 100%;
     font-size: 0.32rem; }
-  .head
-.btnback {
+  .head .btnback {
     padding-left: 0.44rem; }
-    .head
-.btnback:before {
+    .head .btnback:before {
       content: '';
       position: absolute;
       left: 0.28rem;
@@ -421,23 +377,19 @@ plugin/scroll
       box-shadow: -2px -2px 0 #333;
       -webkit-transform: rotateZ(-45deg);
               transform: rotateZ(-45deg); }
-    .head
-.btnback.focus:before {
+    .head .btnback.focus:before {
       box-shadow: -2px -2px 0 #df2221; }
-  .head
-.btnmenu {
+  .head .btnmenu {
     width: 2.5em;
     padding: 0.6em;
     background: -webkit-linear-gradient(#333 2px, transparent 0%) left 0.8em;
     background: linear-gradient(#333 2px, transparent 0%) left 0.8em;
     background-size: 100% 20%;
     background-clip: content-box; }
-    .head
-.btnmenu.focus {
+    .head .btnmenu.focus {
       background-image: -webkit-linear-gradient(#df2221 2px, transparent 0%);
       background-image: linear-gradient(#df2221 2px, transparent 0%); }
-  .head
-.title {
+  .head .title {
     text-align: center; }
 
 /*mainbox*/
@@ -454,8 +406,7 @@ plugin/scroll
   z-index: 9;
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0); }
-  #sidebox
-.content {
+  #sidebox .content {
     height: 100%;
     padding-top: 0.8rem; }
   .onsidebox #sidebox {
@@ -466,8 +417,7 @@ plugin/scroll
 #header {
   /*二级页面标题*/
   /*显示二级页面标题*/ }
-  #header .roottitle, #header
-.subtitle {
+  #header .roottitle, #header .subtitle {
     overflow: hidden; }
 
 /*面板*/
@@ -494,8 +444,7 @@ plugin/scroll
 /*打开iframe页面的面板*/
 #paneliframe {
   height: 100%; }
-  #paneliframe
-iframe {
+  #paneliframe iframe {
     border: none; }
 
 /*导航*/
@@ -505,14 +454,12 @@ iframe {
   height: 1rem;
   z-index: 1;
   border-top: 1px solid rgba(128, 128, 128, 0.5); }
-  #navbar
-.navbox {
+  #navbar .navbox {
     overflow: hidden;
     height: 100%;
     max-width: 100%;
     display: inline-block; }
-  #navbar
-.navlist {
+  #navbar .navlist {
     display: table;
     height: 100%;
     white-space: nowrap;
@@ -535,18 +482,14 @@ plugin/customalert
   .oncustomalert #customalert {
     z-index: 9999;
     opacity: 1; }
-    .oncustomalert #customalert
-.ca-box {
+    .oncustomalert #customalert .ca-box {
       -webkit-transform: scale3d(1, 1, 1);
               transform: scale3d(1, 1, 1); }
-  #customalert.alert
-.ca-ok {
+  #customalert.alert .ca-ok {
     width: 4.6rem; }
-  #customalert.alert
-.ca-cancel {
+  #customalert.alert .ca-cancel {
     display: none; }
-  #customalert
-.ca-box {
+  #customalert .ca-box {
     width: 5.6rem;
     overflow: hidden;
     padding: 0 0 0.3rem 0;
@@ -555,18 +498,14 @@ plugin/customalert
     /*动画*/
     -webkit-transform: scale3d(0, 0, 1);
             transform: scale3d(0, 0, 1); }
-  #customalert
-.ca-title {
+  #customalert .ca-title {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     line-height: 2.4; }
-  #customalert
-.ca-content {
+  #customalert .ca-content {
     padding: 0.3rem 0.4rem; }
-  #customalert
-.btn {
+  #customalert .btn {
     width: 1.1rem; }
-  #customalert
-.ca-ok {
+  #customalert .ca-ok {
     margin-right: 0.2rem; }
 
 /*项目基础样式*/
@@ -575,9 +514,7 @@ input, select, textarea {
   border-radius: 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(0, 0, 0, 0.1); }
-  input[disabled]
-, select[disabled]
-, textarea[disabled] {
+  input[disabled], select[disabled], textarea[disabled] {
     opacity: 0.5; }
 
 /*placeholder的颜色*/
@@ -588,11 +525,9 @@ textarea {
   height: 1rem; }
 
 /*导航*/
-.navlist
-a {
+.navlist a {
   padding: 0 0.5em; }
-  .navlist
-a.selected {
+  .navlist a.selected {
     border-bottom: 2px solid #df2221;
     color: #df2221; }
 
@@ -610,46 +545,37 @@ a.selected {
 /*列表*/
 .list {
   padding: 0.2rem; }
-  .list
-a {
+  .list a {
     display: block;
     padding: 0.2rem 0.1rem;
     position: relative;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-    .list
-a
-p {
+    .list a p {
       color: #888;
       padding-left: 2em; }
-    .list
-a.title {
+    .list a.title {
       background: #eee;
       font-weight: bold; }
-    .list
-a:first-of-type {
+    .list a:first-of-type {
       border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
-h3.center, h3.btn, h3#navbar, #customalert
-h3.ca-box, h3.icon_login {
+h3.center, h3.btn, h3#navbar, #customalert h3.ca-box, h3.icon_login {
   position: relative;
   margin-top: 0.2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
 /*ui panel*/
-#ui
-h3 {
+#ui h3 {
   text-indent: 0.2rem; }
 
-#ui
-.list > div {
+#ui .list > div {
   display: inline-block;
   width: 2rem;
   height: 2rem;
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0.1rem; }
-  #ui
-.list > div:after {
+  #ui .list > div:after {
     content: attr(class);
     display: block; }
 
@@ -672,13 +598,11 @@ plugin/carousel
     float: none; }
   .pi-carousel.vertical > .pi-pager > span {
     display: block; }
-  .pi-carousel
-.pi-wrap > * {
+  .pi-carousel .pi-wrap > * {
     display: block;
     float: left;
     overflow: hidden; }
-  .pi-carousel
-.pi-title {
+  .pi-carousel .pi-title {
     width: 100%;
     line-height: 1.1;
     background-color: rgba(0, 0, 0, 0.5);
@@ -687,41 +611,31 @@ plugin/carousel
     text-shadow: 0 0 0.06rem rgba(0, 0, 0, 0.8);
     /*动画*/
     opacity: 0; }
-    .pi-carousel
-.pi-title.visible {
+    .pi-carousel .pi-title.visible {
       opacity: 1; }
-  .pi-carousel
-.pi-pager {
+  .pi-carousel .pi-pager {
     line-height: 0;
     padding: 0.08rem; }
-    .pi-carousel
-.pi-pager > span {
+    .pi-carousel .pi-pager > span {
       display: inline-block;
       margin: 0.08rem;
       border: 0.08rem solid rgba(255, 255, 255, 0.5);
       border-radius: 50%;
       box-shadow: 0 0 0.06rem rgba(0, 0, 0, 0.5);
       cursor: pointer; }
-      .pi-carousel
-.pi-pager > span.selected {
+      .pi-carousel .pi-pager > span.selected {
         box-shadow: 0 0 0.06rem rgba(0, 0, 0, 0.9);
         border-color: rgba(255, 255, 255, 0.9); }
 
-#carousel
-.carousel {
+#carousel .carousel {
   width: 90%;
   min-width: 6rem;
   margin: 0 auto; }
-  #carousel
-.carousel
-img {
+  #carousel .carousel img {
     width: 100%; }
-  #carousel
-.carousel.vertical {
+  #carousel .carousel.vertical {
     height: 6rem; }
-    #carousel
-.carousel.vertical
-img {
+    #carousel .carousel.vertical img {
       height: 100%; }
 
 /*相册 panel*/
@@ -737,22 +651,16 @@ loading动画样式
 scss/ani_circle
 旋转动画
 */
-@keyframes ani_circle
-{
-  0%
-{
+@keyframes ani_circle {
+  0% {
     -webkit-transform: rotateZ(0deg);
             transform: rotateZ(0deg); }
-  100%
-{
+  100% {
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg); } }
 
 /*loading动画类*/
-.ani_loading:before, .pi-picpager
-.pi-pic:before, #flip
-.flip
-p:before {
+.ani_loading:before, .pi-picpager .pi-pic:before, #flip .flip p:before {
   content: '';
   position: absolute;
   left: 50%;
@@ -778,22 +686,18 @@ p:before {
   overflow: hidden;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden; }
-  .pi-picpager
-.pi-pic {
+  .pi-picpager .pi-pic {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain; }
-    .pi-picpager
-.pi-pic:nth-of-type(1) {
+    .pi-picpager .pi-pic:nth-of-type(1) {
       left: -100%; }
-    .pi-picpager
-.pi-pic:nth-of-type(3) {
+    .pi-picpager .pi-pic:nth-of-type(3) {
       left: 100%; }
 
 #picpager {
   height: 100%; }
-  #picpager
-.info {
+  #picpager .info {
     top: 0.8rem;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -808,11 +712,9 @@ plugin/piccut
 */
 .pi-piccut {
   position: relative; }
-  .pi-piccut
-* {
+  .pi-piccut * {
     visibility: hidden; }
-  .pi-piccut.on
-* {
+  .pi-piccut.on * {
     visibility: visible; }
   .pi-piccut-cutter {
     cursor: move;
@@ -828,8 +730,7 @@ plugin/piccut
     cursor: se-resize;
     box-shadow: 0 0 2px #000; }
 
-#piccut
-.avator_up {
+#piccut .avator_up {
   width: 6.4rem;
   height: 6.4rem;
   margin: 10px auto; }
@@ -857,33 +758,27 @@ plugin/flip
       opacity: 1;
       z-index: 1; }
 
-#flip
-.flip {
+#flip .flip {
   width: 90%;
   min-width: 6rem;
   height: 6rem;
   margin: 0 auto; }
 
 /*自定义滚动 panel*/
-#scroll
-.scroll {
+#scroll .scroll {
   width: 90%;
   min-width: 6rem;
   height: 6rem;
   margin: 0 auto;
   overflow: hidden; }
-  #scroll
-.scroll
-div {
+  #scroll .scroll div {
     background: url(../img/1.jpg);
     -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s; }
-  #scroll
-.scroll:nth-of-type(1) > div {
+  #scroll .scroll:nth-of-type(1) > div {
     width: 100%;
     height: 900%; }
-  #scroll
-.scroll:nth-of-type(2) > div {
+  #scroll .scroll:nth-of-type(2) > div {
     width: 900%;
     height: 100%; }
 
@@ -899,25 +794,20 @@ plugin/turntable
 .pi-turntable {
   position: relative;
   overflow: hidden; }
-  .pi-turntable, .pi-turntable
-.pi-pointer {
+  .pi-turntable, .pi-turntable .pi-pointer {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover; }
 
-#turntable
-.turntable {
+#turntable .turntable {
   width: 6.4rem;
   height: 6.4rem;
   margin: 10px auto;
   background-image: url(../img/bg.png); }
-  #turntable
-.turntable
-.pi-pointer {
+  #turntable .turntable .pi-pointer {
     background-image: url(../img/pointer.png); }
 
-#turntable
-.btn_start {
+#turntable .btn_start {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -928,8 +818,7 @@ plugin/turntable
   background: url(../img/start.png) center center;
   background-size: cover;
   z-index: 1; }
-  #turntable
-.btn_start.focus {
+  #turntable .btn_start.focus {
     opacity: 0.85; }
 
 /*分享 panel*/
@@ -938,8 +827,7 @@ plugin/turntable
   text-align: center;
   /*a标签间隔为0*/
   font-size: 0; }
-  .icon_share
-a {
+  .icon_share a {
     display: inline-block;
     width: 1rem;
     height: 1rem;
@@ -947,17 +835,14 @@ a {
     border-radius: 20%;
     margin: 0.16rem;
     position: relative; }
-    .icon_share
-a:after {
+    .icon_share a:after {
       content: '';
       background: url(../img/icon_share.png);
       background-size: auto 100%;
       border-radius: 20%; }
-    .icon_share
-a.focus {
+    .icon_share a.focus {
       background: #000; }
-      .icon_share
-a.focus:after {
+      .icon_share a.focus:after {
         opacity: 0.5; }
   .icon_share .weibosina:after {
     background-position: 0rem 0; }
@@ -977,8 +862,7 @@ a.focus:after {
     background-position: -7rem 0; }
 
 /*sidebox panel*/
-#sidebox
-.content {
+#sidebox .content {
   width: 84%;
   min-width: 210px;
   max-width: 420px;
@@ -989,8 +873,7 @@ a.focus:after {
 .icon_login {
   /*a标签间隔为0*/
   font-size: 0; }
-  .icon_login
-a {
+  .icon_login a {
     display: inline-block;
     width: 0.6rem;
     height: 0.6rem;
@@ -999,20 +882,16 @@ a {
     margin-left: 0.15rem;
     position: relative;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3); }
-    .icon_login
-a:first-of-type {
+    .icon_login a:first-of-type {
       margin-left: 0; }
-    .icon_login
-a:after {
+    .icon_login a:after {
       content: '';
       background: url(../img/icon_login.png);
       background-size: auto 100%;
       border-radius: 20%; }
-    .icon_login
-a.focus {
+    .icon_login a.focus {
       background: #000; }
-      .icon_login
-a.focus:after {
+      .icon_login a.focus:after {
         opacity: 0.5; }
   .icon_login .qq:after {
     background-position: 0rem 0; }
@@ -1036,57 +915,44 @@ a.focus:after {
   /*搜狐logo*/
   /*登陆按钮*/
   /*第三方登陆*/ }
-  .loginbox .icon_userid:before
-, .loginbox
-.icon_password:before {
+  .loginbox .icon_userid:before, .loginbox .icon_password:before {
     width: 0.6rem;
     font-family: icon_login;
     -webkit-font-smoothing: antialiased;
     font-size: 0.4rem;
     vertical-align: middle;
     display: inline-block; }
-  .loginbox
-.icon_userid:before {
+  .loginbox .icon_userid:before {
     content: '\e600'; }
-  .loginbox
-.icon_password:before {
+  .loginbox .icon_password:before {
     content: '\e601'; }
   .loginbox > * {
     margin-top: 0.3rem; }
-  .loginbox
-.sohulogo {
+  .loginbox .sohulogo {
     display: inline-block;
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 2.2rem;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     position: relative; }
-    .loginbox
-.sohulogo:after {
+    .loginbox .sohulogo:after {
       content: '';
       background: url(../img/sohulogo.jpg);
       background-size: cover;
       border-radius: 2.2rem; }
-    .loginbox
-.sohulogo.focus {
+    .loginbox .sohulogo.focus {
       background: #000; }
-      .loginbox
-.sohulogo.focus:after {
+      .loginbox .sohulogo.focus:after {
         opacity: 0.5; }
-  .loginbox
-input {
+  .loginbox input {
     width: 85%;
     background: none;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-  .loginbox
-.btn-login {
+  .loginbox .btn-login {
     width: 100%; }
-  .loginbox
-.other_login {
+  .loginbox .other_login {
     margin-bottom: 0.3rem; }
-    .loginbox
-.other_login
-p {
+    .loginbox .other_login p {
       padding-bottom: 0.2rem;
       text-align: left; }

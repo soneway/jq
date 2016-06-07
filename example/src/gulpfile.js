@@ -1,21 +1,11 @@
-var gulp = require('gulp');
-
-//默认配置
-var opts = {
-    //第三方资源库路径
-    libDir: './_lib/',
-    //打包生成代码的路径
-    out   : '../dist/',
-    //是否压缩
-    isPack: 0,
-    //是否PC端
-    isPC  : 0
-};
-
-var out = opts.out,
-    libDir = opts.libDir,
-    isPack = opts.isPack,
-    isPC = opts.isPC;
+//打包生成代码的路径
+var out = '../dist/',
+//第三方资源库路径
+    libDir = './_lib/',
+//是否压缩
+    isPack = 0,
+//是否PC端
+    isPC = 0;
 
 //任务配置
 var config = {
@@ -36,13 +26,13 @@ var config = {
             includePaths: [libDir, '../../../'],
 
             //autoprefixer
-            browsers: isPC ? ['ie 6'] : ['ios 7', 'android 4'],
+            browsers: isPC ? ['ie 6', 'chrome 31'] : ['ios 7', 'android 4'],
 
             //base64
             //排除匹配的
             exclude     : [/^http:\/\/.+$/i],
             //小于该设定K数的文件就编码
-            maxImageSize: isPC ? 1 : 5 * 1024
+            maxImageSize: isPC ? 5 * 1024 : 5 * 1024
         }
     },
     js  : {
@@ -67,19 +57,15 @@ var config = {
             collapseWhitespace: true,
             removeComments    : true,
             minifyJS          : true,
-            minifyCSS         : true
+            minifyCSS         : true,
+            processScripts    : ['text/html']
         }
     }
 };
 
-//gulp插件require函数(避免win上面初始化太久)
-var grequire = (function () {
-    var gulpDir = process.platform === 'darwin' ? '' : 'D:/node_modules/';
-    return function (name) {
-        return require(gulpDir + name);
-    };
-})();
 
+//gulp
+var gulp = require('gulp');
 
 
 //出错处理函数(避免任务停止)
@@ -88,13 +74,13 @@ function errorHandler(e) {
 }
 
 //出错处理对象
-var plumber = grequire('gulp-plumber');
+var plumber = require('gulp-plumber');
 
 
 //img任务
-(function (require) {
+(function () {
     var conf = config.img;
-    var image = require('gulp-image');
+    var imagemin = require('gulp-imagemin');
 
     //图片压缩
     gulp.task('img', function () {
@@ -102,18 +88,18 @@ var plumber = grequire('gulp-plumber');
             .pipe(plumber({
                 errorHandler: errorHandler
             }))
-            .pipe(image())
+            .pipe(imagemin())
             .pipe(gulp.dest(conf.dest));
     });
-})(grequire);
+})();
 
 
 //css任务
-(function (require) {
+(function () {
     var conf = config.css;
     var sass = require('gulp-sass');
     var autoprefixer = require('gulp-autoprefixer');
-    var minifyCss = require('gulp-minify-css');
+    var cssmin = require('gulp-clean-css');
     var base64 = require('gulp-base64');
 
     //编译sass,压缩css
@@ -129,19 +115,19 @@ var plumber = grequire('gulp-plumber');
 
         //压缩
         if (isPack) {
-            task.pipe(minifyCss())
+            task.pipe(cssmin())
                 .pipe(base64(conf.opts))
                 .pipe(gulp.dest(conf.dest));
         }
     });
-})(grequire);
+})();
 
 
 //js任务
-(function (require) {
+(function () {
     var conf = config.js;
     var browserify = require('gulp-browserify');
-    var uglify = require('gulp-uglify');
+    var jsmin = require('gulp-uglify');
 
     //browserify编译合并,压缩文件js
     gulp.task('js', function () {
@@ -155,18 +141,18 @@ var plumber = grequire('gulp-plumber');
 
         //压缩
         if (isPack) {
-            task.pipe(uglify())
+            task.pipe(jsmin())
                 .pipe(gulp.dest(conf.dest));
         }
     });
-})(grequire);
+})();
 
 
 //html任务
-(function (require) {
+(function () {
     var conf = config.html;
-    var htmlmin = require('gulp-htmlmin');
     var include = require('gulp-file-include');
+    var htmlmin = require('gulp-htmlmin');
 
     //html编译和压缩
     gulp.task('html', function () {
@@ -184,7 +170,7 @@ var plumber = grequire('gulp-plumber');
                 .pipe(gulp.dest(conf.dest));
         }
     });
-})(grequire);
+})();
 
 
 //监听任务

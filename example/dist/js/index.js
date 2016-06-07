@@ -291,7 +291,7 @@ exports.load = function ($this, isInit) {
 };
 },{"turntable":19}],11:[function(require,module,exports){
 //jq.js
-(function (window, undefined) {
+(function (window) {
 
     var $ = (function () {
 
@@ -1215,12 +1215,11 @@ exports.load = function ($this, isInit) {
 
     //CommonJS
     if (typeof exports === 'object') {
-        module.exports = $;
-        return;
+        return module.exports = $;
     }
     //AMD
     if (typeof define === 'function') {
-        define(function () {
+        return define(function () {
             return $;
         });
     }

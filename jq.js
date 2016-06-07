@@ -1,5 +1,5 @@
 //jq.js
-(function (window, undefined) {
+(function (window) {
 
     var $ = (function () {
 
@@ -927,7 +927,7 @@
     }
     //AMD
     if (typeof define === 'function') {
-        define(function () {
+        return define(function () {
             return $;
         });
     }
