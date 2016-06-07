@@ -80,7 +80,7 @@ var plumber = require('gulp-plumber');
 //img任务
 (function () {
     var conf = config.img;
-    var imagemin = require('gulp-imagemin');
+    var imgmin = require('gulp-imagemin');
 
     //图片压缩
     gulp.task('img', function () {
@@ -88,7 +88,7 @@ var plumber = require('gulp-plumber');
             .pipe(plumber({
                 errorHandler: errorHandler
             }))
-            .pipe(imagemin())
+            .pipe(imgmin())
             .pipe(gulp.dest(conf.dest));
     });
 })();
