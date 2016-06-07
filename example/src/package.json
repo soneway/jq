@@ -5,10 +5,10 @@
     "dependencies": {
         "gulp"             : "",
         "gulp-plumber"     : "",
-        "gulp-image"       : "",
+        "gulp-imagemin"       : "",
         "gulp-sass"        : "",
         "gulp-autoprefixer": "",
-        "gulp-minify-css"  : "",
+        "gulp-clean-css"  : "",
         "gulp-base64"      : "",
         "gulp-browserify"  : "",
         "gulp-uglify"      : "",
