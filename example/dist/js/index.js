@@ -415,7 +415,7 @@ exports.load = function ($this, isInit) {
 
         /**
          * 数组遍历函数
-         * @param {Array} array 待遍历的数组或者对象
+         * @param {Array} array 待遍历的数组
          * @param {Function} fn 回调函数
          * @ignore
          */
@@ -916,6 +916,19 @@ exports.load = function ($this, isInit) {
                 var $el = el instanceof $init ? el : $(el);
                 $el.append(this, true);
                 return this;
+            },
+
+            /**
+             * 元素包装
+             * @param {Node|NodeList|string|$init} el 包装对象
+             * @returns {$init} $对象本身
+             */
+            wrap: function (el) {
+                var $el = el instanceof $init ? el : $(el);
+                return this.forEach(function (el) {
+                    el.parentNode.insertBefore($el[0], el);
+                    $el.append(el);
+                });
             },
 
             /**

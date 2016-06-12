@@ -627,6 +627,19 @@
             },
 
             /**
+             * 元素包装
+             * @param {Node|NodeList|string|$init} el 包装对象
+             * @returns {$init} $对象本身
+             */
+            wrap: function (el) {
+                var $el = el instanceof $init ? el : $(el);
+                return this.forEach(function (el) {
+                    el.parentNode.insertBefore($el[0], el);
+                    $el.append(el);
+                });
+            },
+
+            /**
              * 元素取尺寸对象
              * @returns {Object} 尺寸对象
              */
