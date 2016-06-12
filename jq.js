@@ -15,6 +15,7 @@
         var document = window.document,
             Node = window.Node,
             NodeList = window.NodeList,
+            getComputedStyle = window.getComputedStyle,
             toString = {}.toString,
             tmpArray = [],
             slice = tmpArray.slice,
@@ -161,6 +162,28 @@
                     return el.mozMatchesSelector(sel);
                 };
             }
+        })();
+
+        /**
+         * 返回元素黑夜样式值函数
+         * @param {string} tagName 元素名
+         * @param {string} key 样式key
+         * @returns {string} 初始样式值
+         * @ignore
+         */
+        var getInitialStyle = (function () {
+            var cache = {},
+                bodyEl = document.body;
+            return function (tagName, key) {
+                var prop = tagName + '-' + key;
+                if (!cache[prop]) {
+                    var tmpEl = document.createElement(tagName);
+                    bodyEl.appendChild(tmpEl);
+                    cache[prop] = getComputedStyle(tmpEl)[key];
+                    bodyEl.removeChild(tmpEl);
+                }
+                return cache[prop];
+            };
         })();
 
         /**
@@ -444,25 +467,38 @@
              * 元素属性取值/赋值
              * @param {Object|string} key 属性|属性对象
              * @param {string} val 属性值
+             * @param {string} prefix 属性前缀
              * @returns {$init|string} $对象本身|属性值
              */
-            attr: function (key, val) {
+            attr: function (key, val, prefix) {
+                //属性前缀
+                prefix === undefined && (prefix = '');
                 //$().attr(key)
                 if (typeof key === 'string' && val === undefined) {
-                    return this[0].getAttribute(key);
+                    return this[0].getAttribute(prefix + key);
                 }
                 return this.forEach(function (el) {
                     //$().attr(obj)
                     if ($.isObject(key)) {
                         for (var p in key) {
-                            el.setAttribute(p, key[p]);
+                            el.setAttribute(prefix + p, key[p]);
                         }
                     }
                     //$().attr(key,val)
                     else {
-                        el.setAttribute(key, val);
+                        el.setAttribute(prefix + key, val);
                     }
                 });
+            },
+
+            /**
+             * 元素data-属性取值/赋值
+             * @param {Object|string} key 属性|属性对象
+             * @param {string} val 属性值
+             * @returns {$init|string}
+             */
+            data: function (key, val) {
+                return this.attr(key, val, 'data-');
             },
 
             /**
@@ -490,7 +526,7 @@
                     //必须是node
                     if (this[0] instanceof Node) {
                         //计算样式
-                        var style = window.getComputedStyle(this[0]);
+                        var style = getComputedStyle(this[0]);
                         return style[key] || style[cssPrefix + key];
                     }
                     return undefined;
@@ -516,10 +552,7 @@
              */
             show: function () {
                 return this.forEach(function (el) {
-                    var display = el.getAttribute('data-display') || 'block';
-                    display === 'none' && (display = 'block');
-                    el.style.display = display;
-                    el.removeAttribute('data-display');
+                    el.style.display = getInitialStyle(el.tagName, 'display');
                 });
             },
 
@@ -528,10 +561,7 @@
              * @returns {$init} $对象本身
              */
             hide: function () {
-                return this.forEach(function (el) {
-                    el.setAttribute('data-display', $(el).css('display'));
-                    el.style.display = 'none';
-                });
+                return this.css('display', 'none');
             },
 
             /**
@@ -539,9 +569,7 @@
              * @returns {$init} $对象本身
              */
             fadeIn: function () {
-                return this.forEach(function (el) {
-                    $(el).removeClass('fade-out').addClass('fade-in');
-                });
+                return this.removeClass('fade-out').addClass('fade-in');
             },
 
             /**
@@ -549,9 +577,7 @@
              * @returns {$init} $对象本身
              */
             fadeOut: function () {
-                return this.forEach(function (el) {
-                    $(el).removeClass('fade-in').addClass('fade-out');
-                });
+                return this.removeClass('fade-in').addClass('fade-out');
             },
 
             /**
@@ -913,6 +939,12 @@
             contentType: 'application/x-www-form-urlencoded',
             async      : true
         };
+
+
+        //扩展其他属性
+        $.extend({
+            getInitialStyle: getInitialStyle
+        });
 
         return $;
 
