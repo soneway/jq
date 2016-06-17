@@ -144,6 +144,10 @@ var plumber = require('gulp-plumber');
             task.pipe(jsmin())
                 .pipe(gulp.dest(conf.dest));
         }
+
+        gulp.src('../../jq.js')
+            .pipe(jsmin())
+            .pipe(gulp.dest(conf.dest));
     });
 })();
 
