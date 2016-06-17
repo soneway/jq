@@ -1,8 +1,295 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (window) {
+
+    var share = (function () {
+        return function (url, txt, pic, provider, isGetUrl) {
+            if (!provider) return;
+
+            var toUrl;
+            url = encodeURIComponent(url || '');
+            txt = encodeURIComponent(txt || '');
+            pic = encodeURIComponent(pic || '');
+
+            switch (provider) {
+                case 'weibosohu':
+                {
+                    toUrl = 'http://t.sohu.com/third/post.jsp?url=' + url + '&title=' + txt + '&pic=' + pic;
+                    break;
+                }
+                case 'weibosina':
+                {
+                    toUrl = 'http://service.t.sina.com.cn/share/share.php?title=' + txt + url + '&pic=' + pic + '&searchPic=false';
+                    break;
+                }
+                case 'qq':
+                {
+                    toUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + txt + '&desc=' + txt + '&summary=' + pic;
+                    break;
+                }
+                case 'tqq':
+                {
+                    toUrl = 'http://v.t.qq.com/share/share.php?url=' + url + '&title=' + txt + '&pic=' + pic;
+                    break;
+                }
+                case 'renren':
+                {
+                    toUrl = 'http://widget.renren.com/dialog/share?resourceUrl=' + pic + '&srcUrl=' + url + '&title=' + txt + '&description=' + txt;
+                    break;
+                }
+                case 'baishehui':
+                {
+                    toUrl = 'http://bai.sohu.com/share/blank/addbutton.do?link=' + url + '&title=' + txt + '&pic=' + pic;
+                    break;
+                }
+                case 'douban':
+                {
+                    toUrl = 'http://shuo.douban.com/!service/share?href=' + url + '&name=' + txt;
+                    break;
+                }
+                case 'kaixin001':
+                {
+                    toUrl = 'http://www.kaixin001.com/rest/records.php?url=' + url + '&style=11&content=' + txt;
+                    break;
+                }
+                case '163':
+                {
+                    toUrl = 'http://t.163.com/article/user/checkLogin.do?info=' + txt + url;
+                    break;
+                }
+                case '51':
+                {
+                    toUrl = 'http://share.51.com/share/share.php?vaddr=' + url + '&title=' + txt + '&type=8&pic=' + pic;
+                    break;
+                }
+                case 'txpengyou':
+                {
+                    toUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url=' + url + '&title=' + txt + '&desc=' + txt + '&summary=' + pic;
+                    break;
+                }
+                case 'tieba':
+                {
+                    toUrl = 'http://tieba.baidu.com/f/commit/share/openShareApi?url=' + url + '&title=' + txt + '&desc=' + txt;
+                    break;
+                }
+            }
+
+            return isGetUrl ? toUrl : window.open(toUrl);
+        };
+    })();
+
+
+    //CommonJS
+    if (typeof exports === 'object') {
+        module.exports = share;
+        return;
+    }
+
+    //添加到全局
+    window.share = share;
+
+})(window);
+},{}],2:[function(require,module,exports){
 //index.js
 
 var $ = require('jq');
-},{"jq":2}],2:[function(require,module,exports){
+require('base');
+require('ui');
+require('customalert');
+require('scroll');
+
+//alert方法
+alert = function (str) {
+    $.customalert({
+        content: str
+    });
+};
+
+
+//页面模块加载对象
+var loader = {
+    carousel   : require('./index/carousel'),
+    flip       : require('./index/flip'),
+    picpager   : require('./index/picpager'),
+    piccut     : require('./index/piccut'),
+    scroll     : require('./index/scroll'),
+    scratchcard: require('./index/scratchcard'),
+    turntable  : require('./index/turntable'),
+    share      : require('./index/share')
+};
+
+
+//面板显示回调函数
+$.panelLoaded = function ($this, isInit) {
+    var load = (loader[$this.attr('id')] || {}).load;
+    typeof load === 'function' && load($this, isInit);
+};
+//面板隐藏回调函数
+$.panelUnloaded = function ($this) {
+    var unload = (loader[$this.attr('id')] || {}).unload;
+    typeof unload === 'function' && unload($this);
+};
+},{"./index/carousel":3,"./index/flip":4,"./index/piccut":5,"./index/picpager":6,"./index/scratchcard":7,"./index/scroll":8,"./index/share":9,"./index/turntable":10,"base":20,"customalert":13,"jq":11,"scroll":18,"ui":21}],3:[function(require,module,exports){
+//焦点图
+
+require('carousel');
+
+//加载时执行
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        var html = '';
+        for (var i = 1, len = 6; i < len; i++) {
+            html += '<img data-title="标题' + i + '" src="img/' + i + '.jpg"/>';
+        }
+
+        $('.carousel').each(function () {
+            $(this).html(html).carousel({
+                isVertical: this.getAttribute('data-isvertical') === '1',
+                isAutoPlay: false
+            });
+        });
+    }
+};
+},{"carousel":12}],4:[function(require,module,exports){
+//3d旋转切换
+
+require('flip');
+
+
+//加载时执行
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        $('.flip').each(function () {
+            var len = this.getAttribute('data-len'),
+                html = '';
+
+            for (var i = 0; i < len; i++) {
+                html += '<a><p style="background: url(img/' + (i + 1) + '.jpg) center center; background-size: cover;" data-title="3d旋转切换示例 ' + (i + 1) + '"></p></a>';
+            }
+
+            $(this).html(html).flip({
+                isVertical: this.getAttribute('data-isvertical') === '1'
+            });
+        });
+    }
+};
+},{"flip":14}],5:[function(require,module,exports){
+//图片剪切
+
+require('piccut');
+
+var $doc = $(document);
+
+
+//加载时执行
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        var upEl = $('.avator_up').piccut({
+            fileEl: document.getElementById('file')
+            //, isKeepScale: false
+            //, cutHeight: 200
+            //, isMinLimit: false
+            //, cutX: 0
+        })[0];
+
+        var showerEl = document.getElementById('shower');
+        $doc.on('click', '#btn_cut', function () {
+            showerEl.src = upEl.getDataURL();
+        });
+    }
+};
+},{"piccut":15}],6:[function(require,module,exports){
+//相册功能
+
+require('picpager');
+
+
+//加载时执行
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        var page = 1;
+        $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
+            var $picpager = $('.picpager').picpager({
+                imgData      : rs.data.detail,
+                imgAttrName  : 'image',
+                slideCallback: function (index) {
+                    index + 1 === page * 10 && $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + ++page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
+                        $picpager[0].addItem(rs.data.detail);
+                    });
+                }
+            });
+        });
+    }
+};
+},{"picpager":16}],7:[function(require,module,exports){
+//刮刮卡
+
+require('scratchcard');
+
+
+//加载时执行
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        $('.scratchcard').each(function () {
+            $(this).scratchcard({
+                text  : '刮开有奖',
+                imgSrc: 'img/4.jpg'
+            });
+        });
+    }
+};
+},{"scratchcard":17}],8:[function(require,module,exports){
+//自定义滚动
+
+require('scroll');
+
+
+//加载时执行
+exports.load = function load($this, isInit) {
+    if (isInit) {
+        $('.scroll').each(function () {
+            $(this).scroll({
+                isVertical: this.getAttribute('data-isvertical') === '1'
+            });
+        });
+    }
+};
+},{"scroll":18}],9:[function(require,module,exports){
+//分享
+
+var $doc = $(document),
+    share = require('share');
+
+var txtShare = document.title,
+    picShare = 'http://www.sohu.com/upload/images20140108/sohulogo.png',
+    urlShare = location.href;
+
+//分享按钮点击
+$doc.on('click', '.icon_share a', function () {
+    share(urlShare, txtShare, picShare, this.getAttribute('data-provider'));
+});
+},{"share":1}],10:[function(require,module,exports){
+//转盘抽奖
+
+require('turntable');
+
+//文档jq对象
+var $doc = $(document);
+
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        var turntableEl = $('.turntable').turntable({
+            count: 10
+        })[0];
+
+        $doc.on('click', '.turntable .btn_start', function () {
+            var index = parseInt(Math.random() * 10);
+            turntableEl.turnToIndex(index, function () {
+                alert(index + 1);
+            });
+        });
+    }
+};
+},{"turntable":19}],11:[function(require,module,exports){
 //jq.js
 (function (window, undefined) {
 
@@ -952,4 +1239,2057 @@ var $ = require('jq');
     }
 
 })(window);
-},{}]},{},[1])
+},{}],12:[function(require,module,exports){
+/*
+ * carousel.js
+ * 焦点图js
+ */
+(function (window, $) {
+
+    $.fn.carousel = function (options) {
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.carousel.defaults, options);
+
+            //配置项
+            var isVertical = opts.isVertical,
+                swipThreshold = opts.swipThreshold,
+                isAutoPlay = opts.isAutoPlay,
+                autoPlayInter = opts.autoPlayInter,
+                slideCallback = opts.slideCallback,
+                isShowTitle = opts.isShowTitle,
+                isShowPager = opts.isShowPager,
+                removeClassDelay = opts.removeClassDelay,
+                inited = opts.inited,
+                initIndex = opts.initIndex;
+
+            //变量
+            var $this = $(this),
+                me = this,
+                $wrap, wrapElStyle, $items, itemCount,
+                $title, $pagers;
+
+            //初始化函数
+            function init() {
+                $this.addClass('pi-carousel').html('<div class="pi-wrap">' + $this.html() + '</div>' + (isShowTitle ? '<div class="pi-title"></div>' : ''));
+
+                $wrap = $this.find('.pi-wrap');
+                wrapElStyle = $wrap[0].style;
+                $items = $wrap.children('*');
+                itemCount = $items.length;
+
+                //html初始化完成回调
+                typeof inited === 'function' && inited($items);
+
+                isVertical && $this.addClass('vertical');
+                $title = $this.find('.pi-title');
+
+                //pager
+                var html = '';
+                if (isShowPager) {
+                    html += '<div class="pi-pager">';
+                    for (var i = 0, len = itemCount; i < len; i++) {
+                        html += '<span></span>';
+                    }
+                    html += '</div>';
+                }
+                $pagers = $this.append(html).find('.pi-pager span');
+
+                //初始化事件
+                initEvent();
+            }
+
+            //初始化事件函数
+            function initEvent() {
+                var width, height, inter, index = initIndex,
+                    startX, startY,
+                    swipSpan;
+
+                //设置尺寸函数
+                function setSize() {
+                    width = $this.width();
+                    height = $this.height();
+
+                    //水平方向滚动
+                    if (!isVertical) {
+                        wrapElStyle.width = width * itemCount + 'px';
+                        $items.css('width', width + 'px');
+                    }
+                    //竖直方向滚动
+                    else {
+                        wrapElStyle.height = height * itemCount + 'px';
+                        $items.css('height', height + 'px');
+                    }
+                }
+
+                //设置inter函数
+                function setInter() {
+                    isAutoPlay && (inter = setInterval(function () {
+                        ++index === itemCount && (index = 0);
+                        slide();
+                    }, autoPlayInter));
+                }
+
+                //移动到函数
+                function slide(swipSpan) {
+                    var translate = -index * (isVertical ? height : width),
+                        transform;
+
+                    if (typeof swipSpan === 'number') {
+                        //起点
+                        if (index === 0 && swipSpan > 0) {
+                            swipSpan /= 2;
+                        }
+                        //终点
+                        if (index === itemCount - 1 && swipSpan < 0) {
+                            swipSpan /= 2;
+                        }
+                        translate += swipSpan;
+                    }
+                    else {
+
+                        //滚动回调函数
+                        typeof slideCallback === 'function' && slideCallback.call($items[index], index);
+
+                        //延迟removeClass('current')
+                        setTimeout(function () {
+                            $items.each(function () {
+                                var $this = $(this),
+                                    i = $this.index();
+                                i !== index && $this.removeClass('current');
+                            });
+                        }, removeClassDelay);
+
+                        //title
+                        if (isShowTitle) {
+                            var title = $items.eq(index).addClass('current').attr('data-title');
+                            $title.removeClass('visible');
+                            title && setTimeout(function () {
+                                $title.addClass('visible').html(title);
+                            }, 150);
+                        }
+
+                        //pager状态
+                        if (isShowPager) {
+                            $pagers.removeClass('selected');
+                            //下一队列执行,以防某些情况下无效
+                            setTimeout(function () {
+                                $pagers.eq(index).addClass('selected');
+                            }, 0);
+                        }
+                    }
+
+                    transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
+                    //作动画
+                    $wrap.css({
+                        'transform': transform
+                    });
+                }
+
+
+                //初始化
+                //设置尺寸
+                setSize();
+
+                //暴露slideToIndex方法
+                me.slideToIndex = function (i, isNoAni) {
+                    if (typeof i !== 'number') {
+                        return console.log('index应为数字');
+                    }
+
+                    //是否有动画
+                    isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
+
+                    index = i;
+                    slide();
+                };
+
+                //暴露prev方法
+                me.prev = function () {
+                    --index < 0 && (index = itemCount - 1);
+                    slide();
+                };
+
+                //暴露next方法
+                me.next = function () {
+                    ++index === itemCount && (index = 0);
+                    slide();
+                };
+
+
+                //触摸开始事件
+                $this.on('touchstart', function (evt) {
+                    var touch = evt.targetTouches[0];
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                    //重置swipSpan
+                    swipSpan = 0;
+                    //取消动画
+                    $wrap.removeClass('transform');
+                    //取消自动轮播
+                    isAutoPlay && clearInterval(inter);
+                });
+
+                //触摸移动事件
+                $this.on('touchmove', function (evt) {
+                    var touch = evt.targetTouches[0],
+                        swipSpanX = touch.pageX - startX,
+                        swipSpanY = touch.pageY - startY;
+
+                    //上下
+                    if (isVertical) {
+                        if (Math.abs(swipSpanY) > Math.abs(swipSpanX)) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            slide(swipSpan = swipSpanY);
+                        }
+                    }
+                    //左右
+                    else {
+                        if (Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            slide(swipSpan = swipSpanX);
+                        }
+                    }
+                });
+
+                //触摸结束事件
+                $this.on('touchend', function () {
+                    //向右,下
+                    if (swipSpan > swipThreshold) {
+                        --index < 0 && (index = 0);
+                    }
+                    //向左,上
+                    if (swipSpan < -swipThreshold) {
+                        ++index === itemCount && (index = itemCount - 1);
+                    }
+
+                    //加上动画
+                    $wrap.addClass('transform');
+
+                    //滚动(swipSpan === undefined时无动画)
+                    swipSpan !== 0 && slide();
+
+                    //自动轮播
+                    setInter();
+                }).trigger('touchend');
+
+                //pager点击事件
+                $pagers.on('click', function () {
+                    var index = $(this).index();
+                    me.slideToIndex(index);
+                });
+
+                //屏幕尺寸改变事件
+                window.addEventListener('resize', function () {
+                    var w = $this.width();
+                    if (w > 0) {
+                        setSize();
+                        slide(0);
+                    }
+                }, false);
+
+            }
+
+
+            //初始化
+            init();
+
+        });
+
+    };
+    $.fn.carousel.defaults = {
+        //是否竖直方向滚动
+        isVertical      : false,
+        //滑动阈值
+        swipThreshold   : 100,
+        //是否自动轮播
+        isAutoPlay      : true,
+        //轮播inter
+        autoPlayInter   : 8000,
+        //轮播回调函数
+        slideCallback   : null,
+        //是否显示title
+        isShowTitle     : true,
+        //是否显示pager
+        isShowPager     : true,
+        //移除class延迟
+        removeClassDelay: 0,
+        //初始化完成回调函数
+        inited          : null,
+        //初始index
+        initIndex       : 0
+    };
+
+})(window, $);
+},{}],13:[function(require,module,exports){
+/*
+ * customalert.js
+ * 自定义提示框js
+ */
+(function (window, $) {
+
+    //1.变量
+    var $title, $content,
+        $btnOk, $btnCancel,
+        btnOkClick, btnCancelClick,
+        onShow, onHide,
+        document = window.document,
+        $doc = $(document),
+        $body = $(document.body),
+        $customalert = $('#customalert');
+
+
+    //2.初始化
+    (function () {
+        if ($customalert.length === 0) {
+            $customalert = $('<div id="customalert">' +
+                '<div class="ca-box">' +
+                '<h1 class="ca-title">提示</h1>' +
+                '<p class="ca-content">是否转到登陆</p>' +
+                '<a class="btn ca-ok">确定</a>' +
+                '<a class="btn ca-cancel">关闭</a>' +
+                '</div>' +
+                '</div>');
+            //添加html元素
+            $body.append($customalert);
+        }
+
+        $title = $customalert.find('.ca-title');
+        $content = $customalert.find('.ca-content');
+        $btnOk = $customalert.find('.ca-ok');
+        $btnCancel = $customalert.find('.ca-cancel');
+    })();
+
+
+    //3.事件
+    //确定按钮
+    $doc.on('click', '#customalert .ca-ok', function () {
+        //隐藏
+        $body.removeClass('oncustomalert');
+        typeof onHide === 'function' && onHide();
+        typeof btnOkClick == 'function' && btnOkClick();
+    });
+    //关闭按钮
+    $doc.on('click', '#customalert .ca-cancel', function () {
+        //隐藏
+        $body.removeClass('oncustomalert');
+        typeof onHide === 'function' && onHide();
+        typeof btnCancelClick === 'function' && btnCancelClick();
+    });
+
+
+    //4.扩展属性
+    $.customalert = function (options) {
+        options = options || {};
+
+        //配置项
+        var opts = $.extend({}, $.customalert.defaults, options);
+
+        var title = opts.title,
+            content = opts.content,
+            btnOkText = opts.btnOkText,
+            btnCancelText = opts.btnCancelText,
+            isAlert = opts.isAlert;
+
+        btnOkClick = opts.btnOkClick;
+        btnCancelClick = opts.btnCancelClick;
+        onShow = opts.onShow;
+        onHide = opts.onHide;
+
+        //是否是alert(只显示确定按钮)
+        if (isAlert) {
+            $customalert.addClass('alert');
+        }
+        else {
+            $customalert.removeClass('alert');
+        }
+
+        //设置内容
+        title && $title.html(title);
+        content && $content.html(content);
+        btnOkText && $btnOk.text(btnOkText);
+        btnCancelText && $btnCancel.text(btnCancelText);
+
+        //显示
+        $body.addClass('oncustomalert');
+        typeof onShow === 'function' && onShow();
+    };
+
+    //默认配置
+    $.customalert.defaults = {
+        title         : '提示',
+        content       : '内容',
+        btnOkText     : '确定',
+        btnOkClick    : null,
+        btnCancelText : '取消',
+        btnCancelClick: null,
+        isAlert       : true,
+        onShow        : null,
+        onHide        : null
+    };
+
+})(window, $);
+},{}],14:[function(require,module,exports){
+/*
+ * flip.js
+ * 3d翻转效果js
+ */
+(function (window, $) {
+
+    $.fn.flip = function (options) {
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.flip.defaults, options);
+
+            //配置项
+            var isVertical = opts.isVertical,
+                swipThreshold = opts.swipThreshold,
+                rate = opts.rate,
+                slideCallback = opts.slideCallback;
+
+            //变量
+            var $this = $(this),
+                $items = $this.children('*');
+
+            //初始化函数
+            function init() {
+                $this.addClass('pi-flip');
+
+                //初始化第一个item显示
+                $items.eq(0).addClass('visible');
+                //滚动回调函数
+                typeof slideCallback === 'function' && slideCallback(0);
+
+                //初始化事件
+                initEvent();
+            }
+
+            //初始化事件函数
+            function initEvent() {
+                var itemCount = $items.length,
+                    index = 0,
+                    duration = parseFloat($items.css('transition-duration')) * 1000,
+                    startX, startY,
+                    swipSpan, isAnimating;
+
+                //复位函数
+                function reset(me) {
+                    me.style.cssText = '';
+                }
+
+                //旋转到函数
+                function rotate(swipSpan) {
+                    var transform;
+
+                    if (typeof swipSpan === 'number') {
+                        $items.each(function (i) {
+                            var $this = $(this);
+                            if (i === index) {
+                                transform = isVertical ? 'rotate3d(1,0,0,' + -swipSpan + 'deg)' : 'rotate3d(0,1,0,' + swipSpan + 'deg)';
+                                $this.css({
+                                    'transform': transform
+                                });
+                            }
+                            else {
+                                transform = isVertical ? 'rotate3d(1,0,0,' + (180 - swipSpan) + 'deg)' : 'rotate3d(0,1,0,' + -(180 - swipSpan) + 'deg)';
+                                $this.css({
+                                    'transform': transform
+                                });
+                            }
+                        });
+                    }
+                    else {
+                        isAnimating = true;
+                        //滚动回调函数
+                        $.isFunction(slideCallback) && slideCallback(index);
+
+                        $items.each(function (i) {
+                            var $this = $(this);
+                            if (i === index) {
+                                transform = isVertical ? 'rotate3d(1,0,0,' + -(swipSpan ? 0 : -360) + 'deg)' : 'rotate3d(0,1,0,' + (swipSpan ? 0 : -360) + 'deg)';
+                                $this.addClass('visible').css({
+                                    'transform': transform
+                                });
+                            }
+                            else {
+                                transform = isVertical ? 'rotate3d(1,0,0,' + -(swipSpan ? 180 : -180) + 'deg)' : 'rotate3d(0,1,0,' + (swipSpan ? 180 : -180) + 'deg)';
+                                $this.removeClass('visible').css({
+                                    'transform': transform
+                                });
+                            }
+                        });
+
+                        //延迟复位
+                        setTimeout(function () {
+                            //加上动画
+                            $items.addClass('notrans').each(function () {
+                                reset(this);
+                            });
+                            isAnimating = false;
+                        }, duration);
+                    }
+                }
+
+                //触摸开始事件
+                $this.on('touchstart', function (evt) {
+                    var touch = evt.targetTouches[0];
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                    //重置swipSpan
+                    swipSpan = 0;
+
+                    //去掉动画
+                    $items.addClass('notrans');
+                });
+
+                //触摸移动事件
+                $this.on('touchmove', function (evt) {
+                    var touch = evt.targetTouches[0],
+                        swipSpanX = touch.pageX - startX,
+                        swipSpanY = touch.pageY - startY;
+
+                    //上下
+                    if (isVertical && Math.abs(swipSpanX) < Math.abs(swipSpanY)) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                        !isAnimating && rotate(swipSpan = swipSpanY / rate);
+                    }
+                    //左右
+                    if (!isVertical && Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                        !isAnimating && rotate(swipSpan = swipSpanX / rate);
+                    }
+                });
+
+                //触摸结束事件
+                $this.on('touchend', function (evt) {
+                    if (!isAnimating) {
+                        //达到滚动阈值
+                        if (Math.abs(swipSpan) > swipThreshold) {
+                            if (swipSpan > 0 && --index === -1) {
+                                index = itemCount - 1;
+                            }
+                            if (swipSpan < 0 && ++index === itemCount) {
+                                index = 0;
+                            }
+
+                            //加上动画
+                            $items.removeClass('notrans');
+                            rotate(swipSpan > 0);
+                        }
+                        else if (swipSpan !== 0) {
+                            //加上动画
+                            $items.eq(index).removeClass('notrans');
+                            reset($items[index]);
+                        }
+                    }
+                });
+            }
+
+
+            //初始化
+            init();
+
+        });
+
+    };
+    $.fn.flip.defaults = {
+        //是否竖直方向滚动
+        isVertical: false,
+        //滑动阈值
+        swipThreshold: 60,
+        //比率
+        rate: 1.3,
+        //轮播回调函数
+        slideCallback: null
+    };
+
+})(window, $);
+},{}],15:[function(require,module,exports){
+/*
+ * piccut.js
+ * 图片裁切功能js
+ */
+(function (window, $) {
+
+    $.fn.piccut = function (options) {
+
+        var URL = window.URL || window.webkitURL;
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.piccut.defaults, options);
+
+            //配置项
+            var cutX = opts.cutX,
+                cutY = opts.cutY,
+                cutWidth = opts.cutWidth,
+                cutHeight = opts.cutHeight,
+                fileEl = opts.fileEl,
+                layerStyle = opts.layerStyle,
+                isContain = opts.isContain,
+                isKeepScale = opts.isKeepScale,
+                isMinLimit = opts.isMinLimit,
+                scale = opts.scale;
+
+            //变量
+            var me = this,
+                $this = $(me),
+                meWidth = me.offsetWidth,
+                meHeight = me.offsetHeight,
+                canvasEl, context,
+                canvasWidth = meWidth * scale,
+                canvasHeight = meHeight * scale,
+                maskEl, maskContext,
+                cutterEl, $cutter,
+                $resizer,
+                cutRatio = cutWidth / cutHeight;
+
+            //默认裁切起点
+            cutX === undefined && (cutX = opts.cutX = (meWidth - cutWidth) / 2);
+            cutY === undefined && (cutY = opts.cutY = (meHeight - cutHeight) / 2);
+
+            //初始化函数
+            function init() {
+                $this.addClass('pi-piccut')
+                    .html('<canvas class="pi-piccut-canvas" width="' + canvasWidth + '" height="' + canvasHeight + '" style="width:' + meWidth + 'px;"></canvas>' +
+                    '<canvas class="pi-piccut-mask" width="' + canvasWidth + '" height="' + canvasHeight + '" style="width:' + meWidth + 'px;"></canvas>' +
+                    '<p class="pi-piccut-cutter">' +
+                    '<b class="pi-piccut-resizer"></b>' +
+                    '</p>');
+
+                //画布canvas
+                canvasEl = me.getElementsByClassName('pi-piccut-canvas')[0];
+                context = canvasEl.getContext('2d');
+
+                //遮罩canvas
+                maskEl = me.getElementsByClassName('pi-piccut-mask')[0];
+                maskContext = maskEl.getContext('2d');
+
+                //cutter
+                cutterEl = me.getElementsByClassName('pi-piccut-cutter')[0];
+                $cutter = $(cutterEl);
+                //resizer
+                $resizer = $(me.getElementsByClassName('pi-piccut-resizer')[0]);
+
+                //初始化事件
+                initEvent();
+            }
+
+            //初始化事件函数
+            function initEvent() {
+                var startX, startY,
+                //是否形变
+                    isResing,
+                //记录touchmove时的位置
+                    cutCurX = cutX, cutCurY = cutY,
+                //记录touchmove时的尺寸
+                    cutCurWidth = cutWidth, cutCurHeight = cutHeight;
+
+                //刷新遮罩函数
+                function refreshMask() {
+                    //cutter的位置和尺寸
+                    $cutter.css({
+                        transform: 'translate3d(' + cutCurX + 'px, ' + cutCurY + 'px, 0)',
+                        width    : cutCurWidth + 'px',
+                        height   : cutCurHeight + 'px'
+                    });
+                    //cutterEl.style.cssText = 'width:' + cutCurWidth + 'px; height:' + cutCurHeight + 'px; left:' + cutCurX + 'px; top:' + cutCurY + 'px;';
+
+                    //清理画布
+                    maskContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                    //画layer层
+                    maskContext.globalCompositeOperation = 'source-over';
+                    maskContext.fillStyle = layerStyle;
+                    maskContext.fillRect(0, 0, canvasWidth, canvasHeight);
+
+                    //画mask层
+                    maskContext.globalCompositeOperation = 'destination-out';
+                    maskContext.fillStyle = '#fff';
+                    maskContext.fillRect(cutCurX * scale, cutCurY * scale, cutCurWidth * scale, cutCurHeight * scale);
+                }
+
+
+                //文件选择事件
+                fileEl.onchange = function () {
+                    var file = fileEl.files[0],
+                        url = URL.createObjectURL(file);
+
+                    //重置剪裁参数
+                    cutX = opts.cutX;
+                    cutY = opts.cutY;
+                    cutWidth = opts.cutWidth;
+                    cutHeight = opts.cutHeight;
+
+                    //绘制图片
+                    var img = new Image();
+                    img.src = url;
+                    img.onload = function () {
+                        var imgWidth = img.width,
+                            imgHeight = img.height;
+
+                        //是否如背景图的background-size:contain;那样
+                        if (isContain) {
+                            var ratio = imgWidth / imgHeight;
+                            if (ratio > canvasWidth / canvasHeight) {
+                                if (imgWidth > canvasWidth) {
+                                    imgWidth = canvasWidth;
+                                    imgHeight = imgWidth / ratio;
+                                }
+                            }
+                            else {
+                                if (imgHeight > canvasHeight) {
+                                    imgHeight = canvasHeight;
+                                    imgWidth = imgHeight * ratio;
+                                }
+                            }
+                        }
+
+                        //清理画布
+                        context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                        //画图片层
+                        context.drawImage(img, (canvasWidth - imgWidth) / 2, (canvasHeight - imgHeight) / 2, imgWidth, imgHeight);
+
+                        //刷新遮罩(加个延迟,以避免安卓4.2后面的绘图功能不生效)
+                        setTimeout(function () {
+                            refreshMask();
+                        }, 0);
+
+                        //显示裁切相关元素
+                        $this.addClass('on');
+                    };
+                };
+
+
+                //暴露getDataURL函数
+                me.getDataURL = function () {
+                    if (!fileEl.value) {
+                        alert('请选择图片');
+                        return;
+                    }
+
+                    //临时canvas导出图片数据
+                    var data = context.getImageData(cutX * scale, cutY * scale, cutWidth * scale, cutHeight * scale),
+                        tmp = document.createElement('canvas');
+
+                    tmp.width = cutWidth * scale;
+                    tmp.height = cutHeight * scale;
+                    tmp.getContext('2d').putImageData(data, 0, 0);
+
+                    return tmp.toDataURL('image/png');
+                };
+
+
+                //$this的事件
+                $this.on('touchstart', function (evt) {
+                    var touch = evt.targetTouches[0];
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                });
+
+                //在容器上touchmove时,作形变操作
+                $this.on('touchmove', function (evt) {
+                    //正在形变
+                    if (isResing) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        //计算位移
+                        var touch = evt.targetTouches[0],
+                            swipSpanX = touch.pageX - startX,
+                            swipSpanY = touch.pageY - startY;
+
+                        //宽度
+                        cutCurWidth = cutWidth + swipSpanX;
+                        //高度
+                        cutCurHeight = cutHeight + swipSpanY;
+
+                        //保持比例
+                        if (isKeepScale) {
+                            //计算出按比例的宽度,高度
+                            cutWidth / cutCurHeight > cutRatio ? (cutCurHeight = cutCurWidth / cutRatio) : (cutCurWidth = cutCurHeight * cutRatio);
+
+                            //不能超出范围内
+                            if (cutCurY + cutCurHeight > meHeight) {
+                                cutCurHeight = meHeight - cutCurY;
+                                cutCurWidth = cutCurHeight * cutRatio;
+                            }
+                            if (cutCurX + cutCurWidth > meWidth) {
+                                cutCurWidth = meWidth - cutCurX;
+                                cutCurHeight = cutCurWidth / cutRatio;
+                            }
+                        }
+                        else {
+                            //不能超出范围内
+                            cutCurY + cutCurHeight > meHeight && (cutCurHeight = meHeight - cutCurY);
+                            cutCurX + cutCurWidth > meWidth && (cutCurWidth = meWidth - cutCurX);
+                        }
+
+                        //有最小限制时,将不能小于配置项中的裁切尺寸
+                        isMinLimit && cutCurHeight < opts.cutHeight && (cutCurHeight = opts.cutHeight);
+                        isMinLimit && cutCurWidth < opts.cutWidth && (cutCurWidth = opts.cutWidth);
+
+                        //刷新遮罩
+                        refreshMask();
+                    }
+                });
+
+                //cutter上touchmove时,移动遮罩
+                $cutter.on('touchmove', function (evt) {
+                    //不是形变
+                    if (!isResing) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        //计算位移
+                        var touch = evt.targetTouches[0],
+                            swipSpanX = touch.pageX - startX,
+                            swipSpanY = touch.pageY - startY;
+
+                        //X轴
+                        cutCurX = cutX + swipSpanX;
+                        //不能超出范围内
+                        cutCurX < 0 && (cutCurX = 0);
+                        cutCurX + cutCurWidth > meWidth && (cutCurX = meWidth - cutCurWidth);
+
+                        //Y轴
+                        cutCurY = cutY + swipSpanY;
+                        //不能超出范围内
+                        cutCurY < 0 && (cutCurY = 0);
+                        cutCurY + cutCurHeight > meHeight && (cutCurY = meHeight - cutCurHeight);
+
+                        //刷新遮罩
+                        refreshMask();
+                    }
+                });
+
+                $this.on('touchend', function () {
+                    //保存位置
+                    cutX = cutCurX;
+                    cutY = cutCurY;
+                    //保存尺寸
+                    cutWidth = cutCurWidth;
+                    cutHeight = cutCurHeight;
+                });
+
+
+                //resizer的事件
+                $resizer.on('touchstart', function () {
+                    //标识正在作形变
+                    isResing = true;
+                });
+
+                $resizer.on('touchend', function () {
+                    isResing = false;
+                });
+
+            }
+
+
+            //初始化
+            init();
+
+        });
+
+    };
+    $.fn.piccut.defaults = {
+        //裁切起点x值
+        cutX       : undefined,
+        //裁切起点y值
+        cutY       : undefined,
+        //裁切宽度
+        cutWidth   : 320,
+        //裁切高度
+        cutHeight  : 320,
+        //file元素
+        fileEl     : null,
+        //遮罩样式
+        layerStyle : 'rgba(128,128,128,0.7)',
+        //是否如背景图的background-size:contain;
+        isContain  : true,
+        //截图是否保持比例
+        isKeepScale: true,
+        //是否有最小限制(默认限制为裁切宽度和裁切高度)
+        isMinLimit : true,
+        //缩放比例
+        scale      : 1
+    };
+
+})(window, $);
+},{}],16:[function(require,module,exports){
+/*
+ * picpager.js
+ * 相册js
+ */
+(function (window, $) {
+
+    $.fn.picpager = function (options) {
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.picpager.defaults, options);
+
+            //配置项
+            var imgData = opts.imgData,
+                imgAttrName = opts.imgAttrName,
+                swipThreshold = opts.swipThreshold,
+                slideCallback = opts.slideCallback;
+
+            //变量
+            var $this = $(this),
+                me = this,
+                $pics, $wrap,
+                itemCount = imgData.length;
+
+            //初始化函数
+            function init() {
+                $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
+                $wrap = $this.find('.pi-wrap');
+                $pics = $this.find('.pi-pic');
+
+                //初始化事件
+                initEvent();
+            }
+
+            //初始化事件函数
+            function initEvent() {
+                var width = $this.width(),
+                    index = 0,
+                    startX, startY,
+                    swipSpan, isAnimating,
+                    duration = parseFloat($wrap.css('transition-duration')) * 1000;
+
+                //移动到函数
+                function slide(direction) {
+                    //加上动画
+                    $wrap.removeClass('notrans');
+
+                    //判断滚动
+                    switch (direction) {
+                        //向右
+                        case 1:
+                        //向左
+                        case -1:
+                        {
+                            //动画
+                            isAnimating = true;
+                            var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
+                            translate($wrap, transform);
+
+                            //复位操作,更新图片
+                            setTimeout(function () {
+                                translate($wrap.addClass('notrans'), 'translate3d(0,0,0)');
+                                $pics.each(function (i) {
+                                    loadImg($(this), index + i - 1);
+                                });
+                                isAnimating = false;
+                            }, duration + 100);//加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
+                            break;
+                        }
+                        default:
+                        {
+                            translate($wrap, 'translate3d(0,0,0)');
+                        }
+                    }
+
+                    //滚动回调函数
+                    typeof slideCallback === 'function' && slideCallback(index, direction);
+                }
+
+                //移动函数
+                function translate($this, val) {
+                    $this.css({
+                        'transform': val
+                    });
+                }
+
+                //加载图片函数
+                function loadImg($this, i) {
+                    var item = imgData[i];
+                    $this.css({
+                        'background-image': item ? 'url(' + (imgAttrName ? item[imgAttrName] : item) + ')' : 'none'
+                    });
+                }
+
+                //初始化加载图片
+                $pics.each(function (i) {
+                    loadImg($(this), i - 1);
+                });
+
+
+                //暴露slideToIndex方法
+                me.slideToIndex = function (i) {
+                    var direction;
+                    //如不为数字或者超出范围
+                    if (typeof i !== 'number' || i < 0 || i >= itemCount || i === index) {
+                        return;
+                    }
+
+                    //向左
+                    if (i > index) {
+                        direction = -1;
+                        loadImg($pics.eq(2), i);
+                    }
+                    //向右
+                    else {
+                        direction = 1;
+                        loadImg($pics.eq(0), i);
+                    }
+
+                    //做动画
+                    index = i;
+                    slide(direction);
+                };
+
+                //暴露addItem方法
+                me.addItem = function (item) {
+                    //如为数组
+                    if ($.isArray(item)) {
+                        imgData = imgData.concat(item);
+                    }
+                    else {
+                        imgData.push(item);
+                    }
+                    itemCount = imgData.length;
+                };
+
+
+                //触摸开始事件
+                $this.on('touchstart', function (evt) {
+                    var touch = evt.targetTouches[0];
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                    //重置swipSpan
+                    swipSpan = 0;
+                    //取消动画
+                    $wrap.addClass('notrans');
+                });
+
+                //触摸移动事件
+                $this.on('touchmove', function (evt) {
+                    if (!isAnimating) {
+                        var touch = evt.targetTouches[0],
+                            swipSpanX = touch.pageX - startX,
+                            swipSpanY = touch.pageY - startY;
+
+                        //左右
+                        if (Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+
+                            //第一张图
+                            if (index === 0 && swipSpanX > 0) {
+                                swipSpanX /= 2;
+                            }
+                            //最后一张图
+                            if (index === itemCount - 1 && swipSpanX < 0) {
+                                swipSpanX /= 2;
+                            }
+
+                            var transform = 'translate3d(' + (swipSpan = swipSpanX) + 'px,0,0)';
+                            translate($wrap, transform);
+                        }
+                    }
+                    else {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                    }
+                });
+
+                //触摸结束事件
+                $this.on('touchend', function () {
+                    if (!isAnimating) {
+                        var direction;
+                        //向右
+                        if (swipSpan > swipThreshold) {
+                            --index < 0 ? index = 0 : direction = 1;
+                        }
+                        //向左
+                        if (swipSpan < -swipThreshold) {
+                            ++index === itemCount ? index = itemCount - 1 : direction = -1;
+                        }
+
+                        //滚动
+                        swipSpan !== 0 && slide(direction);
+                    }
+                }).trigger('touchend');
+
+                //屏幕尺寸改变事件
+                window.addEventListener('resize', function () {
+                    var w = $this.width();
+                    w > 0 && (width = w);
+                }, false);
+
+            }
+
+
+            //初始化
+            init();
+
+        });
+
+    };
+    $.fn.picpager.defaults = {
+        //图片数据
+        imgData: null,
+        //表示图片地址属性名
+        imgAttrName: null,
+        //滑动阈值
+        swipThreshold: 100,
+        //轮播回调函数
+        slideCallback: null
+    };
+
+})(window, $);
+},{}],17:[function(require,module,exports){
+/*
+ * scratchcard.js
+ * 刮刮卡js
+ */
+(function (window, $) {
+
+    $.fn.scratchcard = function (options) {
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.scratchcard.deflunt, options);
+
+            //配置项
+            var fineness = opts.fineness,
+                paintStyle = opts.paintStyle,
+                text = opts.text,
+                fontColor = opts.fontColor,
+                font = opts.font,
+                imgSrc = opts.imgSrc,
+                scale = opts.scale;
+
+            //变量
+            var $this = $(this),
+                width = $this.width() * scale,
+                height = $this.height() * scale,
+            //绘画元素
+                $canvas,
+            //容器offsetLeft
+                offsetLeft,
+            //容器offsetTop
+                offsetTop,
+            //上下文
+                context;
+
+            //初始化函数
+            function init() {
+                var html = '<canvas style="width: 100%; height: 100%;" width="' + width + '" height="' + height + '"></canvas>';
+                $this.css({
+                    'position': 'relative',
+                    'background-image': 'url(' + imgSrc + ')',
+                    'background-size': '100% auto'
+                }).html(html);
+
+                //canvas
+                $canvas = $this.find('canvas');
+                $canvas.css({
+                    'position': 'absolute',
+                    'top': 0,
+                    'left': 0
+                });
+
+                //上下文
+                context = $this.children('canvas')[0].getContext('2d');
+
+                drawLayer();
+
+                initEvents();
+            }
+
+            //画覆盖物
+            function drawLayer() {
+                context.fillStyle = paintStyle;
+                context.fillRect(0, 0, width, height);
+                if (text) {
+                    context.fillStyle = fontColor;
+                    if (font) {
+                        context.font = font;
+                    }
+                    var textWidth = context.measureText(text).width;
+                    context.fillText(text, opts.left || (width - textWidth) / 2, opts.top || height / 2 + 20, width);
+                }
+            }
+
+            //事件绑定
+            function initEvents() {
+                $canvas.on('touchstart', function (e) {
+                    //计算offset
+                    var offset = $this.offset();
+                    offsetLeft = offset.left;
+                    offsetTop = offset.top;
+                    //设置画画参数
+                    context.fillStyle = '#fff';
+                    context.globalCompositeOperation = 'destination-out';
+                    context.beginPath();
+                    //画画操作
+                    draw(e);
+                });
+                $canvas.on('touchmove', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    //画画操作
+                    draw(e);
+                });
+                $canvas.on('touchend', function (e) {
+                    context.globalCompositeOperation = 'source-over';
+                });
+            }
+
+            //画画函数
+            function draw(e) {
+                var touch = e.targetTouches[0];
+                context.arc((touch.pageX - offsetLeft) * scale, (touch.pageY - offsetTop) * scale, fineness * scale, 0, Math.PI * 2, true);
+                context.closePath();
+                context.fill();
+            }
+
+
+            //初始化
+            init();
+
+        });
+    };
+    $.fn.scratchcard.deflunt = {
+        //画笔大小
+        fineness: 30,
+        //覆盖层颜色
+        paintStyle: '#ccc',
+        //文字
+        text: '',
+        //字体颜色
+        fontColor: '#f00',
+        //字体相关
+        font: 'bold 60px sans-serif',
+        //图片地址
+        imgSrc: '',
+        //缩放比例
+        scale: 1
+    };
+
+})(window, $);
+},{}],18:[function(require,module,exports){
+/*
+ * scroll.js
+ * 自定义滚动js
+ */
+(function (window, $) {
+
+    $.fn.scroll = function (options) {
+
+        var Math = window.Math;
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.scroll.defaults, options);
+
+            //配置项
+            var isVertical = opts.isVertical,
+                rate = opts.rate,
+                timeSpanThreshold = opts.timeSpanThreshold,
+                maxScroll = opts.maxScroll,
+                androidRate = opts.androidRate,
+                isAdjust = opts.isAdjust;
+
+            //变量
+            var $this = $(this),
+                $items = $this.children('*'),
+                isAndroid = /(android)/i.test(window.navigator.userAgent);
+
+
+            //初始化函数
+            function init() {
+                $items.addClass('pi-scroll-item');
+
+                //初始化事件
+                initEvent();
+            }
+
+
+            //初始化事件函数
+            function initEvent() {
+                //touchstart起点
+                var startX, startY,
+                //touch时间点
+                    startTime, endTime,
+                //move的距离
+                    swipSpan,
+                //作动画的值
+                    translateVal = 0,
+                //当然translate值
+                    currentVal,
+                //可滚动的值
+                    scrollVal;
+
+                //初始化可滚动的值函数
+                function initScrollVal() {
+                    //item包含margin的尺寸
+                    var itemsOuterVal = isVertical ?
+                        $items.height() + parseFloat($items.css('margin-top')) + parseFloat($items.css('margin-bottom')) :
+                        $items.width() + parseFloat($items.css('margin-left')) + parseFloat($items.css('margin-right')),
+                    //this不包含padding的尺寸
+                        thisInnerVal = isVertical ?
+                        $this.height() - parseFloat($this.css('padding-top')) - parseFloat($this.css('padding-bottom')) :
+                        $this.width() - parseFloat($this.css('padding-left')) - parseFloat($this.css('padding-right'));
+
+                    //记录可滚动的值
+                    scrollVal = itemsOuterVal - thisInnerVal;
+                }
+
+                initScrollVal();
+
+                //移动到函数
+                function slide(x) {
+                    //起点
+                    if (x > 0) {
+                        x /= 2;
+                    }
+                    //终点
+                    if (-x > scrollVal) {
+                        x = x + (-x - scrollVal) / 2;
+                    }
+
+                    var transform = 'translate3d(' + (isVertical ? '0,' + (translateVal = x) + 'px,0' : (translateVal = x) + 'px,0,0') + ')';
+                    $items.css({
+                        'transform': transform
+                    });
+                }
+
+                //居中函数
+                function center(me) {
+                    var translateVal = isVertical ?
+                    (me.offsetTop - $items[0].offsetTop) - ($this.height() - me.clientHeight) / 2 :
+                    (me.offsetLeft - $items[0].offsetLeft) - ($this.width() - me.clientWidth) / 2;
+
+                    if (translateVal < 0) {
+                        slide(0);
+                    }
+                    else {
+                        translateVal < scrollVal ? slide(-translateVal) : slide(-scrollVal);
+                    }
+                }
+
+                //暴露居中函数
+                $this[0].center = center;
+
+
+                //触摸开始事件
+                $this.on('touchstart', function (evt) {
+                    var touch = evt.targetTouches[0];
+                    //记录开始时间
+                    startTime = evt.timeStamp;
+                    //记录触摸开始位置
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                    //重置swipSpan
+                    swipSpan = 0;
+                    //记录x
+                    currentVal = translateVal;
+
+                    //不作动画
+                    $items.addClass('notrans');
+                });
+
+                //触摸移动事件
+                $this.on('touchmove', function (evt) {
+                    var touch = evt.targetTouches[0],
+                        swipSpanX = touch.pageX - startX,
+                        swipSpanY = touch.pageY - startY;
+
+                    //上下
+                    if (isVertical && Math.abs(swipSpanX) < Math.abs(swipSpanY)) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        slide(currentVal + (swipSpan = swipSpanY));
+                    }
+                    //左右
+                    if (!isVertical && Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        slide(currentVal + (swipSpan = swipSpanX));
+                    }
+                });
+
+                //触摸结束事件
+                $this.on('touchend', function (evt) {
+                    //记录结束时间
+                    endTime = evt.timeStamp;
+
+                    //计算校正值(更加拟物化)
+                    var timeSpan = endTime - startTime,
+                    //安卓的touch响应时间较长故除以一定比率
+                        swipSpanAdjust = timeSpan > timeSpanThreshold ? 0 : swipSpan / (isAndroid ? timeSpan /= androidRate : timeSpan),
+                        span = Math.abs(swipSpanAdjust) * rate;
+
+                    //设置最大滚动值
+                    span > maxScroll && (span = maxScroll);
+
+                    //作动画
+                    $items.removeClass('notrans');
+
+                    if (swipSpan < 0) {
+                        -(translateVal - span) < scrollVal ? slide(translateVal - span) : slide(-scrollVal);
+                    }
+                    else if (swipSpan > 0) {
+                        translateVal + span < 0 ? slide(translateVal + span) : slide(0);
+                    }
+                });
+
+                //点击事件(如果需要将点击元素定位到居中)
+                isAdjust && $this.on('click', function (evt) {
+                    center(evt.target);
+                });
+
+                //屏幕尺寸改变事件
+                window.addEventListener('resize', function () {
+                    var w = $this.width();
+                    w > 0 && initScrollVal();
+                }, false);
+            }
+
+
+            //初始化
+            init();
+
+        });
+
+    };
+    $.fn.scroll.defaults = {
+        //是否竖直方向滚动
+        isVertical       : false,
+        //滚动率
+        rate             : 400,
+        //时间间隙阈值
+        timeSpanThreshold: 300,
+        //滚动最大值
+        maxScroll        : 400,
+        //安卓响应率
+        androidRate      : 1,
+        //是否调整点击元素居中
+        isAdjust         : false
+    };
+
+})(window, $);
+},{}],19:[function(require,module,exports){
+/*
+ * turntable.js
+ * 转盘抽奖js
+ */
+(function (window, $) {
+
+    $.fn.turntable = function (options) {
+
+        //每个元素执行
+        return this.each(function () {
+            var opts = $.extend({}, $.fn.turntable.defaults, options);
+
+            //配置项
+            var count = opts.count,
+                rotateDeg = opts.rotateDeg,
+                duration = opts.duration,
+                timeFx = opts.timeFx,
+                offset = opts.offset;
+
+            //变量
+            var $this = $(this),
+                me = this,
+                $pointer;
+
+            //初始化函数
+            function init() {
+                $pointer = $('<div class="pi-pointer"></div>');
+                $this.addClass('pi-turntable').prepend($pointer);
+
+                //初始化事件
+                initEvent();
+            }
+
+            //初始化事件函数
+            function initEvent() {
+
+                var timeout,
+                    isAnimating;
+
+                //转动函数
+                me.turnToIndex = function (index, fn) {
+                    //不可大于总数
+                    if (index > count) {
+                        return;
+                    }
+
+                    //正在转动
+                    if (isAnimating) {
+                        return;
+                    }
+
+                    //动画属性
+                    var transition = duration / 1000 + 's ' + timeFx,
+                        endDeg = rotateDeg + (index / count) * 360 + offset + 'deg',
+                        transform = 'rotateZ(' + endDeg + ')';//如用'rotate3d(0, 0, 1, ' + endDeg + ')',ios上动画有bug
+
+                    //重置
+                    $pointer[0].style.cssText = '';
+                    isAnimating = true;
+
+                    //设定延迟才会有动画效果
+                    setTimeout(function () {
+                        //动画
+                        $pointer.css({
+                            'transform': transform
+                        });
+                        var pointerEl = $pointer[0];
+                        pointerEl.style['-webkit-transition'] = '-webkit-transform ' + transition;
+                        pointerEl.style['transition'] = 'transform ' + transition;
+
+                        //动画完成后回调
+                        clearTimeout(timeout);//清理上一个timeout
+                        timeout = setTimeout(function () {
+                            typeof fn === 'function' && fn();
+                            isAnimating = false;
+                        }, duration);
+
+                    }, 40);
+                };
+            }
+
+
+            //初始化
+            init();
+
+        });
+    };
+    $.fn.turntable.defaults = {
+        //奖品格数
+        count    : 12,
+        //旋转度数
+        rotateDeg: 3600,
+        //旋转时长
+        duration : 7000,
+        //动画fx
+        timeFx   : 'cubic-bezier(0.42,0,0.25,1)',
+        //校正值
+        offset   : 0
+    };
+
+})(window, $);
+},{}],20:[function(require,module,exports){
+/*
+ * base.js
+ * 移动端基础js,包含pc端二维码,mask,a标签触摸等基础功能
+ */
+(function (window, $) {
+
+    //文档元素
+    var document = window.document,
+    //文档$对象
+        $doc = $(document),
+    //body $对象
+        $body = $(document.body),
+    //mainbox $对象
+        $mainbox = $('#mainbox');
+
+
+    /**
+     * 是否显示二维码(默认为true)
+     * @type {boolean}
+     */
+    $.isShowQrcode = true;
+
+
+    /**
+     * 是否body滚动
+     * @type {string}
+     */
+    $.isBodyScroll = $mainbox.css('overflow') !== 'hidden';
+    //去掉部分浏览器地址栏(ucweb,qq有效)
+    if (!$.isBodyScroll) {
+        $body.addClass('very-high');
+        window.scrollTo(0, 1);
+        $body.removeClass('very-high');
+    }
+
+
+    var ua = navigator.userAgent;
+    /**
+     * 是否为移动端
+     * @type {boolean}
+     */
+    $.isMobi = /(iPhone|iPod|iPad|android)/i.test(ua);
+    /**
+     * 是否为安卓
+     * @type {boolean}
+     */
+    $.isAndroid = /(android)/i.test(ua);
+    /**
+     * 是否为ios
+     * @type {boolean}
+     */
+    $.isIos = /(iPhone|iPod|iPad)/i.test(ua);
+
+
+    /**
+     * 显示/隐藏mask函数
+     * @param {boolean} isShow 是否显示
+     */
+    $.toggleMask = function (isShow) {
+        isShow ? $body.addClass('onmask') : $body.removeClass('onmask');
+    };
+
+
+    //文档加载完成
+    $(function () {
+
+        setTimeout(function () {
+            //添加class
+            $body.addClass('loaded');
+        }, 100);
+
+        //a标签touch
+        $doc.on('touchstart', 'a', function () {
+            $(this).addClass('focus');
+        });
+        $doc.on('touchend touchmove', 'a', function () {
+            $(this).removeClass('focus');
+        });
+
+        //pc端二维码
+        $.isShowQrcode && !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/qrcode.js', function () {
+                var $qrcode = $('#qrcode');
+                if ($qrcode.length === 0) {
+                    $qrcode = $('<div id="qrcode"></div>');
+                    $body.append($qrcode);
+                    new QRCode($qrcode[0], {
+                        width : $qrcode.width(),
+                        height: $qrcode.height(),
+                        text  : location.href
+                    });
+                }
+                $doc.on('click', '#qrcode', function () {
+                    $qrcode.fadeOut();
+                });
+            }
+        );
+
+        //pc端mouse转touch事件
+        !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/desktouch.js');
+
+    });
+
+})(window, $);
+},{}],21:[function(require,module,exports){
+/*
+ * ui.js
+ * 移动端界面js,包括面板切换,导航,边栏等功能
+ */
+(function (window, $) {
+
+    //文档元素
+    var document = window.document,
+    //文档$对象
+        $doc = $(document),
+    //body对象
+        bodyEl = document.body,
+    //body $对象
+        $body = $(bodyEl),
+    //mainbox $对象
+        $mainbox = $('#mainbox');
+
+    /**
+     * 首页hash(默认为#home)
+     * @type {string}
+     */
+    $.homeSelector = '#home';
+
+
+    //body scroll时设置宽度(ios中header宽度的bug)
+    $.isBodyScroll && $.isIos && $(window).on('resize', (function () {
+        var $toFix = $('#header,#navbar');
+        return function () {
+            $toFix.css({
+                width: bodyEl.offsetWidth + 'px'
+            });
+        };
+    })()).trigger('resize');
+
+
+    /**
+     * 显示/隐藏头部函数
+     * @param {boolean} isShow 是否显示
+     */
+    $.toggleHeader = function (isShow) {
+        isShow ? $mainbox.removeClass('offheader') : $mainbox.addClass('offheader');
+    };
+
+    /**
+     * 显示/隐藏导航条函数
+     * @param {boolean} isShow 是否显示
+     */
+    $.toggleNavbar = function (isShow) {
+        isShow ? $mainbox.removeClass('offnavbar') : $mainbox.addClass('offnavbar');
+    };
+
+    /**
+     * 设置标题函数
+     * @param {string} title 标题
+     */
+    $.setTitle = (function () {
+        var $title = $('.roottitle .title');
+        return function (title) {
+            title && $title.html(title);
+        };
+    })();
+
+    /**
+     * 设置二级页面标题函数
+     * @param {string} title 二级页面标题
+     */
+    $.setSubtitle = (function () {
+        var $title = $('.subtitle .title');
+        return function (title) {
+            title && $title.html(title);
+        };
+    })();
+
+
+    /**
+     * 加载panel函数
+     * @param {string} hash panel的hash(如#home)
+     * @param {boolean} isAnimation 是否动画
+     */
+    $.loadPanel = (function () {
+
+        //导航中的a元素
+        var $navbarA = $('#navbar a'),
+        //导航容器元素
+            navboxEl = document.querySelector('.navbox'),
+        //面板元素
+            $panel = $('.panel'),
+        //panel切换动画duration
+            duration = parseFloat($panel.css('transition-duration')) * 1000,
+        //历史记录对象
+            history = $.history = [],
+        //header元素
+            $header = $('#header');
+
+        /**
+         * 页面加载是否动画(默认为true)
+         * @type {boolean}
+         */
+        $.isLoadAnimation = true;
+
+        /**
+         * scrollTop处理相关
+         * @param {string} id 元素id
+         * @param {boolean} isCache 是否是存储scrollTop
+         * @ignore
+         */
+        var scrollTop = (function () {
+            var cache = {};
+            return function (id, isCache) {
+                if ($.isBodyScroll) {
+                    //是否是存储scrollTop
+                    isCache ? (cache[id] = bodyEl.scrollTop) : (bodyEl.scrollTop = cache[id] || 0);
+                }
+            };
+        })();
+
+        /**
+         * 显示panel时函数
+         * @param {$init} $toShow 显示的$对象
+         * @param {boolean} isNoScroll 是否不恢复scrollTop
+         * @ignore
+         */
+        var toShowPanel = (function () {
+            var cache = {};
+            return function ($toShow, isNoScroll) {
+                var id = $toShow[0].id;
+
+                //显示
+                $toShow.addClass('show opened');
+
+                //b.设置scrollTop(必须放在显示之后)
+                setTimeout(function () {
+                    !isNoScroll && scrollTop(id);
+                }, 0);
+
+                //显示时调用函数
+                var panelLoaded = $.panelLoaded;
+                typeof panelLoaded === 'function' && panelLoaded($toShow, !cache[id]);
+
+                //记录panel是否初始化过(放在最后)
+                cache[id] = true;
+            };
+        })();
+
+        /**
+         * 隐藏panel时函数
+         * @param {$init} $toHide 隐藏的$对象
+         * @param {boolean} isShow 是否不隐藏元素
+         * @ignore
+         */
+        function toHidePanel($toHide, isShow) {
+            //隐藏
+            !isShow && $toHide.removeClass('show');
+
+            //如果是打开iframe页面的面板
+            $toHide[0].id === 'paneliframe' && ($toHide.html(''));
+
+            //隐藏时调用函数
+            var panelUnloaded = $.panelUnloaded;
+            typeof panelUnloaded === 'function' && panelUnloaded($toHide);
+        }
+
+
+        /**
+         * 显示/隐藏边栏函数
+         * @param {boolean} isShow 是否显示
+         */
+        $.toggleSidebox = (function () {
+            var $sidebox = $('#sidebox');
+
+            return function (isShow) {
+                //相关panel
+                var $panel = $.history[$.history.length - 1];
+                if (isShow) {
+                    $body.addClass('onsidebox');
+                    //显示时调用函数
+                    toShowPanel($sidebox);
+                    //隐藏原页面
+                    toHidePanel($panel, true);
+                }
+                else {
+                    $body.removeClass('onsidebox');
+                    //隐藏时调用函数
+                    toHidePanel($sidebox);
+                    //显示原页面
+                    toShowPanel($panel, true);
+                }
+            };
+        })();
+
+        return function (hash, isAnimation) {
+            var $toShow, $toHide;
+
+            //没有hash(表示后退)
+            if (hash === undefined) {
+                $toHide = history.pop();
+                $toShow = history[history.length - 1] || $($.homeSelector);
+                hash = '#' + $toShow[0].id;
+            }
+            else {
+                $toShow = $(hash);
+                if ($toShow.length > 0) {
+                    $toHide = history[history.length - 1];
+                    history.push($toShow);
+                }
+            }
+
+
+            //如果有显示面板
+            if ($toShow.length > 0) {
+
+                //navbar选中状态(与面板切换无关的操作)
+                $navbarA.length > 0 && $navbarA.each(function () {
+                    var array = (this.getAttribute('data-hash') || this.hash).split('|');
+                    for (var i = 0, len = array.length; i < len; i++) {
+                        if (array[i] === hash) {
+                            $navbarA.removeClass('selected');
+                            $(this).addClass('selected');
+                            //居中
+                            navboxEl.center(this);
+                        }
+                    }
+                });
+
+                //标题,navbar状态(与面板切换无关的操作)
+                var showRole = $toShow.attr('data-role');
+                if (showRole === 'root') {
+                    //设置标题
+                    $.setTitle($toShow.attr('title'));
+
+                    //显示navbar
+                    $.toggleNavbar(true);
+
+                    //header内容切换
+                    $header.removeClass('onsubtitle');
+                }
+                else {
+                    //设置二级页面标题
+                    $.setSubtitle($toShow.attr('title'));
+
+                    //隐藏navbar
+                    $.toggleNavbar(false);
+
+                    //header内容切换
+                    $header.addClass('onsubtitle');
+                }
+
+
+                //没有隐藏面板的特殊情况(页面第一次加载)
+                if (!$toHide) {
+                    //显示时调用函数
+                    toShowPanel($toShow);
+                    return;
+                }
+
+
+                //面板切换
+                if ('#' + $toHide[0].id !== hash) {
+                    var hideRole = $toHide.attr('data-role');
+
+                    //a.记录scrollTop(必须放在隐藏之前)
+                    scrollTop($toHide[0].id, 1);
+
+
+                    //一级->一级或无动画
+                    var isAni = isAnimation === undefined ? $.isLoadAnimation : isAnimation;
+                    if (!isAni || showRole === 'root' && hideRole === 'root') {
+                        //无动画
+                        $toShow.addClass('notrans');
+                        $toHide.addClass('notrans');
+
+                        //显示时调用函数(放在靠后)
+                        toShowPanel($toShow);
+                        //隐藏时调用函数(放在靠后)
+                        toHidePanel($toHide);
+                        return;
+                    }
+
+
+                    //其他切换
+                    //1.显示
+                    $toShow.addClass('show');
+
+                    //切换面板时强制重排一次,以免出现横向滚动条
+                    $mainbox.addClass('reflow');
+
+                    //2.延迟保证显示动画
+                    setTimeout(function () {
+                        //有动画
+                        $toShow.removeClass('notrans');
+                        $toHide.removeClass('notrans');
+
+                        //二级->一级
+                        if (showRole === 'root') {
+                            $toShow.removeClass('subopened');
+                            $toHide.removeClass('opened');
+                        }
+                        //显示二级面板
+                        else {
+                            //一级->二级
+                            if ($toShow.hasClass('subopened')) {
+                                $toShow.removeClass('subopened');
+                                $toHide.removeClass('opened');
+                            }
+                            //二级->二级
+                            else {
+                                $toHide.addClass('subopened').removeClass('opened');
+                            }
+                        }
+
+                        //显示时调用函数(放在靠后)
+                        toShowPanel($toShow);
+
+
+                        //3.延迟保证隐藏动画
+                        setTimeout(function () {
+
+                            //延迟重排(延迟100ms+在ios8上才有效果,安卓4.2需要400ms+)
+                            setTimeout(function () {
+                                //切换面板时强制重排一次,以免出现横向滚动条
+                                $mainbox.removeClass('reflow');
+                            }, 400);
+
+                            //隐藏时调用函数(放在靠后)
+                            toHidePanel($toHide);
+                        }, duration);
+
+                    }, 10);
+                }
+            }
+            //没有显示面板
+            else {
+                console.log(hash + '面板未找到');
+            }
+
+        };
+
+    })();
+
+
+    //文档加载完成
+    $(function () {
+
+        //btn-onsidebox点击
+        $doc.on('click', '.btn-onsidebox', function () {
+            $.toggleSidebox(1);
+        });
+        //btn-offsidebox点击
+        $doc.on('click', '.btn-offsidebox', function () {
+            $.toggleSidebox(0);
+        });
+
+        //iframe面板
+        var $iframe = $('#paneliframe');
+        if ($iframe.length === 0) {
+            $iframe = $('<div id="paneliframe" class="panel"></div>');
+            $mainbox.append($iframe);
+        }
+
+        //a标签点击事件切换panel
+        $doc.on('click', 'a', function (evt) {
+            var hash = this.hash;
+            if (hash) {
+                evt.preventDefault();
+                $.loadPanel(hash);
+                return;
+            }
+
+            //不跳出页面加载其他页面(需要a标签有data-href属性)
+            var href = this.getAttribute('data-href'),
+                title = this.getAttribute('data-title');
+
+            if (href) {
+                evt.preventDefault();
+                $iframe.html('<iframe src="' + href + '"></iframe>');
+                $.setSubtitle(title || '详情');
+                $.loadPanel('#paneliframe');
+            }
+        });
+
+        //返回按钮点击
+        $doc.on('click', '#btn-goback', function () {
+            $.loadPanel();
+        });
+
+
+        //导航条
+        var $navbox = $('.navbox');
+        //导航条拨动
+        $navbox.length > 0 && $navbox.scroll();
+
+        //初始化加载指定panel或者首页
+        var hash = location.hash;
+        $.loadPanel(hash || $.homeSelector);
+
+    });
+
+})(window, $);
+},{}]},{},[2])
