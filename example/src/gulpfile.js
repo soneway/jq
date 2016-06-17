@@ -145,9 +145,9 @@ var plumber = require('gulp-plumber');
                 .pipe(gulp.dest(conf.dest));
         }
 
-        gulp.src('../../jq.js')
+        gulp.src('../../*.js')
             .pipe(jsmin())
-            .pipe(gulp.dest(conf.dest));
+            .pipe(gulp.dest(out));
     });
 })();
 
