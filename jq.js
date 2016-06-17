@@ -180,6 +180,26 @@
             return $(els);
         }
 
+        /**
+         * 设置元素属性函数
+         * @param el
+         * @param key
+         * @param val
+         */
+        function setAttr(el, key, val) {
+            key in el ? el[key] = val : el.setAttribute(key, val);
+        }
+
+        /**
+         * 获取元素属性函数
+         * @param el
+         * @param key
+         * @returns {string}
+         */
+        function getAttr(el, key) {
+            return key in el ? el[key] : el.getAttribute(key);
+        }
+
 
         //判断是否为某种类型函数
         forEach(['Object', 'Array', 'Function'], function (item) {
@@ -404,9 +424,7 @@
              * @returns {$init|string} $对象本身|html值
              */
             html: function (html) {
-                return html === undefined ? this[0].innerHTML : this.forEach(function (el) {
-                    el.innerHTML = html;
-                });
+                return this.attr('innerHTML', html);
             },
 
             /**
@@ -415,9 +433,7 @@
              * @returns {$init|string} $对象本身|text值
              */
             text: function (text) {
-                return text === undefined ? this[0].textContent : this.forEach(function (el) {
-                    el.textContent = text;
-                });
+                return this.attr('textContent', text);
             },
 
             /**
@@ -434,9 +450,7 @@
              * @returns {$init|string} $对象本身|获取的值
              */
             val: function (val) {
-                return val === undefined ? this[0].value : this.forEach(function (el) {
-                    el.value = val;
-                });
+                return this.attr('value', val);
             },
 
             /**
@@ -451,18 +465,18 @@
                 prefix === undefined && (prefix = '');
                 //$().attr(key)
                 if (typeof key === 'string' && val === undefined) {
-                    return this[0].getAttribute(prefix + key);
+                    return getAttr(this[0], prefix + key);
                 }
                 return this.forEach(function (el) {
                     //$().attr(obj)
                     if ($.isObject(key)) {
                         for (var p in key) {
-                            el.setAttribute(prefix + p, key[p]);
+                            setAttr(el, prefix + p, key[p]);
                         }
                     }
                     //$().attr(key,val)
                     else {
-                        el.setAttribute(prefix + key, val);
+                        setAttr(el, prefix + key, val);
                     }
                 });
             },
