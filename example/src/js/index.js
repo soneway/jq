@@ -1,6 +1,6 @@
 //index.js
 
-var $ = require('jq');
+var $ = window.$ = require('jq');
 require('base');
 require('ui');
 require('customalert');

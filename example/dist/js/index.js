@@ -91,7 +91,7 @@
 },{}],2:[function(require,module,exports){
 //index.js
 
-var $ = require('jq');
+var $ = window.$ = require('jq');
 require('base');
 require('ui');
 require('customalert');
@@ -314,7 +314,12 @@ exports.load = function ($this, isInit) {
             indexOf = tmpArray.indexOf,
             cssPrefix = '-webkit-',
             oneSelReg = /^[\w-]*$/,
-            spaceReg = /\s+/g;
+            spaceReg = /\s+/g,
+            classRegCache = {},
+            bodyEl = document.body,
+            computedStyleCache = {},
+            headEl = document.head,
+            XMLHttpRequest = window.XMLHttpRequest;
 
         /**
          * 选择器构造函数
@@ -324,10 +329,6 @@ exports.load = function ($this, isInit) {
          */
         function $init(sel) {
             this.length = 0;
-
-            if (!sel) {
-                return this;
-            }
 
             //字符选择器或html
             if (typeof sel === 'string') {
@@ -406,12 +407,9 @@ exports.load = function ($this, isInit) {
          * @returns {RegExp} css类名正式表达式
          * @ignore
          */
-        var classReg = (function () {
-            var cache = {};
-            return function (name) {
-                return cache[name] || (cache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'));
-            };
-        })();
+        function classReg(name) {
+            return classRegCache[name] || (classRegCache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'));
+        }
 
         /**
          * 数组遍历函数
@@ -433,26 +431,22 @@ exports.load = function ($this, isInit) {
         elProto.matchesSelector || (elProto.matchesSelector = elProto.webkitMatchesSelector || elProto.msMatchesSelector || elProto.mozMatchesSelector);
 
         /**
-         * 返回元素黑夜样式值函数
+         * 返回元素默认样式值函数
          * @param {string} tagName 元素名
          * @param {string} key 样式key
          * @returns {string} 初始样式值
          * @ignore
          */
-        var getInitialStyle = (function () {
-            var cache = {},
-                bodyEl = document.body;
-            return function (tagName, key) {
-                var prop = tagName + '-' + key;
-                if (!cache[prop]) {
-                    var tmpEl = document.createElement(tagName);
-                    bodyEl.appendChild(tmpEl);
-                    cache[prop] = getComputedStyle(tmpEl)[key];
-                    bodyEl.removeChild(tmpEl);
-                }
-                return cache[prop];
-            };
-        })();
+        function getInitialStyle(tagName, key) {
+            var prop = tagName + '-' + key;
+            if (!computedStyleCache[prop]) {
+                var tmpEl = document.createElement(tagName);
+                bodyEl.appendChild(tmpEl);
+                computedStyleCache[prop] = getComputedStyle(tmpEl)[key];
+                bodyEl.removeChild(tmpEl);
+            }
+            return computedStyleCache[prop];
+        }
 
         /**
          * 按sel过滤nodes并返回$对象函数
@@ -725,47 +719,39 @@ exports.load = function ($this, isInit) {
              * @returns {$init|string} $对象本身|属性值
              */
             attr: function (key, val, prefix) {
-                //属性前缀
-                prefix === undefined && (prefix = '');
-                //$().attr(key)
-                if (typeof key === 'string' && val === undefined) {
-                    return this[0].getAttribute(prefix + key);
-                }
-                return this.forEach(function (el) {
-                    //$().attr(obj)
-                    if ($.isObject(key)) {
-                        for (var p in key) {
-                            el.setAttribute(prefix + p, key[p]);
-                        }
-                    }
-                    //$().attr(key,val)
-                    else {
-                        el.setAttribute(prefix + key, val);
-                    }
-                });
+                return this.prop(key, val, true, prefix)
             },
 
             /**
              * 元素对象属性取值/赋值
              * @param {Object|string} key 属性|属性对象
              * @param {string} val 属性值
+             * @param {boolean} isAttr 属性值
+             * @param {string} prefix 属性前缀
              * @returns {$init|string} $对象本身|属性值
              */
-            prop: function (key, val) {
+            prop: function (key, val, isAttr, prefix) {
+                //属性前缀
+                prefix === undefined && (prefix = '');
+
+                //$().prop(key)
                 if (typeof key === 'string' && val === undefined) {
-                    return this[key];
+                    key = prefix + key;
+                    return isAttr ? this[0].getAttribute(key) : this[0][key];
                 }
                 return this.forEach(function (el) {
-                    //$().attr(obj)
+                    //$().prop(obj)
                     if ($.isObject(key)) {
                         for (var p in key) {
-                            el[p] = key[p];
+                            var value = key[p];
+                            p = prefix + p;
+                            isAttr ? el[p] = value : el.setAttribute(p, value);
                         }
+                        return;
                     }
-                    //$().attr(key,val)
-                    else {
-                        el[key] = val;
-                    }
+                    //$().prop(key,val)
+                    key = prefix + key;
+                    isAttr ? el.setAttribute(key, val) : el[key] = val;
                 });
             },
 
@@ -830,7 +816,11 @@ exports.load = function ($this, isInit) {
              */
             show: function () {
                 return this.forEach(function (el) {
-                    el.style.display = getInitialStyle(el.tagName, 'display');
+                    var elStyle = el.style;
+                    if (elStyle.display === 'none') {
+                        return elStyle.display = null;
+                    }
+                    elStyle.display = getInitialStyle(el.tagName, 'display');
                 });
             },
 
@@ -885,11 +875,12 @@ exports.load = function ($this, isInit) {
             /**
              * 元素后置添加到
              * @param {Node|NodeList|string|$init} el 内容添加到的元素
+             * @param {boolean} isBefore 是否前置添加
              * @returns {$init} $对象本身
              */
-            appendTo: function (el) {
+            appendTo: function (el, isBefore) {
                 var $el = el instanceof $init ? el : $(el);
-                $el.append(this);
+                $el.append(this, isBefore);
                 return this;
             },
 
@@ -899,9 +890,7 @@ exports.load = function ($this, isInit) {
              * @returns {$init} $对象本身
              */
             prependTo: function (el) {
-                var $el = el instanceof $init ? el : $(el);
-                $el.append(this, true);
-                return this;
+                return this.appendTo(el, true);
             },
 
             /**
@@ -1041,21 +1030,13 @@ exports.load = function ($this, isInit) {
         /**
          * 创建事件函数
          * @param {string} type 事件类型
-         * @param {Object} evt 事件对象
          * @returns {Event} 事件
          * @ignore
          */
-        function createEvent(type, evt) {
+        function createEvent(type) {
             var event = document.createEvent('Events');
             //第二个参数:是否冒泡,第三个参数:是否可以preventDefault阻止事件
             event.initEvent(type, true, true);
-
-            //添加事件的其他属性
-            if (evt) {
-                for (var p in evt) {
-                    event[p] === undefined && (event[p] = evt[p]);
-                }
-            }
             return event;
         }
 
@@ -1123,11 +1104,10 @@ exports.load = function ($this, isInit) {
             /**
              * 元素事件触发
              * @param {string} type 事件类型
-             * @param {Object} evt 事件对象
              * @returns {$init} $对象本身
              */
-            trigger: function (type, evt) {
-                type = createEvent(type, evt);
+            trigger: function (type) {
+                type = createEvent(type);
                 return this.forEach(function (el) {
                     el.dispatchEvent(type);
                 });
@@ -1147,77 +1127,70 @@ exports.load = function ($this, isInit) {
          * @param {string} url 请求地址
          * @param {Function} fn 回调函数
          */
-        $.getScript = (function () {
-            var headEl = document.getElementsByTagName('head')[0];
+        $.getScript = function (url, fn) {
+            var isJs = /(\.js)$/.test(url),//是否js文件
+                script = document.createElement('script');
 
-            return function (url, fn) {
-                var isJs = /(\.js)$/.test(url),//是否js文件
-                    script = document.createElement('script');
-
-                script.type = 'text/javascript';
-                script.onload = function () {
-                    typeof fn === 'function' && fn();
-                    !isJs && headEl.removeChild(script);
-                };
-                script.src = url;
-                headEl.appendChild(script);
+            script.type = 'text/javascript';
+            script.onload = function () {
+                typeof fn === 'function' && fn();
+                !isJs && headEl.removeChild(script);
             };
-        })();
+            script.src = url;
+            headEl.appendChild(script);
+        };
+
+
+        //将data转换为str函数
+        function getDataStr(data) {
+            var array = [];
+            for (var p in data) {
+                array.push(p + '=' + data[p]);
+            }
+            return array.join('&');
+        }
 
         /**
          * ajax请求函数
          * @param {Object} opts ajax请求配置项
          */
-        $.ajax = (function () {
-            var XMLHttpRequest = window.XMLHttpRequest;
+        $.ajax = function (opts) {
+            opts = $.extend({}, $.ajax.defaults, opts);
+            //xhr对象
+            var xhr = new XMLHttpRequest();
 
-            //将data转换为str函数
-            function getDataStr(data) {
-                var array = [];
-                for (var p in data) {
-                    array.push(p + '=' + data[p]);
-                }
-                return array.join('&');
+            //打开链接
+            xhr.open(opts.type.toUpperCase(), opts.url, opts.async);
+
+            //设置header
+            var header = opts.header || {};
+            //contentType
+            header['Content-Type'] = opts.contentType;
+            for (var p in header) {
+                xhr.setRequestHeader(p, header[p]);
             }
 
-            return function (opts) {
-                opts = $.extend({}, $.ajax.defaults, opts);
-                //xhr对象
-                var xhr = new XMLHttpRequest();
-
-                //打开链接
-                xhr.open(opts.type.toUpperCase(), opts.url, opts.async);
-
-                //设置header
-                var header = opts.header || {};
-                //contentType
-                header['Content-Type'] = opts.contentType;
-                for (var p in header) {
-                    xhr.setRequestHeader(p, header[p]);
-                }
-
-                //xhr状态改变事件
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        //成功
-                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                            var success = opts.success;
-                            typeof success === 'function' && success(xhr);
-                        }
-                        //失败
-                        else {
-                            var error = opts.error;
-                            typeof error === 'function' && error(xhr);
-                        }
-                        var complete = opts.complete;
-                        typeof complete === 'function' && complete(xhr);
+            //xhr状态改变事件
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    //成功
+                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                        var success = opts.success;
+                        typeof success === 'function' && success(xhr);
                     }
-                };
-
-                //发送数据
-                xhr.send(getDataStr(opts.data) || null);
+                    //失败
+                    else {
+                        var error = opts.error;
+                        typeof error === 'function' && error(xhr);
+                    }
+                    var complete = opts.complete;
+                    typeof complete === 'function' && complete(xhr);
+                }
             };
-        })();
+
+            //发送数据
+            xhr.send(getDataStr(opts.data) || null);
+        };
         $.ajax.defaults = {
             type       : 'GET',
             contentType: 'application/x-www-form-urlencoded',
@@ -1234,19 +1207,13 @@ exports.load = function ($this, isInit) {
 
     })();
 
-    //添加到全局变量
-    window.jq = window.$ = $;
-
     //CommonJS
     if (typeof exports === 'object') {
         return module.exports = $;
     }
-    //AMD
-    if (typeof define === 'function') {
-        return define(function () {
-            return $;
-        });
-    }
+
+    //添加到全局变量
+    window.jq = window.$ = $;
 
 })(window);
 },{}],12:[function(require,module,exports){
