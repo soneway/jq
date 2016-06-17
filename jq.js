@@ -1,5 +1,5 @@
 //jq.js
-(function (window) {
+(function (window, undefined) {
 
     var $ = (function () {
 
@@ -135,34 +135,10 @@
 
         /**
          * matchesSelector函数
-         * @param {Node} el 元素
-         * @param {string} sel 选择器
-         * @returns {boolean} 元素是否符合sel
          * @ignore
          */
-        var matchesSelector = (function () {
-            var bodyEl = document.body;
-            if (bodyEl.matchesSelector) {
-                return function (el, sel) {
-                    return el.matchesSelector(sel);
-                };
-            }
-            if (bodyEl.webkitMatchesSelector) {
-                return function (el, sel) {
-                    return el.webkitMatchesSelector(sel);
-                };
-            }
-            if (bodyEl.msMatchesSelector) {
-                return function (el, sel) {
-                    return el.msMatchesSelector(sel);
-                };
-            }
-            if (bodyEl.mozMatchesSelector) {
-                return function (el, sel) {
-                    return el.mozMatchesSelector(sel);
-                };
-            }
-        })();
+        var elProto = Element.prototype;
+        elProto.matchesSelector || (elProto.matchesSelector = elProto.webkitMatchesSelector || elProto.msMatchesSelector || elProto.mozMatchesSelector);
 
         /**
          * 返回元素黑夜样式值函数
@@ -199,7 +175,7 @@
             }
             var els = [];
             forEach(nodes, function (el) {
-                matchesSelector(el, sel) && els.push(el);
+                el.matchesSelector(sel) && els.push(el);
             });
             return $(els);
         }
@@ -314,7 +290,7 @@
             not: function (sel) {
                 var els = [];
                 this.forEach(function (el) {
-                    !matchesSelector(el, sel) && els.push(el);
+                    !el.matchesSelector(sel) && els.push(el);
                 });
                 return $(els);
             },
@@ -404,7 +380,7 @@
              */
             closest: function (sel, context) {
                 var curEl = this[0];
-                while (curEl && !matchesSelector(curEl, sel)) {
+                while (curEl && !curEl.matchesSelector(sel)) {
                     //document没有matchesSelector
                     var parentNode = curEl.parentNode;
                     curEl = parentNode === document ? null : (curEl !== context && parentNode);
@@ -671,7 +647,7 @@
              * @returns {boolean} 是否符合sel
              */
             is: function (sel) {
-                return sel && matchesSelector(this[0], sel);
+                return sel && this[0].matchesSelector(sel);
             },
 
             /**
@@ -699,8 +675,7 @@
             removeClass: function (name) {
                 return this.forEach(function (el) {
                     if (name === undefined) {
-                        el.className = '';
-                        return;
+                        return el.className = '';
                     }
 
                     var oldClass = el.className;
@@ -741,16 +716,10 @@
          */
         function addEvent(el, type, fn, sel) {
             forEach(type.split(spaceReg), function (item) {
-                if (sel === undefined) {
-                    el.addEventListener(item, fn, false);
-                }
-                //代理方式
-                else {
-                    el.addEventListener(item, function (evt) {
-                        var match = $(evt.target).closest(sel, el)[0];
-                        match && fn.call(match, evt);
-                    }, false);
-                }
+                sel === undefined ? el.addEventListener(item, fn, false) : el.addEventListener(item, function (evt) {
+                    var match = $(evt.target).closest(sel, el)[0];
+                    match && fn.call(match, evt);
+                }, false);
             });
         }
 
