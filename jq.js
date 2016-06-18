@@ -453,7 +453,7 @@
                         for (var p in key) {
                             var value = key[p];
                             p = prefix + p;
-                            isAttr ? el[p] = value : el.setAttribute(p, value);
+                            isAttr ? el.setAttribute(p, value) : el[p] = value;
                         }
                         return;
                     }
