@@ -947,12 +947,10 @@ exports.load = function ($this, isInit) {
         addClass: function (name) {
             return this.forEach(function (el) {
                 var oldClass = el.className,
-                    classes = [];
-
-                forEach(name.split(spaceReg), function (item) {
-                    !$(el).hasClass(item) && classes.push(item);
-                });
-                classes.length > 0 && (el.className += (oldClass ? ' ' : '') + classes.join(' '));
+                    classes = name.split(spaceReg).filter(function (item) {
+                        return !classReg(item).test(oldClass);
+                    });
+                classes.length > 0 && (el.className = [oldClass].concat(classes).join(' '));
             });
         },
 
@@ -1194,7 +1192,7 @@ exports.load = function ($this, isInit) {
         contentType: 'application/x-www-form-urlencoded',
         async      : true
     };
-    
+
 
     //CommonJS
     if (typeof exports === 'object') {
