@@ -314,6 +314,7 @@ exports.load = function ($this, isInit) {
         oneSelReg = /^[\w-]*$/,
         spaceReg = /\s+/g,
         classRegCache = {},
+        RegExp = window.RegExp,
         bodyEl = document.body,
         computedStyleCache = {},
         headEl = document.head,
@@ -507,6 +508,7 @@ exports.load = function ($this, isInit) {
 
         /**
          * 遍历元素(效率更高,但回调函数中this不指向元素,第一个参数指向元素)
+         * 注: 直接遍历,保证高效率
          * @param {Function} fn 遍历回调函数
          * @returns {$init} $对象本身
          */
@@ -950,7 +952,7 @@ exports.load = function ($this, isInit) {
                     classes = name.split(spaceReg).filter(function (item) {
                         return !classReg(item).test(oldClass);
                     });
-                classes.length > 0 && (el.className = [oldClass].concat(classes).join(' '));
+                classes.length > 0 && (el.className = [oldClass].concat(classes).join(' ').trim());
             });
         },
 

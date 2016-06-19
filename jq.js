@@ -22,6 +22,7 @@
         oneSelReg = /^[\w-]*$/,
         spaceReg = /\s+/g,
         classRegCache = {},
+        RegExp = window.RegExp,
         bodyEl = document.body,
         computedStyleCache = {},
         headEl = document.head,
@@ -215,6 +216,7 @@
 
         /**
          * 遍历元素(效率更高,但回调函数中this不指向元素,第一个参数指向元素)
+         * 注: 直接遍历,保证高效率
          * @param {Function} fn 遍历回调函数
          * @returns {$init} $对象本身
          */
