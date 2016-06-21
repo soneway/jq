@@ -12,7 +12,6 @@
 
     var document = window.document,
         Node = window.Node,
-        NodeList = window.NodeList,
         getComputedStyle = window.getComputedStyle,
         toString = {}.toString,
         tmpArray = [],

@@ -304,7 +304,6 @@ exports.load = function ($this, isInit) {
 
     var document = window.document,
         Node = window.Node,
-        NodeList = window.NodeList,
         getComputedStyle = window.getComputedStyle,
         toString = {}.toString,
         tmpArray = [],
@@ -564,7 +563,7 @@ exports.load = function ($this, isInit) {
         },
 
         /**
-         * not过滤元素
+         * not过滤元素(不用filter.call,效率较高)
          * @param {string} sel 选择器
          * @returns {$init} 选择后的$对象
          */
