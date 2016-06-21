@@ -18,6 +18,7 @@
         tmpArray = [],
         slice = tmpArray.slice,
         indexOf = tmpArray.indexOf,
+        filter = tmpArray.filter,
         cssPrefix = '-webkit-',
         oneSelReg = /^[\w-]*$/,
         spaceReg = /\s+/g,
@@ -76,8 +77,8 @@
             return this;
         }
 
-        //NodeList
-        if (sel instanceof NodeList || $.isArray(sel)) {
+        //类数组
+        if (sel && sel.length > 0) {
             return nodesToThis(sel, this);
         }
 
@@ -163,14 +164,9 @@
      * @ignore
      */
     function filterNodes(nodes, sel) {
-        if (sel === undefined) {
-            return $(nodes);
-        }
-        var els = [];
-        forEach(nodes, function (el) {
-            el.matchesSelector(sel) && els.push(el);
-        });
-        return $(els);
+        return $(sel === undefined ? nodes : filter.call(nodes, function (el) {
+            return el.matchesSelector(sel);
+        }));
     }
 
 
@@ -246,7 +242,7 @@
         ready: function (fn) {
             var readyState = document.readyState;
             readyState === 'complete' || readyState === 'loaded' || readyState === 'interactive' ?
-                fn() : document.addEventListener('DOMContentLoaded', fn, false);
+                fn() : addEvent(document, 'DOMContentLoaded', fn);
             return this;
         },
 
@@ -267,10 +263,9 @@
         siblings: function (sel) {
             var els = [];
             this.forEach(function (el) {
-                var parentNode = el.parentNode;
                 //父元素的子元素,排除当前元素
-                parentNode && forEach(parentNode.children, function (item) {
-                    item !== el && els.indexOf(item) === -1 && els.push(item);
+                forEach(el.parentNode.children, function (item) {
+                    item !== el && els.indexOf(item) < 0 && els.push(item);
                 });
             });
             return filterNodes(els, sel);
@@ -282,6 +277,9 @@
          * @returns {$init} 选择后的$对象
          */
         not: function (sel) {
+            if (sel === undefined) {
+                return this;
+            }
             var els = [];
             this.forEach(function (el) {
                 !el.matchesSelector(sel) && els.push(el);
@@ -299,7 +297,7 @@
             this.forEach(function (el) {
                 //根据当前元素查找符合sel的元素
                 forEach(el.querySelectorAll(sel), function (item) {
-                    els.indexOf(item) === -1 && els.push(item);
+                    els.indexOf(item) < 0 && els.push(item);
                 });
             });
             return $(els);
@@ -341,7 +339,7 @@
             this.forEach(function (el) {
                 var parentNode = el.parentNode;
                 //添加parentNode
-                parentNode && parentNode !== document && els.indexOf(parentNode) === -1 && els.push(parentNode);
+                parentNode !== document && els.indexOf(parentNode) < 0 && els.push(parentNode);
             });
             //过滤
             return filterNodes(els, sel);
@@ -355,11 +353,9 @@
         parents: function (sel) {
             var els = [];
             this.forEach(function (el) {
-                var parentNode = el.parentNode;
                 //遍历parentNode直到根元素
-                while (parentNode) {
-                    parentNode !== document && els.indexOf(parentNode) === -1 && els.push(parentNode);
-                    parentNode = parentNode.parentNode;
+                while (el = el.parentNode) {
+                    el !== document && els.indexOf(el) < 0 && els.push(el);
                 }
             });
             //过滤
