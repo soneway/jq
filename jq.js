@@ -614,7 +614,10 @@
          * @returns {Object} 尺寸对象
          */
         offset: function () {
-            return this[0].getBoundingClientRect();
+            var offset = this[0].getBoundingClientRect();
+            offset.left += window.pageXOffset;
+            offset.top += window.pageYOffset;
+            return offset;
         },
 
         /**

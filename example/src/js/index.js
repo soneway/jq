@@ -7,7 +7,7 @@ require('customalert');
 require('scroll');
 
 //alert方法
-alert = function (str) {
+window.alert = function (str) {
     $.customalert({
         content: str
     });
