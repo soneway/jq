@@ -496,7 +496,7 @@
                     var style = getComputedStyle(this[0]);
                     return style[key] || style[cssPrefix + key];
                 }
-                return undefined;
+                return;
             }
             return this.forEach(function (el) {
                 var style = el.style;
@@ -505,11 +505,10 @@
                     for (var p in key) {
                         style[p] = style[cssPrefix + p] = key[p];
                     }
+                    return;
                 }
                 //$().css(key,val)
-                else {
-                    style[key] = style[cssPrefix + key] = val;
-                }
+                style[key] = style[cssPrefix + key] = val;
             });
         },
 
@@ -533,22 +532,6 @@
          */
         hide: function () {
             return this.css('display', 'none');
-        },
-
-        /**
-         * 元素渐显(实际上是操作class,然后配合css来控制渐显动画)
-         * @returns {$init} $对象本身
-         */
-        fadeIn: function () {
-            return this.removeClass('fade-out').addClass('fade-in');
-        },
-
-        /**
-         * 元素渐隐(实际上是操作class,然后配合css来控制渐隐动画)
-         * @returns {$init} $对象本身
-         */
-        fadeOut: function () {
-            return this.removeClass('fade-in').addClass('fade-out');
         },
 
         /**
@@ -711,7 +694,7 @@
      */
     function addEvent(el, type, fn, sel) {
         forEach(type.split(spaceReg), function (item) {
-            sel === undefined ? el.addEventListener(item, fn, false) : el.addEventListener(item, function (evt) {
+            el.addEventListener(item, sel === undefined ? fn : function (evt) {
                 var match = $(evt.target).closest(sel, el)[0];
                 match && fn.call(match, evt);
             }, false);
