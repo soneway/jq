@@ -5,7 +5,8 @@
 @import "jq/ui/base";
 @import "jq/ui/ui";
 //@import "jq/ui/body_scroll";
-@import "jq/plugin/customalert";
+//@import "jq/plugin/customalert";
+@import "jq/plugin/alert";
 
 //引入基础样式
 @import "./base/base";

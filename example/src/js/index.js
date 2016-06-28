@@ -7,15 +7,12 @@ require('customalert');
 require('scroll');
 
 //alert方法
-window.alert = function (str) {
-    $.customalert({
-        content: str
-    });
-};
+$.extend(window, require('alert'));
 
 
 //页面模块加载对象
 var loader = {
+    home       : require('./index/home'),
     carousel   : require('./index/carousel'),
     flip       : require('./index/flip'),
     picpager   : require('./index/picpager'),

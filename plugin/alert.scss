@@ -1,0 +1,140 @@
+/*通用弹框样式*/
+
+//变量
+$alert-box-width: 5.6rem !default;
+$tooltip-width: 6rem !default;
+
+/*弹出框*/
+.alert {
+    @extend %ph_pffull;
+    background: rgba(#000, 0.3);
+    z-index: 999;
+    //动画
+    @extend .transition;
+    @extend %ph_hidden;
+
+    /*显示弹出框*/
+    &.visible {
+        @extend %ph_visible;
+
+        .box {
+            transform: none;
+        }
+    }
+
+    /*弹框容器*/
+    .box {
+        @extend %ph_absolute;
+        left: 50%;
+        top: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgba(#000, 0.5);
+        background: #fff;
+        //动画
+        @extend .transform;
+        transform: scale3d(1.2, 1.2, 1);
+    }
+
+    /*关闭*/
+    .btn_close {
+        color: #fff;
+        @extend %ph_absolute;
+        right: 4px;
+        top: 4px;
+        font-size: 30px;
+        border-radius: 50%;
+        background: #393a3c;
+        width: 1em;
+        line-height: 1;
+        @extend .center;
+        overflow: hidden;
+        z-index: 9;
+
+        &:hover {
+            background: #e42601;
+            transform: rotateZ(90deg);
+        }
+    }
+}
+
+/*提示框*/
+#alert, #confirm {
+    @extend .alert;
+
+    /*标题*/
+    .head {
+        line-height: 2.8;
+        background: #f1f1f1;
+    }
+
+    /*信息*/
+    .msg {
+        line-height: 1.1;
+        padding: 40px 20px;
+    }
+
+    .btn {
+        margin: 0 6px;
+    }
+
+    .box {
+        width: $alert-box-width;
+        margin-left: -$alert-box-width / 2;
+        margin-top: -110px;
+        @extend .center;
+        padding-bottom: 25px;
+    }
+}
+
+/*弹出页面和弹出窗口*/
+#modal, #dialog {
+    @extend .alert;
+}
+
+/*弹出页面*/
+#modal {
+    .box {
+        line-height: 0;
+    }
+}
+
+/*弹出窗口*/
+#dialog {
+    .box {
+        & > * {
+            @extend %ph_visible;
+        }
+    }
+
+    .tempbox {
+        @extend %ph_hidden;
+    }
+}
+
+/*信息提示*/
+#tooltip {
+    @extend %ph_fixed;
+    top: 45%;
+    left: 50%;
+    padding: 10px;
+    width: $tooltip-width;
+    margin-left: -$tooltip-width / 2;
+    background-color: #ef8f00;
+    color: #fff;
+    @extend .center;
+    box-shadow: 0 0 5px rgba(#000, 0.5);
+    z-index: 999;
+    //动画
+    @extend .transition;
+    @extend %ph_hidden;
+    transform: translate3d(0, -20px, 0);
+
+    &.ok {
+        background-color: #68af02;
+    }
+
+    &.visible {
+        @extend %ph_visible;
+        transform: none;
+    }
+}

@@ -23,6 +23,7 @@
         "jq"         : "../../jq.js",
         "base"       : "../../ui/base.js",
         "ui"         : "../../ui/ui.js",
+        "alert"      : "../../plugin/alert.js",
         "carousel"   : "../../plugin/carousel.js",
         "customalert": "../../plugin/customalert.js",
         "flip"       : "../../plugin/flip.js",
