@@ -2856,7 +2856,7 @@ $.extend(window, require('alert'));
                     });
                 }
                 $doc.on('click', '#qrcode', function () {
-                    $qrcode.fadeOut();
+                    $qrcode.hide();
                 });
             }
         );
