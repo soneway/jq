@@ -3,16 +3,13 @@
 var $ = window.$ = require('jq');
 require('base');
 require('ui');
-require('customalert');
 require('scroll');
-
-//alert方法
-$.extend(window, require('alert'));
 
 
 //页面模块加载对象
 var loader = {
     home       : require('./index/home'),
+    ui         : require('./index/ui'),
     carousel   : require('./index/carousel'),
     flip       : require('./index/flip'),
     picpager   : require('./index/picpager'),

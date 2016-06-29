@@ -1,0 +1,91 @@
+/*通用弹窗样式*/
+
+/*弹窗*/
+.pi-dialog
+{
+    @extend %ph_pffull;
+    background: rgba(#000, 0.7);
+    z-index: 999;
+    //动画
+    @extend .transition;
+    @extend %ph_hidden;
+
+    /*显示弹出框*/
+    &.visible
+    {
+        @extend %ph_visible;
+
+        .pi-box
+        {
+            transform: none;
+        }
+    }
+
+    /*弹窗容器*/
+    .pi-box
+    {
+        @extend %ph_absolute;
+        left: 50%;
+        top: 50%;
+        overflow: hidden;
+        background: #fff;
+        //动画
+        @extend .transform;
+        transform: scale3d(0.8, 0.8, 1);
+    }
+
+    /*关闭弹窗按钮*/
+    .btn_close
+    {
+        color: #fff;
+        @extend %ph_absolute;
+        right: 4px;
+        top: 4px;
+        font-size: 0.6rem;
+        border-radius: 50%;
+        background: #393a3c;
+        width: 1em;
+        line-height: 1;
+        @extend .center;
+        overflow: hidden;
+        z-index: 9;
+
+        &:hover
+        {
+            background: #e42601;
+            transform: rotateZ(90deg);
+        }
+    }
+}
+
+/*弹出页面和弹出窗口*/
+#pi-dialog, #pi-modal
+{
+    @extend .pi-dialog;
+}
+
+/*弹出窗口*/
+#pi-dialog
+{
+    .pi-box
+    {
+        & > *
+        {
+            @extend %ph_visible;
+        }
+    }
+
+    .tempbox
+    {
+        @extend %ph_hidden;
+    }
+}
+
+/*弹出页面*/
+#pi-modal
+{
+    .pi-box
+    {
+        line-height: 0;
+    }
+}

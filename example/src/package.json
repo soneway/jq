@@ -24,6 +24,7 @@
         "base"       : "../../ui/base.js",
         "ui"         : "../../ui/ui.js",
         "alert"      : "../../plugin/alert.js",
+        "dialog"     : "../../plugin/dialog.js",
         "carousel"   : "../../plugin/carousel.js",
         "customalert": "../../plugin/customalert.js",
         "flip"       : "../../plugin/flip.js",

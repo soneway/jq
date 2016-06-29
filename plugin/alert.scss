@@ -2,138 +2,118 @@
 
 //变量
 $alert-box-width: 5.6rem !default;
-$tooltip-width: 6rem !default;
+$tooltip-width: 5rem !default;
 
-/*弹出框*/
-.alert {
+/*弹框*/
+.pi-alert
+{
     @extend %ph_pffull;
-    background: rgba(#000, 0.3);
+    background: rgba(#000, 0.7);
     z-index: 999;
+    /*不能跟着base走,要有自己的颜色,以名base设置为白色时,颜色看不见了*/
+    color: #333;
     //动画
     @extend .transition;
     @extend %ph_hidden;
 
     /*显示弹出框*/
-    &.visible {
+    &.visible
+    {
         @extend %ph_visible;
 
-        .box {
+        .pi-box
+        {
             transform: none;
         }
     }
 
     /*弹框容器*/
-    .box {
+    .pi-box
+    {
         @extend %ph_absolute;
         left: 50%;
         top: 50%;
         overflow: hidden;
-        box-shadow: 0 0 5px rgba(#000, 0.5);
         background: #fff;
         //动画
         @extend .transform;
         transform: scale3d(1.2, 1.2, 1);
     }
-
-    /*关闭*/
-    .btn_close {
-        color: #fff;
-        @extend %ph_absolute;
-        right: 4px;
-        top: 4px;
-        font-size: 30px;
-        border-radius: 50%;
-        background: #393a3c;
-        width: 1em;
-        line-height: 1;
-        @extend .center;
-        overflow: hidden;
-        z-index: 9;
-
-        &:hover {
-            background: #e42601;
-            transform: rotateZ(90deg);
-        }
-    }
 }
 
 /*提示框*/
-#alert, #confirm {
-    @extend .alert;
+#pi-alert, #pi-confirm
+{
+    @extend .pi-alert;
+
+    /*提示框容器*/
+    .pi-box
+    {
+        width: $alert-box-width;
+        margin-left: -$alert-box-width / 2;
+        margin-top: -2rem;
+        @extend .center;
+        padding-bottom: 0.3rem;
+        border-radius: 0.16rem;
+    }
 
     /*标题*/
-    .head {
+    .pi-head
+    {
         line-height: 2.8;
         background: #f1f1f1;
+        box-shadow: 0 0 2px rgba(#000, 0.5);
     }
 
     /*信息*/
-    .msg {
-        line-height: 1.1;
-        padding: 40px 20px;
+    .pi-msg
+    {
+        padding: 0.3rem 0.4rem;
     }
 
-    .btn {
-        margin: 0 6px;
-    }
-
-    .box {
-        width: $alert-box-width;
-        margin-left: -$alert-box-width / 2;
-        margin-top: -110px;
-        @extend .center;
-        padding-bottom: 25px;
+    /*按钮*/
+    .btn
+    {
+        width: 40%;
+        margin: 0 0.1rem;
     }
 }
 
-/*弹出页面和弹出窗口*/
-#modal, #dialog {
-    @extend .alert;
-}
-
-/*弹出页面*/
-#modal {
-    .box {
-        line-height: 0;
-    }
-}
-
-/*弹出窗口*/
-#dialog {
-    .box {
-        & > * {
-            @extend %ph_visible;
-        }
-    }
-
-    .tempbox {
-        @extend %ph_hidden;
+/*alert提示框*/
+#pi-alert
+{
+    .btn_ok
+    {
+        width: 85%;
     }
 }
 
 /*信息提示*/
-#tooltip {
+#pi-tooltip
+{
     @extend %ph_fixed;
     top: 45%;
     left: 50%;
-    padding: 10px;
+    padding: 0.2rem;
     width: $tooltip-width;
     margin-left: -$tooltip-width / 2;
     background-color: #ef8f00;
     color: #fff;
     @extend .center;
-    box-shadow: 0 0 5px rgba(#000, 0.5);
+    box-shadow: 1px 1px 3px rgba(#000, 0.5);
     z-index: 999;
     //动画
     @extend .transition;
     @extend %ph_hidden;
-    transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -0.4rem, 0);
 
-    &.ok {
+    &.ok
+    {
         background-color: #68af02;
     }
 
-    &.visible {
+    &.visible
+    {
         @extend %ph_visible;
         transform: none;
     }

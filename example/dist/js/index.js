@@ -94,19 +94,13 @@
 var $ = window.$ = require('jq');
 require('base');
 require('ui');
-require('customalert');
 require('scroll');
-
-//alert方法
-window.alert = function (str) {
-    $.customalert({
-        content: str
-    });
-};
 
 
 //页面模块加载对象
 var loader = {
+    home       : require('./index/home'),
+    ui         : require('./index/ui'),
     carousel   : require('./index/carousel'),
     flip       : require('./index/flip'),
     picpager   : require('./index/picpager'),
@@ -128,7 +122,7 @@ $.panelUnloaded = function ($this) {
     var unload = (loader[$this.attr('id')] || {}).unload;
     typeof unload === 'function' && unload($this);
 };
-},{"./index/carousel":3,"./index/flip":4,"./index/piccut":5,"./index/picpager":6,"./index/scratchcard":7,"./index/scroll":8,"./index/share":9,"./index/turntable":10,"base":20,"customalert":13,"jq":11,"scroll":18,"ui":21}],3:[function(require,module,exports){
+},{"./index/carousel":3,"./index/flip":4,"./index/home":5,"./index/piccut":6,"./index/picpager":7,"./index/scratchcard":8,"./index/scroll":9,"./index/share":10,"./index/turntable":11,"./index/ui":12,"base":22,"jq":13,"scroll":20,"ui":23}],3:[function(require,module,exports){
 //焦点图
 
 require('carousel');
@@ -149,7 +143,7 @@ exports.load = function ($this, isInit) {
         });
     }
 };
-},{"carousel":12}],4:[function(require,module,exports){
+},{"carousel":15}],4:[function(require,module,exports){
 //3d旋转切换
 
 require('flip');
@@ -172,7 +166,19 @@ exports.load = function ($this, isInit) {
         });
     }
 };
-},{"flip":14}],5:[function(require,module,exports){
+},{"flip":16}],5:[function(require,module,exports){
+//首页
+exports.load = function ($this, isInit) {
+    if (isInit) {
+        var $list = $this.find('.list'),
+            html = '';
+        for (var p in $.fn) {
+            html += '<a>' + p + '</a>';
+        }
+        $list.append(html);
+    }
+};
+},{}],6:[function(require,module,exports){
 //图片剪切
 
 require('piccut');
@@ -197,7 +203,7 @@ exports.load = function ($this, isInit) {
         });
     }
 };
-},{"piccut":15}],6:[function(require,module,exports){
+},{"piccut":17}],7:[function(require,module,exports){
 //相册功能
 
 require('picpager');
@@ -220,7 +226,7 @@ exports.load = function ($this, isInit) {
         });
     }
 };
-},{"picpager":16}],7:[function(require,module,exports){
+},{"picpager":18}],8:[function(require,module,exports){
 //刮刮卡
 
 require('scratchcard');
@@ -237,7 +243,7 @@ exports.load = function ($this, isInit) {
         });
     }
 };
-},{"scratchcard":17}],8:[function(require,module,exports){
+},{"scratchcard":19}],9:[function(require,module,exports){
 //自定义滚动
 
 require('scroll');
@@ -253,7 +259,7 @@ exports.load = function load($this, isInit) {
         });
     }
 };
-},{"scroll":18}],9:[function(require,module,exports){
+},{"scroll":20}],10:[function(require,module,exports){
 //分享
 
 var $doc = $(document),
@@ -267,7 +273,7 @@ var txtShare = document.title,
 $doc.on('click', '.icon_share a', function () {
     share(urlShare, txtShare, picShare, this.getAttribute('data-provider'));
 });
-},{"share":1}],10:[function(require,module,exports){
+},{"share":1}],11:[function(require,module,exports){
 //转盘抽奖
 
 require('turntable');
@@ -289,7 +295,12 @@ exports.load = function ($this, isInit) {
         });
     }
 };
-},{"turntable":19}],11:[function(require,module,exports){
+},{"turntable":21}],12:[function(require,module,exports){
+//ui页
+
+//alert方法
+$.extend(window, require('alert'));
+},{"alert":14}],13:[function(require,module,exports){
 //jq.js
 (function (window, undefined) {
 
@@ -788,7 +799,7 @@ exports.load = function ($this, isInit) {
                     var style = getComputedStyle(this[0]);
                     return style[key] || style[cssPrefix + key];
                 }
-                return undefined;
+                return;
             }
             return this.forEach(function (el) {
                 var style = el.style;
@@ -797,11 +808,10 @@ exports.load = function ($this, isInit) {
                     for (var p in key) {
                         style[p] = style[cssPrefix + p] = key[p];
                     }
+                    return;
                 }
                 //$().css(key,val)
-                else {
-                    style[key] = style[cssPrefix + key] = val;
-                }
+                style[key] = style[cssPrefix + key] = val;
             });
         },
 
@@ -825,22 +835,6 @@ exports.load = function ($this, isInit) {
          */
         hide: function () {
             return this.css('display', 'none');
-        },
-
-        /**
-         * 元素渐显(实际上是操作class,然后配合css来控制渐显动画)
-         * @returns {$init} $对象本身
-         */
-        fadeIn: function () {
-            return this.removeClass('fade-out').addClass('fade-in');
-        },
-
-        /**
-         * 元素渐隐(实际上是操作class,然后配合css来控制渐隐动画)
-         * @returns {$init} $对象本身
-         */
-        fadeOut: function () {
-            return this.removeClass('fade-in').addClass('fade-out');
         },
 
         /**
@@ -1003,7 +997,7 @@ exports.load = function ($this, isInit) {
      */
     function addEvent(el, type, fn, sel) {
         forEach(type.split(spaceReg), function (item) {
-            sel === undefined ? el.addEventListener(item, fn, false) : el.addEventListener(item, function (evt) {
+            el.addEventListener(item, sel === undefined ? fn : function (evt) {
                 var match = $(evt.target).closest(sel, el)[0];
                 match && fn.call(match, evt);
             }, false);
@@ -1203,7 +1197,131 @@ exports.load = function ($this, isInit) {
     window.jq = window.$ = $;
 
 })(window);
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
+/*通用弹框*/
+(function (window, $) {
+
+    //初始化html
+    var html = '<div id="pi-alert"><div class="pi-box"><h2 class="pi-head"></h2><p class="pi-msg"></p><p><a class="btn btn_ok">确定</a></p></div></div>' +
+        '<div id="pi-confirm"><div class="pi-box"><h2 class="pi-head"></h2><p class="pi-msg"></p><p><a class="btn btn_ok">确定</a><a class="btn btn_cancel">取消</a></p></div></div>' +
+        '<div id="pi-tooltip"></div>';
+    $(document.body).append(html);
+
+
+    //alert方法
+    var alert = (function () {
+        var $alert = $('#pi-alert'),
+            $head = $alert.find('.pi-head'),
+            $msg = $alert.find('.pi-msg'), opts;
+
+        //确定按钮点击
+        $alert.on('click', '.btn_ok', function () {
+            //关闭窗口
+            $alert.removeClass('visible');
+
+            //响应事件放在靠后
+            var btnOkClick = opts.btnOkClick;
+            typeof btnOkClick === 'function' && btnOkClick();
+        });
+
+        return function (options) {
+            //配置项
+            typeof options !== 'object' && (options = {msg: options});
+            opts = $.extend({}, alert.defaults, options);
+
+            //显示内容
+            $head.html(opts.head);
+            $msg.html(opts.msg);
+
+            //打开窗口
+            $alert.addClass('visible');
+        };
+    })();
+    alert.defaults = {
+        msg : '内容',
+        head: '提示'
+    };
+
+
+    //confirm方法
+    var confirm = (function () {
+        var $confirm = $('#pi-confirm'),
+            $head = $confirm.find('.pi-head'),
+            $msg = $confirm.find('.pi-msg'), opts;
+
+        //确定和取消按钮点击
+        $confirm.on('click', '.btn_ok', function () {
+            //关闭窗口
+            $confirm.removeClass('visible');
+
+            //响应事件放在靠后
+            var btnOkClick = opts.btnOkClick;
+            typeof btnOkClick === 'function' && btnOkClick();
+        }).on('click', '.btn_cancel', function () {
+            //关闭窗口
+            $confirm.removeClass('visible');
+
+            //响应事件放在靠后
+            var btnCancelClick = opts.btnCancelClick;
+            typeof btnCancelClick === 'function' && btnCancelClick();
+        });
+
+        return function (options) {
+            //配置项
+            typeof options !== 'object' && (options = {msg: options});
+            //配置项
+            opts = $.extend({}, confirm.defaults, options);
+
+            //设置内容
+            $head.html(opts.head);
+            $msg.html(opts.msg);
+
+            //打开窗口
+            $confirm.addClass('visible');
+        };
+    })();
+    confirm.defaults = {
+        msg : '内容',
+        head: '提示'
+    };
+
+
+    //tooltip方法
+    var tooltip = (function () {
+        var $tooltip = $('#pi-tooltip'),
+            timeout;
+
+        return function (msg, isOk, time) {
+            $tooltip.html(msg).addClass('visible');
+
+            //ok状态
+            isOk ? $tooltip.addClass('ok') : $tooltip.removeClass('ok');
+
+            //定时隐藏
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                $tooltip.removeClass('visible');
+            }, time || 2000);
+        };
+    })();
+
+
+    //导出对象
+    var exports = {
+        alert  : alert,
+        confirm: confirm,
+        tooltip: tooltip
+    };
+
+    //CommonJS
+    if (typeof exports === 'object') {
+        return module.exports = exports;
+    }
+
+    $.extend(window, exports);
+
+})(window, $);
+},{}],15:[function(require,module,exports){
 /*
  * carousel.js
  * 焦点图js
@@ -1489,115 +1607,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],13:[function(require,module,exports){
-/*
- * customalert.js
- * 自定义提示框js
- */
-(function (window, $) {
-
-    //1.变量
-    var $title, $content,
-        $btnOk, $btnCancel,
-        btnOkClick, btnCancelClick,
-        onShow, onHide,
-        document = window.document,
-        $doc = $(document),
-        $body = $(document.body),
-        $customalert = $('#customalert');
-
-
-    //2.初始化
-    (function () {
-        if ($customalert.length === 0) {
-            $customalert = $('<div id="customalert">' +
-                '<div class="ca-box">' +
-                '<h1 class="ca-title">提示</h1>' +
-                '<p class="ca-content">是否转到登陆</p>' +
-                '<a class="btn ca-ok">确定</a>' +
-                '<a class="btn ca-cancel">关闭</a>' +
-                '</div>' +
-                '</div>');
-            //添加html元素
-            $body.append($customalert);
-        }
-
-        $title = $customalert.find('.ca-title');
-        $content = $customalert.find('.ca-content');
-        $btnOk = $customalert.find('.ca-ok');
-        $btnCancel = $customalert.find('.ca-cancel');
-    })();
-
-
-    //3.事件
-    //确定按钮
-    $doc.on('click', '#customalert .ca-ok', function () {
-        //隐藏
-        $body.removeClass('oncustomalert');
-        typeof onHide === 'function' && onHide();
-        typeof btnOkClick == 'function' && btnOkClick();
-    });
-    //关闭按钮
-    $doc.on('click', '#customalert .ca-cancel', function () {
-        //隐藏
-        $body.removeClass('oncustomalert');
-        typeof onHide === 'function' && onHide();
-        typeof btnCancelClick === 'function' && btnCancelClick();
-    });
-
-
-    //4.扩展属性
-    $.customalert = function (options) {
-        options = options || {};
-
-        //配置项
-        var opts = $.extend({}, $.customalert.defaults, options);
-
-        var title = opts.title,
-            content = opts.content,
-            btnOkText = opts.btnOkText,
-            btnCancelText = opts.btnCancelText,
-            isAlert = opts.isAlert;
-
-        btnOkClick = opts.btnOkClick;
-        btnCancelClick = opts.btnCancelClick;
-        onShow = opts.onShow;
-        onHide = opts.onHide;
-
-        //是否是alert(只显示确定按钮)
-        if (isAlert) {
-            $customalert.addClass('alert');
-        }
-        else {
-            $customalert.removeClass('alert');
-        }
-
-        //设置内容
-        title && $title.html(title);
-        content && $content.html(content);
-        btnOkText && $btnOk.text(btnOkText);
-        btnCancelText && $btnCancel.text(btnCancelText);
-
-        //显示
-        $body.addClass('oncustomalert');
-        typeof onShow === 'function' && onShow();
-    };
-
-    //默认配置
-    $.customalert.defaults = {
-        title         : '提示',
-        content       : '内容',
-        btnOkText     : '确定',
-        btnOkClick    : null,
-        btnCancelText : '取消',
-        btnCancelClick: null,
-        isAlert       : true,
-        onShow        : null,
-        onHide        : null
-    };
-
-})(window, $);
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
  * flip.js
  * 3d翻转效果js
@@ -1776,7 +1786,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*
  * piccut.js
  * 图片裁切功能js
@@ -2090,7 +2100,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*
  * picpager.js
  * 相册js
@@ -2316,7 +2326,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*
  * scratchcard.js
  * 刮刮卡js
@@ -2447,7 +2457,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*
  * scroll.js
  * 自定义滚动js
@@ -2651,7 +2661,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*
  * turntable.js
  * 转盘抽奖js
@@ -2753,7 +2763,7 @@ exports.load = function ($this, isInit) {
     };
 
 })(window, $);
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*
  * base.js
  * 移动端基础js,包含pc端二维码,mask,a标签触摸等基础功能
@@ -2857,7 +2867,7 @@ exports.load = function ($this, isInit) {
     });
 
 })(window, $);
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*
  * ui.js
  * 移动端界面js,包括面板切换,导航,边栏等功能
