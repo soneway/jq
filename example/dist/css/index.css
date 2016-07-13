@@ -37,16 +37,16 @@ ui/base
   width: 100%;
   height: 100%; }
 
-#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after, .onmask:after, .pi-alert, #pi-alert, #pi-confirm {
+#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after, .onmask:after, #pi-alert, #pi-confirm {
   left: 0;
   top: 0;
   bottom: 0;
   right: 0; }
 
-#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after, .pi-alert .pi-box, #pi-alert .pi-box, #pi-confirm .pi-box {
+#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after {
   position: absolute; }
 
-.onmask:after, .pi-alert, #pi-alert, #pi-confirm, #pi-tooltip {
+.onmask:after, #pi-alert, #pi-confirm, #pi-tooltip {
   position: fixed; }
 
 #navbar .navlist a {
@@ -54,7 +54,7 @@ ui/base
   vertical-align: middle;
   line-height: normal; }
 
-#loading {
+#loading, #pi-alert, #pi-confirm {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -65,11 +65,11 @@ ui/base
   -webkit-align-items: center;
           align-items: center; }
 
-#header.onsubtitle .subtitle, .pi-alert.visible, .visible#pi-alert, .visible#pi-confirm, #pi-tooltip.visible {
+#header.onsubtitle .subtitle, #pi-alert.visible, #pi-confirm.visible, #pi-tooltip.visible {
   visibility: visible;
   opacity: 1; }
 
-.offheader #header, #header .subtitle, #header.onsubtitle .roottitle, .offnavbar > #navbar, .pi-alert, #pi-alert, #pi-confirm, #pi-tooltip {
+.offheader #header, #header .subtitle, #header.onsubtitle .roottitle, .offnavbar > #navbar, #pi-alert, #pi-confirm, #pi-tooltip {
   visibility: hidden;
   opacity: 0; }
 
@@ -196,7 +196,7 @@ h4 {
 
 /*类*/
 /*btn*/
-.btn {
+.btn, #pi-alert [class^="pi-btn"], #pi-confirm [class^="pi-btn"] {
   display: inline-block;
   font-size: 0.32rem;
   line-height: 2;
@@ -207,7 +207,7 @@ h4 {
   background-color: #f8f8f8;
   /*固定颜色*/
   color: #333; }
-  .btn.focus {
+  .btn.focus, #pi-alert .focus[class^="pi-btn"], #pi-confirm .focus[class^="pi-btn"] {
     background-color: #eee; }
 
 /*隐藏*/
@@ -240,15 +240,15 @@ h4 {
   float: right; }
 
 /*居中*/
-.center, .btn, #navbar, #pi-alert .pi-box, #pi-confirm .pi-box, #pi-tooltip, #ui .list > div:after, .icon_login {
+.center, .btn, #pi-alert [class^="pi-btn"], #pi-confirm [class^="pi-btn"], #navbar, #pi-alert .pi-box, #pi-confirm .pi-box, #pi-tooltip, #ui .list > div:after, .icon_login {
   text-align: center; }
 
 /*动画*/
-.transition, .fade-out, .fade-in, #loading, #header, #header .roottitle, #header .subtitle, #navbar, .pi-alert, #pi-alert, #pi-confirm, #pi-tooltip, .pi-carousel .pi-title, .pi-flip > * {
+.transition, .fade-out, .fade-in, #loading, #header, #header .roottitle, #header .subtitle, #navbar, #pi-alert, #pi-confirm, #pi-tooltip, .pi-carousel .pi-title, .pi-flip > * {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
-.transform, .pi-scroll-item, #mainbox, #sidebox, .panel, .pi-alert .pi-box, #pi-alert .pi-box, #pi-confirm .pi-box, .pi-picpager .pi-wrap {
+.transform, .pi-scroll-item, #mainbox, #sidebox, .panel, #pi-alert .pi-box, #pi-confirm .pi-box, .pi-picpager .pi-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
@@ -522,55 +522,47 @@ textarea {
     .list a:first-of-type {
       border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
-h3.center, h3.btn, h3#navbar, #pi-alert h3.pi-box, #pi-confirm h3.pi-box, h3#pi-tooltip, h3.icon_login {
+h3.center, h3.btn, #pi-alert h3[class^="pi-btn"], #pi-confirm h3[class^="pi-btn"], h3#navbar, #pi-alert h3.pi-box, #pi-confirm h3.pi-box, h3#pi-tooltip, h3.icon_login {
   position: relative;
   margin-top: 0.2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
 /*通用弹框样式*/
 /*弹框*/
-.pi-alert, #pi-alert, #pi-confirm {
+#pi-alert, #pi-confirm {
   background: rgba(0, 0, 0, 0.7);
   z-index: 999;
   /*不能跟着base走,要有自己的颜色,以名base设置为白色时,颜色看不见了*/
   color: #333;
+  /*内容居中*/
   /*显示弹出框*/
-  /*弹框容器*/ }
-  .pi-alert.visible .pi-box, .visible#pi-alert .pi-box, .visible#pi-confirm .pi-box {
-    -webkit-transform: none;
-            transform: none; }
-  .pi-alert .pi-box, #pi-alert .pi-box, #pi-confirm .pi-box {
-    left: 50%;
-    top: 50%;
-    overflow: hidden;
-    background: #fff;
-    -webkit-transform: scale3d(1.2, 1.2, 1);
-            transform: scale3d(1.2, 1.2, 1); }
-
-/*提示框*/
-#pi-alert, #pi-confirm {
-  /*提示框容器*/
+  /*弹框容器*/
   /*标题*/
   /*信息*/
   /*按钮*/ }
+  #pi-alert.visible .pi-box, #pi-confirm.visible .pi-box {
+    -webkit-transform: none;
+            transform: none; }
   #pi-alert .pi-box, #pi-confirm .pi-box {
     width: 5.6rem;
-    margin-left: -2.8rem;
-    margin-top: -2rem;
     padding-bottom: 0.3rem;
-    border-radius: 0.16rem; }
+    border-radius: 0.16rem;
+    background: #fff;
+    overflow: hidden;
+    -webkit-transform: scale3d(1.2, 1.2, 1);
+            transform: scale3d(1.2, 1.2, 1); }
   #pi-alert .pi-head, #pi-confirm .pi-head {
     line-height: 2.8;
     background: #f1f1f1;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); }
   #pi-alert .pi-msg, #pi-confirm .pi-msg {
     padding: 0.3rem 0.4rem; }
-  #pi-alert .btn, #pi-confirm .btn {
+  #pi-alert [class^="pi-btn"], #pi-confirm [class^="pi-btn"] {
     width: 40%;
     margin: 0 0.1rem; }
 
 /*alert提示框*/
-#pi-alert .btn_ok {
+#pi-alert .pi-btn-ok {
   width: 85%; }
 
 /*信息提示*/
@@ -579,18 +571,17 @@ h3.center, h3.btn, h3#navbar, #pi-alert h3.pi-box, #pi-confirm h3.pi-box, h3#pi-
   left: 50%;
   padding: 0.2rem;
   width: 5rem;
-  margin-left: -2.5rem;
   background-color: #ef8f00;
   color: #fff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   z-index: 999;
-  -webkit-transform: translate3d(0, -0.4rem, 0);
-          transform: translate3d(0, -0.4rem, 0); }
+  -webkit-transform: translate3d(-50%, -0.4rem, 0);
+          transform: translate3d(-50%, -0.4rem, 0); }
   #pi-tooltip.ok {
     background-color: #68af02; }
   #pi-tooltip.visible {
-    -webkit-transform: none;
-            transform: none; }
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0); }
 
 /*ui panel*/
 #ui h3 {

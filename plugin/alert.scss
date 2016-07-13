@@ -5,98 +5,74 @@ $alert-box-width: 5.6rem !default;
 $tooltip-width: 5rem !default;
 
 /*弹框*/
-.pi-alert
-{
+#pi-alert, #pi-confirm {
     @extend %ph_pffull;
     background: rgba(#000, 0.7);
     z-index: 999;
     /*不能跟着base走,要有自己的颜色,以名base设置为白色时,颜色看不见了*/
     color: #333;
+    /*内容居中*/
+    @extend %ph_center;
     //动画
     @extend .transition;
     @extend %ph_hidden;
 
     /*显示弹出框*/
-    &.visible
-    {
+    &.visible {
         @extend %ph_visible;
 
-        .pi-box
-        {
+        .pi-box {
             transform: none;
         }
     }
 
     /*弹框容器*/
-    .pi-box
-    {
-        @extend %ph_absolute;
-        left: 50%;
-        top: 50%;
-        overflow: hidden;
+    .pi-box {
+        width: $alert-box-width;
+        @extend .center;
+        padding-bottom: 0.3rem;
+        border-radius: 0.16rem;
         background: #fff;
+        overflow: hidden;
         //动画
         @extend .transform;
         transform: scale3d(1.2, 1.2, 1);
     }
-}
-
-/*提示框*/
-#pi-alert, #pi-confirm
-{
-    @extend .pi-alert;
-
-    /*提示框容器*/
-    .pi-box
-    {
-        width: $alert-box-width;
-        margin-left: -$alert-box-width / 2;
-        margin-top: -2rem;
-        @extend .center;
-        padding-bottom: 0.3rem;
-        border-radius: 0.16rem;
-    }
 
     /*标题*/
-    .pi-head
-    {
+    .pi-head {
         line-height: 2.8;
         background: #f1f1f1;
         box-shadow: 0 0 2px rgba(#000, 0.5);
     }
 
     /*信息*/
-    .pi-msg
-    {
+    .pi-msg {
         padding: 0.3rem 0.4rem;
     }
 
     /*按钮*/
-    .btn
-    {
+    [class^="pi-btn"] {
+        @extend .btn;
         width: 40%;
         margin: 0 0.1rem;
     }
 }
 
 /*alert提示框*/
-#pi-alert
-{
-    .btn_ok
-    {
+#pi-alert {
+    .pi-btn-ok {
         width: 85%;
     }
 }
 
 /*信息提示*/
-#pi-tooltip
-{
+#pi-tooltip {
     @extend %ph_fixed;
     top: 45%;
     left: 50%;
     padding: 0.2rem;
     width: $tooltip-width;
-    margin-left: -$tooltip-width / 2;
     background-color: #ef8f00;
     color: #fff;
     @extend .center;
@@ -105,16 +81,14 @@ $tooltip-width: 5rem !default;
     //动画
     @extend .transition;
     @extend %ph_hidden;
-    transform: translate3d(0, -0.4rem, 0);
+    transform: translate3d(-50%, -0.4rem, 0);
 
-    &.ok
-    {
+    &.ok {
         background-color: #68af02;
     }
 
-    &.visible
-    {
+    &.visible {
         @extend %ph_visible;
-        transform: none;
+        transform: translate3d(-50%, 0, 0);
     }
 }

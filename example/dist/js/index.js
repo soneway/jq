@@ -1199,11 +1199,11 @@ $.extend(window, require('alert'));
 })(window);
 },{}],14:[function(require,module,exports){
 /*通用弹框*/
-(function (window, $) {
+(function ($) {
 
     //初始化html
-    var html = '<div id="pi-alert"><div class="pi-box"><h2 class="pi-head"></h2><p class="pi-msg"></p><p><a class="btn btn_ok">确定</a></p></div></div>' +
-        '<div id="pi-confirm"><div class="pi-box"><h2 class="pi-head"></h2><p class="pi-msg"></p><p><a class="btn btn_ok">确定</a><a class="btn btn_cancel">取消</a></p></div></div>' +
+    var html = '<div id="pi-alert"><div class="pi-box"><h2 class="pi-head"></h2><p class="pi-msg"></p><p><a class="pi-btn-ok"></a></p></div></div>' +
+        '<div id="pi-confirm"><div class="pi-box"><h2 class="pi-head"></h2><p class="pi-msg"></p><p><a class="pi-btn-ok"></a><a class="pi-btn-cancel"></a></p></div></div>' +
         '<div id="pi-tooltip"></div>';
     $(document.body).append(html);
 
@@ -1212,10 +1212,11 @@ $.extend(window, require('alert'));
     var alert = (function () {
         var $alert = $('#pi-alert'),
             $head = $alert.find('.pi-head'),
-            $msg = $alert.find('.pi-msg'), opts;
+            $msg = $alert.find('.pi-msg'),
+            $btnOk = $alert.find('.pi-btn-ok'), opts;
 
         //确定按钮点击
-        $alert.on('click', '.btn_ok', function () {
+        $alert.on('click', '.pi-btn-ok', function () {
             //关闭窗口
             $alert.removeClass('visible');
 
@@ -1232,14 +1233,16 @@ $.extend(window, require('alert'));
             //显示内容
             $head.html(opts.head);
             $msg.html(opts.msg);
+            $btnOk.text(opts.okTxt);
 
             //打开窗口
             $alert.addClass('visible');
         };
     })();
     alert.defaults = {
-        msg : '内容',
-        head: '提示'
+        head: '提示',
+        msg: '内容',
+        okTxt: '确定'
     };
 
 
@@ -1247,17 +1250,19 @@ $.extend(window, require('alert'));
     var confirm = (function () {
         var $confirm = $('#pi-confirm'),
             $head = $confirm.find('.pi-head'),
-            $msg = $confirm.find('.pi-msg'), opts;
+            $msg = $confirm.find('.pi-msg'),
+            $btnOk = $confirm.find('.pi-btn-ok'),
+            $btnCancel = $confirm.find('.pi-btn-cancel'), opts;
 
         //确定和取消按钮点击
-        $confirm.on('click', '.btn_ok', function () {
+        $confirm.on('click', '.pi-btn-ok', function () {
             //关闭窗口
             $confirm.removeClass('visible');
 
             //响应事件放在靠后
             var btnOkClick = opts.btnOkClick;
             typeof btnOkClick === 'function' && btnOkClick();
-        }).on('click', '.btn_cancel', function () {
+        }).on('click', '.pi-btn-cancel', function () {
             //关闭窗口
             $confirm.removeClass('visible');
 
@@ -1275,15 +1280,16 @@ $.extend(window, require('alert'));
             //设置内容
             $head.html(opts.head);
             $msg.html(opts.msg);
+            $btnOk.text(opts.okTxt);
+            $btnCancel.text(opts.cancelTxt);
 
             //打开窗口
             $confirm.addClass('visible');
         };
     })();
-    confirm.defaults = {
-        msg : '内容',
-        head: '提示'
-    };
+    confirm.defaults = $.extend({}, alert.defaults, {
+        cancelTxt: '取消'
+    });
 
 
     //tooltip方法
@@ -1308,7 +1314,7 @@ $.extend(window, require('alert'));
 
     //导出对象
     var exports = {
-        alert  : alert,
+        alert: alert,
         confirm: confirm,
         tooltip: tooltip
     };
@@ -1320,7 +1326,7 @@ $.extend(window, require('alert'));
 
     $.extend(window, exports);
 
-})(window, $);
+})($);
 },{}],15:[function(require,module,exports){
 /*
  * carousel.js
