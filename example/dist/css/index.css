@@ -56,8 +56,14 @@ ui/base
 
 #loading {
   display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   -webkit-box-align: center;
-  -webkit-box-pack: center; }
+  -webkit-align-items: center;
+          align-items: center; }
 
 #header.onsubtitle .subtitle, .pi-alert.visible, .visible#pi-alert, .visible#pi-confirm, #pi-tooltip.visible {
   visibility: visible;

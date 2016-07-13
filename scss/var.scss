@@ -195,13 +195,9 @@
 //居中
 %ph_center
 {
-    display: -webkit-box;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
-
-    //display: box;
-    //box-align: center;
-    //box-pack: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
