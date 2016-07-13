@@ -1,9 +1,9 @@
+//开发代码路径
+var dev = '../dev/',
 //打包生成代码的路径
-var out = '../dist/',
+    dist = '../dist/',
 //第三方资源库路径
     libDir = './_lib/',
-//是否压缩
-    isPack = 0,
 //是否PC端
     isPC = 0;
 
@@ -14,13 +14,16 @@ var config = {
         src  : ['./img/**'],
         //监听文件
         watch: ['./img/**'],
-        //输出文件夹
-        dest : out + 'img'
+        //开发输出文件夹
+        dev  : dev + 'img',
+        //打包输出文件夹
+        dist : dist + 'img'
     },
     css : {
         src  : ['./css/*.scss'],
         watch: ['./css/**'],
-        dest : out + 'css',
+        dev  : dev + 'css',
+        dist : dist + 'css',
         opts : {
             //sass
             includePaths: [libDir, '../../../'],
@@ -38,7 +41,8 @@ var config = {
     js  : {
         src  : ['./js/*.js'],
         watch: ['./js/**'],
-        dest : out + 'js',
+        dev  : dev + 'js',
+        dist : dist + 'js',
         opts : {
             //browserify
             paths: [libDir]
@@ -47,7 +51,8 @@ var config = {
     html: {
         src  : ['./*.html'],
         watch: ['./*.html', './html/**'],
-        dest : out,
+        dev  : dev,
+        dist : dist,
         opts : {
             //include
             prefix  : '@',
@@ -88,8 +93,10 @@ var plumber = require('gulp-plumber');
             .pipe(plumber({
                 errorHandler: errorHandler
             }))
+            //压缩
             .pipe(imgmin())
-            .pipe(gulp.dest(conf.dest));
+            .pipe(gulp.dest(conf.dev))
+            .pipe(gulp.dest(conf.dist));
     });
 })();
 
@@ -104,21 +111,18 @@ var plumber = require('gulp-plumber');
 
     //编译sass,压缩css
     gulp.task('css', function () {
-        var task = gulp.src(conf.src)
+        gulp.src(conf.src)
             .pipe(plumber({
                 errorHandler: errorHandler
             }))
             //编译
             .pipe(sass(conf.opts))
             .pipe(autoprefixer(conf.opts))
-            .pipe(gulp.dest(conf.dest));
-
-        //压缩
-        if (isPack) {
-            task.pipe(cssmin())
-                .pipe(base64(conf.opts))
-                .pipe(gulp.dest(conf.dest));
-        }
+            .pipe(gulp.dest(conf.dev))
+            //压缩
+            .pipe(cssmin())
+            .pipe(base64(conf.opts))
+            .pipe(gulp.dest(conf.dist));
     });
 })();
 
@@ -131,23 +135,16 @@ var plumber = require('gulp-plumber');
 
     //browserify编译合并,压缩文件js
     gulp.task('js', function () {
-        var task = gulp.src(conf.src)
+        gulp.src(conf.src)
             .pipe(plumber({
                 errorHandler: errorHandler
             }))
             //编译合并
             .pipe(browserify(conf.opts))
-            .pipe(gulp.dest(conf.dest));
-
-        //压缩
-        if (isPack) {
-            task.pipe(jsmin())
-                .pipe(gulp.dest(conf.dest));
-        }
-
-        gulp.src('../../*.js')
+            .pipe(gulp.dest(conf.dev))
+            //压缩
             .pipe(jsmin())
-            .pipe(gulp.dest(out));
+            .pipe(gulp.dest(conf.dist));
     });
 })();
 
@@ -160,19 +157,16 @@ var plumber = require('gulp-plumber');
 
     //html编译和压缩
     gulp.task('html', function () {
-        var task = gulp.src(conf.src)
+        gulp.src(conf.src)
             .pipe(plumber({
                 errorHandler: errorHandler
             }))
             //include编译
             .pipe(include(conf.opts))
-            .pipe(gulp.dest(conf.dest));
-
-        //压缩
-        if (isPack) {
-            task.pipe(htmlmin(conf.opts))
-                .pipe(gulp.dest(conf.dest));
-        }
+            .pipe(gulp.dest(conf.dev))
+            //压缩
+            .pipe(htmlmin(conf.opts))
+            .pipe(gulp.dest(conf.dist));
     });
 })();
 
