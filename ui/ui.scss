@@ -213,7 +213,6 @@ $head-color: $color !default;
     @extend %ph_palt;
     right: 0;
     height: 100%;
-    overflow: auto;
     padding-top: $head-height;
     display: none;
     @extend .transform;
