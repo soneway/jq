@@ -52,6 +52,7 @@ body
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     /*禁止保存图片*/
     -webkit-touch-callout: none;
+    /*滚动平滑*/
     -webkit-overflow-scrolling: touch;
 }
 
@@ -229,13 +230,6 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .notrans
 {
     transition: none !important;
-}
-
-
-/*滚动*/
-.ofauto
-{
-    @extend %ph_ofauto;
 }
 
 

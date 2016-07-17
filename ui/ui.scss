@@ -154,6 +154,7 @@ $head-color: $color !default;
     {
         height: 100%;
         padding-top: $head-height;
+        overflow: auto;
     }
 
     .onsidebox &
@@ -212,7 +213,7 @@ $head-color: $color !default;
     @extend %ph_palt;
     right: 0;
     height: 100%;
-    @extend %ph_ofauto;
+    overflow: auto;
     padding-top: $head-height;
     display: none;
     @extend .transform;

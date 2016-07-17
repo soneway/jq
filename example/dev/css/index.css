@@ -4,10 +4,6 @@ ui/base
 移动端基础样式
 包括样式重置,常用类等
 */
-.ofauto, .panel {
-  overflow: auto;
-  /*-webkit-overflow-scrolling: touch;*/ }
-
 .head, .head .btnleft, .panel, .pi-picpager .pi-pic, #picpager .info, .pi-piccut-mask, .pi-piccut-cutter, .loginbox .sohulogo:after {
   position: absolute;
   left: 0;
@@ -145,6 +141,7 @@ body {
   -webkit-tap-highlight-color: transparent;
   /*禁止保存图片*/
   -webkit-touch-callout: none;
+  /*滚动平滑*/
   -webkit-overflow-scrolling: touch; }
 
 input, textarea, select {
@@ -259,7 +256,6 @@ h4 {
   -webkit-transition: none !important;
   transition: none !important; }
 
-/*滚动*/
 /*非常高的高度*/
 .very-high {
   height: 9999px; }
@@ -415,7 +411,8 @@ plugin/scroll
           transform: translate3d(100%, 0, 0); }
   #sidebox .content {
     height: 100%;
-    padding-top: 0.8rem; }
+    padding-top: 0.8rem;
+    overflow: auto; }
   .onsidebox #sidebox {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0); }
@@ -432,6 +429,7 @@ plugin/scroll
   /*二级面板会出现横向滚动条的bug,可以通过对二级面板的重排来解决,比如显示面板时,padding-bottom的值的改变*/
   right: 0;
   height: 100%;
+  overflow: auto;
   padding-top: 0.8rem;
   display: none;
   -webkit-transform: translate3d(100%, 0, 0);
