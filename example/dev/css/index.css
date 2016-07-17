@@ -144,7 +144,8 @@ body {
   /*部分浏览器点选时会有淡蓝色框,这样可以去掉*/
   -webkit-tap-highlight-color: transparent;
   /*禁止保存图片*/
-  -webkit-touch-callout: none; }
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch; }
 
 input, textarea, select {
   font-size: inherit; }
