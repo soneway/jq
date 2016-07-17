@@ -481,6 +481,16 @@ $.extend(window, require('alert'));
 
 
     /**
+     * 判断是否为$对象
+     * @param obj
+     * @returns {boolean}
+     */
+    $.is$ = function (obj) {
+        return obj instanceof $init;
+    };
+
+
+    /**
      * 扩展函数
      * @param {Object} obj 扩展参数
      * @returns {Object} 返回扩展属性后的对象
@@ -686,7 +696,7 @@ $.extend(window, require('alert'));
          * @returns {number} 索引值
          */
         index: function (el) {
-            el instanceof $init && (el = el[0]);
+            $.is$(el) && (el = el[0]);
             return el ? indexOf.call(this, el) : indexOf.call(this[0].parentNode.children, this[0]);
         },
 
@@ -844,7 +854,7 @@ $.extend(window, require('alert'));
          * @returns {$init} $对象本身
          */
         append: function (el, isBefore) {
-            var $el = el instanceof $init ? el : $(el);
+            var $el = $.is$(el) ? el : $(el);
             return this.forEach(function (me) {
                 $el.forEach(function (el) {
                     isBefore ? me.insertBefore(el, me.firstChild) : me.appendChild(el);
@@ -868,7 +878,7 @@ $.extend(window, require('alert'));
          * @returns {$init} $对象本身
          */
         appendTo: function (el, isBefore) {
-            var $el = el instanceof $init ? el : $(el);
+            var $el = $.is$(el) ? el : $(el);
             $el.append(this, isBefore);
             return this;
         },
@@ -888,7 +898,7 @@ $.extend(window, require('alert'));
          * @returns {$init} $对象本身
          */
         wrap: function (el) {
-            var $el = el instanceof $init ? el : $(el);
+            var $el = $.is$(el) ? el : $(el);
             return this.forEach(function (el) {
                 el.parentNode.insertBefore($el[0], el);
                 $el.append(el);
