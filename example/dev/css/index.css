@@ -429,6 +429,7 @@ plugin/scroll
   /*二级面板会出现横向滚动条的bug,可以通过对二级面板的重排来解决,比如显示面板时,padding-bottom的值的改变*/
   right: 0;
   height: 100%;
+  overflow: auto;
   padding-top: 0.8rem;
   display: none;
   -webkit-transform: translate3d(100%, 0, 0);
