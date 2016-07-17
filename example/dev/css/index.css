@@ -6,7 +6,7 @@ ui/base
 */
 .ofauto, .panel {
   overflow: auto;
-  -webkit-overflow-scrolling: touch; }
+  /*-webkit-overflow-scrolling: touch;*/ }
 
 .head, .head .btnleft, .panel, .pi-picpager .pi-pic, #picpager .info, .pi-piccut-mask, .pi-piccut-cutter, .loginbox .sohulogo:after {
   position: absolute;
