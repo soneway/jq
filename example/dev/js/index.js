@@ -1225,14 +1225,42 @@ $.extend(window, require('alert'));
             $msg = $alert.find('.pi-msg'),
             $btnOk = $alert.find('.pi-btn-ok'), opts;
 
-        //确定按钮点击
-        $alert.on('click', '.pi-btn-ok', function () {
+        //打开
+        function open() {
+            //打开窗口
+            $alert.addClass('visible');
+
+            //响应事件
+            var onOpen = opts.onOpen;
+            typeof onOpen === 'function' && onOpen();
+        }
+
+        //关闭
+        function close() {
             //关闭窗口
             $alert.removeClass('visible');
+
+            //响应事件
+            var onClose = opts.onClose;
+            typeof onClose === 'function' && onClose();
+        }
+
+        //确定按钮点击
+        $alert.on('click', '.pi-btn-ok', function () {
+            //disabled时,不响应
+            if ($btnOk.hasClass('disabled')) {
+                return;
+            }
+
+            //关闭
+            close();
 
             //响应事件放在靠后
             var btnOkClick = opts.btnOkClick;
             typeof btnOkClick === 'function' && btnOkClick();
+        }).on('click', function (evt) {
+            //点击背景时关闭窗口
+            opts.isHideOnBgClick && $(evt.target).closest('.pi-box').length === 0 && close();
         });
 
         return function (options) {
@@ -1240,19 +1268,23 @@ $.extend(window, require('alert'));
             typeof options !== 'object' && (options = {msg: options});
             opts = $.extend({}, alert.defaults, options);
 
+            //初始化tag
+            $alert.attr('data-pi-tag', opts.tag);
             //显示内容
             $head.html(opts.head);
             $msg.html(opts.msg);
             $btnOk.text(opts.okTxt);
 
-            //打开窗口
-            $alert.addClass('visible');
+            //打开
+            open();
         };
     })();
     alert.defaults = {
         head: '提示',
         msg: '内容',
-        okTxt: '确定'
+        okTxt: '确定',
+        //是否在点击背景时隐藏
+        isHideOnBgClick: false
     };
 
 
@@ -1264,21 +1296,49 @@ $.extend(window, require('alert'));
             $btnOk = $confirm.find('.pi-btn-ok'),
             $btnCancel = $confirm.find('.pi-btn-cancel'), opts;
 
-        //确定和取消按钮点击
-        $confirm.on('click', '.pi-btn-ok', function () {
+        //打开
+        function open() {
+            //打开窗口
+            $confirm.addClass('visible');
+
+            //响应事件
+            var onOpen = opts.onOpen;
+            typeof onOpen === 'function' && onOpen();
+        }
+
+        //关闭
+        function close() {
             //关闭窗口
             $confirm.removeClass('visible');
+
+            //响应事件
+            var onClose = opts.onClose;
+            typeof onClose === 'function' && onClose();
+        }
+
+        //确定和取消按钮点击
+        $confirm.on('click', '.pi-btn-ok', function () {
+            //disabled时,不响应
+            if ($btnOk.hasClass('disabled')) {
+                return;
+            }
+
+            //关闭
+            close();
 
             //响应事件放在靠后
             var btnOkClick = opts.btnOkClick;
             typeof btnOkClick === 'function' && btnOkClick();
         }).on('click', '.pi-btn-cancel', function () {
-            //关闭窗口
-            $confirm.removeClass('visible');
+            //关闭
+            close();
 
             //响应事件放在靠后
             var btnCancelClick = opts.btnCancelClick;
             typeof btnCancelClick === 'function' && btnCancelClick();
+        }).on('click', function (evt) {
+            //点击背景时关闭窗口
+            opts.isHideOnBgClick && $(evt.target).closest('.pi-box').length === 0 && close();
         });
 
         return function (options) {
@@ -1293,8 +1353,8 @@ $.extend(window, require('alert'));
             $btnOk.text(opts.okTxt);
             $btnCancel.text(opts.cancelTxt);
 
-            //打开窗口
-            $confirm.addClass('visible');
+            //打开
+            open();
         };
     })();
     confirm.defaults = $.extend({}, alert.defaults, {
@@ -1323,7 +1383,7 @@ $.extend(window, require('alert'));
 
 
     //导出对象
-    var exports = {
+    var exp = {
         alert: alert,
         confirm: confirm,
         tooltip: tooltip
@@ -1331,10 +1391,10 @@ $.extend(window, require('alert'));
 
     //CommonJS
     if (typeof exports === 'object') {
-        return module.exports = exports;
+        return module.exports = exp;
     }
 
-    $.extend(window, exports);
+    $.extend(window, exp);
 
 })($);
 },{}],15:[function(require,module,exports){
