@@ -608,9 +608,12 @@
          */
         offset: function () {
             var offset = this[0].getBoundingClientRect();
-            offset.left += window.pageXOffset;
-            offset.top += window.pageYOffset;
-            return offset;
+            return {
+                left: offset.left + window.pageXOffset,
+                top: offset.top + window.pageYOffset,
+                width: offset.width,
+                height: offset.height
+            };
         },
 
         /**
@@ -889,9 +892,9 @@
         xhr.send(getDataStr(opts.data) || null);
     };
     $.ajax.defaults = {
-        type       : 'GET',
+        type: 'GET',
         contentType: 'application/x-www-form-urlencoded',
-        async      : true
+        async: true
     };
 
 
