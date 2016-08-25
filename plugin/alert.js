@@ -173,7 +173,7 @@
 
 
     //导出对象
-    var exp = {
+    var out = {
         alert: alert,
         confirm: confirm,
         tooltip: tooltip
@@ -181,9 +181,9 @@
 
     //CommonJS
     if (typeof exports === 'object') {
-        return module.exports = exp;
+        return module.exports = out;
     }
 
-    $.extend(window, exp);
+    $.extend(window, out);
 
 })($);
