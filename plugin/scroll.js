@@ -8,22 +8,25 @@
 
         var Math = window.Math;
 
+        function getReviseSpan(timeSpan, swipSpan, reviseRatio) {
+            var speed = Math.abs(swipSpan) / timeSpan;
+            return (speed * speed) / (2 * reviseRatio);
+        }
+
         //每个元素执行
         return this.each(function () {
             var opts = $.extend({}, $.fn.scroll.defaults, options);
 
             //配置项
             var isVertical = opts.isVertical,
-                rate = opts.rate,
                 timeSpanThreshold = opts.timeSpanThreshold,
                 maxScroll = opts.maxScroll,
-                androidRate = opts.androidRate,
-                isAdjust = opts.isAdjust;
+                isAdjust = opts.isAdjust,
+                reviseRatio = opts.reviseRatio;
 
             //变量
             var $this = $(this),
-                $items = $this.children('*'),
-                isAndroid = /(android)/i.test(window.navigator.userAgent);
+                $items = $this.children('*');
 
 
             //初始化函数
@@ -39,15 +42,15 @@
             function initEvent() {
                 //touchstart起点
                 var startX, startY,
-                //touch时间点
+                    //touch时间点
                     startTime, endTime,
-                //move的距离
+                    //move的距离
                     swipSpan,
-                //作动画的值
+                    //作动画的值
                     translateVal = 0,
-                //当然translate值
+                    //当然translate值
                     currentVal,
-                //可滚动的值
+                    //可滚动的值
                     scrollVal;
 
                 //初始化可滚动的值函数
@@ -56,7 +59,7 @@
                     var itemsOuterVal = isVertical ?
                         $items.height() + parseFloat($items.css('margin-top')) + parseFloat($items.css('margin-bottom')) :
                         $items.width() + parseFloat($items.css('margin-left')) + parseFloat($items.css('margin-right')),
-                    //this不包含padding的尺寸
+                        //this不包含padding的尺寸
                         thisInnerVal = isVertical ?
                         $this.height() - parseFloat($this.css('padding-top')) - parseFloat($this.css('padding-bottom')) :
                         $this.width() - parseFloat($this.css('padding-left')) - parseFloat($this.css('padding-right'));
@@ -148,9 +151,7 @@
 
                     //计算校正值(更加拟物化)
                     var timeSpan = endTime - startTime,
-                    //安卓的touch响应时间较长故除以一定比率
-                        swipSpanAdjust = timeSpan > timeSpanThreshold ? 0 : swipSpan / (isAndroid ? timeSpan /= androidRate : timeSpan),
-                        span = Math.abs(swipSpanAdjust) * rate;
+                        span = timeSpan > timeSpanThreshold ? 0 : getReviseSpan(timeSpan, swipSpan, reviseRatio);
 
                     //设置最大滚动值
                     span > maxScroll && (span = maxScroll);
@@ -187,17 +188,15 @@
     };
     $.fn.scroll.defaults = {
         //是否竖直方向滚动
-        isVertical       : false,
-        //滚动率
-        rate             : 400,
+        isVertical: false,
         //时间间隙阈值
         timeSpanThreshold: 300,
         //滚动最大值
-        maxScroll        : 400,
-        //安卓响应率
-        androidRate      : 1,
+        maxScroll: 400,
         //是否调整点击元素居中
-        isAdjust         : false
+        isAdjust: false,
+        //校正系统
+        reviseRatio: 0.002
     };
 
 })(window, $);

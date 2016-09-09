@@ -334,8 +334,8 @@ plugin/scroll
 自定义滚动样式
 */
 .pi-scroll-item {
-  -webkit-transition-timing-function: ease-out;
-          transition-timing-function: ease-out; }
+  -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+          transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); }
 
 /*重排类*/
 .reflow {

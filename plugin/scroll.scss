@@ -2,8 +2,7 @@
 plugin/scroll
 自定义滚动样式
 */
-.pi-scroll-item
-{
+.pi-scroll-item {
     @extend .transform;
-    transition-timing-function: ease-out;
+    transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
 }
