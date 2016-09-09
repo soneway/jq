@@ -2754,7 +2754,7 @@ $.extend(window, require('alert'));
         //时间间隙阈值
         timeSpanThreshold: 300,
         //滑动距离阈值
-        swipSpanThreshold: 20,
+        swipSpanThreshold: 10,
         //滚动最大值
         maxScroll: 800,
         //是否调整点击元素居中
@@ -2762,7 +2762,7 @@ $.extend(window, require('alert'));
         //校正系数
         reviseRatio: 400,
         //默认触摸时长
-        touchDuration: 200
+        touchDuration: 300
     };
 
 })(window, $);
