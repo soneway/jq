@@ -221,9 +221,9 @@
         //是否调整点击元素居中
         isAdjust: false,
         //校正系数
-        reviseRatio: 200,
+        reviseRatio: 400,
         //默认触摸时长
-        touchDuration: 300
+        touchDuration: 200
     };
 
 })(window, $);

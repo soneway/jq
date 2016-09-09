@@ -2672,7 +2672,6 @@ $.extend(window, require('alert'));
                         absY = Math.abs(swipSpanY),
                         //事件当前时间
                         timeStamp = evt.timeStamp;
-                    console.log(swipSpanX, swipSpanY);
 
                     //上下
                     if (isVertical) {
@@ -2694,6 +2693,8 @@ $.extend(window, require('alert'));
                             slide(currentTranslateVal + swipSpanX);
                         }
                     }
+
+                    console.log(timeStamp - lastTouch.startTime);
 
                     //如果大于一定时间间隔,重置最后一个touch的信息
                     if (timeStamp - lastTouch.startTime > touchDuration) {
@@ -2720,9 +2721,11 @@ $.extend(window, require('alert'));
                     $items.removeClass('notrans');
 
                     if (swipSpan < 0) {
+                        //是否滚动到最后
                         -(translateVal - span) < scrollVal ? slide(translateVal - span) : slide(-scrollVal);
                     }
                     else if (swipSpan > 0) {
+                        //是否滚动到最前
                         translateVal + span < 0 ? slide(translateVal + span) : slide(0);
                     }
                 });
@@ -2735,7 +2738,8 @@ $.extend(window, require('alert'));
                 //屏幕尺寸改变事件
                 window.addEventListener('resize', function () {
                     var w = $this.width();
-                    w > 0 && initScrollVal();
+                    //重置可滚动的值
+                    w > 0 && (scrollVal = getScrollVal());
                 }, false);
             }
 
@@ -2758,9 +2762,9 @@ $.extend(window, require('alert'));
         //是否调整点击元素居中
         isAdjust: false,
         //校正系数
-        reviseRatio: 200,
+        reviseRatio: 400,
         //默认触摸时长
-        touchDuration: 300
+        touchDuration: 200
     };
 
 })(window, $);
