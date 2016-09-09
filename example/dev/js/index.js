@@ -2694,8 +2694,6 @@ $.extend(window, require('alert'));
                         }
                     }
 
-                    console.log(timeStamp - lastTouch.startTime);
-
                     //如果大于一定时间间隔,重置最后一个touch的信息
                     if (timeStamp - lastTouch.startTime > touchDuration) {
                         lastTouch.startTime = timeStamp;
