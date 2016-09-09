@@ -8,9 +8,10 @@
 
         var Math = window.Math;
 
-        function getReviseSpan(timeSpan, swipSpan, reviseRatio) {
+        //计算校正距离函数
+        function getReviseSpan(swipSpan, timeSpan, reviseRatio) {
             var speed = Math.abs(swipSpan) / timeSpan;
-            return (speed * speed) / (2 * reviseRatio);
+            return speed * speed * reviseRatio;
         }
 
         //每个元素执行
@@ -20,9 +21,11 @@
             //配置项
             var isVertical = opts.isVertical,
                 timeSpanThreshold = opts.timeSpanThreshold,
+                swipSpanThreshold = opts.swipSpanThreshold,
                 maxScroll = opts.maxScroll,
                 isAdjust = opts.isAdjust,
-                reviseRatio = opts.reviseRatio;
+                reviseRatio = opts.reviseRatio,
+                touchDuration = opts.touchDuration;
 
             //变量
             var $this = $(this),
@@ -40,21 +43,19 @@
 
             //初始化事件函数
             function initEvent() {
-                //touchstart起点
-                var startX, startY,
-                    //touch时间点
-                    startTime, endTime,
-                    //move的距离
-                    swipSpan,
-                    //作动画的值
+                //最后一个touch的信息
+                var lastTouch = {},
+                    //touchstart位置
+                    startX, startY,
+                    //作动画translate值
                     translateVal = 0,
-                    //当然translate值
-                    currentVal,
+                    //当前translate值
+                    currentTranslateVal,
                     //可滚动的值
-                    scrollVal;
+                    scrollVal = getScrollVal();
 
-                //初始化可滚动的值函数
-                function initScrollVal() {
+                //获取可滚动的值函数
+                function getScrollVal() {
                     //item包含margin的尺寸
                     var itemsOuterVal = isVertical ?
                         $items.height() + parseFloat($items.css('margin-top')) + parseFloat($items.css('margin-bottom')) :
@@ -65,10 +66,8 @@
                         $this.width() - parseFloat($this.css('padding-left')) - parseFloat($this.css('padding-right'));
 
                     //记录可滚动的值
-                    scrollVal = itemsOuterVal - thisInnerVal;
+                    return itemsOuterVal - thisInnerVal;
                 }
-
-                initScrollVal();
 
                 //移动到函数
                 function slide(x) {
@@ -107,16 +106,15 @@
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
-                    var touch = evt.targetTouches[0];
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
+
                     //记录开始时间
-                    startTime = evt.timeStamp;
+                    lastTouch.startTime = evt.timeStamp;
                     //记录触摸开始位置
-                    startX = touch.pageX;
-                    startY = touch.pageY;
-                    //重置swipSpan
-                    swipSpan = 0;
-                    //记录x
-                    currentVal = translateVal;
+                    lastTouch.startX = startX = touch.pageX;
+                    lastTouch.startY = startY = touch.pageY;
+                    //记录当前动画值
+                    currentTranslateVal = translateVal;
 
                     //不作动画
                     $items.addClass('notrans');
@@ -124,34 +122,56 @@
 
                 //触摸移动事件
                 $this.on('touchmove', function (evt) {
-                    var touch = evt.targetTouches[0],
-                        swipSpanX = touch.pageX - startX,
-                        swipSpanY = touch.pageY - startY;
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
+                        currentX = touch.pageX,
+                        currentY = touch.pageY,
+                        //x轴滑动距离
+                        swipSpanX = currentX - startX,
+                        absX = Math.abs(swipSpanX),
+                        //y轴滑动距离
+                        swipSpanY = currentY - startY,
+                        absY = Math.abs(swipSpanY),
+                        //事件当前时间
+                        timeStamp = evt.timeStamp;
 
                     //上下
-                    if (isVertical && Math.abs(swipSpanX) < Math.abs(swipSpanY)) {
-                        evt.preventDefault();
-                        evt.stopPropagation();
+                    if (isVertical) {
+                        //x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
+                        if (absX < swipSpanThreshold || absX < absY) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
 
-                        slide(currentVal + (swipSpan = swipSpanY));
+                            slide(currentTranslateVal + swipSpanY);
+                        }
                     }
                     //左右
-                    if (!isVertical && Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
-                        evt.preventDefault();
-                        evt.stopPropagation();
+                    else {
+                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        if (absY < swipSpanThreshold || absY < absX) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
 
-                        slide(currentVal + (swipSpan = swipSpanX));
+                            slide(currentTranslateVal + swipSpanX);
+                        }
+                    }
+
+                    //如果大于一定时间间隔,重置最后一个touch的信息
+                    if (timeStamp - lastTouch.startTime > touchDuration) {
+                        lastTouch.startTime = timeStamp;
+                        lastTouch.startX = currentX;
+                        lastTouch.startY = currentY;
                     }
                 });
 
                 //触摸结束事件
                 $this.on('touchend', function (evt) {
-                    //记录结束时间
-                    endTime = evt.timeStamp;
-
-                    //计算校正值(更加拟物化)
-                    var timeSpan = endTime - startTime,
-                        span = timeSpan > timeSpanThreshold ? 0 : getReviseSpan(timeSpan, swipSpan, reviseRatio);
+                    var touch = evt.changedTouches ? evt.changedTouches[0] : evt,
+                        //滑动距离
+                        swipSpan = isVertical ? touch.pageY - lastTouch.startY : touch.pageX - lastTouch.startX,
+                        //滑动时间间隔
+                        timeSpan = evt.timeStamp - lastTouch.startTime,
+                        //计算校正值(更加拟物化)
+                        span = timeSpan > timeSpanThreshold ? 0 : getReviseSpan(swipSpan, timeSpan, reviseRatio);
 
                     //设置最大滚动值
                     span > maxScroll && (span = maxScroll);
@@ -160,9 +180,11 @@
                     $items.removeClass('notrans');
 
                     if (swipSpan < 0) {
+                        //是否滚动到最后
                         -(translateVal - span) < scrollVal ? slide(translateVal - span) : slide(-scrollVal);
                     }
                     else if (swipSpan > 0) {
+                        //是否滚动到最前
                         translateVal + span < 0 ? slide(translateVal + span) : slide(0);
                     }
                 });
@@ -175,7 +197,8 @@
                 //屏幕尺寸改变事件
                 window.addEventListener('resize', function () {
                     var w = $this.width();
-                    w > 0 && initScrollVal();
+                    //重置可滚动的值
+                    w > 0 && (scrollVal = getScrollVal());
                 }, false);
             }
 
@@ -191,12 +214,16 @@
         isVertical: false,
         //时间间隙阈值
         timeSpanThreshold: 300,
+        //滑动距离阈值
+        swipSpanThreshold: 20,
         //滚动最大值
-        maxScroll: 400,
+        maxScroll: 800,
         //是否调整点击元素居中
         isAdjust: false,
-        //校正系统
-        reviseRatio: 0.002
+        //校正系数
+        reviseRatio: 200,
+        //默认触摸时长
+        touchDuration: 300
     };
 
 })(window, $);
