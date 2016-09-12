@@ -76,8 +76,8 @@
                         x /= 2;
                     }
                     //终点
-                    if (-x > scrollVal) {
-                        x = x + (-x - scrollVal) / 2;
+                    else if (x < -scrollVal) {
+                        x += (-x - scrollVal) / 2;
                     }
 
                     var transform = 'translate3d(' + (isVertical ? '0,' + (translateVal = x) + 'px,0' : (translateVal = x) + 'px,0,0') + ')';
