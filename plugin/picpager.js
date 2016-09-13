@@ -14,6 +14,7 @@
             var imgData = opts.imgData,
                 imgAttrName = opts.imgAttrName,
                 swipThreshold = opts.swipThreshold,
+                swipSpanThreshold = opts.swipSpanThreshold,
                 slideCallback = opts.slideCallback;
 
             //变量
@@ -50,8 +51,7 @@
                         //向右
                         case 1:
                         //向左
-                        case -1:
-                        {
+                        case -1: {
                             //动画
                             isAnimating = true;
                             var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
@@ -67,8 +67,7 @@
                             }, duration + 100);//加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
                             break;
                         }
-                        default:
-                        {
+                        default: {
                             translate($wrap, 'translate3d(0,0,0)');
                         }
                     }
@@ -137,10 +136,12 @@
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
-                    var touch = evt.targetTouches[0];
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
+
                     //记录触摸开始位置
                     startX = touch.pageX;
                     startY = touch.pageY;
+
                     //重置swipSpan
                     swipSpan = 0;
                     //取消动画
@@ -150,12 +151,16 @@
                 //触摸移动事件
                 $this.on('touchmove', function (evt) {
                     if (!isAnimating) {
-                        var touch = evt.targetTouches[0],
+                        var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
+                            // x轴滑动距离
                             swipSpanX = touch.pageX - startX,
-                            swipSpanY = touch.pageY - startY;
+                            absX = Math.abs(swipSpanX),
+                            // y轴滑动距离
+                            swipSpanY = touch.pageY - startY,
+                            absY = Math.abs(swipSpanY);
 
-                        //左右
-                        if (Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
+                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        if (absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
 
@@ -187,7 +192,7 @@
                             --index < 0 ? index = 0 : direction = 1;
                         }
                         //向左
-                        if (swipSpan < -swipThreshold) {
+                        else if (swipSpan < -swipThreshold) {
                             ++index === itemCount ? index = itemCount - 1 : direction = -1;
                         }
 
@@ -218,6 +223,8 @@
         imgAttrName: null,
         //滑动阈值
         swipThreshold: 100,
+        // 滑动距离阈值
+        swipSpanThreshold: 10,
         //轮播回调函数
         slideCallback: null
     };

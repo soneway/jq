@@ -13,6 +13,7 @@
             //配置项
             var isVertical = opts.isVertical,
                 swipThreshold = opts.swipThreshold,
+                swipSpanThreshold = opts.swipSpanThreshold,
                 isAutoPlay = opts.isAutoPlay,
                 autoPlayInter = opts.autoPlayInter,
                 slideCallback = opts.slideCallback,
@@ -178,10 +179,12 @@
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
-                    var touch = evt.targetTouches[0];
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
+
                     //记录触摸开始位置
                     startX = touch.pageX;
                     startY = touch.pageY;
+
                     //重置swipSpan
                     swipSpan = 0;
                     //取消动画
@@ -192,13 +195,18 @@
 
                 //触摸移动事件
                 $this.on('touchmove', function (evt) {
-                    var touch = evt.targetTouches[0],
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
+                        // x轴滑动距离
                         swipSpanX = touch.pageX - startX,
-                        swipSpanY = touch.pageY - startY;
+                        absX = Math.abs(swipSpanX),
+                        // y轴滑动距离
+                        swipSpanY = touch.pageY - startY,
+                        absY = Math.abs(swipSpanY);
 
                     //上下
                     if (isVertical) {
-                        if (Math.abs(swipSpanY) > Math.abs(swipSpanX)) {
+                        //x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
+                        if (absX < swipSpanThreshold || absX < absY) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanY);
@@ -206,7 +214,8 @@
                     }
                     //左右
                     else {
-                        if (Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
+                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        if (absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanX);
@@ -221,7 +230,7 @@
                         --index < 0 && (index = 0);
                     }
                     //向左,上
-                    if (swipSpan < -swipThreshold) {
+                    else if (swipSpan < -swipThreshold) {
                         ++index === itemCount && (index = itemCount - 1);
                     }
 
@@ -261,25 +270,27 @@
     };
     $.fn.carousel.defaults = {
         //是否竖直方向滚动
-        isVertical      : false,
+        isVertical: false,
         //滑动阈值
-        swipThreshold   : 100,
+        swipThreshold: 100,
+        // 滑动距离阈值
+        swipSpanThreshold: 10,
         //是否自动轮播
-        isAutoPlay      : true,
+        isAutoPlay: true,
         //轮播inter
-        autoPlayInter   : 8000,
+        autoPlayInter: 8000,
         //轮播回调函数
-        slideCallback   : null,
+        slideCallback: null,
         //是否显示title
-        isShowTitle     : true,
+        isShowTitle: true,
         //是否显示pager
-        isShowPager     : true,
+        isShowPager: true,
         //移除class延迟
         removeClassDelay: 0,
         //初始化完成回调函数
-        inited          : null,
+        inited: null,
         //初始index
-        initIndex       : 0
+        initIndex: 0
     };
 
 })(window, $);

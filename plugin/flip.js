@@ -13,6 +13,7 @@
             //配置项
             var isVertical = opts.isVertical,
                 swipThreshold = opts.swipThreshold,
+                swipSpanThreshold = opts.swipSpanThreshold,
                 rate = opts.rate,
                 slideCallback = opts.slideCallback;
 
@@ -101,7 +102,8 @@
 
                 //触摸开始事件
                 $this.on('touchstart', function (evt) {
-                    var touch = evt.targetTouches[0];
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
+
                     //记录触摸开始位置
                     startX = touch.pageX;
                     startY = touch.pageY;
@@ -114,33 +116,45 @@
 
                 //触摸移动事件
                 $this.on('touchmove', function (evt) {
-                    var touch = evt.targetTouches[0],
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
+                        // x轴滑动距离
                         swipSpanX = touch.pageX - startX,
-                        swipSpanY = touch.pageY - startY;
+                        absX = Math.abs(swipSpanX),
+                        // y轴滑动距离
+                        swipSpanY = touch.pageY - startY,
+                        absY = Math.abs(swipSpanY);
 
                     //上下
-                    if (isVertical && Math.abs(swipSpanX) < Math.abs(swipSpanY)) {
-                        evt.preventDefault();
-                        evt.stopPropagation();
-                        !isAnimating && rotate(swipSpan = swipSpanY / rate);
+                    if (isVertical) {
+                        //x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
+                        if (absX < swipSpanThreshold || absX < absY) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            !isAnimating && rotate(swipSpan = swipSpanY / rate);
+                        }
                     }
                     //左右
-                    if (!isVertical && Math.abs(swipSpanX) > Math.abs(swipSpanY)) {
-                        evt.preventDefault();
-                        evt.stopPropagation();
-                        !isAnimating && rotate(swipSpan = swipSpanX / rate);
+                    else {
+                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        if (absY < swipSpanThreshold || absY < absX) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            !isAnimating && rotate(swipSpan = swipSpanX / rate);
+                        }
                     }
                 });
 
                 //触摸结束事件
-                $this.on('touchend', function (evt) {
+                $this.on('touchend', function () {
                     if (!isAnimating) {
                         //达到滚动阈值
                         if (Math.abs(swipSpan) > swipThreshold) {
+                            // 向右,下
                             if (swipSpan > 0 && --index === -1) {
                                 index = itemCount - 1;
                             }
-                            if (swipSpan < 0 && ++index === itemCount) {
+                            // 向左,上
+                            else if (swipSpan < 0 && ++index === itemCount) {
                                 index = 0;
                             }
 
@@ -169,6 +183,8 @@
         isVertical: false,
         //滑动阈值
         swipThreshold: 60,
+        // 滑动距离阈值
+        swipSpanThreshold: 10,
         //比率
         rate: 1.3,
         //轮播回调函数
