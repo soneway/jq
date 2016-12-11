@@ -58,8 +58,6 @@
             typeof options !== 'object' && (options = {msg: options});
             opts = $.extend({}, alert.defaults, options);
 
-            //初始化tag
-            $alert.attr('data-pi-tag', opts.tag);
             //显示内容
             $head.html(opts.head);
             $msg.html(opts.msg);

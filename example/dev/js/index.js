@@ -987,6 +987,18 @@ $.extend(window, require('alert'));
          */
         hasClass: function (name) {
             return classReg(name).test(this[0].className);
+        },
+
+        /**
+         * 切换class
+         * @param name css类名
+         * @returns {$init} 返回$对象本身
+         */
+        toggleClass: function (name) {
+            return this.forEach(function (el) {
+                var $this = $(el);
+                $this.hasClass(name) ? $this.removeClass(name) : $this.addClass(name);
+            });
         }
 
     };
