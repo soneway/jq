@@ -6,34 +6,35 @@
 
     $.fn.picpager = function (options) {
 
-        //每个元素执行
+        // 每个元素执行
         return this.each(function () {
             var opts = $.extend({}, $.fn.picpager.defaults, options);
 
-            //配置项
+            // 配置项
             var imgData = opts.imgData,
                 imgAttrName = opts.imgAttrName,
                 swipThreshold = opts.swipThreshold,
                 swipSpanThreshold = opts.swipSpanThreshold,
-                slideCallback = opts.slideCallback;
+                slideCallback = opts.slideCallback,
+                pullRatio = opts.pullRatio;
 
-            //变量
+            // 变量
             var $this = $(this),
                 me = this,
                 $pics, $wrap,
                 itemCount = imgData.length;
 
-            //初始化函数
+            // 初始化函数
             function init() {
                 $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
                 $wrap = $this.find('.pi-wrap');
                 $pics = $this.find('.pi-pic');
 
-                //初始化事件
+                // 初始化事件
                 initEvent();
             }
 
-            //初始化事件函数
+            // 初始化事件函数
             function initEvent() {
                 var width = $this.width(),
                     index = 0,
@@ -41,30 +42,30 @@
                     swipSpan, isAnimating,
                     duration = parseFloat($wrap.css('transition-duration')) * 1000;
 
-                //移动到函数
+                // 移动到函数
                 function slide(direction) {
-                    //加上动画
+                    // 加上动画
                     $wrap.removeClass('notrans');
 
-                    //判断滚动
+                    // 判断滚动
                     switch (direction) {
-                        //向右
+                        // 向右
                         case 1:
-                        //向左
+                        // 向左
                         case -1: {
-                            //动画
+                            // 动画
                             isAnimating = true;
                             var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
                             translate($wrap, transform);
 
-                            //复位操作,更新图片
+                            // 复位操作,更新图片
                             setTimeout(function () {
                                 translate($wrap.addClass('notrans'), 'translate3d(0,0,0)');
                                 $pics.each(function (i) {
                                     loadImg($(this), index + i - 1);
                                 });
                                 isAnimating = false;
-                            }, duration + 100);//加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
+                            }, duration + 100);// 加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
                             break;
                         }
                         default: {
@@ -72,18 +73,18 @@
                         }
                     }
 
-                    //滚动回调函数
+                    // 滚动回调函数
                     typeof slideCallback === 'function' && slideCallback(index, direction);
                 }
 
-                //移动函数
+                // 移动函数
                 function translate($this, val) {
                     $this.css({
                         'transform': val
                     });
                 }
 
-                //加载图片函数
+                // 加载图片函数
                 function loadImg($this, i) {
                     var item = imgData[i];
                     $this.css({
@@ -91,39 +92,39 @@
                     });
                 }
 
-                //初始化加载图片
+                // 初始化加载图片
                 $pics.each(function (i) {
                     loadImg($(this), i - 1);
                 });
 
 
-                //暴露slideToIndex方法
+                // 暴露slideToIndex方法
                 me.slideToIndex = function (i) {
                     var direction;
-                    //如不为数字或者超出范围
+                    // 如不为数字或者超出范围
                     if (typeof i !== 'number' || i < 0 || i >= itemCount || i === index) {
                         return;
                     }
 
-                    //向左
+                    // 向左
                     if (i > index) {
                         direction = -1;
                         loadImg($pics.eq(2), i);
                     }
-                    //向右
+                    // 向右
                     else {
                         direction = 1;
                         loadImg($pics.eq(0), i);
                     }
 
-                    //做动画
+                    // 做动画
                     index = i;
                     slide(direction);
                 };
 
-                //暴露addItem方法
+                // 暴露addItem方法
                 me.addItem = function (item) {
-                    //如为数组
+                    // 如为数组
                     if ($.isArray(item)) {
                         imgData = imgData.concat(item);
                     }
@@ -134,43 +135,43 @@
                 };
 
 
-                //触摸开始事件
+                // 触摸开始事件
                 $this.on('touchstart', function (evt) {
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
 
-                    //记录触摸开始位置
+                    // 记录触摸开始位置
                     startX = touch.pageX;
                     startY = touch.pageY;
 
-                    //重置swipSpan
+                    // 重置swipSpan
                     swipSpan = 0;
-                    //取消动画
+                    // 取消动画
                     $wrap.addClass('notrans');
                 });
 
-                //触摸移动事件
+                // 触摸移动事件
                 $this.on('touchmove', function (evt) {
                     if (!isAnimating) {
                         var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
-                            // x轴滑动距离
+                            //  x轴滑动距离
                             swipSpanX = touch.pageX - startX,
                             absX = Math.abs(swipSpanX),
-                            // y轴滑动距离
+                            //  y轴滑动距离
                             swipSpanY = touch.pageY - startY,
                             absY = Math.abs(swipSpanY);
 
-                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
                         if (absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
 
-                            //第一张图
+                            // 第一张图
                             if (index === 0 && swipSpanX > 0) {
-                                swipSpanX /= 2;
+                                swipSpanX /= pullRatio;
                             }
-                            //最后一张图
+                            // 最后一张图
                             if (index === itemCount - 1 && swipSpanX < 0) {
-                                swipSpanX /= 2;
+                                swipSpanX /= pullRatio;
                             }
 
                             var transform = 'translate3d(' + (swipSpan = swipSpanX) + 'px,0,0)';
@@ -183,25 +184,25 @@
                     }
                 });
 
-                //触摸结束事件
+                // 触摸结束事件
                 $this.on('touchend', function () {
                     if (!isAnimating) {
                         var direction;
-                        //向右
+                        // 向右
                         if (swipSpan > swipThreshold) {
                             --index < 0 ? index = 0 : direction = 1;
                         }
-                        //向左
+                        // 向左
                         else if (swipSpan < -swipThreshold) {
                             ++index === itemCount ? index = itemCount - 1 : direction = -1;
                         }
 
-                        //滚动
+                        // 滚动
                         swipSpan !== 0 && slide(direction);
                     }
                 }).trigger('touchend');
 
-                //屏幕尺寸改变事件
+                // 屏幕尺寸改变事件
                 window.addEventListener('resize', function () {
                     var w = $this.width();
                     w > 0 && (width = w);
@@ -210,23 +211,25 @@
             }
 
 
-            //初始化
+            // 初始化
             init();
 
         });
 
     };
     $.fn.picpager.defaults = {
-        //图片数据
+        // 图片数据
         imgData: null,
-        //表示图片地址属性名
+        // 表示图片地址属性名
         imgAttrName: null,
-        //滑动阈值
+        // 滑动阈值
         swipThreshold: 100,
-        // 滑动距离阈值
+        //  滑动距离阈值
         swipSpanThreshold: 10,
-        //轮播回调函数
-        slideCallback: null
+        // 轮播回调函数
+        slideCallback: null,
+        // first和last拉不动的比率
+        pullRatio: 3
     };
 
 })(window, $);
