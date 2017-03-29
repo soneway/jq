@@ -246,7 +246,7 @@ h4 {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
-.transform, .pi-scroll-item, #mainbox, #sidebox, .panel, #pi-alert .pi-box, #pi-confirm .pi-box, .pi-picpager .pi-wrap {
+.transform, .pi-scroll-item, #mainbox, #sidebox, .panel, #pi-alert .pi-box, #pi-confirm .pi-box, .pi-carousel .pi-wrap, .pi-picpager .pi-wrap {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;

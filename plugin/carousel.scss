@@ -28,6 +28,8 @@ $pi-carousel-pager-radius: 0.08rem !default;
     /*滚动容器*/
     .pi-wrap
     {
+        @extend .transform;
+
         & > *
         {
             display: block;

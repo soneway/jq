@@ -13,7 +13,8 @@ exports.load = function ($this, isInit) {
         $('.carousel').each(function () {
             $(this).html(html).carousel({
                 isVertical: this.getAttribute('data-isvertical') === '1',
-                isAutoPlay: false
+                isAutoPlay: true,
+                autoPlayInter: 3000
             });
         });
     }

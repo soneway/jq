@@ -138,7 +138,8 @@ exports.load = function ($this, isInit) {
         $('.carousel').each(function () {
             $(this).html(html).carousel({
                 isVertical: this.getAttribute('data-isvertical') === '1',
-                isAutoPlay: false
+                isAutoPlay: true,
+                autoPlayInter: 3000
             });
         });
     }
@@ -1283,8 +1284,6 @@ $.extend(window, require('alert'));
             typeof options !== 'object' && (options = {msg: options});
             opts = $.extend({}, alert.defaults, options);
 
-            //初始化tag
-            $alert.attr('data-pi-tag', opts.tag);
             //显示内容
             $head.html(opts.head);
             $msg.html(opts.msg);
@@ -1421,11 +1420,11 @@ $.extend(window, require('alert'));
 
     $.fn.carousel = function (options) {
 
-        //每个元素执行
+        // 每个元素执行
         return this.each(function () {
             var opts = $.extend({}, $.fn.carousel.defaults, options);
 
-            //配置项
+            // 配置项
             var isVertical = opts.isVertical,
                 swipThreshold = opts.swipThreshold,
                 swipSpanThreshold = opts.swipSpanThreshold,
@@ -1436,30 +1435,60 @@ $.extend(window, require('alert'));
                 isShowPager = opts.isShowPager,
                 removeClassDelay = opts.removeClassDelay,
                 inited = opts.inited,
-                initIndex = opts.initIndex;
+                initIndex = opts.initIndex,
+                pullRatio = opts.pullRatio,
+                isLoop = opts.isLoop;
 
-            //变量
+            // 变量
             var $this = $(this),
                 me = this,
-                $wrap, wrapElStyle, $items, itemCount,
-                $title, $pagers;
+                $wrap, wrapElStyle,
+                $items, itemCount,
+                $allItems, allItemCount,
+                $title, $pagers,
+                duration;
 
-            //初始化函数
+            // 初始化函数
             function init() {
-                $this.addClass('pi-carousel').html('<div class="pi-wrap">' + $this.html() + '</div>' + (isShowTitle ? '<div class="pi-title"></div>' : ''));
-
-                $wrap = $this.find('.pi-wrap');
-                wrapElStyle = $wrap[0].style;
-                $items = $wrap.children('*');
+                // items
+                $items = $this.children('*').each(function () {
+                    var $this = $(this),
+                        index = $this.index();
+                    // 添加index属性
+                    $this.attr({
+                        'data-index': index
+                    });
+                });
                 itemCount = $items.length;
 
-                //html初始化完成回调
+                // this
+                $this.addClass('pi-carousel').html('<div class="pi-wrap"></div>' + (isShowTitle ? '<div class="pi-title"></div>' : ''));
+
+                // wrap
+                $wrap = $this.find('.pi-wrap').append($items);
+                wrapElStyle = $wrap[0].style;
+                duration = parseFloat($wrap.css('transition-duration')) * 1000;
+                // 如果需要循环滚动,需要多添加两个元素
+                if (isLoop) {
+                    // 在最后添加第一个元素
+                    $wrap.append($items[0].outerHTML)
+                    // 在最前添加最后一个元素
+                        .prepend($items[itemCount - 1].outerHTML);
+                }
+
+                // allItems
+                $allItems = $wrap.children('*');
+                allItemCount = $allItems.length;
+
+                // html初始化完成回调
                 typeof inited === 'function' && inited($items);
 
                 isVertical && $this.addClass('vertical');
+
+                // title
                 $title = $this.find('.pi-title');
 
-                //pager
+                // pager
                 var html = '';
                 if (isShowPager) {
                     html += '<div class="pi-pager">';
@@ -1470,166 +1499,200 @@ $.extend(window, require('alert'));
                 }
                 $pagers = $this.append(html).find('.pi-pager span');
 
-                //初始化事件
+                // 初始化事件
                 initEvent();
             }
 
-            //初始化事件函数
+            // 初始化事件函数
             function initEvent() {
                 var width, height, inter, index = initIndex,
                     startX, startY,
                     swipSpan;
 
-                //设置尺寸函数
+                // 设置尺寸函数
                 function setSize() {
                     width = $this.width();
                     height = $this.height();
 
-                    //水平方向滚动
+                    // 水平方向滚动
                     if (!isVertical) {
-                        wrapElStyle.width = width * itemCount + 'px';
-                        $items.css('width', width + 'px');
+                        wrapElStyle.width = width * allItemCount + 'px';
+                        $allItems.css('width', width + 'px');
+                        // 如果是循环滚动
+                        isLoop && $wrap.css({
+                            'margin-left': -width + 'px'
+                        });
                     }
-                    //竖直方向滚动
+                    // 竖直方向滚动
                     else {
-                        wrapElStyle.height = height * itemCount + 'px';
-                        $items.css('height', height + 'px');
+                        wrapElStyle.height = height * allItemCount + 'px';
+                        $allItems.css('height', height + 'px');
+                        // 如果是循环滚动
+                        isLoop && $wrap.css({
+                            'margin-top': -height + 'px'
+                        });
                     }
                 }
 
-                //设置inter函数
+                // 设置inter函数
                 function setInter() {
                     isAutoPlay && (inter = setInterval(function () {
-                        ++index === itemCount && (index = 0);
+                        ++index;
+                        !isLoop && index === itemCount && (index = 0);
+
+                        // 加上动画
+                        $wrap.removeClass('notrans');
                         slide();
                     }, autoPlayInter));
                 }
 
-                //移动到函数
+                // 移动到函数
                 function slide(swipSpan) {
                     var translate = -index * (isVertical ? height : width),
                         transform;
 
+                    // touchmove跟手指滚动
                     if (typeof swipSpan === 'number') {
-                        //起点
+                        // 起点
                         if (index === 0 && swipSpan > 0) {
-                            swipSpan /= 2;
+                            if (!isLoop) {
+                                swipSpan /= pullRatio;
+                            }
                         }
-                        //终点
+                        // 终点
                         if (index === itemCount - 1 && swipSpan < 0) {
-                            swipSpan /= 2;
+                            if (!isLoop) {
+                                swipSpan /= pullRatio;
+                            }
                         }
                         translate += swipSpan;
                     }
+                    // touchend时滚动动画
                     else {
+                        var $item = $items.eq(index);
+                        // item存在
+                        if ($item.length) {
+                            // 滚动回调函数
+                            typeof slideCallback === 'function' && slideCallback.call($item, index);
 
-                        //滚动回调函数
-                        typeof slideCallback === 'function' && slideCallback.call($items[index], index);
+                            // 添加当前类
+                            $item.addClass('current');
 
-                        //延迟removeClass('current')
-                        setTimeout(function () {
-                            $items.each(function () {
-                                var $this = $(this),
-                                    i = $this.index();
-                                i !== index && $this.removeClass('current');
-                            });
-                        }, removeClassDelay);
+                            // title
+                            if (isShowTitle) {
+                                var title = $item.attr('data-title');
+                                $title.removeClass('visible');
+                                title && setTimeout(function () {
+                                    $title.addClass('visible').html(title);
+                                }, 150);
+                            }
 
-                        //title
-                        if (isShowTitle) {
-                            var title = $items.eq(index).addClass('current').attr('data-title');
-                            $title.removeClass('visible');
-                            title && setTimeout(function () {
-                                $title.addClass('visible').html(title);
-                            }, 150);
-                        }
+                            // pager状态
+                            if (isShowPager) {
+                                $pagers.removeClass('selected');
+                                // 下一队列执行,以防某些情况下无效
+                                setTimeout(function () {
+                                    $pagers.eq(index).addClass('selected');
+                                }, 0);
+                            }
 
-                        //pager状态
-                        if (isShowPager) {
-                            $pagers.removeClass('selected');
-                            //下一队列执行,以防某些情况下无效
+                            // 延迟removeClass('current')
                             setTimeout(function () {
-                                $pagers.eq(index).addClass('selected');
-                            }, 0);
+                                $items.each(function () {
+                                    var $this = $(this),
+                                        i = $this.attr('data-index');
+                                    i !== index && $this.removeClass('current');
+                                });
+                            }, removeClassDelay);
                         }
+
+                        // 如果是循环滚动
+                        isLoop && setTimeout(function () {
+                            // 第一帧滑到最后一帧
+                            index < 0 && me.slideToIndex(itemCount - 1, 1);
+                            // 最后一帧滑到第一帧
+                            index === itemCount && me.slideToIndex(0, 1);
+                        }, duration);
                     }
 
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
-                    //作动画
+                    // 作动画
                     $wrap.css({
-                        'transform': transform
+                        transform: transform
                     });
                 }
 
 
-                //初始化
-                //设置尺寸
+                // 初始化
+                // 设置尺寸
                 setSize();
 
-                //暴露slideToIndex方法
+                // 暴露slideToIndex方法
                 me.slideToIndex = function (i, isNoAni) {
                     if (typeof i !== 'number') {
                         return console.log('index应为数字');
                     }
 
-                    //是否有动画
-                    isNoAni ? $wrap.removeClass('transform') : $wrap.addClass('transform');
+                    // 是否没有动画
+                    isNoAni ? $wrap.addClass('notrans') : $wrap.removeClass('notrans');
 
                     index = i;
                     slide();
                 };
 
-                //暴露prev方法
+                // 暴露prev方法
                 me.prev = function () {
-                    --index < 0 && (index = itemCount - 1);
+                    --index;
+                    !isLoop && index < 0 && (index = itemCount - 1);
                     slide();
                 };
 
-                //暴露next方法
+                // 暴露next方法
                 me.next = function () {
-                    ++index === itemCount && (index = 0);
+                    ++index;
+                    !isLoop && index === itemCount && (index = 0);
                     slide();
                 };
 
 
-                //触摸开始事件
+                // 触摸开始事件
                 $this.on('touchstart', function (evt) {
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
 
-                    //记录触摸开始位置
+                    // 记录触摸开始位置
                     startX = touch.pageX;
                     startY = touch.pageY;
 
-                    //重置swipSpan
+                    // 重置swipSpan
                     swipSpan = 0;
-                    //取消动画
-                    $wrap.removeClass('transform');
-                    //取消自动轮播
+                    // 取消动画
+                    $wrap.addClass('notrans');
+                    // 取消自动轮播
                     isAutoPlay && clearInterval(inter);
                 });
 
-                //触摸移动事件
+                // 触摸移动事件
                 $this.on('touchmove', function (evt) {
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
-                        // x轴滑动距离
+                        //  x轴滑动距离
                         swipSpanX = touch.pageX - startX,
                         absX = Math.abs(swipSpanX),
-                        // y轴滑动距离
+                        //  y轴滑动距离
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    //上下
+                    // 上下
                     if (isVertical) {
-                        //x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
+                        // x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
                         if (absX < swipSpanThreshold || absX < absY) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanY);
                         }
                     }
-                    //左右
+                    // 左右
                     else {
-                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
                         if (absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
@@ -1638,34 +1701,36 @@ $.extend(window, require('alert'));
                     }
                 });
 
-                //触摸结束事件
+                // 触摸结束事件
                 $this.on('touchend', function () {
-                    //向右,下
+                    // 向右,下
                     if (swipSpan > swipThreshold) {
-                        --index < 0 && (index = 0);
+                        --index;
+                        !isLoop && index < 0 && (index = 0);
                     }
-                    //向左,上
+                    // 向左,上
                     else if (swipSpan < -swipThreshold) {
-                        ++index === itemCount && (index = itemCount - 1);
+                        ++index;
+                        !isLoop && index === itemCount && (index = itemCount - 1);
                     }
 
-                    //加上动画
-                    $wrap.addClass('transform');
+                    // 加上动画
+                    $wrap.removeClass('notrans');
 
-                    //滚动(swipSpan === undefined时无动画)
+                    // 滚动(swipSpan === undefined时无动画)
                     swipSpan !== 0 && slide();
 
-                    //自动轮播
+                    // 自动轮播
                     setInter();
                 }).trigger('touchend');
 
-                //pager点击事件
+                // pager点击事件
                 $pagers.on('click', function () {
                     var index = $(this).index();
                     me.slideToIndex(index);
                 });
 
-                //屏幕尺寸改变事件
+                // 屏幕尺寸改变事件
                 window.addEventListener('resize', function () {
                     var w = $this.width();
                     if (w > 0) {
@@ -1677,35 +1742,39 @@ $.extend(window, require('alert'));
             }
 
 
-            //初始化
+            // 初始化
             init();
 
         });
 
     };
     $.fn.carousel.defaults = {
-        //是否竖直方向滚动
+        // 是否竖直方向滚动
         isVertical: false,
-        //滑动阈值
+        // 滑动阈值
         swipThreshold: 100,
-        // 滑动距离阈值
+        //  滑动距离阈值
         swipSpanThreshold: 10,
-        //是否自动轮播
+        // 是否自动轮播
         isAutoPlay: true,
-        //轮播inter
+        // 轮播inter
         autoPlayInter: 8000,
-        //轮播回调函数
+        // 轮播回调函数
         slideCallback: null,
-        //是否显示title
+        // 是否显示title
         isShowTitle: true,
-        //是否显示pager
+        // 是否显示pager
         isShowPager: true,
-        //移除class延迟
+        // 移除class延迟
         removeClassDelay: 0,
-        //初始化完成回调函数
+        // 初始化完成回调函数
         inited: null,
-        //初始index
-        initIndex: 0
+        // 初始index
+        initIndex: 0,
+        // first和last拉不动的比率
+        pullRatio: 3,
+        // 是否可以循环切换
+        isLoop: true
     };
 
 })(window, $);
@@ -2227,34 +2296,35 @@ $.extend(window, require('alert'));
 
     $.fn.picpager = function (options) {
 
-        //每个元素执行
+        // 每个元素执行
         return this.each(function () {
             var opts = $.extend({}, $.fn.picpager.defaults, options);
 
-            //配置项
+            // 配置项
             var imgData = opts.imgData,
                 imgAttrName = opts.imgAttrName,
                 swipThreshold = opts.swipThreshold,
                 swipSpanThreshold = opts.swipSpanThreshold,
-                slideCallback = opts.slideCallback;
+                slideCallback = opts.slideCallback,
+                pullRatio = opts.pullRatio;
 
-            //变量
+            // 变量
             var $this = $(this),
                 me = this,
                 $pics, $wrap,
                 itemCount = imgData.length;
 
-            //初始化函数
+            // 初始化函数
             function init() {
                 $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
                 $wrap = $this.find('.pi-wrap');
                 $pics = $this.find('.pi-pic');
 
-                //初始化事件
+                // 初始化事件
                 initEvent();
             }
 
-            //初始化事件函数
+            // 初始化事件函数
             function initEvent() {
                 var width = $this.width(),
                     index = 0,
@@ -2262,30 +2332,30 @@ $.extend(window, require('alert'));
                     swipSpan, isAnimating,
                     duration = parseFloat($wrap.css('transition-duration')) * 1000;
 
-                //移动到函数
+                // 移动到函数
                 function slide(direction) {
-                    //加上动画
+                    // 加上动画
                     $wrap.removeClass('notrans');
 
-                    //判断滚动
+                    // 判断滚动
                     switch (direction) {
-                        //向右
+                        // 向右
                         case 1:
-                        //向左
+                        // 向左
                         case -1: {
-                            //动画
+                            // 动画
                             isAnimating = true;
                             var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
                             translate($wrap, transform);
 
-                            //复位操作,更新图片
+                            // 复位操作,更新图片
                             setTimeout(function () {
                                 translate($wrap.addClass('notrans'), 'translate3d(0,0,0)');
                                 $pics.each(function (i) {
                                     loadImg($(this), index + i - 1);
                                 });
                                 isAnimating = false;
-                            }, duration + 100);//加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
+                            }, duration + 100);// 加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
                             break;
                         }
                         default: {
@@ -2293,18 +2363,18 @@ $.extend(window, require('alert'));
                         }
                     }
 
-                    //滚动回调函数
+                    // 滚动回调函数
                     typeof slideCallback === 'function' && slideCallback(index, direction);
                 }
 
-                //移动函数
+                // 移动函数
                 function translate($this, val) {
                     $this.css({
                         'transform': val
                     });
                 }
 
-                //加载图片函数
+                // 加载图片函数
                 function loadImg($this, i) {
                     var item = imgData[i];
                     $this.css({
@@ -2312,39 +2382,39 @@ $.extend(window, require('alert'));
                     });
                 }
 
-                //初始化加载图片
+                // 初始化加载图片
                 $pics.each(function (i) {
                     loadImg($(this), i - 1);
                 });
 
 
-                //暴露slideToIndex方法
+                // 暴露slideToIndex方法
                 me.slideToIndex = function (i) {
                     var direction;
-                    //如不为数字或者超出范围
+                    // 如不为数字或者超出范围
                     if (typeof i !== 'number' || i < 0 || i >= itemCount || i === index) {
                         return;
                     }
 
-                    //向左
+                    // 向左
                     if (i > index) {
                         direction = -1;
                         loadImg($pics.eq(2), i);
                     }
-                    //向右
+                    // 向右
                     else {
                         direction = 1;
                         loadImg($pics.eq(0), i);
                     }
 
-                    //做动画
+                    // 做动画
                     index = i;
                     slide(direction);
                 };
 
-                //暴露addItem方法
+                // 暴露addItem方法
                 me.addItem = function (item) {
-                    //如为数组
+                    // 如为数组
                     if ($.isArray(item)) {
                         imgData = imgData.concat(item);
                     }
@@ -2355,43 +2425,43 @@ $.extend(window, require('alert'));
                 };
 
 
-                //触摸开始事件
+                // 触摸开始事件
                 $this.on('touchstart', function (evt) {
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
 
-                    //记录触摸开始位置
+                    // 记录触摸开始位置
                     startX = touch.pageX;
                     startY = touch.pageY;
 
-                    //重置swipSpan
+                    // 重置swipSpan
                     swipSpan = 0;
-                    //取消动画
+                    // 取消动画
                     $wrap.addClass('notrans');
                 });
 
-                //触摸移动事件
+                // 触摸移动事件
                 $this.on('touchmove', function (evt) {
                     if (!isAnimating) {
                         var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
-                            // x轴滑动距离
+                            //  x轴滑动距离
                             swipSpanX = touch.pageX - startX,
                             absX = Math.abs(swipSpanX),
-                            // y轴滑动距离
+                            //  y轴滑动距离
                             swipSpanY = touch.pageY - startY,
                             absY = Math.abs(swipSpanY);
 
-                        //y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                        // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
                         if (absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
 
-                            //第一张图
+                            // 第一张图
                             if (index === 0 && swipSpanX > 0) {
-                                swipSpanX /= 2;
+                                swipSpanX /= pullRatio;
                             }
-                            //最后一张图
+                            // 最后一张图
                             if (index === itemCount - 1 && swipSpanX < 0) {
-                                swipSpanX /= 2;
+                                swipSpanX /= pullRatio;
                             }
 
                             var transform = 'translate3d(' + (swipSpan = swipSpanX) + 'px,0,0)';
@@ -2404,25 +2474,25 @@ $.extend(window, require('alert'));
                     }
                 });
 
-                //触摸结束事件
+                // 触摸结束事件
                 $this.on('touchend', function () {
                     if (!isAnimating) {
                         var direction;
-                        //向右
+                        // 向右
                         if (swipSpan > swipThreshold) {
                             --index < 0 ? index = 0 : direction = 1;
                         }
-                        //向左
+                        // 向左
                         else if (swipSpan < -swipThreshold) {
                             ++index === itemCount ? index = itemCount - 1 : direction = -1;
                         }
 
-                        //滚动
+                        // 滚动
                         swipSpan !== 0 && slide(direction);
                     }
                 }).trigger('touchend');
 
-                //屏幕尺寸改变事件
+                // 屏幕尺寸改变事件
                 window.addEventListener('resize', function () {
                     var w = $this.width();
                     w > 0 && (width = w);
@@ -2431,23 +2501,25 @@ $.extend(window, require('alert'));
             }
 
 
-            //初始化
+            // 初始化
             init();
 
         });
 
     };
     $.fn.picpager.defaults = {
-        //图片数据
+        // 图片数据
         imgData: null,
-        //表示图片地址属性名
+        // 表示图片地址属性名
         imgAttrName: null,
-        //滑动阈值
+        // 滑动阈值
         swipThreshold: 100,
-        // 滑动距离阈值
+        //  滑动距离阈值
         swipSpanThreshold: 10,
-        //轮播回调函数
-        slideCallback: null
+        // 轮播回调函数
+        slideCallback: null,
+        // first和last拉不动的比率
+        pullRatio: 3
     };
 
 })(window, $);
