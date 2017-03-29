@@ -140,12 +140,9 @@
                     // touchmove跟手指滚动
                     if (typeof swipSpan === 'number') {
                         if (!isLoop) {
-                            // 起点
-                            if (index === 0 && swipSpan > 0) {
-                                swipSpan /= pullRatio;
-                            }
-                            // 终点
-                            if (index === itemCount - 1 && swipSpan < 0) {
+                            // 起点或者终点
+                            if (index === 0 && swipSpan > 0 || index === itemCount - 1 && swipSpan < 0) {
+                                // 模拟拉不动的操作体验
                                 swipSpan /= pullRatio;
                             }
                         }
@@ -157,7 +154,7 @@
                         // item存在
                         if ($item.length) {
                             // 滚动回调函数
-                            typeof slideCallback === 'function' && slideCallback.call($item, index);
+                            typeof slideCallback === 'function' && slideCallback($items, index);
 
                             // 添加当前类
                             $item.addClass('current');
@@ -258,10 +255,10 @@
                 // 触摸移动事件
                 $this.on('touchmove', function (evt) {
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
-                        //  x轴滑动距离
+                        // x轴滑动距离
                         swipSpanX = touch.pageX - startX,
                         absX = Math.abs(swipSpanX),
-                        //  y轴滑动距离
+                        // y轴滑动距离
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
@@ -337,7 +334,7 @@
         isVertical: false,
         // 滑动阈值
         swipThreshold: 100,
-        //  滑动距离阈值
+        // 滑动距离阈值
         swipSpanThreshold: 10,
         // 是否自动轮播
         isAutoPlay: true,
