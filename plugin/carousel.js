@@ -162,10 +162,12 @@
                             // title
                             if (isShowTitle) {
                                 var title = $item.attr('data-title');
+                                // 隐藏
                                 $title.removeClass('visible');
                                 title && setTimeout(function () {
+                                    // 显示
                                     $title.addClass('visible').html(title);
-                                }, 150);
+                                }, duration / 2);
                             }
 
                             // pager状态
