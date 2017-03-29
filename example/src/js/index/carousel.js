@@ -14,7 +14,7 @@ exports.load = function ($this, isInit) {
             $(this).html(html).carousel({
                 isVertical: this.getAttribute('data-isvertical') === '1',
                 isAutoPlay: true,
-                autoPlayInter: 3000
+                isLoop: true
             });
         });
     }

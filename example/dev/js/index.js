@@ -139,7 +139,7 @@ exports.load = function ($this, isInit) {
             $(this).html(html).carousel({
                 isVertical: this.getAttribute('data-isvertical') === '1',
                 isAutoPlay: true,
-                autoPlayInter: 3000
+                isLoop: true
             });
         });
     }
@@ -1553,15 +1553,13 @@ $.extend(window, require('alert'));
 
                     // touchmove跟手指滚动
                     if (typeof swipSpan === 'number') {
-                        // 起点
-                        if (index === 0 && swipSpan > 0) {
-                            if (!isLoop) {
+                        if (!isLoop) {
+                            // 起点
+                            if (index === 0 && swipSpan > 0) {
                                 swipSpan /= pullRatio;
                             }
-                        }
-                        // 终点
-                        if (index === itemCount - 1 && swipSpan < 0) {
-                            if (!isLoop) {
+                            // 终点
+                            if (index === itemCount - 1 && swipSpan < 0) {
                                 swipSpan /= pullRatio;
                             }
                         }
