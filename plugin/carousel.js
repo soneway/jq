@@ -139,15 +139,13 @@
 
                     // touchmove跟手指滚动
                     if (typeof swipSpan === 'number') {
-                        // 起点
-                        if (index === 0 && swipSpan > 0) {
-                            if (!isLoop) {
+                        if (!isLoop) {
+                            // 起点
+                            if (index === 0 && swipSpan > 0) {
                                 swipSpan /= pullRatio;
                             }
-                        }
-                        // 终点
-                        if (index === itemCount - 1 && swipSpan < 0) {
-                            if (!isLoop) {
+                            // 终点
+                            if (index === itemCount - 1 && swipSpan < 0) {
                                 swipSpan /= pullRatio;
                             }
                         }
@@ -360,7 +358,7 @@
         // first和last拉不动的比率
         pullRatio: 3,
         // 是否可以循环切换
-        isLoop: true
+        isLoop: false
     };
 
 })(window, $);

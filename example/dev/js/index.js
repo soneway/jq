@@ -1774,7 +1774,7 @@ $.extend(window, require('alert'));
         // first和last拉不动的比率
         pullRatio: 3,
         // 是否可以循环切换
-        isLoop: true
+        isLoop: false
     };
 
 })(window, $);
