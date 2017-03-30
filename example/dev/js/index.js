@@ -1437,7 +1437,6 @@ $.extend(window, require('alert'));
                 slideCallback = opts.slideCallback,
                 isShowTitle = opts.isShowTitle,
                 isShowPager = opts.isShowPager,
-                removeClassDelay = opts.removeClassDelay,
                 inited = opts.inited,
                 initIndex = opts.initIndex,
                 pullRatio = opts.pullRatio,
@@ -1455,14 +1454,7 @@ $.extend(window, require('alert'));
             // 初始化函数
             function init() {
                 // items
-                $items = $this.children('*').each(function () {
-                    var $this = $(this),
-                        index = $this.index();
-                    // 添加index属性
-                    $this.attr({
-                        'data-index': index
-                    });
-                });
+                $items = $this.children('*');
                 itemCount = $items.length;
 
                 // html
@@ -1473,22 +1465,20 @@ $.extend(window, require('alert'));
                 $wrap = $this.find('.pi-wrap').append($items);
                 wrapElStyle = $wrap[0].style;
                 duration = parseFloat($wrap.css('transition-duration')) * 1000;
+
                 // 如果需要循环滚动,需要多添加两个元素
-                if (isLoop) {
-                    // 在最后添加第一个元素
-                    $wrap.append($items[0].outerHTML)
+                isLoop && $wrap
+                // 在最后添加第一个元素
+                    .append($items[0].outerHTML)
                     // 在最前添加最后一个元素
-                        .prepend($items[itemCount - 1].outerHTML);
-                }
+                    .prepend($items[itemCount - 1].outerHTML);
 
                 // allItems
                 $allItems = $wrap.children('*');
                 allItemCount = $allItems.length;
 
                 // title
-                if (isShowTitle) {
-                    $this.append($title = $('<div class="pi-title"></div>'));
-                }
+                isShowTitle && $this.append($title = $('<div class="pi-title"></div>'));
 
                 // pager
                 if (isShowPager) {
@@ -1576,7 +1566,7 @@ $.extend(window, require('alert'));
                             typeof slideCallback === 'function' && slideCallback.call($items, index);
 
                             // 添加当前类
-                            $item.addClass('current');
+                            $items.removeClass('current').eq(index).addClass('current');
 
                             // title
                             if (isShowTitle) {
@@ -1589,19 +1579,10 @@ $.extend(window, require('alert'));
                                 }, duration / 2);
                             }
 
-                            // pager状态(下一队列执行,以防某些情况下无效)
+                            // pager(下一队列执行,以防某些情况下无效)
                             isShowPager && setTimeout(function () {
                                 $pagers.removeClass('selected').eq(index).addClass('selected');
                             }, 0);
-
-                            // 延迟removeClass('current')
-                            setTimeout(function () {
-                                $items.each(function () {
-                                    var $this = $(this),
-                                        i = $this.attr('data-index');
-                                    i !== index && $this.removeClass('current');
-                                });
-                            }, removeClassDelay);
                         }
 
                         // 如果是循环滚动
@@ -1768,8 +1749,6 @@ $.extend(window, require('alert'));
         isShowTitle: true,
         // 是否显示pager
         isShowPager: true,
-        // 移除class延迟
-        removeClassDelay: 0,
         // 初始化完成回调函数
         inited: null,
         // 初始index

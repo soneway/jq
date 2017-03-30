@@ -30,7 +30,7 @@
                 $wrap = $this.find('.pi-wrap');
                 $pics = $this.find('.pi-pic').each(function (i) {
                     // 初始化内容
-                    $(this).html(contentFormate(imgData[--i]));
+                    $(this).html(contentFormate(imgData[i - 1]));
                 });
 
                 // 初始化事件
