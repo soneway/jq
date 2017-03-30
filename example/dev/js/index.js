@@ -1654,8 +1654,8 @@ $.extend(window, require('alert'));
 
                     // 左右
                     if (!isVertical) {
-                        // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (isMoving || absY < swipSpanThreshold && absY < absX) {
+                        // x轴滑动距离大于y轴 y轴滑动距离小于阈值,说明的确是左右滑动
+                        if (isMoving || absY < absX || absY < swipSpanThreshold) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanX);
@@ -1665,8 +1665,8 @@ $.extend(window, require('alert'));
                     }
                     // 上下
                     else {
-                        // x轴滑动距离小于阈值且y轴滑动距离大于x轴,说明的确是上下滑动
-                        if (isMoving || absX < swipSpanThreshold && absX < absY) {
+                        // y轴滑动距离大于x轴 x轴滑动距离小于阈值,说明的确是上下滑动
+                        if (isMoving || absX < absY || absX < swipSpanThreshold) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanY);
@@ -1728,7 +1728,7 @@ $.extend(window, require('alert'));
         // 滑动阈值
         swipThreshold: 100,
         // 滑动距离阈值
-        swipSpanThreshold: 10,
+        swipSpanThreshold: 5,
         // 是否自动轮播
         isAutoPlay: true,
         // 轮播inter
@@ -2387,6 +2387,11 @@ $.extend(window, require('alert'));
 
                 // 触摸开始事件
                 $this.on('touchstart', function (evt) {
+                    // 如果正在作动画,不作响应
+                    if (isAnimating) {
+                        return;
+                    }
+
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
 
                     // 记录触摸开始位置
@@ -2418,8 +2423,8 @@ $.extend(window, require('alert'));
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
-                    if (isMoving || absY < swipSpanThreshold && absY < absX) {
+                    // x轴滑动距离大于y轴 y轴滑动距离小于阈值, 说明的确是左右滑动
+                    if (isMoving || absY < absX || absY < swipSpanThreshold) {
                         evt.preventDefault();
                         evt.stopPropagation();
 
@@ -2480,7 +2485,7 @@ $.extend(window, require('alert'));
         // 滑动阈值
         swipThreshold: 100,
         //  滑动距离阈值
-        swipSpanThreshold: 10,
+        swipSpanThreshold: 5,
         // 轮播回调函数
         slideCallback: null,
         // first和last拉不动的比率

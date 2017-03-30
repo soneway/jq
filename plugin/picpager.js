@@ -125,6 +125,11 @@
 
                 // 触摸开始事件
                 $this.on('touchstart', function (evt) {
+                    // 如果正在作动画,不作响应
+                    if (isAnimating) {
+                        return;
+                    }
+
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt;
 
                     // 记录触摸开始位置
@@ -156,8 +161,8 @@
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
-                    if (isMoving || absY < swipSpanThreshold && absY < absX) {
+                    // x轴滑动距离大于y轴 y轴滑动距离小于阈值, 说明的确是左右滑动
+                    if (isMoving || absY < absX || absY < swipSpanThreshold) {
                         evt.preventDefault();
                         evt.stopPropagation();
 
@@ -218,7 +223,7 @@
         // 滑动阈值
         swipThreshold: 100,
         //  滑动距离阈值
-        swipSpanThreshold: 10,
+        swipSpanThreshold: 5,
         // 轮播回调函数
         slideCallback: null,
         // first和last拉不动的比率

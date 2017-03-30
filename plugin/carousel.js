@@ -236,8 +236,8 @@
 
                     // 左右
                     if (!isVertical) {
-                        // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (isMoving || absY < swipSpanThreshold && absY < absX) {
+                        // x轴滑动距离大于y轴 y轴滑动距离小于阈值,说明的确是左右滑动
+                        if (isMoving || absY < absX || absY < swipSpanThreshold) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanX);
@@ -247,8 +247,8 @@
                     }
                     // 上下
                     else {
-                        // x轴滑动距离小于阈值且y轴滑动距离大于x轴,说明的确是上下滑动
-                        if (isMoving || absX < swipSpanThreshold && absX < absY) {
+                        // y轴滑动距离大于x轴 x轴滑动距离小于阈值,说明的确是上下滑动
+                        if (isMoving || absX < absY || absX < swipSpanThreshold) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanY);
@@ -310,7 +310,7 @@
         // 滑动阈值
         swipThreshold: 100,
         // 滑动距离阈值
-        swipSpanThreshold: 10,
+        swipSpanThreshold: 5,
         // 是否自动轮播
         isAutoPlay: true,
         // 轮播inter
