@@ -216,11 +216,15 @@ exports.load = function ($this, isInit) {
         var page = 1;
         $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
             var $picpager = $('.picpager').picpager({
-                imgData      : rs.data.detail,
-                imgAttrName  : 'image',
+                imgData: rs.data.detail.map(function (item) {
+                    return item.image;
+                }),
+                imgAttrName: 'image',
                 slideCallback: function (index) {
                     index + 1 === page * 10 && $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + ++page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
-                        $picpager[0].addItem(rs.data.detail);
+                        $picpager[0].addItem(rs.data.detail.map(function (item) {
+                            return item.image;
+                        }));
                     });
                 }
             });
@@ -1507,7 +1511,7 @@ $.extend(window, require('alert'));
             function initEvent() {
                 var width, height, inter, index = initIndex,
                     startX, startY,
-                    swipSpan;
+                    swipSpan, isMoving;
 
                 // 设置尺寸函数
                 function setSize() {
@@ -1554,12 +1558,9 @@ $.extend(window, require('alert'));
                     // touchmove跟手指滚动
                     if (typeof swipSpan === 'number') {
                         if (!isLoop) {
-                            // 起点
-                            if (index === 0 && swipSpan > 0) {
-                                swipSpan /= pullRatio;
-                            }
-                            // 终点
-                            if (index === itemCount - 1 && swipSpan < 0) {
+                            // 起点或者终点
+                            if (index === 0 && swipSpan > 0 || index === itemCount - 1 && swipSpan < 0) {
+                                // 模拟拉不动的操作体验
                                 swipSpan /= pullRatio;
                             }
                         }
@@ -1571,7 +1572,7 @@ $.extend(window, require('alert'));
                         // item存在
                         if ($item.length) {
                             // 滚动回调函数
-                            typeof slideCallback === 'function' && slideCallback.call($item, index);
+                            typeof slideCallback === 'function' && slideCallback($items, index);
 
                             // 添加当前类
                             $item.addClass('current');
@@ -1579,10 +1580,12 @@ $.extend(window, require('alert'));
                             // title
                             if (isShowTitle) {
                                 var title = $item.attr('data-title');
+                                // 隐藏
                                 $title.removeClass('visible');
                                 title && setTimeout(function () {
+                                    // 显示
                                     $title.addClass('visible').html(title);
-                                }, 150);
+                                }, duration / 2);
                             }
 
                             // pager状态
@@ -1663,6 +1666,8 @@ $.extend(window, require('alert'));
 
                     // 重置swipSpan
                     swipSpan = 0;
+                    // 重置手指拖拽移动
+                    isMoving = false;
                     // 取消动画
                     $wrap.addClass('notrans');
                     // 取消自动轮播
@@ -1672,29 +1677,33 @@ $.extend(window, require('alert'));
                 // 触摸移动事件
                 $this.on('touchmove', function (evt) {
                     var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
-                        //  x轴滑动距离
+                        // x轴滑动距离
                         swipSpanX = touch.pageX - startX,
                         absX = Math.abs(swipSpanX),
-                        //  y轴滑动距离
+                        // y轴滑动距离
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    // 上下
-                    if (isVertical) {
-                        // x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
-                        if (absX < swipSpanThreshold || absX < absY) {
-                            evt.preventDefault();
-                            evt.stopPropagation();
-                            slide(swipSpan = swipSpanY);
-                        }
-                    }
                     // 左右
-                    else {
+                    if (!isVertical) {
                         // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (absY < swipSpanThreshold || absY < absX) {
+                        if (isMoving || absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanX);
+                            // 已经满足滚动条件,且正在手指拖动
+                            isMoving = true;
+                        }
+                    }
+                    // 上下
+                    else {
+                        // x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
+                        if (isMoving || absX < swipSpanThreshold || absX < absY) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            slide(swipSpan = swipSpanY);
+                            // 已经满足滚动条件,且正在手指拖动
+                            isMoving = true;
                         }
                     }
                 });
@@ -1714,7 +1723,6 @@ $.extend(window, require('alert'));
 
                     // 加上动画
                     $wrap.removeClass('notrans');
-
                     // 滚动(swipSpan === undefined时无动画)
                     swipSpan !== 0 && slide();
 
@@ -1751,7 +1759,7 @@ $.extend(window, require('alert'));
         isVertical: false,
         // 滑动阈值
         swipThreshold: 100,
-        //  滑动距离阈值
+        // 滑动距离阈值
         swipSpanThreshold: 10,
         // 是否自动轮播
         isAutoPlay: true,
@@ -2300,11 +2308,11 @@ $.extend(window, require('alert'));
 
             // 配置项
             var imgData = opts.imgData,
-                imgAttrName = opts.imgAttrName,
                 swipThreshold = opts.swipThreshold,
                 swipSpanThreshold = opts.swipSpanThreshold,
                 slideCallback = opts.slideCallback,
-                pullRatio = opts.pullRatio;
+                pullRatio = opts.pullRatio,
+                contentFormate = opts.contentFormate;
 
             // 变量
             var $this = $(this),
@@ -2316,7 +2324,10 @@ $.extend(window, require('alert'));
             function init() {
                 $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
                 $wrap = $this.find('.pi-wrap');
-                $pics = $this.find('.pi-pic');
+                $pics = $this.find('.pi-pic').each(function (i) {
+                    // 初始化内容
+                    $(this).html(contentFormate(imgData[--i]));
+                });
 
                 // 初始化事件
                 initEvent();
@@ -2327,15 +2338,12 @@ $.extend(window, require('alert'));
                 var width = $this.width(),
                     index = 0,
                     startX, startY,
-                    swipSpan, isAnimating,
+                    swipSpan, isAnimating, isMoving,
                     duration = parseFloat($wrap.css('transition-duration')) * 1000;
 
                 // 移动到函数
                 function slide(direction) {
-                    // 加上动画
-                    $wrap.removeClass('notrans');
-
-                    // 判断滚动
+                    // 判断滚动方向
                     switch (direction) {
                         // 向右
                         case 1:
@@ -2343,21 +2351,24 @@ $.extend(window, require('alert'));
                         case -1: {
                             // 动画
                             isAnimating = true;
-                            var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
-                            translate($wrap, transform);
+                            // 作动画
+                            translate($wrap, width * direction);
 
-                            // 复位操作,更新图片
+                            // 复位操作,更新内容
                             setTimeout(function () {
-                                translate($wrap.addClass('notrans'), 'translate3d(0,0,0)');
+                                // 去掉动画并复位
+                                translate($wrap.addClass('notrans'), 0);
+                                // 更新内容
                                 $pics.each(function (i) {
-                                    loadImg($(this), index + i - 1);
+                                    $(this).html(contentFormate(imgData[index + i - 1]));
                                 });
+                                // 重置isAnimating
                                 isAnimating = false;
                             }, duration + 100);// 加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
                             break;
                         }
                         default: {
-                            translate($wrap, 'translate3d(0,0,0)');
+                            translate($wrap, 0);
                         }
                     }
 
@@ -2366,28 +2377,15 @@ $.extend(window, require('alert'));
                 }
 
                 // 移动函数
-                function translate($this, val) {
+                function translate($this, x) {
                     $this.css({
-                        'transform': val
+                        'transform': 'translate3d(' + x + 'px,0,0)'
                     });
                 }
-
-                // 加载图片函数
-                function loadImg($this, i) {
-                    var item = imgData[i];
-                    $this.css({
-                        'background-image': item ? 'url(' + (imgAttrName ? item[imgAttrName] : item) + ')' : 'none'
-                    });
-                }
-
-                // 初始化加载图片
-                $pics.each(function (i) {
-                    loadImg($(this), i - 1);
-                });
 
 
                 // 暴露slideToIndex方法
-                me.slideToIndex = function (i) {
+                me.slideToIndex = function (i, isNoAni) {
                     var direction;
                     // 如不为数字或者超出范围
                     if (typeof i !== 'number' || i < 0 || i >= itemCount || i === index) {
@@ -2397,16 +2395,18 @@ $.extend(window, require('alert'));
                     // 向左
                     if (i > index) {
                         direction = -1;
-                        loadImg($pics.eq(2), i);
+                        $pics.eq(2).html(contentFormate(imgData[i]));
                     }
                     // 向右
                     else {
                         direction = 1;
-                        loadImg($pics.eq(0), i);
+                        $pics.eq(0).html(contentFormate(imgData[i]));
                     }
 
-                    // 做动画
                     index = i;
+                    // 是否无动画
+                    isNoAni ? $wrap.addClass('notrans') : $wrap.removeClass('notrans');
+                    // 滚动
                     slide(direction);
                 };
 
@@ -2433,6 +2433,8 @@ $.extend(window, require('alert'));
 
                     // 重置swipSpan
                     swipSpan = 0;
+                    // 重置手指拖拽移动
+                    isMoving = false;
                     // 取消动画
                     $wrap.addClass('notrans');
                 });
@@ -2449,21 +2451,20 @@ $.extend(window, require('alert'));
                             absY = Math.abs(swipSpanY);
 
                         // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (absY < swipSpanThreshold || absY < absX) {
+                        if (isMoving || absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
 
-                            // 第一张图
-                            if (index === 0 && swipSpanX > 0) {
-                                swipSpanX /= pullRatio;
-                            }
-                            // 最后一张图
-                            if (index === itemCount - 1 && swipSpanX < 0) {
+                            // 第一张图或最后一张图
+                            if (index === 0 && swipSpanX > 0 || index === itemCount - 1 && swipSpanX < 0) {
+                                // 模拟拉不动操作体验
                                 swipSpanX /= pullRatio;
                             }
 
-                            var transform = 'translate3d(' + (swipSpan = swipSpanX) + 'px,0,0)';
-                            translate($wrap, transform);
+                            // 位移
+                            translate($wrap, swipSpan = swipSpanX);
+                            // 已经满足滚动条件,且正在手指拖动
+                            isMoving = true;
                         }
                     }
                     else {
@@ -2476,15 +2477,17 @@ $.extend(window, require('alert'));
                 $this.on('touchend', function () {
                     if (!isAnimating) {
                         var direction;
-                        // 向右
-                        if (swipSpan > swipThreshold) {
-                            --index < 0 ? index = 0 : direction = 1;
-                        }
                         // 向左
-                        else if (swipSpan < -swipThreshold) {
+                        if (swipSpan < -swipThreshold) {
                             ++index === itemCount ? index = itemCount - 1 : direction = -1;
                         }
+                        // 向右
+                        else if (swipSpan > swipThreshold) {
+                            --index < 0 ? index = 0 : direction = 1;
+                        }
 
+                        // 加上动画
+                        $wrap.removeClass('notrans');
                         // 滚动
                         swipSpan !== 0 && slide(direction);
                     }
@@ -2508,8 +2511,6 @@ $.extend(window, require('alert'));
     $.fn.picpager.defaults = {
         // 图片数据
         imgData: null,
-        // 表示图片地址属性名
-        imgAttrName: null,
         // 滑动阈值
         swipThreshold: 100,
         //  滑动距离阈值
@@ -2517,7 +2518,11 @@ $.extend(window, require('alert'));
         // 轮播回调函数
         slideCallback: null,
         // first和last拉不动的比率
-        pullRatio: 3
+        pullRatio: 3,
+        // 返回内容函数
+        contentFormate: function (itemData) {
+            return itemData ? '<div style="background: url(' + itemData + ') center center no-repeat; background-size: contain; width: 100%; height: 100%;"></div>' : '';
+        }
     };
 
 })(window, $);

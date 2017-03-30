@@ -93,7 +93,7 @@
             function initEvent() {
                 var width, height, inter, index = initIndex,
                     startX, startY,
-                    swipSpan;
+                    swipSpan, isMoving;
 
                 // 设置尺寸函数
                 function setSize() {
@@ -248,6 +248,8 @@
 
                     // 重置swipSpan
                     swipSpan = 0;
+                    // 重置手指拖拽移动
+                    isMoving = false;
                     // 取消动画
                     $wrap.addClass('notrans');
                     // 取消自动轮播
@@ -264,22 +266,26 @@
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    // 上下
-                    if (isVertical) {
-                        // x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
-                        if (absX < swipSpanThreshold || absX < absY) {
-                            evt.preventDefault();
-                            evt.stopPropagation();
-                            slide(swipSpan = swipSpanY);
-                        }
-                    }
                     // 左右
-                    else {
+                    if (!isVertical) {
                         // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (absY < swipSpanThreshold || absY < absX) {
+                        if (isMoving || absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanX);
+                            // 已经满足滚动条件,且正在手指拖动
+                            isMoving = true;
+                        }
+                    }
+                    // 上下
+                    else {
+                        // x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
+                        if (isMoving || absX < swipSpanThreshold || absX < absY) {
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            slide(swipSpan = swipSpanY);
+                            // 已经满足滚动条件,且正在手指拖动
+                            isMoving = true;
                         }
                     }
                 });
@@ -299,7 +305,6 @@
 
                     // 加上动画
                     $wrap.removeClass('notrans');
-
                     // 滚动(swipSpan === undefined时无动画)
                     swipSpan !== 0 && slide();
 

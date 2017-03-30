@@ -12,11 +12,11 @@
 
             // 配置项
             var imgData = opts.imgData,
-                imgAttrName = opts.imgAttrName,
                 swipThreshold = opts.swipThreshold,
                 swipSpanThreshold = opts.swipSpanThreshold,
                 slideCallback = opts.slideCallback,
-                pullRatio = opts.pullRatio;
+                pullRatio = opts.pullRatio,
+                contentFormate = opts.contentFormate;
 
             // 变量
             var $this = $(this),
@@ -28,7 +28,10 @@
             function init() {
                 $this.addClass('pi-picpager').html('<div class="pi-wrap"><div class="pi-pic"></div><div class="pi-pic"></div><div class="pi-pic"></div></div>');
                 $wrap = $this.find('.pi-wrap');
-                $pics = $this.find('.pi-pic');
+                $pics = $this.find('.pi-pic').each(function (i) {
+                    // 初始化内容
+                    $(this).html(contentFormate(imgData[--i]));
+                });
 
                 // 初始化事件
                 initEvent();
@@ -39,15 +42,12 @@
                 var width = $this.width(),
                     index = 0,
                     startX, startY,
-                    swipSpan, isAnimating,
+                    swipSpan, isAnimating, isMoving,
                     duration = parseFloat($wrap.css('transition-duration')) * 1000;
 
                 // 移动到函数
                 function slide(direction) {
-                    // 加上动画
-                    $wrap.removeClass('notrans');
-
-                    // 判断滚动
+                    // 判断滚动方向
                     switch (direction) {
                         // 向右
                         case 1:
@@ -55,21 +55,24 @@
                         case -1: {
                             // 动画
                             isAnimating = true;
-                            var transform = 'translate3d(' + (direction === 1 ? '' : '-') + width + 'px,0,0)';
-                            translate($wrap, transform);
+                            // 作动画
+                            translate($wrap, width * direction);
 
-                            // 复位操作,更新图片
+                            // 复位操作,更新内容
                             setTimeout(function () {
-                                translate($wrap.addClass('notrans'), 'translate3d(0,0,0)');
+                                // 去掉动画并复位
+                                translate($wrap.addClass('notrans'), 0);
+                                // 更新内容
                                 $pics.each(function (i) {
-                                    loadImg($(this), index + i - 1);
+                                    $(this).html(contentFormate(imgData[index + i - 1]));
                                 });
+                                // 重置isAnimating
                                 isAnimating = false;
                             }, duration + 100);// 加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
                             break;
                         }
                         default: {
-                            translate($wrap, 'translate3d(0,0,0)');
+                            translate($wrap, 0);
                         }
                     }
 
@@ -78,28 +81,15 @@
                 }
 
                 // 移动函数
-                function translate($this, val) {
+                function translate($this, x) {
                     $this.css({
-                        'transform': val
+                        'transform': 'translate3d(' + x + 'px,0,0)'
                     });
                 }
-
-                // 加载图片函数
-                function loadImg($this, i) {
-                    var item = imgData[i];
-                    $this.css({
-                        'background-image': item ? 'url(' + (imgAttrName ? item[imgAttrName] : item) + ')' : 'none'
-                    });
-                }
-
-                // 初始化加载图片
-                $pics.each(function (i) {
-                    loadImg($(this), i - 1);
-                });
 
 
                 // 暴露slideToIndex方法
-                me.slideToIndex = function (i) {
+                me.slideToIndex = function (i, isNoAni) {
                     var direction;
                     // 如不为数字或者超出范围
                     if (typeof i !== 'number' || i < 0 || i >= itemCount || i === index) {
@@ -109,16 +99,18 @@
                     // 向左
                     if (i > index) {
                         direction = -1;
-                        loadImg($pics.eq(2), i);
+                        $pics.eq(2).html(contentFormate(imgData[i]));
                     }
                     // 向右
                     else {
                         direction = 1;
-                        loadImg($pics.eq(0), i);
+                        $pics.eq(0).html(contentFormate(imgData[i]));
                     }
 
-                    // 做动画
                     index = i;
+                    // 是否无动画
+                    isNoAni ? $wrap.addClass('notrans') : $wrap.removeClass('notrans');
+                    // 滚动
                     slide(direction);
                 };
 
@@ -145,6 +137,8 @@
 
                     // 重置swipSpan
                     swipSpan = 0;
+                    // 重置手指拖拽移动
+                    isMoving = false;
                     // 取消动画
                     $wrap.addClass('notrans');
                 });
@@ -161,21 +155,20 @@
                             absY = Math.abs(swipSpanY);
 
                         // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (absY < swipSpanThreshold || absY < absX) {
+                        if (isMoving || absY < swipSpanThreshold || absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
 
-                            // 第一张图
-                            if (index === 0 && swipSpanX > 0) {
-                                swipSpanX /= pullRatio;
-                            }
-                            // 最后一张图
-                            if (index === itemCount - 1 && swipSpanX < 0) {
+                            // 第一张图或最后一张图
+                            if (index === 0 && swipSpanX > 0 || index === itemCount - 1 && swipSpanX < 0) {
+                                // 模拟拉不动操作体验
                                 swipSpanX /= pullRatio;
                             }
 
-                            var transform = 'translate3d(' + (swipSpan = swipSpanX) + 'px,0,0)';
-                            translate($wrap, transform);
+                            // 位移
+                            translate($wrap, swipSpan = swipSpanX);
+                            // 已经满足滚动条件,且正在手指拖动
+                            isMoving = true;
                         }
                     }
                     else {
@@ -188,15 +181,17 @@
                 $this.on('touchend', function () {
                     if (!isAnimating) {
                         var direction;
-                        // 向右
-                        if (swipSpan > swipThreshold) {
-                            --index < 0 ? index = 0 : direction = 1;
-                        }
                         // 向左
-                        else if (swipSpan < -swipThreshold) {
+                        if (swipSpan < -swipThreshold) {
                             ++index === itemCount ? index = itemCount - 1 : direction = -1;
                         }
+                        // 向右
+                        else if (swipSpan > swipThreshold) {
+                            --index < 0 ? index = 0 : direction = 1;
+                        }
 
+                        // 加上动画
+                        $wrap.removeClass('notrans');
                         // 滚动
                         swipSpan !== 0 && slide(direction);
                     }
@@ -220,8 +215,6 @@
     $.fn.picpager.defaults = {
         // 图片数据
         imgData: null,
-        // 表示图片地址属性名
-        imgAttrName: null,
         // 滑动阈值
         swipThreshold: 100,
         //  滑动距离阈值
@@ -229,7 +222,11 @@
         // 轮播回调函数
         slideCallback: null,
         // first和last拉不动的比率
-        pullRatio: 3
+        pullRatio: 3,
+        // 返回内容函数
+        contentFormate: function (itemData) {
+            return itemData ? '<div style="background: url(' + itemData + ') center center no-repeat; background-size: contain; width: 100%; height: 100%;"></div>' : '';
+        }
     };
 
 })(window, $);
