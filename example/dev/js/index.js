@@ -1511,21 +1511,17 @@ $.extend(window, require('alert'));
 
                     // 水平方向滚动
                     if (!isVertical) {
+                        // 如果是循环滚动
+                        isLoop && (wrapElStyle.marginLeft = -width + 'px');
                         wrapElStyle.width = width * allItemCount + 'px';
                         $allItems.css('width', width + 'px');
-                        // 如果是循环滚动
-                        isLoop && $wrap.css({
-                            'margin-left': -width + 'px'
-                        });
                     }
                     // 竖直方向滚动
                     else {
+                        // 如果是循环滚动
+                        isLoop && (wrapElStyle.marginTop = -height + 'px');
                         wrapElStyle.height = height * allItemCount + 'px';
                         $allItems.css('height', height + 'px');
-                        // 如果是循环滚动
-                        isLoop && $wrap.css({
-                            'margin-top': -height + 'px'
-                        });
                     }
                 }
 
