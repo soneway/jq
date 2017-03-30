@@ -154,7 +154,7 @@
                         // item存在
                         if ($item.length) {
                             // 滚动回调函数
-                            typeof slideCallback === 'function' && slideCallback($items, index);
+                            typeof slideCallback === 'function' && slideCallback.call($items, index);
 
                             // 添加当前类
                             $item.addClass('current');

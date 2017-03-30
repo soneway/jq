@@ -56,33 +56,35 @@
                             // 动画
                             isAnimating = true;
                             // 作动画
-                            translate($wrap, width * direction);
+                            translate(width * direction);
 
                             // 复位操作,更新内容
                             setTimeout(function () {
-                                // 去掉动画并复位
-                                translate($wrap.addClass('notrans'), 0);
+                                // 去掉动画
+                                $wrap.addClass('notrans');
+                                // 复位
+                                translate(0);
                                 // 更新内容
                                 $pics.each(function (i) {
                                     $(this).html(contentFormate(imgData[index + i - 1]));
                                 });
                                 // 重置isAnimating
                                 isAnimating = false;
-                            }, duration + 100);// 加上一定ms数,可以减缓部分浏览器由于复位操作而引起的闪烁
+                            }, duration);
                             break;
                         }
                         default: {
-                            translate($wrap, 0);
+                            translate(0);
                         }
                     }
 
                     // 滚动回调函数
-                    typeof slideCallback === 'function' && slideCallback(index, direction);
+                    typeof slideCallback === 'function' && slideCallback.call($pics, index, direction);
                 }
 
                 // 移动函数
-                function translate($this, x) {
-                    $this.css({
+                function translate(x) {
+                    $wrap.css({
                         'transform': 'translate3d(' + x + 'px,0,0)'
                     });
                 }
@@ -116,13 +118,7 @@
 
                 // 暴露addItem方法
                 me.addItem = function (item) {
-                    // 如为数组
-                    if ($.isArray(item)) {
-                        imgData = imgData.concat(item);
-                    }
-                    else {
-                        imgData.push(item);
-                    }
+                    imgData = imgData.concat(item);
                     itemCount = imgData.length;
                 };
 
@@ -145,56 +141,60 @@
 
                 // 触摸移动事件
                 $this.on('touchmove', function (evt) {
-                    if (!isAnimating) {
-                        var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
-                            //  x轴滑动距离
-                            swipSpanX = touch.pageX - startX,
-                            absX = Math.abs(swipSpanX),
-                            //  y轴滑动距离
-                            swipSpanY = touch.pageY - startY,
-                            absY = Math.abs(swipSpanY);
-
-                        // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (isMoving || absY < swipSpanThreshold || absY < absX) {
-                            evt.preventDefault();
-                            evt.stopPropagation();
-
-                            // 第一张图或最后一张图
-                            if (index === 0 && swipSpanX > 0 || index === itemCount - 1 && swipSpanX < 0) {
-                                // 模拟拉不动操作体验
-                                swipSpanX /= pullRatio;
-                            }
-
-                            // 位移
-                            translate($wrap, swipSpan = swipSpanX);
-                            // 已经满足滚动条件,且正在手指拖动
-                            isMoving = true;
-                        }
-                    }
-                    else {
+                    // 如果正在作动画,不作响应
+                    if (isAnimating) {
                         evt.preventDefault();
                         evt.stopPropagation();
+                        return;
+                    }
+
+                    var touch = evt.targetTouches ? evt.targetTouches[0] : evt,
+                        //  x轴滑动距离
+                        swipSpanX = touch.pageX - startX,
+                        absX = Math.abs(swipSpanX),
+                        //  y轴滑动距离
+                        swipSpanY = touch.pageY - startY,
+                        absY = Math.abs(swipSpanY);
+
+                    // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
+                    if (isMoving || absY < swipSpanThreshold || absY < absX) {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        // 第一张图或最后一张图
+                        if (index === 0 && swipSpanX > 0 || index === itemCount - 1 && swipSpanX < 0) {
+                            // 模拟拉不动操作体验
+                            swipSpanX /= pullRatio;
+                        }
+
+                        // 位移
+                        translate(swipSpan = swipSpanX);
+                        // 已经满足滚动条件,且正在手指拖动
+                        isMoving = true;
                     }
                 });
 
                 // 触摸结束事件
                 $this.on('touchend', function () {
-                    if (!isAnimating) {
-                        var direction;
-                        // 向左
-                        if (swipSpan < -swipThreshold) {
-                            ++index === itemCount ? index = itemCount - 1 : direction = -1;
-                        }
-                        // 向右
-                        else if (swipSpan > swipThreshold) {
-                            --index < 0 ? index = 0 : direction = 1;
-                        }
-
-                        // 加上动画
-                        $wrap.removeClass('notrans');
-                        // 滚动
-                        swipSpan !== 0 && slide(direction);
+                    // 如果正在作动画,不作响应
+                    if (isAnimating) {
+                        return;
                     }
+
+                    var direction;
+                    // 向左
+                    if (swipSpan < -swipThreshold) {
+                        ++index === itemCount ? index = itemCount - 1 : direction = -1;
+                    }
+                    // 向右
+                    else if (swipSpan > swipThreshold) {
+                        --index < 0 ? index = 0 : direction = 1;
+                    }
+
+                    // 加上动画
+                    $wrap.removeClass('notrans');
+                    // 滚动
+                    swipSpan !== 0 && slide(direction);
                 }).trigger('touchend');
 
                 // 屏幕尺寸改变事件
