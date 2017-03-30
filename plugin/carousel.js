@@ -47,8 +47,9 @@
                 });
                 itemCount = $items.length;
 
-                // this
-                $this.addClass('pi-carousel').html('<div class="pi-wrap"></div>' + (isShowTitle ? '<div class="pi-title"></div>' : ''));
+                // html
+                $this.addClass('pi-carousel' + (isVertical ? ' vertical' : ''))
+                    .html('<div class="pi-wrap"></div>');
 
                 // wrap
                 $wrap = $this.find('.pi-wrap').append($items);
@@ -66,24 +67,24 @@
                 $allItems = $wrap.children('*');
                 allItemCount = $allItems.length;
 
-                // html初始化完成回调
-                typeof inited === 'function' && inited($items);
-
-                isVertical && $this.addClass('vertical');
-
                 // title
-                $title = $this.find('.pi-title');
+                if (isShowTitle) {
+                    $this.append($title = $('<div class="pi-title"></div>'));
+                }
 
                 // pager
-                var html = '';
                 if (isShowPager) {
-                    html += '<div class="pi-pager">';
-                    for (var i = 0, len = itemCount; i < len; i++) {
-                        html += '<span></span>';
+                    var spanHtml = '';
+                    for (var i = 0; i < itemCount; i++) {
+                        spanHtml += '<span></span>';
                     }
-                    html += '</div>';
+                    var pagerHtml = '<div class="pi-pager">' + spanHtml + '</div>';
+                    $this.append(pagerHtml);
+                    $pagers = $this.find('.pi-pager>span');
                 }
-                $pagers = $this.append(html).find('.pi-pager span');
+
+                // html初始化完成回调
+                typeof inited === 'function' && inited($items);
 
                 // 初始化事件
                 initEvent();
@@ -170,14 +171,10 @@
                                 }, duration / 2);
                             }
 
-                            // pager状态
-                            if (isShowPager) {
-                                $pagers.removeClass('selected');
-                                // 下一队列执行,以防某些情况下无效
-                                setTimeout(function () {
-                                    $pagers.eq(index).addClass('selected');
-                                }, 0);
-                            }
+                            // pager(下一队列执行,以防某些情况下无效)
+                            isShowPager && setTimeout(function () {
+                                $pagers.removeClass('selected').eq(index).addClass('selected');
+                            }, 0);
 
                             // 延迟removeClass('current')
                             setTimeout(function () {
@@ -313,7 +310,7 @@
                 }).trigger('touchend');
 
                 // pager点击事件
-                $pagers.on('click', function () {
+                isShowPager && $pagers.on('click', function () {
                     var index = $(this).index();
                     me.slideToIndex(index);
                 });
