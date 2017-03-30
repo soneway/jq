@@ -1569,20 +1569,10 @@ $.extend(window, require('alert'));
                             $items.removeClass('current').eq(index).addClass('current');
 
                             // title
-                            if (isShowTitle) {
-                                var title = $item.attr('data-title');
-                                // 隐藏
-                                $title.removeClass('visible');
-                                title && setTimeout(function () {
-                                    // 显示
-                                    $title.addClass('visible').html(title);
-                                }, duration / 2);
-                            }
+                            isShowTitle && $title.html($item.attr('data-title'));
 
                             // pager(下一队列执行,以防某些情况下无效)
-                            isShowPager && setTimeout(function () {
-                                $pagers.removeClass('selected').eq(index).addClass('selected');
-                            }, 0);
+                            isShowPager && $pagers.removeClass('selected').eq(index).addClass('selected');
                         }
 
                         // 如果是循环滚动
@@ -1664,8 +1654,8 @@ $.extend(window, require('alert'));
 
                     // 左右
                     if (!isVertical) {
-                        // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                        if (isMoving || absY < swipSpanThreshold || absY < absX) {
+                        // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
+                        if (isMoving || absY < swipSpanThreshold && absY < absX) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanX);
@@ -1675,8 +1665,8 @@ $.extend(window, require('alert'));
                     }
                     // 上下
                     else {
-                        // x轴滑动距离小于阈值,或y轴滑动距离大于x轴,说明的确是上下滑动
-                        if (isMoving || absX < swipSpanThreshold || absX < absY) {
+                        // x轴滑动距离小于阈值且y轴滑动距离大于x轴,说明的确是上下滑动
+                        if (isMoving || absX < swipSpanThreshold && absX < absY) {
                             evt.preventDefault();
                             evt.stopPropagation();
                             slide(swipSpan = swipSpanY);
@@ -2302,7 +2292,7 @@ $.extend(window, require('alert'));
                 $wrap = $this.find('.pi-wrap');
                 $pics = $this.find('.pi-pic').each(function (i) {
                     // 初始化内容
-                    $(this).html(contentFormate(imgData[--i]));
+                    $(this).html(contentFormate(imgData[i - 1]));
                 });
 
                 // 初始化事件
@@ -2428,8 +2418,8 @@ $.extend(window, require('alert'));
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                    if (isMoving || absY < swipSpanThreshold || absY < absX) {
+                    // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
+                    if (isMoving || absY < swipSpanThreshold && absY < absX) {
                         evt.preventDefault();
                         evt.stopPropagation();
 

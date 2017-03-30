@@ -242,7 +242,7 @@ h4 {
   text-align: center; }
 
 /*动画*/
-.transition, .fade-out, .fade-in, #loading, #header, #header .roottitle, #header .subtitle, #navbar, #pi-alert, #pi-confirm, #pi-tooltip, .pi-carousel .pi-title, .pi-flip > * {
+.transition, .fade-out, .fade-in, #loading, #header, #header .roottitle, #header .subtitle, #navbar, #pi-alert, #pi-confirm, #pi-tooltip, .pi-flip > * {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
@@ -626,11 +626,7 @@ plugin/carousel
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     padding: 0.2rem;
-    text-shadow: 0 0 0.06rem rgba(0, 0, 0, 0.8);
-    /*动画*/
-    opacity: 0; }
-    .pi-carousel .pi-title.visible {
-      opacity: 1; }
+    text-shadow: 0 0 0.06rem rgba(0, 0, 0, 0.8); }
   .pi-carousel .pi-pager {
     line-height: 0;
     padding: 0.08rem; }

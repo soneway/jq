@@ -156,8 +156,8 @@
                         swipSpanY = touch.pageY - startY,
                         absY = Math.abs(swipSpanY);
 
-                    // y轴滑动距离小于阈值,或x轴滑动距离大于y轴,说明的确是左右滑动
-                    if (isMoving || absY < swipSpanThreshold || absY < absX) {
+                    // y轴滑动距离小于阈值且x轴滑动距离大于y轴,说明的确是左右滑动
+                    if (isMoving || absY < swipSpanThreshold && absY < absX) {
                         evt.preventDefault();
                         evt.stopPropagation();
 

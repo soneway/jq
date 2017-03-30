@@ -48,14 +48,6 @@ $pi-carousel-pager-radius: 0.08rem !default;
         color: #fff;
         padding: 0.2rem;
         text-shadow: 0 0 0.06rem rgba(#000, 0.8);
-        /*动画*/
-        @extend .transition;
-        opacity: 0;
-
-        &.visible
-        {
-            opacity: 1;
-        }
     }
 
     /*pager*/
