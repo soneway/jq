@@ -29,6 +29,7 @@ $pi-carousel-pager-radius: 0.08rem !default;
     .pi-wrap
     {
         @extend .transform;
+        visibility: hidden;
 
         & > *
         {

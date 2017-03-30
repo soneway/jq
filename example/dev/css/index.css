@@ -616,10 +616,12 @@ plugin/carousel
     float: none; }
   .pi-carousel.vertical > .pi-pager > span {
     display: block; }
-  .pi-carousel .pi-wrap > * {
-    display: block;
-    float: left;
-    overflow: hidden; }
+  .pi-carousel .pi-wrap {
+    visibility: hidden; }
+    .pi-carousel .pi-wrap > * {
+      display: block;
+      float: left;
+      overflow: hidden; }
   .pi-carousel .pi-title {
     width: 100%;
     line-height: 1.1;
@@ -644,13 +646,12 @@ plugin/carousel
 #carousel .carousel {
   width: 90%;
   min-width: 6rem;
+  height: 6rem;
   margin: 0 auto; }
   #carousel .carousel img {
-    width: 100%; }
-  #carousel .carousel.vertical {
     height: 6rem; }
-    #carousel .carousel.vertical img {
-      height: 100%; }
+  #carousel .carousel.vertical img {
+    width: 100%; }
 
 /*相册 panel*/
 /*

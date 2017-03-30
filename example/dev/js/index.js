@@ -1523,6 +1523,8 @@ $.extend(window, require('alert'));
                         wrapElStyle.height = height * allItemCount + 'px';
                         $allItems.css('height', height + 'px');
                     }
+                    // 显示
+                    wrapElStyle.visibility = 'visible';
                 }
 
                 // 设置inter函数
@@ -1567,7 +1569,7 @@ $.extend(window, require('alert'));
                             // title
                             isShowTitle && $title.html($item.attr('data-title'));
 
-                            // pager(下一队列执行,以防某些情况下无效)
+                            // pager
                             isShowPager && $pagers.removeClass('selected').eq(index).addClass('selected');
                         }
 

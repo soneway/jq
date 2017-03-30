@@ -105,6 +105,8 @@
                         wrapElStyle.height = height * allItemCount + 'px';
                         $allItems.css('height', height + 'px');
                     }
+                    // 显示
+                    wrapElStyle.visibility = 'visible';
                 }
 
                 // 设置inter函数
