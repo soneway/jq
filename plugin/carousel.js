@@ -279,7 +279,7 @@
                 }).trigger('touchend');
 
                 // pager点击事件
-                isShowPager && $pagers.on('click', function () {
+                isShowPager && $this.on('click', '.pi-pager>span', function () {
                     var index = $(this).index();
                     me.slideToIndex(index);
                 });
