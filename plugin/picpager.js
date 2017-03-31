@@ -84,9 +84,7 @@
 
                 // 移动函数
                 function translate(x) {
-                    $wrap.css({
-                        'transform': 'translate3d(' + x + 'px,0,0)'
-                    });
+                    $wrap.css('transform', 'translate3d(' + x + 'px,0,0)');
                 }
 
 

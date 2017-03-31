@@ -166,9 +166,7 @@
 
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
                     // 作动画
-                    $wrap.css({
-                        transform: transform
-                    });
+                    $wrap.css('transform', transform);
                 }
 
 

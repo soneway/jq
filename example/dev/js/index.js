@@ -1584,9 +1584,7 @@ $.extend(window, require('alert'));
 
                     transform = 'translate3d(' + (isVertical ? '0,' + translate + 'px,0' : translate + 'px,0,0') + ')';
                     // 作动画
-                    $wrap.css({
-                        transform: transform
-                    });
+                    $wrap.css('transform', transform);
                 }
 
 
@@ -1699,7 +1697,6 @@ $.extend(window, require('alert'));
                 // pager点击事件
                 isShowPager && $this.on('click', '.pi-pager>span', function () {
                     var index = $(this).index();
-                    console.log(index);
                     me.slideToIndex(index);
                 });
 
@@ -2345,9 +2342,7 @@ $.extend(window, require('alert'));
 
                 // 移动函数
                 function translate(x) {
-                    $wrap.css({
-                        'transform': 'translate3d(' + x + 'px,0,0)'
-                    });
+                    $wrap.css('transform', 'translate3d(' + x + 'px,0,0)');
                 }
 
 
