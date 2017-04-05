@@ -6,11 +6,11 @@
 
     //文档元素
     var document = window.document,
-    //文档$对象
+        //文档$对象
         $doc = $(document),
-    //body $对象
+        //body $对象
         $body = $(document.body),
-    //mainbox $对象
+        //mainbox $对象
         $mainbox = $('#mainbox');
 
 
@@ -78,15 +78,15 @@
         });
 
         //pc端二维码
-        $.isShowQrcode && !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/qrcode.js', function () {
+        $.isShowQrcode && !$.isMobi && $.getScript('https://soneway.github.io/js/qrcode.js', function () {
                 var $qrcode = $('#qrcode');
                 if ($qrcode.length === 0) {
                     $qrcode = $('<div id="qrcode"></div>');
                     $body.append($qrcode);
                     new QRCode($qrcode[0], {
-                        width : $qrcode.width(),
+                        width: $qrcode.width(),
                         height: $qrcode.height(),
-                        text  : location.href
+                        text: location.href
                     });
                 }
                 $doc.on('click', '#qrcode', function () {
@@ -96,7 +96,7 @@
         );
 
         //pc端mouse转touch事件
-        !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/desktouch.js');
+        !$.isMobi && $.getScript('https://soneway.github.io/js/desktouch.js');
 
     });
 

@@ -214,14 +214,14 @@ require('picpager');
 exports.load = function ($this, isInit) {
     if (isInit) {
         var page = 1;
-        $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
+        $.getScript('https://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
             var $picpager = $('.picpager').picpager({
                 imgData: rs.data.detail.map(function (item) {
                     return item.image;
                 }),
                 imgAttrName: 'image',
                 slideCallback: function (index) {
-                    index + 1 === page * 10 && $.getScript('http://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + ++page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
+                    index + 1 === page * 10 && $.getScript('https://app.gd.sohu.com/minisite/xtep/20140530/get.php?vname=rs&act=list&page=' + ++page + '&code=aa1c9153608a7755b7c20e97c0eade27', function () {
                         $picpager[0].addItem(rs.data.detail.map(function (item) {
                             return item.image;
                         }));
@@ -2963,11 +2963,11 @@ $.extend(window, require('alert'));
 
     //文档元素
     var document = window.document,
-    //文档$对象
+        //文档$对象
         $doc = $(document),
-    //body $对象
+        //body $对象
         $body = $(document.body),
-    //mainbox $对象
+        //mainbox $对象
         $mainbox = $('#mainbox');
 
 
@@ -3035,15 +3035,15 @@ $.extend(window, require('alert'));
         });
 
         //pc端二维码
-        $.isShowQrcode && !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/qrcode.js', function () {
+        $.isShowQrcode && !$.isMobi && $.getScript('https://soneway.github.io/js/qrcode.js', function () {
                 var $qrcode = $('#qrcode');
                 if ($qrcode.length === 0) {
                     $qrcode = $('<div id="qrcode"></div>');
                     $body.append($qrcode);
                     new QRCode($qrcode[0], {
-                        width : $qrcode.width(),
+                        width: $qrcode.width(),
                         height: $qrcode.height(),
-                        text  : location.href
+                        text: location.href
                     });
                 }
                 $doc.on('click', '#qrcode', function () {
@@ -3053,7 +3053,7 @@ $.extend(window, require('alert'));
         );
 
         //pc端mouse转touch事件
-        !$.isMobi && $.getScript('http://img.gd.sohu.com/static/v3/desktouch.js');
+        !$.isMobi && $.getScript('https://soneway.github.io/js/desktouch.js');
 
     });
 
