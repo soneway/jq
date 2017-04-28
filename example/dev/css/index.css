@@ -4,7 +4,7 @@ ui/base
 移动端基础样式
 包括样式重置,常用类等
 */
-.head, .head .btnleft, .panel, .pi-picpager .pi-pic, #picpager .info, .pi-piccut-mask, .pi-piccut-cutter, .loginbox .sohulogo:after {
+.head, .head .btnleft, .panel, #picpager .info, .pi-piccut-mask, .pi-piccut-cutter, .loginbox .sohulogo:after {
   position: absolute;
   left: 0;
   top: 0; }
@@ -29,17 +29,17 @@ ui/base
   right: 0;
   bottom: 0; }
 
-#paneliframe iframe, .pi-picpager .pi-pic, #picpager .picpager, #flip .flip p, #scratchcard .scratchcard, .loginbox .sohulogo:after {
+#paneliframe iframe, #picpager .picpager, #flip .flip p, #scratchcard .scratchcard, .loginbox .sohulogo:after {
   width: 100%;
   height: 100%; }
 
-#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after, .onmask:after, #pi-alert, #pi-confirm {
+#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after, .onmask:after, #pi-alert, #pi-confirm {
   left: 0;
   top: 0;
   bottom: 0;
   right: 0; }
 
-#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-picpager .pi-wrap, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after {
+#mainbox, #loading, #header .roottitle, #header .subtitle, .pi-flip > *, .pi-turntable .pi-pointer, .icon_share a:after, .icon_login a:after {
   position: absolute; }
 
 .onmask:after, #pi-alert, #pi-confirm, #pi-tooltip {
@@ -701,14 +701,15 @@ scss/ani_circle
   overflow: hidden;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden; }
+  .pi-picpager .pi-wrap {
+    width: 300%;
+    height: 100%;
+    margin-left: -100%;
+    font-size: 0; }
   .pi-picpager .pi-pic {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain; }
-    .pi-picpager .pi-pic:nth-of-type(1) {
-      left: -100%; }
-    .pi-picpager .pi-pic:nth-of-type(3) {
-      left: 100%; }
+    display: inline-block;
+    width: 33.3334%;
+    height: 100%; }
 
 #picpager {
   height: 100%; }
