@@ -306,7 +306,7 @@
         // 滑动阈值
         swipThreshold: 100,
         // 滑动距离阈值
-        swipSpanThreshold: 5,
+        swipSpanThreshold: 10,
         // 是否自动轮播
         isAutoPlay: true,
         // 轮播inter

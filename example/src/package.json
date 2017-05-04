@@ -1,39 +1,39 @@
 {
-    "name"        : "jq",
-    "version"     : "0.0.0",
+  "name": "jq",
+  "version": "0.0.0",
 
-    "dependencies": {
-        "gulp"             : "",
-        "gulp-plumber"     : "",
-        "gulp-imagemin"    : "",
-        "gulp-sass"        : "",
-        "gulp-autoprefixer": "",
-        "gulp-clean-css"   : "",
-        "gulp-base64"      : "",
-        "gulp-browserify"  : "",
-        "gulp-uglify"      : "",
-        "gulp-htmlmin"     : "",
-        "gulp-file-include": ""
-    },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^3.0.4",
+    "gulp-base64": "^0.1.3",
+    "gulp-browserify": "^0.5.1",
+    "gulp-uglify": "^2.1.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-file-include": "^1.1.0"
+  },
 
-    "browser"     : {
-        "artmpl"     : "./_lib/js/artmpl.js",
-        "share"      : "./_lib/js/share.js",
+  "browser": {
+    "artmpl": "./_lib/js/artmpl.js",
+    "share": "./_lib/js/share.js",
 
-        "jq"         : "../../jq.js",
-        "base"       : "../../ui/base.js",
-        "ui"         : "../../ui/ui.js",
-        "alert"      : "../../plugin/alert.js",
-        "dialog"     : "../../plugin/dialog.js",
-        "carousel"   : "../../plugin/carousel.js",
-        "customalert": "../../plugin/customalert.js",
-        "flip"       : "../../plugin/flip.js",
-        "piccut"     : "../../plugin/piccut.js",
-        "picpager"   : "../../plugin/picpager.js",
-        "scratchcard": "../../plugin/scratchcard.js",
-        "scroll"     : "../../plugin/scroll.js",
-        "scrollto"   : "../../plugin/scrollto.js",
-        "swatchbook" : "../../plugin/swatchbook.js",
-        "turntable"  : "../../plugin/turntable.js"
-    }
+    "jq": "../../jq.js",
+    "base": "../../ui/base.js",
+    "ui": "../../ui/ui.js",
+    "alert": "../../plugin/alert.js",
+    "dialog": "../../plugin/dialog.js",
+    "carousel": "../../plugin/carousel.js",
+    "customalert": "../../plugin/customalert.js",
+    "flip": "../../plugin/flip.js",
+    "piccut": "../../plugin/piccut.js",
+    "picpager": "../../plugin/picpager.js",
+    "scratchcard": "../../plugin/scratchcard.js",
+    "scroll": "../../plugin/scroll.js",
+    "scrollto": "../../plugin/scrollto.js",
+    "swatchbook": "../../plugin/swatchbook.js",
+    "turntable": "../../plugin/turntable.js"
+  }
 }
