@@ -6,21 +6,19 @@ plugin/picpager
 @import "scss/ani/ani_loading";
 
 .pi-picpager {
-    position: relative;
     overflow: hidden;
-    backface-visibility: hidden;
 
     .pi-wrap {
         width: 300%;
         height: 100%;
         margin-left: -100%;
-        font-size: 0;
+        display: flex;
+        flex-direction: row;
         @extend .transform;
     }
 
     .pi-pic {
-        display: inline-block;
-        width: 33.3334%;
+        flex: 1;
         height: 100%;
         @extend .ani_loading;
     }

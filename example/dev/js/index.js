@@ -2314,7 +2314,7 @@ $.extend(window, require('alert'));
               // 动画
               isAnimating = true;
               // 作动画
-              translate((100 / 3) * direction + '%');
+              translate(width * direction);
 
               // 复位操作,更新内容
               setTimeout(function() {
